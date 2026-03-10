@@ -2,9 +2,9 @@ name: Refresh Dashboard Data
 
 on:
   schedule:
-    # 21:35 UTC = 16:35 ET  —  daily after US market close (Mon–Fri)
+    # 21:35 UTC = 15:35 CST  —  daily after US market close (Mon–Fri)
     - cron: "35 21 * * 1-5"
-    # 13:35 UTC = 09:35 ET  —  shortly after market open (Mon–Fri)
+    # 13:35 UTC = 07:35 CST  —  shortly after market open (Mon–Fri)
     - cron: "35 13 * * 1-5"
   workflow_dispatch:          # Manual trigger from GitHub Actions UI
 
@@ -21,45 +21,45 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # ── 1. Checkout ────────────────────────────────────────────────────────
+      # 1. Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0          # full history so we can push back
+          fetch-depth: 0
 
-      # ── 2. Python setup ────────────────────────────────────────────────────
+      # 2. Python setup
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
 
-      # ── 3. Install dependencies ────────────────────────────────────────────
+      # 3. Install dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # ── 4. Run data pipeline ───────────────────────────────────────────────
+      # 4. Run data pipeline
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
-      # ── 5. Commit refreshed data back to repo ──────────────────────────────
+      # 5. Commit data back — pull --rebase first to avoid non-fast-forward errors
       - name: Commit data files
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          # Only commit if something changed
           git diff --cached --quiet \
             || git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git push
+          git pull --rebase origin main
+          git push origin main
 
-      # ── 6. Upload site for Pages deployment ───────────────────────────────
+      # 6. Upload site for Pages deployment
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."             # serve entire repo root
+          path: "."
 
-      # ── 7. Deploy to GitHub Pages ──────────────────────────────────────────
+      # 7. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
