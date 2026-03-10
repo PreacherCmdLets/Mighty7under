@@ -186,46 +186,82 @@
   </div>
 </div>
 
-<!-- PAGE: CHARTS (TradingView) -->
+<!-- PAGE: CHARTS (TradingView JS widgets) -->
 <div class="page" id="page-charts">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView Embedded Widgets</span></div>
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView Widgets</span></div>
+
     <div class="tv-full">
-      <div class="tv-hdr">S&P 500 (SPX) — Interactive Chart<span>TradingView</span></div>
-      <iframe class="tv-embed" height="500" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=SPX&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=true&details=true&hotlist=true"></iframe>
+      <div class="tv-hdr">S&P 500 (SPX) — Interactive<span>TradingView</span></div>
+      <div class="tradingview-widget-container" style="height:520px">
+        <div class="tradingview-widget-container__widget" style="height:500px"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"SPX","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":true,"calendar":false}</script>
+      </div>
     </div>
+
     <div class="tv-3col">
       <div class="tv-panel">
         <div class="tv-hdr">Nasdaq 100<span>NQ1!</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=NQ1!&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"NQ1!","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">Bitcoin<span>BTCUSD</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=BTCUSD&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"BTCUSD","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">Gold<span>XAUUSD</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=XAUUSD&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"XAUUSD","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
     </div>
+
     <div class="tv-2col">
       <div class="tv-panel">
         <div class="tv-hdr">10Y Treasury Yield<span>US10Y</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=US10Y&interval=D&theme=dark&style=2&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"US10Y","interval":"D","timezone":"America/Chicago","theme":"dark","style":"2","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
       <div class="tv-panel">
-        <div class="tv-hdr">US Dollar Index<span>TVC:DXY</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=TVC:DXY&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tv-hdr">US Dollar Index<span>DXY</span></div>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"TVC:DXY","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
     </div>
+
     <div class="tv-2col">
       <div class="tv-panel">
         <div class="tv-hdr">WTI Crude Oil<span>USOIL</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=USOIL&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"USOIL","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
       </div>
       <div class="tv-panel">
-        <div class="tv-hdr">VIX Volatility Index<span>VIX</span></div>
-        <iframe class="tv-embed" height="260" src="https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?symbol=VIX&interval=D&theme=dark&style=1&locale=en&allow_symbol_change=false"></iframe>
+        <div class="tv-hdr">VIX<span>VIX</span></div>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget" style="height:300px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"VIX","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+        </div>
+      </div>
+    </div>
+
+    <div class="tv-full">
+      <div class="tv-hdr">Market Ticker Tape<span>TradingView</span></div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq"},{"proName":"FX_IDC:EURUSD","title":"EUR/USD"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},{"description":"Gold","proName":"TVC:GOLD"}],"showSymbolLogo":true,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}</script>
       </div>
     </div>
   </div>
@@ -245,7 +281,10 @@
     </div>
     <div class="tv-full">
       <div class="tv-hdr">S&P 500 Sector Heatmap<span>TradingView</span></div>
-      <iframe class="tv-embed" height="500" src="https://www.tradingview.com/widgetsnext/embed/stock-heatmap/stock-heatmap.html?exchanges=NYSE,NASDAQ&dataSource=SPX500&grouping=sector&blockSize=market_cap_basic&blockColor=change&locale=en&colorTheme=dark&hasTopBar=false&isZoomEnabled=true&hasSymbolTooltip=true"></iframe>
+      <div class="tradingview-widget-container" style="height:520px">
+      <div class="tradingview-widget-container__widget" style="height:500px"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>{"exchanges":[],"dataSource":"SPX500","grouping":"sector","blockSize":"market_cap_basic","blockColor":"change","locale":"en","colorTheme":"dark","hasTopBar":false,"isZoomEnabled":true,"hasSymbolTooltip":true}</script>
+    </div>
     </div>
   </div>
 </div>
@@ -256,7 +295,10 @@
     <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Economic Calendar</span><span class="sec-sub">Key Upcoming Events</span></div>
     <div class="tv-full" style="margin-bottom:20px">
       <div class="tv-hdr">Live Economic Calendar<span>TradingView</span></div>
-      <iframe class="tv-embed" height="480" src="https://www.tradingview.com/widgetsnext/embed/economic-calendar/economic-calendar.html?colorTheme=dark&isTransparent=false&locale=en&importanceFilter=-1,0,1&currencyFilter=USD,EUR,GBP,JPY,AUD,CAD"></iframe>
+      <div class="tradingview-widget-container" style="height:500px">
+      <div class="tradingview-widget-container__widget" style="height:480px"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-economic-calendar.js" async>{"colorTheme":"dark","isTransparent":false,"width":"100%","height":480,"locale":"en","importanceFilter":"-1,0,1","currencyFilter":"USD,EUR,GBP,JPY,AUD,CAD"}</script>
+    </div>
     </div>
     <div class="tbl-group">
       <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events — from events.json</span></div>
@@ -276,16 +318,25 @@
     <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Stock Screener</span><span class="sec-sub">TradingView Widgets</span></div>
     <div class="tv-full">
       <div class="tv-hdr">US Stock Screener<span>TradingView</span></div>
-      <iframe class="tv-embed" height="600" src="https://www.tradingview.com/widgetsnext/embed/screener/screener.html?width=100%25&height=600&defaultColumn=overview&defaultScreen=most_capitalized&market=america&showToolbar=true&colorTheme=dark&locale=en&isTransparent=false"></iframe>
+      <div class="tradingview-widget-container" style="height:620px">
+      <div class="tradingview-widget-container__widget" style="height:600px"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":600,"defaultColumn":"overview","defaultScreen":"most_capitalized","market":"america","showToolbar":true,"colorTheme":"dark","locale":"en"}</script>
+    </div>
     </div>
     <div class="tv-2col" style="margin-top:14px">
       <div class="tv-panel">
         <div class="tv-hdr">Forex Screener<span>TradingView</span></div>
-        <iframe class="tv-embed" height="400" src="https://www.tradingview.com/widgetsnext/embed/screener/screener.html?market=forex&colorTheme=dark&locale=en&height=400"></iframe>
+        <div class="tradingview-widget-container" style="height:420px">
+          <div class="tradingview-widget-container__widget" style="height:400px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":400,"market":"forex","colorTheme":"dark","locale":"en"}</script>
+        </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">Crypto Screener<span>TradingView</span></div>
-        <iframe class="tv-embed" height="400" src="https://www.tradingview.com/widgetsnext/embed/screener/screener.html?market=crypto&colorTheme=dark&locale=en&height=400"></iframe>
+        <div class="tradingview-widget-container" style="height:420px">
+          <div class="tradingview-widget-container__widget" style="height:400px"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":400,"market":"crypto","colorTheme":"dark","locale":"en"}</script>
+        </div>
       </div>
     </div>
   </div>
@@ -327,7 +378,7 @@
 </div>
 
 <footer>
-  <span>© 2025 MIGHTY7UNDER · NOT FINANCIAL ADVICE · mashwin.github.io/Mighty7under</span>
+  <span>© 2025 MIGHTY7UNDER · NOT FINANCIAL ADVICE · preachercmdlets.github.io/Mighty7under</span>
   <span style="font-style:italic">"Risk comes from not knowing what you're doing." — Warren Buffett</span>
   <span>DATA: YAHOO FINANCE · CHARTS: TRADINGVIEW</span>
 </footer>
