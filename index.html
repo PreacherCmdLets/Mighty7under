@@ -194,6 +194,42 @@
     border: none;
   }
 
+
+  /* ── Chart tab buttons ───────────────────────────────────────────────── */
+  .tf-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tf-btn:hover, .tf-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+  .sym-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .sym-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -243,91 +279,59 @@
   </div>
 </div>
 
-<!-- PAGE: CHARTS (TradingView mini widgets - no login required) -->
+<!-- PAGE: CHARTS -->
 <div class="page" id="page-charts">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView Widgets</span></div>
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView · Interactive</span></div>
 
-    <div class="tv-full">
-      <div class="tv-hdr">S&P 500 (SPX)<span>TradingView</span></div>
-      <div class="tradingview-widget-container" style="height:420px">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-        {"symbols":[["S&P 500","SP:SPX|1D"],["Nasdaq 100","NASDAQ:NDX|1D"],["Dow Jones","DJ:DJI|1D"]],"chartOnly":false,"width":"100%","height":400,"locale":"en","colorTheme":"dark","autosize":true,"showVolume":true,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"-apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","maLineColor":"#2962FF","maLineWidth":1,"maLength":9,"lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
+    <!-- Search + Timeframe Controls -->
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);padding:6px 12px;flex:1;min-width:200px;max-width:340px;">
+        <span style="color:var(--muted);font-family:var(--mono);font-size:12px;">SYM</span>
+        <input id="chart-symbol-input" type="text" placeholder="e.g. AAPL, BTC, SPX..." 
+          style="background:transparent;border:none;outline:none;color:#fff;font-family:var(--mono);font-size:13px;width:100%;letter-spacing:0.05em;"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter')loadChart()">
+        <button onclick="loadChart()" style="background:var(--accent);color:#000;border:none;font-family:var(--mono);font-size:11px;font-weight:700;padding:4px 10px;cursor:pointer;letter-spacing:0.08em;">GO</button>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="tf-btn active" onclick="setTF(this,'60')">1H</button>
+        <button class="tf-btn" onclick="setTF(this,'D')">1D</button>
+        <button class="tf-btn" onclick="setTF(this,'W')">1W</button>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="sym-btn" onclick="quickSym('SPX')">SPX</button>
+        <button class="sym-btn" onclick="quickSym('NQ1!')">NQ</button>
+        <button class="sym-btn" onclick="quickSym('BTCUSD')">BTC</button>
+        <button class="sym-btn" onclick="quickSym('TVC:GOLD')">GOLD</button>
+        <button class="sym-btn" onclick="quickSym('TVC:DXY')">DXY</button>
+        <button class="sym-btn" onclick="quickSym('TVC:US10Y')">10Y</button>
+        <button class="sym-btn" onclick="quickSym('TVC:USOIL')">OIL</button>
+        <button class="sym-btn" onclick="quickSym('CBOE:VIX')">VIX</button>
+      </div>
+    </div>
+
+    <!-- Chart container -->
+    <div id="chart-wrap" style="width:100%;height:650px;border:1px solid var(--border);position:relative;">
+      <div id="chart-label" style="position:absolute;top:10px;left:14px;z-index:10;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.1em;pointer-events:none;">SPX · 1H</div>
+      <div class="tradingview-widget-container" style="height:100%">
+        <div id="tv-main-chart" style="height:100%"></div>
+        <script id="tv-main-script" type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {"autosize":true,"symbol":"SPX","interval":"60","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false,"calendar":false,"hide_top_toolbar":false,"hide_side_toolbar":false,"withdateranges":true,"save_image":true}
         </script>
       </div>
     </div>
 
-    <div class="tv-3col">
-      <div class="tv-panel">
-        <div class="tv-hdr">Bitcoin<span>BTCUSD</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"BITSTAMP:BTCUSD","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-      <div class="tv-panel">
-        <div class="tv-hdr">Gold<span>XAUUSD</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"TVC:GOLD","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-      <div class="tv-panel">
-        <div class="tv-hdr">WTI Crude Oil<span>USOIL</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"TVC:USOIL","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-    </div>
-
-    <div class="tv-3col">
-      <div class="tv-panel">
-        <div class="tv-hdr">10Y Treasury Yield<span>US10Y</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"TVC:US10Y","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-      <div class="tv-panel">
-        <div class="tv-hdr">US Dollar Index<span>DXY</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"TVC:DXY","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-      <div class="tv-panel">
-        <div class="tv-hdr">VIX<span>VIX</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {"symbol":"CBOE:VIX","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
-          </script>
-        </div>
-      </div>
-    </div>
-
-    <div class="tv-full">
-      <div class="tv-hdr">Forex Rates<span>TradingView</span></div>
+    <!-- Ticker tape -->
+    <div style="margin-top:14px">
+      <div class="tv-hdr">Market Ticker Tape<span>TradingView</span></div>
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
-        {"width":"100%","height":400,"currencies":["EUR","USD","JPY","GBP","AUD","CAD","CHF"],"isTransparent":false,"colorTheme":"dark","locale":"en","backgroundColor":"#090c0f"}
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq"},{"proName":"FX_IDC:EURUSD","title":"EUR/USD"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},{"description":"Gold","proName":"TVC:GOLD"},{"description":"Oil","proName":"TVC:USOIL"},{"description":"VIX","proName":"CBOE:VIX"}],"showSymbolLogo":true,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
         </script>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -622,6 +626,63 @@ calc();
     <iframe id="tv-popup-iframe" src="" allowfullscreen></iframe>
   </div>
 </div>
+
+
+<script>
+// ── Chart Tab Controls ────────────────────────────────────────────────────
+let currentSymbol = 'SPX';
+let currentInterval = '60';
+
+function reloadMainChart(symbol, interval) {
+  currentSymbol = symbol || currentSymbol;
+  currentInterval = interval || currentInterval;
+
+  const label = document.getElementById('chart-label');
+  if (label) label.textContent = currentSymbol + ' · ' + 
+    (currentInterval === '60' ? '1H' : currentInterval === 'D' ? '1D' : '1W');
+
+  const wrap = document.getElementById('tv-main-chart');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+
+  const s = document.createElement('script');
+  s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+  s.async = true;
+  s.type = 'text/javascript';
+  s.textContent = JSON.stringify({
+    autosize: true,
+    symbol: currentSymbol,
+    interval: currentInterval,
+    timezone: 'America/Chicago',
+    theme: 'dark',
+    style: '1',
+    locale: 'en',
+    allow_symbol_change: false,
+    calendar: false,
+    hide_top_toolbar: false,
+    withdateranges: true,
+    save_image: true
+  });
+  wrap.appendChild(s);
+}
+
+function setTF(btn, interval) {
+  document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  reloadMainChart(null, interval);
+}
+
+function quickSym(sym) {
+  currentSymbol = sym;
+  document.getElementById('chart-symbol-input').value = sym;
+  reloadMainChart(sym, null);
+}
+
+function loadChart() {
+  const val = document.getElementById('chart-symbol-input').value.trim().toUpperCase();
+  if (val) reloadMainChart(val, null);
+}
+</script>
 
 <script>
 // ── Ticker Popup Logic ────────────────────────────────────────────────────
