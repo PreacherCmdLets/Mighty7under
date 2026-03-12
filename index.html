@@ -137,6 +137,63 @@
 
   @media(max-width:1024px){.tv-2col,.tv-3col{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.bg{grid-template-columns:1fr 1fr}.calc-grid{grid-template-columns:1fr}}
   @media(max-width:600px){.cards{grid-template-columns:1fr}.bg{grid-template-columns:1fr}.page{padding:14px}}
+
+  /* ── Ticker Hover Chart Popup ─────────────────────────────────────────── */
+  .ticker-link {
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent);
+    transition: color 0.2s;
+    position: relative;
+  }
+  .ticker-link:hover { color: #fff; }
+
+  #tv-popup {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    width: 680px;
+    height: 420px;
+    background: #0d1117;
+    border: 1px solid var(--accent);
+    box-shadow: 0 8px 40px rgba(0,255,136,0.18), 0 2px 12px rgba(0,0,0,0.7);
+    border-radius: 4px;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+  #tv-popup.visible { display: block; }
+  #tv-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background: #0a0e13;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+  }
+  #tv-popup-header .pop-close {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0 4px;
+  }
+  #tv-popup-header .pop-close:hover { color: var(--red); }
+  #tv-popup-body {
+    width: 100%;
+    height: calc(100% - 30px);
+  }
+  #tv-popup-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
 </style>
 </head>
 <body>
@@ -186,84 +243,91 @@
   </div>
 </div>
 
-<!-- PAGE: CHARTS (TradingView JS widgets) -->
+<!-- PAGE: CHARTS (TradingView mini widgets - no login required) -->
 <div class="page" id="page-charts">
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView Widgets</span></div>
 
     <div class="tv-full">
-      <div class="tv-hdr">S&P 500 (SPX) — Interactive<span>TradingView</span></div>
-      <div class="tradingview-widget-container" style="height:520px">
-        <div class="tradingview-widget-container__widget" style="height:500px"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"SPX","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":true,"calendar":false}</script>
+      <div class="tv-hdr">S&P 500 (SPX)<span>TradingView</span></div>
+      <div class="tradingview-widget-container" style="height:420px">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {"symbols":[["S&P 500","SP:SPX|1D"],["Nasdaq 100","NASDAQ:NDX|1D"],["Dow Jones","DJ:DJI|1D"]],"chartOnly":false,"width":"100%","height":400,"locale":"en","colorTheme":"dark","autosize":true,"showVolume":true,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"-apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","maLineColor":"#2962FF","maLineWidth":1,"maLength":9,"lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
+        </script>
       </div>
     </div>
 
     <div class="tv-3col">
       <div class="tv-panel">
-        <div class="tv-hdr">Nasdaq 100<span>NQ1!</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"NQ1!","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
-        </div>
-      </div>
-      <div class="tv-panel">
         <div class="tv-hdr">Bitcoin<span>BTCUSD</span></div>
         <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"BTCUSD","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"BITSTAMP:BTCUSD","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
         </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">Gold<span>XAUUSD</span></div>
         <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"XAUUSD","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"TVC:GOLD","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
+        </div>
+      </div>
+      <div class="tv-panel">
+        <div class="tv-hdr">WTI Crude Oil<span>USOIL</span></div>
+        <div class="tradingview-widget-container" style="height:320px">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"TVC:USOIL","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
         </div>
       </div>
     </div>
 
-    <div class="tv-2col">
+    <div class="tv-3col">
       <div class="tv-panel">
         <div class="tv-hdr">10Y Treasury Yield<span>US10Y</span></div>
         <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"US10Y","interval":"D","timezone":"America/Chicago","theme":"dark","style":"2","locale":"en","allow_symbol_change":false}</script>
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"TVC:US10Y","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
         </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">US Dollar Index<span>DXY</span></div>
         <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"TVC:DXY","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
-        </div>
-      </div>
-    </div>
-
-    <div class="tv-2col">
-      <div class="tv-panel">
-        <div class="tv-hdr">WTI Crude Oil<span>USOIL</span></div>
-        <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"USOIL","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"TVC:DXY","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
         </div>
       </div>
       <div class="tv-panel">
         <div class="tv-hdr">VIX<span>VIX</span></div>
         <div class="tradingview-widget-container" style="height:320px">
-          <div class="tradingview-widget-container__widget" style="height:300px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>{"autosize":true,"symbol":"VIX","interval":"D","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false}</script>
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {"symbol":"CBOE:VIX","width":"100%","height":300,"locale":"en","dateRange":"12M","colorTheme":"dark","isTransparent":false,"autosize":true,"largeChartUrl":""}
+          </script>
         </div>
       </div>
     </div>
 
     <div class="tv-full">
-      <div class="tv-hdr">Market Ticker Tape<span>TradingView</span></div>
+      <div class="tv-hdr">Forex Rates<span>TradingView</span></div>
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq"},{"proName":"FX_IDC:EURUSD","title":"EUR/USD"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},{"description":"Gold","proName":"TVC:GOLD"}],"showSymbolLogo":true,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}</script>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+        {"width":"100%","height":400,"currencies":["EUR","USD","JPY","GBP","AUD","CAD","CHF"],"isTransparent":false,"colorTheme":"dark","locale":"en","backgroundColor":"#090c0f"}
+        </script>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -315,28 +379,23 @@
 <!-- PAGE: SCREENER -->
 <div class="page" id="page-screener">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Stock Screener</span><span class="sec-sub">TradingView Widgets</span></div>
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Market Overview</span><span class="sec-sub">TradingView Widgets</span></div>
     <div class="tv-full">
-      <div class="tv-hdr">US Stock Screener<span>TradingView</span></div>
-      <div class="tradingview-widget-container" style="height:620px">
-      <div class="tradingview-widget-container__widget" style="height:600px"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":600,"defaultColumn":"overview","defaultScreen":"most_capitalized","market":"america","showToolbar":true,"colorTheme":"dark","locale":"en"}</script>
-    </div>
-    </div>
-    <div class="tv-2col" style="margin-top:14px">
-      <div class="tv-panel">
-        <div class="tv-hdr">Forex Screener<span>TradingView</span></div>
-        <div class="tradingview-widget-container" style="height:420px">
-          <div class="tradingview-widget-container__widget" style="height:400px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":400,"market":"forex","colorTheme":"dark","locale":"en"}</script>
-        </div>
+      <div class="tv-hdr">US Market Overview<span>TradingView</span></div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+        {"colorTheme":"dark","dateRange":"12M","showChart":true,"locale":"en","width":"100%","height":660,"largeChartUrl":"","isTransparent":false,"showSymbolLogo":true,"showFloatingTooltip":false,"plotLineColorGrowing":"rgba(41, 98, 255, 1)","plotLineColorFalling":"rgba(41, 98, 255, 1)","gridLineColor":"rgba(240, 243, 250, 0)","scaleFontColor":"rgba(106, 109, 120, 1)","belowLineFillColorGrowing":"rgba(41, 98, 255, 0.12)","belowLineFillColorFalling":"rgba(41, 98, 255, 0.12)","belowLineFillColorGrowingBottom":"rgba(41, 98, 255, 0)","belowLineFillColorFallingBottom":"rgba(41, 98, 255, 0)","symbolActiveColor":"rgba(41, 98, 255, 0.12)","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:NKY","d":"Nikkei 225"},{"s":"INDEX:DEU40","d":"DAX"},{"s":"FOREXCOM:UKXGBP","d":"FTSE 100"}],"originalTitle":"Indices"},{"title":"Commodities","symbols":[{"s":"CME_MINI:ES1!","d":"S&P 500"},{"s":"CME:6E1!","d":"Euro"},{"s":"COMEX:GC1!","d":"Gold"},{"s":"NYMEX:CL1!","d":"Crude Oil"},{"s":"NYMEX:NG1!","d":"Natural Gas"},{"s":"CBOT:ZC1!","d":"Corn"}],"originalTitle":"Commodities"},{"title":"Bonds","symbols":[{"s":"CBOT:ZB1!","d":"T-Bond"},{"s":"CBOT:UB1!","d":"Ultra T-Bond"},{"s":"EUREX:FGBL1!","d":"Euro Bund"},{"s":"EUREX:FBTP1!","d":"Euro BTP"},{"s":"EUREX:FGBM1!","d":"Euro BOBL"}],"originalTitle":"Bonds"},{"title":"Forex","symbols":[{"s":"FX:EURUSD","d":"EUR/USD"},{"s":"FX:GBPUSD","d":"GBP/USD"},{"s":"FX:USDJPY","d":"USD/JPY"},{"s":"FX:USDCHF","d":"USD/CHF"},{"s":"FX:AUDUSD","d":"AUD/USD"},{"s":"FX:USDCAD","d":"USD/CAD"}],"originalTitle":"Forex"}]}
+        </script>
       </div>
-      <div class="tv-panel">
-        <div class="tv-hdr">Crypto Screener<span>TradingView</span></div>
-        <div class="tradingview-widget-container" style="height:420px">
-          <div class="tradingview-widget-container__widget" style="height:400px"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{"width":"100%","height":400,"market":"crypto","colorTheme":"dark","locale":"en"}</script>
-        </div>
+    </div>
+    <div class="tv-full" style="margin-top:14px">
+      <div class="tv-hdr">Crypto Market<span>TradingView</span></div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+        {"colorTheme":"dark","dateRange":"12M","showChart":true,"locale":"en","width":"100%","height":500,"isTransparent":false,"showSymbolLogo":true,"tabs":[{"title":"Crypto","symbols":[{"s":"BITSTAMP:BTCUSD","d":"Bitcoin"},{"s":"BITSTAMP:ETHUSD","d":"Ethereum"},{"s":"BINANCE:SOLUSD","d":"Solana"},{"s":"BINANCE:BNBUSD","d":"BNB"},{"s":"BINANCE:XRPUSD","d":"XRP"},{"s":"COINBASE:AVAXUSD","d":"Avalanche"}],"originalTitle":"Crypto"}]}
+        </script>
       </div>
     </div>
   </div>
@@ -551,6 +610,115 @@ function calc(){
   }).join('');
 }
 calc();
+</script>
+
+<!-- ── Ticker Hover Chart Popup ──────────────────────────────────────────── -->
+<div id="tv-popup">
+  <div id="tv-popup-header">
+    <span id="tv-popup-title">Chart</span>
+    <span class="pop-close" onclick="closeTickerPopup()">✕</span>
+  </div>
+  <div id="tv-popup-body">
+    <iframe id="tv-popup-iframe" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+// ── Ticker Popup Logic ────────────────────────────────────────────────────
+(function() {
+  const popup   = document.getElementById('tv-popup');
+  const iframe  = document.getElementById('tv-popup-iframe');
+  const title   = document.getElementById('tv-popup-title');
+  let hideTimer = null;
+
+  function buildChartUrl(ticker) {
+    const params = new URLSearchParams({
+      symbol: ticker,
+      interval: 'D',
+      theme: 'dark',
+      style: '1',
+      locale: 'en',
+      hide_top_toolbar: '0',
+      hide_side_toolbar: '0',
+      allow_symbol_change: '0',
+      save_image: '0',
+      withdateranges: '1',
+    });
+    return `https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?${params}`;
+  }
+
+  function positionPopup(el) {
+    const rect = el.getBoundingClientRect();
+    const pw = 680, ph = 420;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    let left = rect.left;
+    let top  = rect.bottom + 8;
+    if (left + pw > vw - 12) left = vw - pw - 12;
+    if (top  + ph > vh - 12) top  = rect.top - ph - 8;
+    if (left < 8) left = 8;
+    popup.style.left = left + 'px';
+    popup.style.top  = top  + 'px';
+  }
+
+  window.showTickerPopup = function(el, ticker) {
+    clearTimeout(hideTimer);
+    const sym = ticker.toUpperCase();
+    title.textContent = '$' + sym + ' — Daily Chart';
+    iframe.src = buildChartUrl(sym);
+    positionPopup(el);
+    popup.classList.add('visible');
+  };
+
+  window.hideTickerPopupDelayed = function() {
+    hideTimer = setTimeout(() => popup.classList.remove('visible'), 300);
+  };
+
+  window.closeTickerPopup = function() {
+    clearTimeout(hideTimer);
+    popup.classList.remove('visible');
+    iframe.src = '';
+  };
+
+  // Keep popup alive when hovering over it
+  popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  popup.addEventListener('mouseleave', () => {
+    hideTimer = setTimeout(() => { popup.classList.remove('visible'); iframe.src=''; }, 300);
+  });
+
+  // ── Auto-linkify $TICKER tokens in tables ─────────────────────────────
+  function linkifyTickers(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      if (!node.textContent.includes('$')) return;
+      const parent = node.parentElement;
+      if (!parent || parent.classList.contains('ticker-link')) return;
+      if (['SCRIPT','STYLE','INPUT','TEXTAREA'].includes(parent.tagName)) return;
+      const html = node.textContent.replace(/\$([A-Z]{1,5})/g, (_, sym) =>
+        `<span class="ticker-link"
+          onmouseenter="showTickerPopup(this,'${sym}')"
+          onmouseleave="hideTickerPopupDelayed()">$${sym}</span>`
+      );
+      if (html !== node.textContent) {
+        const span = document.createElement('span');
+        span.innerHTML = html;
+        parent.replaceChild(span, node);
+      }
+    });
+  }
+
+  // Run after data loads (tables are built dynamically)
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('#macro-tables, #equities-tables').forEach(linkifyTickers);
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Also scan any static content
+  document.addEventListener('DOMContentLoaded', () => {
+    linkifyTickers(document.body);
+  });
+})();
 </script>
 </body>
 </html>
