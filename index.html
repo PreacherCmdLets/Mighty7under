@@ -382,8 +382,21 @@
 
 <!-- PAGE: SCREENER -->
 <div class="page" id="page-screener">
+
+  <!-- WATCHLISTS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Market Overview</span><span class="sec-sub">TradingView Widgets</span></div>
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
+
+    <!-- Watchlist tab buttons -->
+    <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"></div>
+
+    <!-- Watchlist panels -->
+    <div id="wl-panels"></div>
+  </div>
+
+  <!-- MARKET OVERVIEW (existing) -->
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Market Overview</span><span class="sec-sub">TradingView Widgets</span></div>
     <div class="tv-full">
       <div class="tv-hdr">US Market Overview<span>TradingView</span></div>
       <div class="tradingview-widget-container">
@@ -447,6 +460,69 @@
 </footer>
 
 <script>
+// WATCHLISTS
+(async () => {
+  try {
+    const res = await fetch('data/watchlists.json');
+    if (!res.ok) return;
+    const watchlists = await res.json();
+
+    const tabsEl   = document.getElementById('wl-tabs');
+    const panelsEl = document.getElementById('wl-panels');
+
+    watchlists.forEach((wl, i) => {
+      // Tab button
+      const btn = document.createElement('div');
+      btn.className = 'nav-tab' + (i === 0 ? ' active' : '');
+      btn.style.cssText = 'height:36px;font-size:10px;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:6px;padding:0 14px;letter-spacing:2px;';
+      btn.textContent = `${wl.name}`;
+      const badge = document.createElement('span');
+      badge.style.cssText = 'background:var(--surface2);border-radius:10px;padding:1px 8px;font-size:9px;color:var(--muted)';
+      badge.textContent = wl.symbols.length;
+      btn.appendChild(badge);
+      btn.onclick = () => {
+        tabsEl.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        panelsEl.querySelectorAll('.wl-panel').forEach(p => p.style.display = 'none');
+        btn.classList.add('active');
+        document.getElementById(`wl-panel-${wl.id}`).style.display = 'block';
+      };
+      tabsEl.appendChild(btn);
+
+      // Panel
+      const updated = new Date(wl.lastUpdated).toLocaleString('en-US', {
+        timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short'
+      });
+      const rows = wl.symbols.map(s => {
+        const [exchange, ticker] = s.split(':');
+        return `<tr>
+          <td style="font-weight:600;color:var(--text)">${ticker}</td>
+          <td style="color:var(--muted)">${exchange}</td>
+          <td><a href="https://www.tradingview.com/symbols/${ticker}" target="_blank" style="color:var(--accent2);text-decoration:none;font-size:10px;letter-spacing:1px">CHART ↗</a></td>
+        </tr>`;
+      }).join('');
+
+      const panel = document.createElement('div');
+      panel.className = 'wl-panel';
+      panel.id = `wl-panel-${wl.id}`;
+      panel.style.display = i === 0 ? 'block' : 'none';
+      panel.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:var(--surface2);border:1px solid var(--border);border-bottom:none;font-size:9px;color:var(--muted);letter-spacing:2px">
+          <span>UPDATED ${updated} ET</span>
+          <a href="${wl.url}" target="_blank" style="color:var(--accent2);text-decoration:none;letter-spacing:1px">VIEW ON TRADINGVIEW ↗</a>
+        </div>
+        <div class="tbl-wrap open" style="max-height:520px;overflow-y:auto">
+          <table>
+            <thead><tr><th>SYMBOL</th><th>EXCHANGE</th><th>CHART</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+      panelsEl.appendChild(panel);
+    });
+  } catch(e) {
+    console.warn('Watchlists not loaded:', e.message);
+  }
+})();
+
 // CLOCK
 setInterval(()=>{ document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZoneName:'short'}); },1000);
 
