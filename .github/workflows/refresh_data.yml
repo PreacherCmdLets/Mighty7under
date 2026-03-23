@@ -2,8 +2,9 @@ name: Refresh Dashboard Data
 
 on:
   schedule:
-    - cron: "35 21 * * 1-5"
-    - cron: "35 13 * * 1-5"
+    - cron: "35 21 * * 1-5"   # Weekdays 4:35 PM CT — market data
+    - cron: "35 13 * * 1-5"   # Weekdays 8:35 AM CT — market data
+    - cron: "0 0 * * 0"       # Sunday midnight UTC — watchlist scrape
   workflow_dispatch:
 
 permissions:
@@ -12,25 +13,43 @@ permissions:
   id-token: write
 
 jobs:
-  # ── Job 1: Fetch data and commit to repo ──────────────────────────────────
+  # ── Job 1: Fetch all data and commit to repo ──────────────────────────────
   fetch-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ── Python: market snapshot ──────────────────────────────────────────
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: pip install -r requirements.txt
 
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
+      # ── Node.js: watchlist scraper (runs every Sunday) ───────────────────
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Scrape TradingView watchlists
+        run: node scripts/scrape_watchlists.js
+
+      # ── Commit everything ─────────────────────────────────────────────────
       - name: Commit and push data
         run: |
           git config user.name  "github-actions[bot]"
@@ -39,14 +58,14 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git commit -m "data: refresh snapshot + watchlists [$(date -u '+%Y-%m-%d %H:%M UTC')]"
             git push origin HEAD
           fi
 
   # ── Job 2: Deploy to GitHub Pages (runs after Job 1 finishes) ────────────
   deploy:
     runs-on: ubuntu-latest
-    needs: fetch-data          # waits for fetch-data to complete first
+    needs: fetch-data
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,7 +73,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: main            # gets the latest commit including new data
+          ref: main
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
