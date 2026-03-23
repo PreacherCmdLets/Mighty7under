@@ -40,7 +40,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git push origin main
+            git push origin HEAD
           fi
 
   # ── Job 2: Deploy to GitHub Pages (runs after Job 1 finishes) ────────────

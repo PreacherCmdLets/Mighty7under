@@ -45,7 +45,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "data: refresh watchlists [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git push origin screener
+            git push origin HEAD
           fi
 
       - name: Upload Pages artifact
