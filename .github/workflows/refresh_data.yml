@@ -33,20 +33,24 @@ jobs:
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
-      # ── Node.js: watchlist scraper (runs every Sunday) ───────────────────
+      # ── Node.js: watchlist scraper (Sundays + manual only) ──────────────
       - name: Set up Node.js
+        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: Install Node dependencies
+        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         run: npm ci
 
       - name: Install Playwright browsers
+        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         run: npx playwright install chromium --with-deps
 
       - name: Scrape TradingView watchlists
+        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         run: node scripts/scrape_watchlists.js
 
       # ── Commit everything ─────────────────────────────────────────────────
