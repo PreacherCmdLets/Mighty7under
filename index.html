@@ -316,9 +316,6 @@
       <div id="chart-label" style="position:absolute;top:10px;left:14px;z-index:10;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.1em;pointer-events:none;">SPX · 1H</div>
       <div class="tradingview-widget-container" style="height:100%">
         <div id="tv-main-chart" style="height:100%"></div>
-        <script id="tv-main-script" type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {"autosize":true,"symbol":"SPX","interval":"60","timezone":"America/Chicago","theme":"dark","style":"1","locale":"en","allow_symbol_change":false,"calendar":false,"hide_top_toolbar":false,"hide_side_toolbar":false,"withdateranges":true,"save_image":true}
-        </script>
       </div>
     </div>
 
@@ -758,6 +755,8 @@ function loadChart() {
   const val = document.getElementById('chart-symbol-input').value.trim().toUpperCase();
   if (val) reloadMainChart(val, null);
 }
+
+document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbol, currentInterval));
 </script>
 
 <script>
