@@ -149,6 +149,8 @@
     position: relative;
   }
   .ticker-link:hover { color: #fff; }
+  .sym-cell { cursor: pointer; transition: color 0.15s; }
+  .sym-cell:hover { color: var(--accent) !important; text-decoration: underline dotted; }
 
   #tv-popup {
     display: none;
@@ -458,6 +460,37 @@
 
 <script>
 // WATCHLISTS
+const WL_PAGE_SIZE = 10;
+const wlPages = {};
+
+function renderWLPage(wlId, symbols, page) {
+  wlPages[wlId] = page;
+  const total  = symbols.length;
+  const pages  = Math.ceil(total / WL_PAGE_SIZE);
+  const start  = page * WL_PAGE_SIZE;
+  const slice  = symbols.slice(start, start + WL_PAGE_SIZE);
+
+  const rows = slice.map(s => {
+    const ticker = s.includes(':') ? s.split(':')[1] : s;
+    return `<tr>
+      <td class="sym-cell" data-ticker="${ticker}"
+          onmouseenter="showTickerPopup(this,'${ticker}')"
+          onmouseleave="hideTickerPopupDelayed()"
+          style="font-weight:600;color:var(--text)">${ticker}</td>
+      <td><a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(s)}" target="_blank" style="color:var(--accent2);text-decoration:none;font-size:10px;letter-spacing:1px">CHART ↗</a></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById(`wl-tbody-${wlId}`).innerHTML = rows;
+
+  const info = document.getElementById(`wl-pginfo-${wlId}`);
+  const prev = document.getElementById(`wl-prev-${wlId}`);
+  const next = document.getElementById(`wl-next-${wlId}`);
+  info.textContent = `${start + 1}–${Math.min(start + WL_PAGE_SIZE, total)} of ${total}`;
+  prev.disabled = page === 0;
+  next.disabled = page >= pages - 1;
+}
+
 (async () => {
   try {
     const res = await fetch('data/watchlists.json');
@@ -489,14 +522,7 @@
       const updated = new Date(wl.lastUpdated).toLocaleString('en-US', {
         timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short'
       });
-      const rows = wl.symbols.map(s => {
-        const [exchange, ticker] = s.split(':');
-        return `<tr>
-          <td style="font-weight:600;color:var(--text)">${ticker}</td>
-          <td style="color:var(--muted)">${exchange}</td>
-          <td><a href="https://www.tradingview.com/symbols/${ticker}" target="_blank" style="color:var(--accent2);text-decoration:none;font-size:10px;letter-spacing:1px">CHART ↗</a></td>
-        </tr>`;
-      }).join('');
+      const pages = Math.ceil(wl.symbols.length / WL_PAGE_SIZE);
 
       const panel = document.createElement('div');
       panel.className = 'wl-panel';
@@ -507,13 +533,24 @@
           <span>UPDATED ${updated} ET</span>
           <a href="${wl.url}" target="_blank" style="color:var(--accent2);text-decoration:none;letter-spacing:1px">VIEW ON TRADINGVIEW ↗</a>
         </div>
-        <div class="tbl-wrap open" style="max-height:520px;overflow-y:auto">
+        <div class="tbl-wrap open">
           <table>
-            <thead><tr><th>SYMBOL</th><th>EXCHANGE</th><th>CHART</th></tr></thead>
-            <tbody>${rows}</tbody>
+            <thead><tr><th>SYMBOL</th><th>CHART</th></tr></thead>
+            <tbody id="wl-tbody-${wl.id}"></tbody>
           </table>
-        </div>`;
+        </div>
+        ${pages > 1 ? `
+        <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:8px 14px;border:1px solid var(--border);border-top:none;background:var(--surface2);font-size:9px;color:var(--muted);letter-spacing:1px">
+          <button id="wl-prev-${wl.id}" onclick="renderWLPage('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']-1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px" disabled>◀ PREV</button>
+          <span id="wl-pginfo-${wl.id}"></span>
+          <button id="wl-next-${wl.id}" onclick="renderWLPage('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']+1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px">NEXT ▶</button>
+        </div>` : ''}`;
       panelsEl.appendChild(panel);
+
+      // Store symbols reference and render first page
+      window.wlSymbols = window.wlSymbols || {};
+      window.wlSymbols[wl.id] = wl.symbols;
+      renderWLPage(wl.id, wl.symbols, 0);
     });
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
@@ -766,21 +803,34 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
   const iframe  = document.getElementById('tv-popup-iframe');
   const title   = document.getElementById('tv-popup-title');
   let hideTimer = null;
+  let currentBlobUrl = null;
 
   function buildChartUrl(ticker) {
-    const params = new URLSearchParams({
+    if (currentBlobUrl) { URL.revokeObjectURL(currentBlobUrl); currentBlobUrl = null; }
+    const config = JSON.stringify({
+      autosize: true,
       symbol: ticker,
       interval: 'D',
+      timezone: 'America/Chicago',
       theme: 'dark',
       style: '1',
       locale: 'en',
-      hide_top_toolbar: '0',
-      hide_side_toolbar: '0',
-      allow_symbol_change: '0',
-      save_image: '0',
-      withdateranges: '1',
+      allow_symbol_change: false,
+      hide_top_toolbar: false,
+      hide_side_toolbar: false,
+      withdateranges: true,
+      save_image: false
     });
-    return `https://www.tradingview.com/widgetsnext/embed/advanced-chart/advanced-chart.html?${params}`;
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>*{margin:0;padding:0}html,body,.tradingview-widget-container,.tradingview-widget-container__widget{width:100%;height:100%;overflow:hidden}</style>
+</head><body>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js">${config}<\/script>
+</div></body></html>`;
+    const blob = new Blob([html], { type: 'text/html' });
+    currentBlobUrl = URL.createObjectURL(blob);
+    return currentBlobUrl;
   }
 
   function positionPopup(el) {
@@ -791,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
     let top  = rect.bottom + 8;
     if (left + pw > vw - 12) left = vw - pw - 12;
     if (top  + ph > vh - 12) top  = rect.top - ph - 8;
+    if (top  < 8) top  = 8;
     if (left < 8) left = 8;
     popup.style.left = left + 'px';
     popup.style.top  = top  + 'px';
@@ -813,6 +864,7 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
     clearTimeout(hideTimer);
     popup.classList.remove('visible');
     iframe.src = '';
+    if (currentBlobUrl) { URL.revokeObjectURL(currentBlobUrl); currentBlobUrl = null; }
   };
 
   // Keep popup alive when hovering over it
