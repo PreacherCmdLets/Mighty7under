@@ -138,6 +138,71 @@
   @media(max-width:1024px){.tv-2col,.tv-3col{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.bg{grid-template-columns:1fr 1fr}.calc-grid{grid-template-columns:1fr}}
   @media(max-width:600px){.cards{grid-template-columns:1fr}.bg{grid-template-columns:1fr}.page{padding:14px}}
 
+  /* ── MOBILE RESPONSIVE ─────────────────────────────────────────────────── */
+  .nav-hamburger{display:none;background:none;border:none;color:var(--accent);font-size:22px;padding:0 16px;cursor:pointer;height:50px;align-items:center;margin-left:auto;flex-shrink:0}
+
+  @media(max-width:767px){
+    /* Nav */
+    .nav-hamburger{display:flex}
+    .nav-tabs{display:none;position:absolute;top:50px;left:0;right:0;z-index:300;background:var(--bg);border-bottom:2px solid var(--accent);flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+    .nav-tabs.open{display:flex}
+    .nav-tab{height:44px;border-right:none;border-bottom:1px solid var(--border);font-size:12px;padding:0 20px;letter-spacing:1px}
+    .nav-meta{display:none}
+
+    /* Page padding */
+    .page{padding:12px}
+
+    /* Section header */
+    .sec-num{font-size:26px}
+    .sec-title{font-size:15px;letter-spacing:2px}
+    .sec-sub{display:none}
+    .section{margin-bottom:24px}
+
+    /* Cards */
+    .card-val{font-size:clamp(18px,5vw,24px)}
+
+    /* Chart height */
+    #chart-wrap{height:clamp(300px,55vh,500px)!important}
+
+    /* Quick-sym buttons — wrap tightly */
+    .sym-btn{font-size:10px;padding:4px 8px}
+
+    /* Tables → stacked card layout */
+    .tbl-wrap table thead{display:none}
+    .tbl-wrap table,.tbl-wrap tbody{display:block}
+    .tbl-wrap tbody tr{display:block;border:1px solid var(--border);margin-bottom:8px;padding:10px 12px;background:var(--surface)}
+    .tbl-wrap tbody td{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,42,54,.3);text-align:right;white-space:normal;font-size:12px}
+    .tbl-wrap tbody td:first-child{font-size:13px;font-weight:600;padding-bottom:7px;border-bottom:1px solid var(--border);margin-bottom:2px;text-align:left}
+    .tbl-wrap tbody td:last-child{border-bottom:none}
+    .tbl-wrap tbody td::before{content:attr(data-label);font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;text-align:left;flex-shrink:0;margin-right:8px}
+    .tbl-wrap tbody td:first-child::before{display:none}
+
+    /* Calendar table → stacked */
+    .cal-tbl thead{display:none}
+    .cal-tbl,.cal-tbl tbody{display:block}
+    .cal-tbl tr{display:block;border:1px solid var(--border);margin-bottom:8px;padding:10px 12px;background:var(--surface)}
+    .cal-tbl td{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,42,54,.3);white-space:normal;font-size:12px}
+    .cal-tbl td:last-child{border-bottom:none}
+    .cal-tbl td::before{content:attr(data-label);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;margin-right:8px}
+
+    /* Popup → full screen */
+    #tv-popup{width:100%!important;height:100%!important;top:0!important;left:0!important;border-radius:0!important;border-left:none!important;border-right:none!important;border-bottom:none!important}
+
+    /* Footer */
+    footer{flex-direction:column;align-items:center;text-align:center;gap:5px;padding:12px 14px}
+
+    /* Calc */
+    .calc-grid{gap:14px}
+    .cp{padding:14px}
+  }
+
+  @media(max-width:480px){
+    /* Hide spark bars on very small screens */
+    .tbl-wrap tbody td[data-label="5D"]{display:none}
+    /* Compact sym buttons */
+    .sym-btn{font-size:9px;padding:3px 6px}
+  }
+
   /* ── Ticker Hover Chart Popup ─────────────────────────────────────────── */
   .ticker-link {
     color: var(--accent);
@@ -239,7 +304,8 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><div class="nav-logo-text">Mighty<span>7</span>under</div></div>
-  <div class="nav-tabs">
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
+  <div class="nav-tabs" id="nav-tabs">
     <div class="nav-tab active" onclick="showPage('macro',this)">📊 Macro</div>
     <div class="nav-tab" onclick="showPage('equities',this)">📈 Equities</div>
     <div class="nav-tab" onclick="showPage('charts',this)">🕯 Charts</div>
@@ -566,6 +632,16 @@ function showPage(id,tab){
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   tab.classList.add('active');
+  // Close mobile nav after selection
+  document.getElementById('nav-tabs').classList.remove('open');
+  document.getElementById('nav-hamburger').textContent = '☰';
+}
+
+function toggleMobileNav(){
+  const tabs = document.getElementById('nav-tabs');
+  const btn  = document.getElementById('nav-hamburger');
+  const open = tabs.classList.toggle('open');
+  btn.textContent = open ? '✕' : '☰';
 }
 
 // HELPERS
@@ -589,14 +665,14 @@ function buildTable(rows,ranked=false){
     ?'<th>#</th><th>Instrument</th><th>Price</th><th>1D%</th><th>1W%</th><th>52W Hi%</th><th>YTD%</th><th>5D</th>'
     :'<th>Instrument</th><th>Price</th><th>1D%</th><th>1W%</th><th>52W Hi%</th><th>YTD%</th><th>5D</th>';
   const trs=rows.map((r,i)=>`<tr>
-    ${ranked?`<td class="neu" style="font-size:10px">${i+1}</td>`:''}
+    ${ranked?`<td class="neu" style="font-size:10px" data-label="#">${i+1}</td>`:''}
     <td>${r.name}${r.symbol?`<span class="sub">${r.symbol}</span>`:''}</td>
-    <td>${fmtN(r.price)}</td>
-    <td class="${cls(r.d1)}">${fmtP(r.d1)}</td>
-    <td class="${cls(r.w1)}">${fmtP(r.w1)}</td>
-    <td class="${cls(r.hi52pct)}">${fmtP(r.hi52pct)}</td>
-    <td class="${cls(r.ytd)}">${fmtP(r.ytd)}</td>
-    <td><span style="display:inline-flex;align-items:flex-end;gap:1px">${sparkHTML(r.spark)}</span></td>
+    <td data-label="Price">${fmtN(r.price)}</td>
+    <td class="${cls(r.d1)}" data-label="1D%">${fmtP(r.d1)}</td>
+    <td class="${cls(r.w1)}" data-label="1W%">${fmtP(r.w1)}</td>
+    <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>
+    <td class="${cls(r.ytd)}" data-label="YTD%">${fmtP(r.ytd)}</td>
+    <td data-label="5D"><span style="display:inline-flex;align-items:flex-end;gap:1px">${sparkHTML(r.spark)}</span></td>
   </tr>`).join('');
   return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
 }
@@ -673,8 +749,8 @@ async function loadData(){
   // Calendar
   if(events?.length){
     document.getElementById('cal-body').innerHTML=events.map(e=>`<tr>
-      <td>${e.date}</td><td>${e.time||'—'}</td><td>${e.event}</td><td>${e.country||'—'}</td>
-      <td><span class="i${(e.impact||'l')[0]}">${e.impact||'low'}</span></td>
+      <td data-label="Date">${e.date}</td><td data-label="Time">${e.time||'—'}</td><td data-label="Event">${e.event}</td><td data-label="Country">${e.country||'—'}</td>
+      <td data-label="Impact"><span class="i${(e.impact||'l')[0]}">${e.impact||'low'}</span></td>
     </tr>`).join('');
   }else{
     document.getElementById('cal-body').innerHTML='<tr><td colspan="5" class="loading">No upcoming events</td></tr>';
@@ -803,7 +879,9 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
   const iframe  = document.getElementById('tv-popup-iframe');
   const title   = document.getElementById('tv-popup-title');
   let hideTimer = null;
+  let showTimer = null;
   let currentBlobUrl = null;
+  let currentTicker = null;
 
   function buildChartUrl(ticker) {
     if (currentBlobUrl) { URL.revokeObjectURL(currentBlobUrl); currentBlobUrl = null; }
@@ -834,6 +912,12 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
   }
 
   function positionPopup(el) {
+    // Full-screen on mobile
+    if (window.innerWidth <= 767) {
+      popup.style.top  = '0';
+      popup.style.left = '0';
+      return;
+    }
     const rect = el.getBoundingClientRect();
     const pw = 680, ph = 420;
     const vw = window.innerWidth, vh = window.innerHeight;
@@ -849,28 +933,38 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
 
   window.showTickerPopup = function(el, ticker) {
     clearTimeout(hideTimer);
+    clearTimeout(showTimer);
     const sym = ticker.toUpperCase();
-    title.textContent = '$' + sym + ' — Daily Chart';
-    iframe.src = buildChartUrl(sym);
-    positionPopup(el);
-    popup.classList.add('visible');
+    // If popup is already visible with same ticker, just keep it alive
+    if (popup.classList.contains('visible') && currentTicker === sym) return;
+    const delay = popup.classList.contains('visible') ? 150 : 400;
+    showTimer = setTimeout(() => {
+      currentTicker = sym;
+      title.textContent = '$' + sym + ' — Daily Chart';
+      iframe.src = buildChartUrl(sym);
+      positionPopup(el);
+      popup.classList.add('visible');
+    }, delay);
   };
 
   window.hideTickerPopupDelayed = function() {
-    hideTimer = setTimeout(() => popup.classList.remove('visible'), 300);
+    clearTimeout(showTimer);
+    hideTimer = setTimeout(() => { popup.classList.remove('visible'); currentTicker = null; }, 300);
   };
 
   window.closeTickerPopup = function() {
     clearTimeout(hideTimer);
+    clearTimeout(showTimer);
     popup.classList.remove('visible');
+    currentTicker = null;
     iframe.src = '';
     if (currentBlobUrl) { URL.revokeObjectURL(currentBlobUrl); currentBlobUrl = null; }
   };
 
   // Keep popup alive when hovering over it
-  popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  popup.addEventListener('mouseenter', () => { clearTimeout(hideTimer); clearTimeout(showTimer); });
   popup.addEventListener('mouseleave', () => {
-    hideTimer = setTimeout(() => { popup.classList.remove('visible'); iframe.src=''; }, 300);
+    hideTimer = setTimeout(() => { popup.classList.remove('visible'); currentTicker = null; iframe.src=''; }, 300);
   });
 
   // ── Auto-linkify $TICKER tokens in tables ─────────────────────────────
