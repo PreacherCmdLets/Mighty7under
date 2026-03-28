@@ -1,0 +1,46 @@
+name: Scrape Watchlists
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"   # Sunday midnight UTC
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Scrape TradingView watchlists
+        run: node scripts/scrape_watchlists.js
+
+      - name: Commit and push watchlists
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/watchlists.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: watchlist update [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git push origin HEAD
+          fi

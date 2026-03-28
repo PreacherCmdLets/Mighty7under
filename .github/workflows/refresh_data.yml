@@ -4,11 +4,8 @@ on:
   schedule:
     - cron: "35 21 * * 1-5"   # Weekdays 4:35 PM CT
     - cron: "35 13 * * 1-5"   # Weekdays 8:35 AM CT
-    - cron: "0 0 * * 0"       # Sunday midnight UTC — includes watchlist scrape
+    - cron: "0 0 * * 0"       # Sunday midnight UTC
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: write
@@ -34,26 +31,6 @@ jobs:
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
-      # ── Watchlist scrape (Sundays + manual only) ───────────────────────────
-      - name: Set up Node.js
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install Node dependencies
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        run: npm ci
-
-      - name: Install Playwright browsers (Node)
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        run: npx playwright install chromium --with-deps
-
-      - name: Scrape TradingView watchlists
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        run: node scripts/scrape_watchlists.js
-
       - name: Commit and push data
         run: |
           git config user.name  "github-actions[bot]"
@@ -62,7 +39,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "data: refresh snapshot + watchlists [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
             git push origin HEAD
           fi
 
