@@ -11,6 +11,8 @@ Usage:
   python scripts/generate_fundamental.py            # all Primary Focus tickers
   python scripts/generate_fundamental.py --ticker AAPL   # single ticker
   python scripts/generate_fundamental.py --force    # ignore cache
+  python scripts/generate_fundamental.py --ticker AAPL --model haiku   # use Haiku
+  python scripts/generate_fundamental.py --ticker AAPL --model sonnet  # use Sonnet (default)
 
 Runs automatically every Sunday via GitHub Actions.
 Requires: ANTHROPIC_API_KEY environment variable
@@ -34,7 +36,9 @@ OUTPUT_DIR       = Path("data/research")
 CACHE_MAX_DAYS   = 6          # skip if report is fresher than this
 SCRAPE_SLICE     = 3000       # chars per page scrape
 OPTIONS_SLICE    = 2500
-CLAUDE_MODEL     = "claude-sonnet-4-6"
+CLAUDE_MODEL_SONNET = "claude-sonnet-4-6"
+CLAUDE_MODEL_HAIKU  = "claude-haiku-4-5-20251001"
+CLAUDE_MODEL        = CLAUDE_MODEL_SONNET  # default
 INTER_TICKER_DELAY = 3        # seconds between tickers (rate limit safety)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -184,12 +188,14 @@ Consensus $X (range $low–$high, N analysts). Bull $X / Base $X / Bear $X with 
 """
 
 
-def generate_report(ticker, scraped):
+def generate_report(ticker, scraped, model=None):
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     prompt = build_prompt(ticker, scraped)
+    use_model = model or CLAUDE_MODEL
+    print(f"  model: {use_model}")
 
     message = client.messages.create(
-        model=CLAUDE_MODEL,
+        model=use_model,
         max_tokens=4096,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -213,37 +219,40 @@ def update_manifest(ticker, report_type, date_str):
     manifest_path.write_text(json.dumps(manifest, indent=2))
 
 
-def save_report(ticker, report_text, scraped_at):
+def save_report(ticker, report_text, scraped_at, model=None):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     now = datetime.now(timezone.utc)
     date_str = now.strftime("%Y-%m-%d")
+    use_model = model or CLAUDE_MODEL
+    short_model = "haiku" if "haiku" in use_model else "sonnet"
     payload = {
         "ticker": ticker,
         "type": "fundamental",
+        "model": use_model,
         "generated_at": now.isoformat(),
         "scraped_at": scraped_at,
         "report": report_text
     }
     data = json.dumps(payload, indent=2)
 
-    # Save dated copy
+    # Save dated copy (model-tagged for comparison)
     dated_dir = OUTPUT_DIR / date_str
     dated_dir.mkdir(parents=True, exist_ok=True)
-    (dated_dir / f"{ticker}_fundamental.json").write_text(data)
+    (dated_dir / f"{ticker}_fundamental_{short_model}.json").write_text(data)
 
-    # Overwrite latest
+    # Overwrite latest only when using default model (sonnet) or explicitly chosen
     output_path(ticker).write_text(data)
 
     update_manifest(ticker, "fundamental", date_str)
-    print(f"  saved {date_str}/{ticker}_fundamental.json")
+    print(f"  saved {date_str}/{ticker}_fundamental_{short_model}.json")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def process_ticker(ticker, force=False):
+def process_ticker(ticker, force=False, model=None):
     print(f"\n[{ticker}]")
     if not force and is_fresh(ticker):
-        print(f"  ↷ skipped (report is less than {CACHE_MAX_DAYS} days old)")
+        print(f"  skipped (report is less than {CACHE_MAX_DAYS} days old)")
         return
 
     print(f"  scraping...")
@@ -252,8 +261,8 @@ def process_ticker(ticker, force=False):
 
     print(f"  generating report...")
     try:
-        report = generate_report(ticker, scraped)
-        save_report(ticker, report, scraped_at)
+        report = generate_report(ticker, scraped, model=model)
+        save_report(ticker, report, scraped_at, model=model)
         print(f"  OK done")
     except Exception as e:
         print(f"  FAIL API error: {e}")
@@ -263,12 +272,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--ticker", help="Run for a single ticker only")
     parser.add_argument("--force",  action="store_true", help="Ignore cache")
+    parser.add_argument("--model",  choices=["sonnet", "haiku"], default="sonnet",
+                        help="Model to use: sonnet (default) or haiku")
     args = parser.parse_args()
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         print("ERROR: ANTHROPIC_API_KEY environment variable not set")
         sys.exit(1)
+
+    model = CLAUDE_MODEL_HAIKU if args.model == "haiku" else CLAUDE_MODEL_SONNET
+    print(f"Using model: {model}")
 
     if args.ticker:
         tickers = [args.ticker.upper()]
@@ -277,7 +291,7 @@ def main():
         print(f"Primary Focus: {len(tickers)} tickers — {', '.join(tickers)}")
 
     for i, ticker in enumerate(tickers):
-        process_ticker(ticker, force=args.force)
+        process_ticker(ticker, force=args.force, model=model)
         if i < len(tickers) - 1:
             time.sleep(INTER_TICKER_DELAY)
 

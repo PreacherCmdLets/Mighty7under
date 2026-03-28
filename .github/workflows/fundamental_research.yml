@@ -12,6 +12,13 @@ on:
         description: 'Force regenerate (ignore cache)'
         type: boolean
         default: false
+      model:
+        description: 'Model to use'
+        type: choice
+        options:
+          - haiku
+          - sonnet
+        default: haiku
 
 permissions:
   contents: write
@@ -39,9 +46,9 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          ARGS=""
+          ARGS="--model ${{ github.event.inputs.model || 'haiku' }}"
           if [ -n "${{ github.event.inputs.ticker }}" ]; then
-            ARGS="--ticker ${{ github.event.inputs.ticker }}"
+            ARGS="$ARGS --ticker ${{ github.event.inputs.ticker }}"
           fi
           if [ "${{ github.event.inputs.force }}" = "true" ]; then
             ARGS="$ARGS --force"
