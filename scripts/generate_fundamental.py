@@ -196,18 +196,46 @@ def generate_report(ticker, scraped):
     return message.content[0].text
 
 
+def update_manifest(ticker, report_type, date_str):
+    manifest_path = OUTPUT_DIR / "index.json"
+    manifest = {}
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text())
+        except Exception:
+            manifest = {}
+    if ticker not in manifest:
+        manifest[ticker] = {}
+    dates = manifest[ticker].get(report_type, [])
+    if date_str not in dates:
+        dates = sorted([date_str] + dates, reverse=True)
+    manifest[ticker][report_type] = dates
+    manifest_path.write_text(json.dumps(manifest, indent=2))
+
+
 def save_report(ticker, report_text, scraped_at):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    path = output_path(ticker)
+    now = datetime.now(timezone.utc)
+    date_str = now.strftime("%Y-%m-%d")
     payload = {
         "ticker": ticker,
         "type": "fundamental",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": now.isoformat(),
         "scraped_at": scraped_at,
         "report": report_text
     }
-    path.write_text(json.dumps(payload, indent=2))
-    print(f"  saved {path}")
+    data = json.dumps(payload, indent=2)
+
+    # Save dated copy
+    dated_dir = OUTPUT_DIR / date_str
+    dated_dir.mkdir(parents=True, exist_ok=True)
+    (dated_dir / f"{ticker}_fundamental.json").write_text(data)
+
+    # Overwrite latest
+    output_path(ticker).write_text(data)
+
+    update_manifest(ticker, "fundamental", date_str)
+    print(f"  saved {date_str}/{ticker}_fundamental.json")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
