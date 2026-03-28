@@ -234,16 +234,16 @@ def save_report(ticker, report_text, scraped_at, model=None):
     }
     data = json.dumps(payload, indent=2)
 
-    # Save dated copy (model-tagged for comparison)
+    # Save dated copy (standard name so frontend can find it)
     dated_dir = OUTPUT_DIR / date_str
     dated_dir.mkdir(parents=True, exist_ok=True)
-    (dated_dir / f"{ticker}_fundamental_{short_model}.json").write_text(data)
+    (dated_dir / f"{ticker}_fundamental.json").write_text(data)
 
-    # Overwrite latest only when using default model (sonnet) or explicitly chosen
+    # Also save latest (no date prefix) for direct access
     output_path(ticker).write_text(data)
 
     update_manifest(ticker, "fundamental", date_str)
-    print(f"  saved {date_str}/{ticker}_fundamental_{short_model}.json")
+    print(f"  saved {date_str}/{ticker}_fundamental.json + latest")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
