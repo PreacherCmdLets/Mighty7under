@@ -298,6 +298,24 @@
     border-color: var(--accent);
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+<style>
+  #research-body h1,#research-body h2{font-size:15px;font-weight:700;color:var(--accent2);margin:20px 0 8px;border-bottom:1px solid var(--border);padding-bottom:4px}
+  #research-body h3{font-size:13px;font-weight:700;color:var(--text);margin:16px 0 6px;border-bottom:1px solid var(--border);padding-bottom:3px}
+  #research-body h4{font-size:12px;font-weight:700;color:var(--accent2);margin:12px 0 4px}
+  #research-body p{margin:6px 0;line-height:1.6}
+  #research-body ul,#research-body ol{margin:6px 0 6px 20px;padding:0}
+  #research-body li{margin:3px 0;line-height:1.5}
+  #research-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px}
+  #research-body th{background:var(--bg2);color:var(--accent2);padding:6px 10px;border:1px solid var(--border);text-align:left;font-weight:600}
+  #research-body td{padding:5px 10px;border:1px solid var(--border)}
+  #research-body tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+  #research-body strong{color:var(--text);font-weight:600}
+  #research-body em{color:var(--muted)}
+  #research-body hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+  #research-body code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:11px}
+  #research-body blockquote{border-left:3px solid var(--accent2);margin:8px 0;padding:4px 12px;color:var(--muted)}
+</style>
 </head>
 <body>
 
@@ -878,27 +896,10 @@ function renderResearch(data, type) {
   const body   = document.getElementById('research-body');
   const footer = document.getElementById('research-footer');
 
-  // Render markdown as HTML (basic conversion)
-  let html = data.report
-    .replace(/^# (.+)$/gm,   '<h2 style="font-size:16px;font-weight:700;margin:20px 0 8px;color:var(--accent2)">$1</h2>')
-    .replace(/^## (.+)$/gm,  '<h3 style="font-size:13px;font-weight:700;margin:16px 0 6px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:4px">$1</h3>')
-    .replace(/^#### (.+)$/gm,'<h4 style="font-size:12px;font-weight:700;margin:12px 0 4px;color:var(--accent2)">$1</h4>')
-    .replace(/^### (.+)$/gm, '<h4 style="font-size:12px;font-weight:700;margin:12px 0 4px">$1</h4>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^\| (.+) \|$/gm, (row) => {
-      if (row.includes('---')) return '';
-      const cells = row.split('|').slice(1,-1).map(c =>
-        `<td style="padding:4px 10px;border:1px solid var(--border)">${c.trim()}</td>`).join('');
-      return `<tr>${cells}</tr>`;
-    })
-    .replace(/(<tr>.*<\/tr>\n?)+/gs, (t) => `<table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:12px">${t}</table>`)
-    .replace(/^- (.+)$/gm,  '<li style="margin:2px 0">$1</li>')
-    .replace(/(<li.*<\/li>\n?)+/gs, (l) => `<ul style="margin:6px 0 6px 18px">${l}</ul>`)
-    .replace(/^(\d+)\. (.+)$/gm, '<li style="margin:2px 0">$2</li>')
-    .replace(/\n\n/g, '</p><p style="margin:6px 0">')
-    .replace(/\n/g, '<br>');
-
-  body.innerHTML = `<div style="max-width:100%">${html}</div>`;
+  // Use marked.js for proper markdown rendering
+  marked.setOptions({ breaks: true, gfm: true });
+  const html = marked.parse(data.report);
+  body.innerHTML = `<div style="padding:0 2px">${html}</div>`;
 
   // Footer with timestamp
   const dt = new Date(data.generated_at);
