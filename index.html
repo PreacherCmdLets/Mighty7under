@@ -828,9 +828,8 @@ calc();
     <span id="research-title" style="font-weight:700;font-size:15px;color:var(--text)">Research</span>
     <span onclick="closeResearch()" style="cursor:pointer;color:var(--muted);font-size:18px;line-height:1">✕</span>
   </div>
-  <div style="display:flex;gap:0;border-bottom:1px solid var(--border);flex-shrink:0">
-    <button id="tab-fundamental" onclick="switchTab('fundamental')" style="flex:1;padding:10px;background:var(--accent2);color:#000;border:none;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer">FUNDAMENTAL</button>
-    <button id="tab-technical"   onclick="switchTab('technical')"   style="flex:1;padding:10px;background:none;color:var(--muted);border:none;font-size:12px;letter-spacing:1px;cursor:pointer;border-left:1px solid var(--border)">TECHNICAL</button>
+  <div style="padding:6px 18px;border-bottom:1px solid var(--border);flex-shrink:0">
+    <span style="font-size:11px;font-weight:600;letter-spacing:1px;color:var(--accent2)">FUNDAMENTAL</span>
   </div>
   <div id="research-body" style="flex:1;overflow-y:auto;padding:20px 22px;font-size:13px;line-height:1.7;color:var(--text)"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 18px;border-top:1px solid var(--border);flex-shrink:0">
@@ -841,9 +840,8 @@ calc();
 
 <script>
 // ── AI Research Drawer ────────────────────────────────────────────────────
-let researchTicker  = null;
-let researchTab     = 'fundamental';
-let researchCache   = {};   // keyed by `AAPL_fundamental_2026-03-28` or `AAPL_fundamental_latest`
+let researchTicker   = null;
+let researchCache    = {};
 let researchManifest = null;
 
 async function loadManifest() {
@@ -857,12 +855,11 @@ async function loadManifest() {
 
 function openResearch(ticker) {
   researchTicker = ticker;
-  researchTab = 'fundamental';
   document.getElementById('research-title').textContent = ticker + ' — AI Research';
   document.getElementById('research-date-picker').innerHTML = '';
   document.getElementById('research-overlay').style.display = 'block';
   requestAnimationFrame(() => document.getElementById('research-drawer').style.transform = 'translateX(0)');
-  switchTab('fundamental');
+  loadResearch(ticker, null);
 }
 
 function closeResearch() {
@@ -870,40 +867,30 @@ function closeResearch() {
   document.getElementById('research-overlay').style.display = 'none';
 }
 
-function switchTab(tab) {
-  researchTab = tab;
-  document.getElementById('tab-fundamental').style.background = tab === 'fundamental' ? 'var(--accent2)' : 'none';
-  document.getElementById('tab-fundamental').style.color       = tab === 'fundamental' ? '#000' : 'var(--muted)';
-  document.getElementById('tab-technical').style.background   = tab === 'technical'   ? 'var(--accent2)' : 'none';
-  document.getElementById('tab-technical').style.color         = tab === 'technical'   ? '#000' : 'var(--muted)';
-  loadResearch(researchTicker, tab, null);
-}
-
-function renderDatePicker(ticker, type, dates, selectedDate) {
+function renderDatePicker(ticker, dates, selectedDate) {
   const el = document.getElementById('research-date-picker');
   if (!dates || dates.length <= 1) { el.innerHTML = ''; return; }
   const options = dates.map(d =>
     `<option value="${d}" ${d === selectedDate ? 'selected' : ''}>${d}</option>`
   ).join('');
-  el.innerHTML = `<select onchange="loadResearch('${ticker}','${type}',this.value)"
+  el.innerHTML = `<select onchange="loadResearch('${ticker}',this.value)"
     style="background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:3px 8px;font-size:11px;cursor:pointer">
     ${options}
   </select>`;
 }
 
-async function loadResearch(ticker, type, date) {
+async function loadResearch(ticker, date) {
   const body   = document.getElementById('research-body');
   const footer = document.getElementById('research-footer');
 
-  // Load manifest to get available dates
   const manifest = await loadManifest();
-  const dates = manifest[ticker]?.[type] || [];
+  const dates = manifest[ticker]?.fundamental || [];
   const selectedDate = date || dates[0] || null;
-  renderDatePicker(ticker, type, dates, selectedDate);
+  renderDatePicker(ticker, dates, selectedDate);
 
-  const cacheKey = `${ticker}_${type}_${selectedDate || 'latest'}`;
+  const cacheKey = `${ticker}_fundamental_${selectedDate || 'latest'}`;
   if (researchCache[cacheKey]) {
-    renderResearch(researchCache[cacheKey], type);
+    renderResearch(researchCache[cacheKey]);
     return;
   }
 
@@ -911,55 +898,36 @@ async function loadResearch(ticker, type, date) {
   footer.textContent = '';
 
   const url = selectedDate
-    ? `data/research/${selectedDate}/${ticker}_${type}.json?_=${Date.now()}`
-    : `data/research/${ticker}_${type}.json?_=${Date.now()}`;
+    ? `data/research/${selectedDate}/${ticker}_fundamental.json?_=${Date.now()}`
+    : `data/research/${ticker}_fundamental.json?_=${Date.now()}`;
 
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('not found');
     const data = await res.json();
     researchCache[cacheKey] = data;
-    renderResearch(data, type);
+    renderResearch(data);
   } catch {
-    const msgs = {
-      fundamental: {
-        icon: '📊',
-        title: 'Fundamental Analysis Not Yet Available',
-        detail: `No report has been generated for <strong>${ticker}</strong> yet.`,
-        hint: 'Reports run automatically every Sunday for all Primary Focus tickers.'
-      },
-      technical: {
-        icon: '📈',
-        title: 'Technical Analysis Not Yet Available',
-        detail: `No chart analysis has been generated for <strong>${ticker}</strong> yet.`,
-        hint: 'Trigger it manually: GitHub Actions → <em>Technical Research</em> → Run workflow.'
-      }
-    };
-    const m = msgs[type];
     body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60%;text-align:center;padding:40px 30px;gap:12px">
-        <div style="font-size:36px">${m.icon}</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text)">${m.title}</div>
-        <div style="font-size:12px;color:var(--text)">${m.detail}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;max-width:340px;line-height:1.6">${m.hint}</div>
+        <div style="font-size:36px">📊</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text)">Fundamental Analysis Not Yet Available</div>
+        <div style="font-size:12px;color:var(--text)">No report has been generated for <strong>${ticker}</strong> yet.</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;max-width:340px;line-height:1.6">Reports run automatically every Sunday for all Primary Focus tickers.</div>
       </div>`;
     footer.textContent = '';
   }
 }
 
-function renderResearch(data, type) {
+function renderResearch(data) {
   const body   = document.getElementById('research-body');
   const footer = document.getElementById('research-footer');
 
-  // Use marked.js for proper markdown rendering
   marked.setOptions({ breaks: true, gfm: true });
-  const html = marked.parse(data.report);
-  body.innerHTML = `<div style="padding:0 2px">${html}</div>`;
+  body.innerHTML = `<div style="padding:0 2px">${marked.parse(data.report)}</div>`;
 
-  // Footer with timestamp
   const dt = new Date(data.generated_at);
-  const label = type === 'fundamental' ? 'Fundamental' : 'Technical';
-  footer.textContent = `${label} report generated ${dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} ${dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})} UTC`;
+  footer.textContent = `Fundamental report generated ${dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} ${dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})} UTC`;
 }
 </script>
 
