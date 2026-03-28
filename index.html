@@ -804,8 +804,8 @@ calc();
 </script>
 
 <!-- ── AI Research Drawer ────────────────────────────────────────────────── -->
-<div id="research-overlay" onclick="closeResearch()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1100"></div>
-<div id="research-drawer" style="display:none;position:fixed;top:0;right:0;width:min(760px,100vw);height:100vh;background:var(--bg2);border-left:1px solid var(--border);z-index:1101;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease">
+<div id="research-overlay" onclick="closeResearch()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1100"></div>
+<div id="research-drawer" style="position:fixed;top:0;right:0;width:min(760px,100vw);height:100vh;background:#0e1117;border-left:1px solid var(--border);z-index:1101;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);flex-shrink:0">
     <span id="research-title" style="font-weight:700;font-size:15px;color:var(--text)">Research</span>
     <span onclick="closeResearch()" style="cursor:pointer;color:var(--muted);font-size:18px;line-height:1">✕</span>
@@ -828,17 +828,13 @@ function openResearch(ticker) {
   researchTicker = ticker;
   document.getElementById('research-title').textContent = ticker + ' — AI Research';
   document.getElementById('research-overlay').style.display = 'block';
-  const drawer = document.getElementById('research-drawer');
-  drawer.style.display = 'flex';
-  requestAnimationFrame(() => drawer.style.transform = 'translateX(0)');
+  requestAnimationFrame(() => document.getElementById('research-drawer').style.transform = 'translateX(0)');
   switchTab('fundamental');
 }
 
 function closeResearch() {
-  const drawer = document.getElementById('research-drawer');
-  drawer.style.transform = 'translateX(100%)';
+  document.getElementById('research-drawer').style.transform = 'translateX(100%)';
   document.getElementById('research-overlay').style.display = 'none';
-  setTimeout(() => { drawer.style.display = 'none'; }, 260);
 }
 
 function switchTab(tab) {
