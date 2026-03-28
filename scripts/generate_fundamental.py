@@ -140,21 +140,21 @@ Produce this exact report. Every field must contain real numbers from the data a
 
 ## FUNDAMENTAL ANALYSIS
 **Recent Metrics:** Revenue $X (+Y% YoY) | Non-GAAP EPS $X | Gross Margin X% | Op Margin X% | FCF $X
-**Peer Comparison:** [Table: Company | Fwd P/E | EV/EBITDA | P/S — 3–4 named peers]
+**Peer Comparison:** [Table: Company | Fwd P/E | EV/EBITDA | P/S — 3-4 named peers]
 **Forward Outlook:** [Next qtr guidance, full-year consensus, growth trajectory with specific numbers]
 
 ## CATALYST ANALYSIS
-**Near-term (0–6 months):** [Dated events — next earnings date, product launches, regulatory decisions]
-**Medium-term (6–24 months):** [Strategic initiatives, market expansion, pipeline milestones]
+**Near-term (0-6 months):** [Dated events — next earnings date, product launches, regulatory decisions]
+**Medium-term (6-24 months):** [Strategic initiatives, market expansion, pipeline milestones]
 **Event-driven:** [M&A potential, index changes, special dividends, spinoffs]
 
 ## VALUATION & PRICE TARGETS
-Consensus $X (range $low–$high, N analysts). Bull $X / Base $X / Bear $X with one scenario each. Probability weighting X%/X%/X%. Probability-weighted target $X vs current $X = X% upside/downside.
+Consensus $X (range $low-$high, N analysts). Bull $X / Base $X / Bear $X with one scenario each. Probability weighting X%/X%/X%. Probability-weighted target $X vs current $X = X% upside/downside.
 
 ## RISK ASSESSMENT
 **Company risks:** [3 specific risks with context]
 **Macro risks:** [Rate sensitivity, sector rotation, regulatory/geopolitical]
-**Position sizing:** X%–Y% based on beta X.X. ESG note if material.
+**Position sizing:** X%-Y% based on beta X.X. ESG note if material.
 
 ## MARKET POSITIONING
 [YTD vs relevant sector ETF. Relative strength vs S&P 500. Rotation context.]
@@ -179,7 +179,7 @@ Consensus $X (range $low–$high, N analysts). Bull $X / Base $X / Bear $X with 
 | **Price Target** | $X |
 | **Timeframe** | 12 months |
 | **Upside/Downside** | +X% / -X% |
-| **Position Size** | X%–Y% |
+| **Position Size** | X%-Y% |
 
 ---
 
@@ -190,14 +190,13 @@ Consensus $X (range $low–$high, N analysts). Bull $X / Base $X / Bear $X with 
 
 def generate_report(ticker, scraped, model=None):
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    prompt = build_prompt(ticker, scraped)
     use_model = model or CLAUDE_MODEL
     print(f"  model: {use_model}")
 
     message = client.messages.create(
         model=use_model,
         max_tokens=4096,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": build_prompt(ticker, scraped)}]
     )
     return message.content[0].text
 
