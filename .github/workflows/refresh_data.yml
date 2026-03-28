@@ -2,9 +2,9 @@ name: Refresh Dashboard Data
 
 on:
   schedule:
-    - cron: "35 21 * * 1-5"   # Weekdays 4:35 PM CT — market data
-    - cron: "35 13 * * 1-5"   # Weekdays 8:35 AM CT — market data
-    - cron: "0 0 * * 0"       # Sunday midnight UTC — watchlist scrape + fundamental research
+    - cron: "35 21 * * 1-5"   # Weekdays 4:35 PM CT
+    - cron: "35 13 * * 1-5"   # Weekdays 8:35 AM CT
+    - cron: "0 0 * * 0"       # Sunday midnight UTC — includes watchlist scrape
   workflow_dispatch:
 
 env:
@@ -16,14 +16,12 @@ permissions:
   id-token: write
 
 jobs:
-  # ── Job 1: Fetch market data, watchlists, fundamental research ───────────
   fetch-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── Python: market snapshot ──────────────────────────────────────────
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -36,7 +34,7 @@ jobs:
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
-      # ── Node.js: watchlist scraper (Sundays + manual only) ──────────────
+      # ── Watchlist scrape (Sundays + manual only) ───────────────────────────
       - name: Set up Node.js
         if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         uses: actions/setup-node@v4
@@ -56,18 +54,6 @@ jobs:
         if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
         run: node scripts/scrape_watchlists.js
 
-      # ── Python Playwright: fundamental research (Sundays + manual only) ─
-      - name: Install Playwright browsers (Python)
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        run: python -m playwright install chromium --with-deps
-
-      - name: Generate fundamental research
-        if: github.event.schedule == '0 0 * * 0' || github.event_name == 'workflow_dispatch'
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/generate_fundamental.py
-
-      # ── Commit everything ─────────────────────────────────────────────────
       - name: Commit and push data
         run: |
           git config user.name  "github-actions[bot]"
@@ -76,48 +62,10 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "data: refresh snapshot + watchlists + research [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git commit -m "data: refresh snapshot + watchlists [$(date -u '+%Y-%m-%d %H:%M UTC')]"
             git push origin HEAD
           fi
 
-  # ── Job 2: Technical chart analysis (on-demand only) ─────────────────────
-  generate-technical:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install Playwright browsers
-        run: python -m playwright install chromium --with-deps
-
-      - name: Generate technical research
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/generate_technical.py
-
-      - name: Commit technical reports
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/research/
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "research: technical analysis update [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git push origin HEAD
-          fi
-
-  # ── Job 3: Deploy to GitHub Pages ─────────────────────────────────────────
   deploy:
     runs-on: ubuntu-latest
     needs: fetch-data
