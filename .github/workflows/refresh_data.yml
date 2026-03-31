@@ -40,6 +40,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git pull --rebase origin main
             git push origin HEAD
           fi
 
