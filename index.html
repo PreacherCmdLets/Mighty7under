@@ -77,6 +77,33 @@
   .pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--text2)}
   .spark-bar{width:3px;border-radius:1px;display:inline-block;vertical-align:bottom}
 
+  /* WATCHLIST COMPACT GRID */
+  .wl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px}
+  .wl-chip{background:var(--surface);border:1px solid var(--border);padding:7px 12px;border-radius:4px;display:flex;align-items:center;justify-content:space-between;transition:all .15s;cursor:pointer}
+  .wl-chip:hover{border-color:var(--accent2);background:var(--surface2)}
+  .wl-chip .wl-sym{font-weight:600;font-size:11px;letter-spacing:1px}
+  .wl-chip .wl-link{color:var(--accent2);font-size:8px;letter-spacing:1px;text-decoration:none;opacity:0;transition:opacity .15s}
+  .wl-chip:hover .wl-link{opacity:1}
+  .wl-meta{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:0 2px}
+  .wl-meta span{font-size:9px;color:var(--muted);letter-spacing:1px}
+  .wl-meta a{color:var(--accent2);font-size:9px;text-decoration:none;letter-spacing:1px}
+
+  /* PRISTINE TWO-PANEL LAYOUT */
+  .pristine-two-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pristine-left-stack{display:flex;flex-direction:column;gap:12px}
+
+  /* PRISTINE STAGE BADGES */
+  .stg{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;min-width:28px;text-align:center}
+  .stg-1A{background:#d4a017;color:#000}.stg-1B{background:#e8d44d;color:#000}.stg-1R{background:#e87800;color:#000}
+  .stg-2A{background:#00c853;color:#000}.stg-2B{background:#43a047;color:#fff}.stg-2C{background:#1b5e20;color:#fff}.stg-2R{background:#81c784;color:#000}
+  .stg-3A{background:#ffb74d;color:#000}.stg-3B{background:#ef6c00;color:#fff}.stg-3R{background:#c68400;color:#000}
+  .stg-4A{background:#ef9a9a;color:#000}.stg-4B{background:#e53935;color:#fff}.stg-4C{background:#7f0000;color:#fff}.stg-4R{background:#f48fb1;color:#000}
+  .stg-NA{background:#555;color:#aaa}
+
+  /* PRISTINE TABLE HEADER TOOLTIPS */
+  .th-tip{position:relative;cursor:help}
+  .th-tip:hover::after{content:attr(data-tip);position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#1a1f2e;color:var(--text);border:1px solid var(--border);padding:6px 10px;font-size:10px;white-space:pre;z-index:100;border-radius:4px;letter-spacing:0;text-transform:none;font-weight:400;margin-top:4px;min-width:180px}
+
   /* BREADTH */
   .bg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
   .bc{background:var(--surface);border:1px solid var(--border);padding:17px}
@@ -448,39 +475,21 @@
 <!-- PAGE: SCREENER -->
 <div class="page" id="page-screener">
 
-  <!-- WATCHLISTS -->
+  <!-- WATCHLISTS (compact grid) -->
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
-
-    <!-- Watchlist tab buttons -->
-    <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"></div>
-
-    <!-- Watchlist panels -->
+    <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
     <div id="wl-panels"></div>
   </div>
 
-  <!-- MARKET OVERVIEW (existing) -->
+  <hr style="border:none;border-top:1px solid var(--border);margin:0 0 20px">
+
+  <!-- PRISTINE MARKET ANALYSIS (two-panel) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Market Overview</span><span class="sec-sub">TradingView Widgets</span></div>
-    <div class="tv-full">
-      <div class="tv-hdr">US Market Overview<span>TradingView</span></div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-        {"colorTheme":"dark","dateRange":"12M","showChart":true,"locale":"en","width":"100%","height":660,"largeChartUrl":"","isTransparent":false,"showSymbolLogo":true,"showFloatingTooltip":false,"plotLineColorGrowing":"rgba(41, 98, 255, 1)","plotLineColorFalling":"rgba(41, 98, 255, 1)","gridLineColor":"rgba(240, 243, 250, 0)","scaleFontColor":"rgba(106, 109, 120, 1)","belowLineFillColorGrowing":"rgba(41, 98, 255, 0.12)","belowLineFillColorFalling":"rgba(41, 98, 255, 0.12)","belowLineFillColorGrowingBottom":"rgba(41, 98, 255, 0)","belowLineFillColorFallingBottom":"rgba(41, 98, 255, 0)","symbolActiveColor":"rgba(41, 98, 255, 0.12)","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:NKY","d":"Nikkei 225"},{"s":"INDEX:DEU40","d":"DAX"},{"s":"FOREXCOM:UKXGBP","d":"FTSE 100"}],"originalTitle":"Indices"},{"title":"Commodities","symbols":[{"s":"CME_MINI:ES1!","d":"S&P 500"},{"s":"CME:6E1!","d":"Euro"},{"s":"COMEX:GC1!","d":"Gold"},{"s":"NYMEX:CL1!","d":"Crude Oil"},{"s":"NYMEX:NG1!","d":"Natural Gas"},{"s":"CBOT:ZC1!","d":"Corn"}],"originalTitle":"Commodities"},{"title":"Bonds","symbols":[{"s":"CBOT:ZB1!","d":"T-Bond"},{"s":"CBOT:UB1!","d":"Ultra T-Bond"},{"s":"EUREX:FGBL1!","d":"Euro Bund"},{"s":"EUREX:FBTP1!","d":"Euro BTP"},{"s":"EUREX:FGBM1!","d":"Euro BOBL"}],"originalTitle":"Bonds"},{"title":"Forex","symbols":[{"s":"FX:EURUSD","d":"EUR/USD"},{"s":"FX:GBPUSD","d":"GBP/USD"},{"s":"FX:USDJPY","d":"USD/JPY"},{"s":"FX:USDCHF","d":"USD/CHF"},{"s":"FX:AUDUSD","d":"AUD/USD"},{"s":"FX:USDCAD","d":"USD/CAD"}],"originalTitle":"Forex"}]}
-        </script>
-      </div>
-    </div>
-    <div class="tv-full" style="margin-top:14px">
-      <div class="tv-hdr">Crypto Market<span>TradingView</span></div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-        {"colorTheme":"dark","dateRange":"12M","showChart":true,"locale":"en","width":"100%","height":500,"isTransparent":false,"showSymbolLogo":true,"tabs":[{"title":"Crypto","symbols":[{"s":"BITSTAMP:BTCUSD","d":"Bitcoin"},{"s":"BITSTAMP:ETHUSD","d":"Ethereum"},{"s":"BINANCE:SOLUSD","d":"Solana"},{"s":"BINANCE:BNBUSD","d":"BNB"},{"s":"BINANCE:XRPUSD","d":"XRP"},{"s":"COINBASE:AVAXUSD","d":"Avalanche"}],"originalTitle":"Crypto"}]}
-        </script>
-      </div>
-    </div>
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Pristine Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Auto-Sorted by %D</span></div>
+    <div id="pristine-tables"><div class="loading">Loading Pristine screeners…</div></div>
   </div>
+
 </div>
 
 <!-- PAGE: POSITION SIZER -->
@@ -525,37 +534,35 @@
 </footer>
 
 <script>
-// WATCHLISTS
-const WL_PAGE_SIZE = 10;
+// WATCHLISTS (compact chip grid with pagination)
+const WL_GRID_SIZE = 40;
 const wlPages = {};
 
-function renderWLPage(wlId, symbols, page) {
+function renderWLGrid(wlId, symbols, page) {
   wlPages[wlId] = page;
-  const total  = symbols.length;
-  const pages  = Math.ceil(total / WL_PAGE_SIZE);
-  const start  = page * WL_PAGE_SIZE;
-  const slice  = symbols.slice(start, start + WL_PAGE_SIZE);
+  const total = symbols.length;
+  const pages = Math.ceil(total / WL_GRID_SIZE);
+  const start = page * WL_GRID_SIZE;
+  const slice = symbols.slice(start, start + WL_GRID_SIZE);
 
-  const rows = slice.map(s => {
+  const chips = slice.map(s => {
     const ticker = s.includes(':') ? s.split(':')[1] : s;
-    return `<tr>
-      <td class="sym-cell" data-ticker="${ticker}"
-          onmouseenter="showTickerPopup(this,'${ticker}')"
-          onmouseleave="hideTickerPopupDelayed()"
-          style="font-weight:600;color:var(--text)">${ticker}</td>
-      <td><a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(s)}" target="_blank" style="color:var(--accent2);text-decoration:none;font-size:10px;letter-spacing:1px">CHART ↗</a></td>
-      <td></td>
-    </tr>`;
+    return `<div class="wl-chip" onmouseenter="showTickerPopup(this,'${ticker}')" onmouseleave="hideTickerPopupDelayed()">
+      <span class="wl-sym">${ticker}</span>
+      <a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(s)}" target="_blank" class="wl-link" onclick="event.stopPropagation()">CHART</a>
+    </div>`;
   }).join('');
 
-  document.getElementById(`wl-tbody-${wlId}`).innerHTML = rows;
+  document.getElementById(`wl-grid-${wlId}`).innerHTML = chips;
 
-  const info = document.getElementById(`wl-pginfo-${wlId}`);
-  const prev = document.getElementById(`wl-prev-${wlId}`);
-  const next = document.getElementById(`wl-next-${wlId}`);
-  info.textContent = `${start + 1}–${Math.min(start + WL_PAGE_SIZE, total)} of ${total}`;
-  prev.disabled = page === 0;
-  next.disabled = page >= pages - 1;
+  if (pages > 1) {
+    const info = document.getElementById(`wl-pginfo-${wlId}`);
+    const prev = document.getElementById(`wl-prev-${wlId}`);
+    const next = document.getElementById(`wl-next-${wlId}`);
+    info.textContent = `${start + 1}–${Math.min(start + WL_GRID_SIZE, total)} of ${total}`;
+    prev.disabled = page === 0;
+    next.disabled = page >= pages - 1;
+  }
 }
 
 (async () => {
@@ -589,35 +596,29 @@ function renderWLPage(wlId, symbols, page) {
       const updated = new Date(wl.lastUpdated).toLocaleString('en-US', {
         timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short'
       });
-      const pages = Math.ceil(wl.symbols.length / WL_PAGE_SIZE);
+      const pages = Math.ceil(wl.symbols.length / WL_GRID_SIZE);
 
       const panel = document.createElement('div');
       panel.className = 'wl-panel';
       panel.id = `wl-panel-${wl.id}`;
       panel.style.display = i === 0 ? 'block' : 'none';
       panel.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:var(--surface2);border:1px solid var(--border);border-bottom:none;font-size:9px;color:var(--muted);letter-spacing:2px">
-          <span>UPDATED ${updated} ET</span>
-          <a href="${wl.url}" target="_blank" style="color:var(--accent2);text-decoration:none;letter-spacing:1px">VIEW ON TRADINGVIEW ↗</a>
-        </div>
-        <div class="tbl-wrap open">
-          <table>
-            <thead><tr><th>SYMBOL</th><th>CHART</th></tr></thead>
-            <tbody id="wl-tbody-${wl.id}"></tbody>
-          </table>
-        </div>
-        ${pages > 1 ? `
-        <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:8px 14px;border:1px solid var(--border);border-top:none;background:var(--surface2);font-size:9px;color:var(--muted);letter-spacing:1px">
-          <button id="wl-prev-${wl.id}" onclick="renderWLPage('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']-1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px" disabled>◀ PREV</button>
-          <span id="wl-pginfo-${wl.id}"></span>
-          <button id="wl-next-${wl.id}" onclick="renderWLPage('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']+1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px">NEXT ▶</button>
-        </div>` : ''}`;
+        <div id="wl-grid-${wl.id}" class="wl-grid"></div>
+        <div class="wl-meta">
+          <span>Updated ${updated} ET</span>
+          ${pages > 1 ? `
+          <div style="display:flex;align-items:center;gap:10px">
+            <button id="wl-prev-${wl.id}" onclick="renderWLGrid('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']-1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px" disabled>◀ PREV</button>
+            <span id="wl-pginfo-${wl.id}" style="font-size:9px;color:var(--muted);letter-spacing:1px"></span>
+            <button id="wl-next-${wl.id}" onclick="renderWLGrid('${wl.id}',wlSymbols['${wl.id}'],wlPages['${wl.id}']+1)" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:3px 10px;cursor:pointer;font-family:inherit;font-size:9px;letter-spacing:1px">NEXT ▶</button>
+          </div>` : ''}
+          <a href="${wl.url}" target="_blank">View on TradingView ↗</a>
+        </div>`;
       panelsEl.appendChild(panel);
 
-      // Store symbols reference and render first page
       window.wlSymbols = window.wlSymbols || {};
       window.wlSymbols[wl.id] = wl.symbols;
-      renderWLPage(wl.id, wl.symbols, 0);
+      renderWLGrid(wl.id, wl.symbols, 0);
     });
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
@@ -675,6 +676,51 @@ function buildTable(rows,ranked=false){
     <td class="${cls(r.ytd)}" data-label="YTD%">${fmtP(r.ytd)}</td>
     <td data-label="5D"><span style="display:inline-flex;align-items:flex-end;gap:1px">${sparkHTML(r.spark)}</span></td>
   </tr>`).join('');
+  return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
+}
+
+// PRISTINE TABLE
+function stgBadge(s){
+  if(!s||s==='N/A')return'<span class="stg stg-NA">N/A</span>';
+  const c=s.replace('/','');
+  return`<span class="stg stg-${c}">${s}</span>`;
+}
+function dcrBg(v){
+  if(v==null)return'';
+  const a=Math.min(1,Math.max(0,v/100))*0.6;
+  return`background:rgba(0,200,80,${a.toFixed(2)})`;
+}
+
+function buildPristineTable(rows,label='Instrument'){
+  if(!rows?.length)return'<div class="loading">No data — trigger GitHub Actions to populate.</div>';
+  const sorted=[...rows].sort((a,b)=>(b.d1||0)-(a.d1||0));
+  const th=`<th>${label}</th><th>Symbol</th><th>Price</th>`
+    +`<th class="th-tip" data-tip="1-day percent change">%Δ</th>`
+    +`<th class="th-tip" data-tip="1-day % change / ATR %\nNormalizes move by volatility">ATR Δ</th>`
+    +`<th class="th-tip" data-tip="Daily Closing Range\n0 = closed at low, 100 = closed at high">DCR</th>`
+    +`<th class="th-tip" data-tip="52-Week Range position\n0 = at 52wk low, 100 = at 52wk high">52WR</th>`
+    +`<th class="th-tip" data-tip="Price extension from 50D SMA\nin ATR% multiples (mean reversion)">MAx</th>`
+    +`<th class="th-tip" data-tip="Short-Term Stage\n10 EMA vs 20 SMA">ST ⇅</th>`
+    +`<th class="th-tip" data-tip="Long-Term Stage\n50 SMA vs 200 SMA">LT ⇅</th>`;
+  const trs=sorted.map(r=>{
+    const fD=r.d1!=null?((r.d1>0?'+':'')+fmtN(r.d1)+'%'):'—';
+    const fA=r.atr_d!=null?fmtN(r.atr_d,1):'—';
+    const fDCR=r.dcr!=null?fmtN(r.dcr,1)+'%':'—';
+    const f52=r.w52r!=null?fmtN(r.w52r,1)+'%':'—';
+    const fM=r.max_val!=null?((r.max_val>0?'+':'')+fmtN(r.max_val,1)):'—';
+    return`<tr>
+      <td>${r.name}</td>
+      <td style="font-size:10px;color:var(--accent2);letter-spacing:1px">${r.symbol}</td>
+      <td>${fmtN(r.price)}</td>
+      <td class="${cls(r.d1)}" style="font-weight:600">${fD}</td>
+      <td class="${cls(r.atr_d)}">${fA}</td>
+      <td style="${dcrBg(r.dcr)}">${fDCR}</td>
+      <td style="${dcrBg(r.w52r)}">${f52}</td>
+      <td class="${cls(r.max_val)}" style="font-weight:600">${fM}</td>
+      <td>${stgBadge(r.st)}</td>
+      <td>${stgBadge(r.lt)}</td>
+    </tr>`;
+  }).join('');
   return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
 }
 
@@ -746,6 +792,18 @@ async function loadData(){
     grp('Major ETFs',buildTable(snap.etfs),true),
     grp('S&amp;P 500 Sectors — Ranked by 1W',buildTable(ss,true)),
   ].join('');
+
+  // Pristine Market Analysis (two-panel layout)
+  const ptEl=document.getElementById('pristine-tables');
+  if(snap.pristine_equity_alt||snap.pristine_global_eq||snap.pristine_us_indices||snap.pristine_sectors){
+    const leftCol=[
+      grp('Equity Alternatives',buildPristineTable(snap.pristine_equity_alt,'Market'),true),
+      grp('Global Equities',buildPristineTable(snap.pristine_global_eq,'Region'),true),
+      grp('US Equity Indices',buildPristineTable(snap.pristine_us_indices,'Equity Index'),true),
+    ].join('');
+    const rightCol=grp('Pristine Sector Snapshot',buildPristineTable(snap.pristine_sectors,'Sector'),true);
+    ptEl.innerHTML=`<div class="pristine-two-panel"><div class="pristine-left-stack">${leftCol}</div><div>${rightCol}</div></div>`;
+  }
 
   // Calendar
   if(events?.length){

@@ -2,7 +2,7 @@ name: Scrape Watchlists
 
 on:
   schedule:
-    - cron: "0 0 * * 0"   # Sunday midnight UTC
+    - cron: "0 13 * * *"   # Daily 9 AM ET (13:00 UTC / 14:00 during EST)
   workflow_dispatch:
 
 env:
