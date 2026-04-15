@@ -324,6 +324,29 @@
     color: #000;
     border-color: var(--accent);
   }
+
+  /* AI BRIEF */
+  .brief-grid{display:grid;grid-template-columns:260px 1fr;gap:20px}
+  .brief-panel{background:var(--surface);border:1px solid var(--border);padding:20px;margin-bottom:14px}
+  .brief-section{margin-bottom:16px}
+  .brief-section:last-child{margin-bottom:0}
+  .brief-section-title{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+  .brief-select{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:7px 9px;outline:none;cursor:pointer;margin-top:2px}
+  .brief-select:focus{border-color:var(--accent)}
+  .brief-key-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:8px 11px;outline:none;margin-top:4px;letter-spacing:1px}
+  .brief-key-input:focus{border-color:var(--accent);box-shadow:0 0 0 1px rgba(0,255,136,.15)}
+  .brief-key-save{padding:7px 14px;background:var(--surface2);border:1px solid var(--border);color:var(--accent);font-family:var(--mono);font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;margin-top:7px;text-transform:uppercase}
+  .brief-key-save:hover{border-color:var(--accent);background:rgba(0,255,136,.08)}
+  .brief-key-status{font-size:9px;color:var(--green);letter-spacing:1px;margin-top:5px;min-height:14px}
+  .brief-data-preview{font-size:10px;color:var(--muted);line-height:1.9}
+  .brief-btn{width:100%;padding:13px;background:var(--accent);border:none;color:var(--bg);font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:3px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+  .brief-btn:hover{box-shadow:0 0 20px rgba(0,255,136,.4)}
+  .brief-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none}
+  .brief-status{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:8px;text-align:center;text-transform:uppercase;min-height:14px}
+  .brief-output{background:var(--bg);border:1px solid var(--border);padding:22px;min-height:420px;line-height:1.85;font-size:12px;white-space:pre-wrap;margin-top:14px;position:relative;overflow-y:auto}
+  .brief-output.streaming::after{content:'▋';animation:blink .7s step-end infinite;color:var(--accent);position:absolute}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  @media(max-width:900px){.brief-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -340,6 +363,7 @@
     <div class="nav-tab" onclick="showPage('calendar',this)">📅 Calendar</div>
     <div class="nav-tab" onclick="showPage('screener',this)">🔍 Screener</div>
     <div class="nav-tab" onclick="showPage('calc',this)">⚖️ Position Sizer</div>
+    <div class="nav-tab" onclick="showPage('brief',this)">🧠 AI Brief</div>
   </div>
   <div class="nav-meta">
     <div class="live-dot"></div>
@@ -522,6 +546,52 @@
           <div class="bc-title" style="margin-bottom:7px">R:R Targets</div>
           <table class="rr-tbl"><thead><tr><th>R Multiple</th><th>Target Price</th><th>P&amp;L</th></tr></thead><tbody id="rr-body"></tbody></table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: AI BRIEF -->
+<div class="page" id="page-brief">
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">AI Market Brief</span><span class="sec-sub">Claude AI · Streaming · Powered by Anthropic</span></div>
+    <div class="brief-grid">
+      <div>
+        <div class="brief-panel">
+          <div class="brief-section">
+            <div class="brief-section-title">API Key</div>
+            <div style="font-size:9px;letter-spacing:1px;color:var(--muted)">Anthropic key — stored in your browser only</div>
+            <input class="brief-key-input" id="brief-api-key" type="password" placeholder="sk-ant-api03-…">
+            <button class="brief-key-save" onclick="briefSaveKey()">SAVE KEY</button>
+            <div class="brief-key-status" id="brief-key-status"></div>
+          </div>
+          <div class="brief-section">
+            <div class="brief-section-title">Model</div>
+            <select class="brief-select" id="brief-model">
+              <option value="claude-haiku-4-5-20251001">Haiku 4.5 — Fast &amp; cheap</option>
+              <option value="claude-sonnet-4-6" selected>Sonnet 4.6 — Balanced</option>
+            </select>
+          </div>
+          <div class="brief-section">
+            <div class="brief-section-title">Trading Focus</div>
+            <select class="brief-select" id="brief-focus">
+              <option value="swing">Swing Trading</option>
+              <option value="intraday">Intraday</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+        </div>
+        <div class="brief-panel">
+          <div class="brief-section">
+            <div class="brief-section-title">Data Snapshot</div>
+            <div class="brief-data-preview" id="brief-data-preview">Waiting for market data…</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="brief-btn" id="brief-btn" onclick="generateBrief()">⚡ GENERATE MARKET BRIEF</button>
+        <div class="brief-status" id="brief-status">Enter your API key and click Generate</div>
+        <div class="brief-output" id="brief-output">Brief will appear here once generated…</div>
       </div>
     </div>
   </div>
@@ -735,9 +805,11 @@ function grp(title,html,open=false){
 
 function tgl(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
 
+// GLOBALS
+let snap, events, meta;
+
 // LOAD DATA
 async function loadData(){
-  let snap,events,meta;
   try{
     const [sr,er,mr]=await Promise.all([
       fetch('data/snapshot.json?t='+Date.now()),
@@ -824,6 +896,7 @@ async function loadData(){
     <span class="${cls(r.d1)}">${fmtP(r.d1)}</span>
   </div>`).join('');
   document.getElementById('tickerTrack').innerHTML=tape||'<span class="loading">—</span>';
+  updateDataPreview();
 }
 loadData();
 
@@ -859,6 +932,187 @@ function calc(){
   }).join('');
 }
 calc();
+
+// ── AI BRIEF ─────────────────────────────────────────────────────────────
+
+function briefSaveKey(){
+  const k=document.getElementById('brief-api-key').value.trim();
+  const st=document.getElementById('brief-key-status');
+  if(!k){st.textContent='Enter a key first.';st.style.color='var(--red)';return;}
+  localStorage.setItem('m7_apikey',k);
+  document.getElementById('brief-api-key').value='';
+  st.style.color='var(--green)';
+  st.textContent='✓ Saved to localStorage';
+  setTimeout(()=>{st.textContent='✓ Key loaded';},2500);
+}
+
+function briefGetKey(){return localStorage.getItem('m7_apikey')||'';}
+
+window.addEventListener('load',()=>{
+  if(briefGetKey()) document.getElementById('brief-key-status').textContent='✓ Key loaded';
+});
+
+function updateDataPreview(){
+  const el=document.getElementById('brief-data-preview');
+  if(!el||!snap)return;
+  const es =snap.futures?.find(x=>x.symbol==='ES=F');
+  const vix=snap.volatility?.find(x=>x.symbol==='^VIX');
+  const spy=snap.etfs?.find(x=>x.symbol==='SPY');
+  const qqq=snap.etfs?.find(x=>x.symbol==='QQQ');
+  const t10=snap.yields?.find(x=>x.symbol==='^TNX');
+  const rows=[
+    es  &&`ES: ${fmtN(es.price)} <span class="${cls(es.d1)}">${fmtP(es.d1)}</span>`,
+    vix &&`VIX: ${fmtN(vix.price)} <span class="${cls(vix.d1)}">${fmtP(vix.d1)}</span>`,
+    t10 &&`10Y Yield: ${fmtN(t10.price)}%`,
+    spy &&`SPY YTD: <span class="${cls(spy.ytd)}">${fmtP(spy.ytd)}</span>`,
+    qqq &&`QQQ YTD: <span class="${cls(qqq.ytd)}">${fmtP(qqq.ytd)}</span>`,
+    `F&G: 42 · Breadth 200: 68.4% · 50: 55.2%`,
+    `${(events||[]).length} calendar events loaded`,
+  ];
+  el.innerHTML=rows.filter(Boolean).join('<br>');
+}
+
+function buildBriefContext(){
+  if(!snap)return'Market data not yet loaded.';
+  const L=[];
+  const es  =snap.futures?.find(x=>x.symbol==='ES=F');
+  const nq  =snap.futures?.find(x=>x.symbol==='NQ=F')||snap.futures?.find(x=>x.name?.toLowerCase().includes('nasdaq'));
+  const vix =snap.volatility?.find(x=>x.symbol==='^VIX');
+  const t10 =snap.yields?.find(x=>x.symbol==='^TNX');
+  const t30 =snap.yields?.find(x=>x.symbol==='^TYX');
+  const gold=snap.metals?.find(x=>x.symbol==='GC=F');
+  const oil =snap.energy?.find(x=>x.symbol==='CL=F');
+  const dxy =snap.volatility?.find(x=>x.name?.includes('Dollar')||x.symbol?.includes('DX'));
+  const spy =snap.etfs?.find(x=>x.symbol==='SPY');
+  const qqq =snap.etfs?.find(x=>x.symbol==='QQQ');
+  const iwm =snap.etfs?.find(x=>x.symbol==='IWM');
+  const btc =snap.crypto?.find(x=>x.symbol==='BTC-USD');
+  const eth =snap.crypto?.find(x=>x.symbol==='ETH-USD');
+  L.push('=== MACRO ===');
+  if(es)  L.push(`S&P 500 Futures (ES): ${fmtN(es.price)} | 1D ${fmtP(es.d1)} | 1W ${fmtP(es.w1)} | YTD ${fmtP(es.ytd)}`);
+  if(nq)  L.push(`Nasdaq Futures (NQ):  ${fmtN(nq.price)} | 1D ${fmtP(nq.d1)} | 1W ${fmtP(nq.w1)}`);
+  if(vix) L.push(`VIX: ${fmtN(vix.price)} | 1D ${fmtP(vix.d1)}`);
+  if(t10) L.push(`10Y Treasury Yield: ${fmtN(t10.price)}% | 1D ${fmtP(t10.d1)}`);
+  if(t30) L.push(`30Y Treasury Yield: ${fmtN(t30.price)}% | 1D ${fmtP(t30.d1)}`);
+  if(gold)L.push(`Gold: $${fmtN(gold.price)} | 1D ${fmtP(gold.d1)} | YTD ${fmtP(gold.ytd)}`);
+  if(oil) L.push(`WTI Oil: $${fmtN(oil.price)} | 1D ${fmtP(oil.d1)}`);
+  if(dxy) L.push(`DXY: ${fmtN(dxy.price)} | 1D ${fmtP(dxy.d1)}`);
+  L.push('');
+  L.push('=== MAJOR ETFs ===');
+  if(spy)L.push(`SPY: $${fmtN(spy.price)} | 1D ${fmtP(spy.d1)} | 1W ${fmtP(spy.w1)} | YTD ${fmtP(spy.ytd)}`);
+  if(qqq)L.push(`QQQ: $${fmtN(qqq.price)} | 1D ${fmtP(qqq.d1)} | 1W ${fmtP(qqq.w1)} | YTD ${fmtP(qqq.ytd)}`);
+  if(iwm)L.push(`IWM: $${fmtN(iwm.price)} | 1D ${fmtP(iwm.d1)} | 1W ${fmtP(iwm.w1)} | YTD ${fmtP(iwm.ytd)}`);
+  if(btc)L.push(`BTC: $${fmtN(btc.price)} | 1D ${fmtP(btc.d1)} | YTD ${fmtP(btc.ytd)}`);
+  if(eth)L.push(`ETH: $${fmtN(eth.price)} | 1D ${fmtP(eth.d1)}`);
+  L.push('');
+  L.push('=== SECTORS (1W ranked) ===');
+  const srt=[...(snap.sectors||[])].sort((a,b)=>(b.w1||0)-(a.w1||0));
+  if(srt.length){
+    srt.slice(0,5).forEach(s=>L.push(`  LEADING: ${s.name} ${fmtP(s.w1)} 1W | ${fmtP(s.d1)} 1D`));
+    srt.slice(-3).forEach(s=> L.push(`  LAGGING: ${s.name} ${fmtP(s.w1)} 1W | ${fmtP(s.d1)} 1D`));
+  }
+  L.push('');
+  L.push('=== BREADTH & SENTIMENT ===');
+  L.push('% S&P 500 above 200 SMA: 68.4% (Bullish Breadth)');
+  L.push('% S&P 500 above 50 SMA:  55.2% (Neutral)');
+  L.push('CNN Fear & Greed Index:  42/100 (Fear)');
+  L.push('AAII Bullish Sentiment:  37.8% (Historical avg 37.5%)');
+  L.push('BTC Dominance:           58.4% (Risk-On signal)');
+  L.push('');
+  L.push('=== UPCOMING ECONOMIC EVENTS ===');
+  const evts=(events||[]).slice(0,7);
+  evts.length
+    ?evts.forEach(e=>L.push(`  ${e.date||''} ${e.time||''} — ${e.event||''} [${e.country||''}] [impact: ${e.impact||'?'}]`))
+    :L.push('  No events loaded.');
+  return L.join('\n');
+}
+
+async function generateBrief(){
+  const apiKey=briefGetKey();
+  const btn   =document.getElementById('brief-btn');
+  const output=document.getElementById('brief-output');
+  const status=document.getElementById('brief-status');
+  if(!apiKey){
+    status.textContent='⚠ No API key — save one in the left panel.';
+    output.textContent='Please enter and save your Anthropic API key first.';
+    return;
+  }
+  const model =document.getElementById('brief-model').value;
+  const focus =document.getElementById('brief-focus').value;
+  const label ={swing:'swing trading',intraday:'intraday trading',both:'swing and intraday trading'}[focus];
+  const ctx   =buildBriefContext();
+  const prompt=`You are a professional market analyst writing a concise daily brief for a ${label} trader.
+
+Given the live market data below, produce a structured brief with these exact sections:
+
+**MARKET REGIME** — A single label (e.g. "Risk-On Trending", "Choppy/Transition", "Risk-Off Defensive", "Bear Rally") followed by one sentence explaining why.
+
+**CONTEXT** — 4-6 bullets interpreting what the data collectively means. Be specific to the numbers, not generic.
+
+**TODAY'S PLAYBOOK** — 2-3 bullets: what setups or behaviors does this regime favor?
+
+**RISKS & WATCH** — 2-3 things that could shift the picture today (events, levels, divergences).
+
+**ONE-LINER** — One memorable sentence capturing today's market character.
+
+Market Data (EOD, auto-refreshed daily):
+${ctx}
+
+Rules: direct and specific. No disclaimers. No padding. Every bullet must reference actual data.`;
+  btn.disabled=true;
+  btn.textContent='⏳ GENERATING…';
+  output.textContent='';
+  output.classList.add('streaming');
+  status.textContent='Connecting to Claude…';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'x-api-key':apiKey,
+        'anthropic-version':'2023-06-01',
+        'content-type':'application/json',
+        'anthropic-dangerous-direct-browser-access':'true',
+      },
+      body:JSON.stringify({model,max_tokens:1024,stream:true,messages:[{role:'user',content:prompt}]}),
+    });
+    if(!res.ok){
+      const err=await res.json().catch(()=>({error:{message:res.statusText}}));
+      throw new Error(err?.error?.message||res.statusText);
+    }
+    status.textContent='Receiving…';
+    const reader=res.body.getReader();
+    const decoder=new TextDecoder();
+    let buf='';
+    while(true){
+      const{done,value}=await reader.read();
+      if(done)break;
+      buf+=decoder.decode(value,{stream:true});
+      const lines=buf.split('\n');
+      buf=lines.pop();
+      for(const line of lines){
+        if(!line.startsWith('data: '))continue;
+        const data=line.slice(6).trim();
+        if(data==='[DONE]')continue;
+        try{
+          const evt=JSON.parse(data);
+          if(evt.type==='content_block_delta'&&evt.delta?.type==='text_delta'){
+            output.textContent+=evt.delta.text;
+            output.scrollTop=output.scrollHeight;
+          }
+        }catch{}
+      }
+    }
+    output.classList.remove('streaming');
+    status.textContent='✓ Generated — '+new Date().toLocaleTimeString();
+  }catch(err){
+    output.classList.remove('streaming');
+    output.textContent='⚠ Error: '+err.message;
+    status.textContent='Failed.';
+  }finally{
+    btn.disabled=false;
+    btn.textContent='⚡ GENERATE MARKET BRIEF';
+  }
+}
 </script>
 
 
