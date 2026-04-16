@@ -1,24 +1,4 @@
-# Mighty7 Stock Analysis Crew — Python dependencies
-# Install with:  pip install -r requirements.txt
-# Playwright browsers: playwright install chromium
-#
-# Tested on Python 3.10+
-
-# ── Core data ──────────────────────────────────────────────────────────────
+yfinance>=0.2.40
 pandas>=2.0.0
 numpy>=1.26.0
-scipy>=1.10.0
-
-# ── Market data ────────────────────────────────────────────────────────────
-alpaca-py>=0.18.0               # Alpaca SDK (StockHistoricalDataClient)
-yfinance>=0.2.40                # Fundamental ratios fallback
-
-# ── Web scraping ────────────────────────────────────────────────────────────
-playwright>=1.40.0              # JS-rendered pages (Finviz, MarketBeat)
-requests>=2.31.0                # Simple HTTP for TraderMonty breadth CSV
-
-# ── NLP / sentiment ────────────────────────────────────────────────────────
-vaderSentiment>=3.3.2           # Offline headline polarity scorer
-
-# ── Utilities ──────────────────────────────────────────────────────────────
-python-dateutil>=2.8.2
+requests>=2.31.0
