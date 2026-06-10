@@ -104,6 +104,26 @@
   .th-tip{position:relative;cursor:help}
   .th-tip:hover::after{content:attr(data-tip);position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#1a1f2e;color:var(--text);border:1px solid var(--border);padding:6px 10px;font-size:10px;white-space:pre;z-index:100;border-radius:4px;letter-spacing:0;text-transform:none;font-weight:400;margin-top:4px;min-width:180px}
 
+  /* RS RANK DASHBOARD */
+  .rs-movers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .rs-movers:empty{display:none}
+  .rs-mcard{background:var(--surface);border:1px solid var(--border);padding:12px 14px}
+  .rs-mtitle{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  .rs-mtitle::before{content:'';width:3px;height:11px;background:var(--green);flex-shrink:0}
+  .rs-mcard.down .rs-mtitle::before{background:var(--red)}
+  .rs-mrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(30,42,54,.5)}
+  .rs-mrow:last-child{border-bottom:none;padding-bottom:0}
+  .rs-badge{min-width:32px;text-align:center;padding:3px 0;border-radius:3px;font-weight:700;font-size:11px;color:var(--text)}
+  .rs-mrow .nm{flex:1;min-width:0}
+  .rs-mrow .nm .t{color:var(--accent2);font-weight:600;letter-spacing:1px;cursor:pointer}
+  .rs-mrow .nm .t:hover{text-decoration:underline dotted}
+  .rs-mrow .nm .s{display:block;font-size:9px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rs-mrow .px{text-align:right;font-size:11px}
+  .rs-mrow .px .pts{display:block;font-weight:700}
+  .rs-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  @media(max-width:1024px){.rs-movers{grid-template-columns:repeat(2,1fr)}.rs-2col{grid-template-columns:1fr}}
+  @media(max-width:600px){.rs-movers{grid-template-columns:1fr}}
+
   /* BREADTH */
   .bg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
   .bc{background:var(--surface);border:1px solid var(--border);padding:17px}
@@ -333,7 +353,7 @@
   <div class="nav-logo"><div class="nav-logo-text">Mighty<span>7</span>under</div></div>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
   <div class="nav-tabs" id="nav-tabs">
-    <div class="nav-tab active" onclick="showPage('macro',this)">📊 Macro</div>
+    <div class="nav-tab active" onclick="showPage('macro',this)">📊 Dashboard</div>
     <div class="nav-tab" onclick="showPage('equities',this)">📈 Equities</div>
     <div class="nav-tab" onclick="showPage('charts',this)">🕯 Charts</div>
     <div class="nav-tab" onclick="showPage('breadth',this)">🧭 Breadth</div>
@@ -363,6 +383,12 @@
       <div class="card b"><div class="card-lbl">10Y Yield</div>      <div class="card-val" id="c-10y">—</div><div class="card-chg" id="c-10y-c">—</div></div>
     </div>
     <div id="macro-tables"><div class="loading">Fetching market data…</div></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend · Daily</span></div>
+    <div id="rs-movers" class="rs-movers"></div>
+    <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
   </div>
 </div>
 
@@ -474,10 +500,10 @@
 
   <hr style="border:none;border-top:1px solid var(--border);margin:0 0 20px">
 
-  <!-- PRISTINE MARKET ANALYSIS (two-panel) -->
+  <!-- MIGHTY7UNDER MARKET ANALYSIS (two-panel) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Pristine Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Auto-Sorted by %D</span></div>
-    <div id="pristine-tables"><div class="loading">Loading Pristine screeners…</div></div>
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Auto-Sorted by %D</span></div>
+    <div id="pristine-tables"><div class="loading">Loading Mighty7under screeners…</div></div>
   </div>
 
 </div>
@@ -725,6 +751,65 @@ function grp(title,html,open=false){
 
 function tgl(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open')}
 
+// RS RANK DASHBOARD
+function rsBadgeStyle(v){
+  if(v==null)return'background:var(--surface2);color:var(--muted)';
+  return v>=50
+    ?`background:rgba(0,200,80,${(v/100*.5).toFixed(2)})`
+    :`background:rgba(255,68,102,${((50-v)/50*.35).toFixed(2)})`;
+}
+
+function buildRSTable(rows,full=false){
+  if(!rows?.length)return'<div class="loading">No data yet — populates after the next data refresh.</div>';
+  const rankTd=(v,lbl)=>`<td data-label="${lbl}" style="text-align:center;font-weight:600;${rsBadgeStyle(v)}">${v==null?'—':v}</td>`;
+  const th='<th style="text-align:center">Now</th><th style="text-align:center">1D</th><th style="text-align:center">1W</th><th style="text-align:center">1M</th>'
+    +'<th style="text-align:left">Ticker</th><th style="text-align:left">Name</th><th>Day%</th><th>Wk%</th>'
+    +(full?'<th>Mth%</th><th>52W Hi%</th>':'');
+  const trs=rows.map(r=>`<tr>
+    ${rankTd(r.rank,'Now')}${rankTd(r.rank_1d,'1D')}${rankTd(r.rank_1w,'1W')}${rankTd(r.rank_1m,'1M')}
+    <td data-label="Ticker" style="text-align:left"><span class="sym-cell" style="color:var(--accent2);font-weight:600;letter-spacing:1px" onmouseenter="showTickerPopup(this,'${r.symbol}')" onmouseleave="hideTickerPopupDelayed()">${r.symbol}</span></td>
+    <td data-label="Name" style="text-align:left">${r.name}</td>
+    <td class="${cls(r.d1)}" data-label="Day%">${fmtP(r.d1)}</td>
+    <td class="${cls(r.w1)}" data-label="Wk%">${fmtP(r.w1)}</td>
+    ${full?`<td class="${cls(r.m1)}" data-label="Mth%">${fmtP(r.m1)}</td>
+    <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>`:''}
+  </tr>`).join('');
+  return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
+}
+
+function rsMoverCard(title,rows,prevKey,down){
+  const movers=rows
+    .filter(r=>r.rank!=null&&r[prevKey]!=null)
+    .map(r=>({...r,delta:r.rank-r[prevKey]}))
+    .filter(r=>down?r.delta<0:r.delta>0)
+    .sort((a,b)=>down?a.delta-b.delta:b.delta-a.delta)
+    .slice(0,3);
+  const body=movers.length?movers.map(r=>`<div class="rs-mrow">
+      <span class="rs-badge" style="${rsBadgeStyle(r.rank)}">${r.rank}</span>
+      <span class="nm">
+        <span class="t" onmouseenter="showTickerPopup(this,'${r.symbol}')" onmouseleave="hideTickerPopupDelayed()">${r.symbol}</span>
+        <span class="s">${r.name}</span>
+      </span>
+      <span class="px">${fmtN(r.price)}<span class="pts ${down?'neg':'pos'}">${down?'':'+'}${r.delta} pts</span></span>
+    </div>`).join(''):'<div class="loading" style="padding:8px">No movers</div>';
+  return`<div class="rs-mcard ${down?'down':''}"><div class="rs-mtitle">${title}</div>${body}</div>`;
+}
+
+function renderRS(snap){
+  const sec=snap.rs_sectors||[], ind=snap.rs_industries||[];
+  if(!sec.length&&!ind.length)return;   // keep the "after next refresh" note
+  document.getElementById('rs-movers').innerHTML=[
+    rsMoverCard('Daily Rank Up',ind,'rank_1d',false),
+    rsMoverCard('Daily Rank Down',ind,'rank_1d',true),
+    rsMoverCard('Weekly Rank Up',ind,'rank_1w',false),
+    rsMoverCard('Weekly Rank Down',ind,'rank_1w',true),
+  ].join('');
+  document.getElementById('rs-tables').innerHTML=`<div class="rs-2col">
+    <div>${grp('Sector Leaders',buildRSTable(sec,true),true)}</div>
+    <div>${grp('Industry RS Rank',buildRSTable(ind),true)}</div>
+  </div>`;
+}
+
 // LOAD DATA
 async function loadData(){
   let snap,events,meta;
@@ -783,7 +868,7 @@ async function loadData(){
     grp('S&amp;P 500 Sectors — Ranked by 1W',buildTable(ss,true)),
   ].join('');
 
-  // Pristine Market Analysis (two-panel layout)
+  // Mighty7under Market Analysis (two-panel layout)
   const ptEl=document.getElementById('pristine-tables');
   if(snap.pristine_equity_alt||snap.pristine_global_eq||snap.pristine_us_indices||snap.pristine_sectors){
     const leftCol=[
@@ -791,9 +876,12 @@ async function loadData(){
       grp('Global Equities',buildPristineTable(snap.pristine_global_eq,'Region'),true),
       grp('US Equity Indices',buildPristineTable(snap.pristine_us_indices,'Equity Index'),true),
     ].join('');
-    const rightCol=grp('Pristine Sector Snapshot',buildPristineTable(snap.pristine_sectors,'Sector'),true);
+    const rightCol=grp('Mighty7under Sector Snapshot',buildPristineTable(snap.pristine_sectors,'Sector'),true);
     ptEl.innerHTML=`<div class="pristine-two-panel"><div class="pristine-left-stack">${leftCol}</div><div>${rightCol}</div></div>`;
   }
+
+  // RS Rank dashboard (movers + Sector Leaders + Industry RS Rank)
+  renderRS(snap);
 
   // Calendar
   if(events?.length){
