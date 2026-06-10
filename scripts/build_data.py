@@ -145,6 +145,16 @@ PRISTINE_GROUPS = {
     },
 }
 
+# ── RS Rank universes (Dashboard) ─────────────────────────────────────────────
+# Sector Leaders uses the 11 SPDR sector ETFs; Industry RS Rank uses the
+# Mighty7under Market Analysis sector/industry list.
+
+RS_GROUPS = {
+    "rs_sectors":    GROUPS["sectors"],
+    "rs_industries": PRISTINE_GROUPS["pristine_sectors"],
+}
+
+
 # ── Pristine indicator calculations ──────────────────────────────────────────
 
 def calc_sma(series, period):
@@ -437,16 +447,92 @@ def fetch_pristine_group(symbols: dict) -> list:
     return rows
 
 
+def fetch_rs_group(symbols: dict) -> list:
+    """
+    Download 1y daily closes and compute relative-strength percentile ranks.
+
+    RS score per day = mean of trailing 1W / 1M / 3M returns. Each day the
+    scores are percentile-ranked across the group (0 = weakest, 100 =
+    strongest). Besides today's rank, the rank as of 1 day / 1 week /
+    1 month ago is included so the dashboard can show rank movers.
+    """
+    syms = list(symbols.keys())
+    try:
+        raw = yf.download(syms, period="1y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+    except Exception as e:
+        print(f"  ✗ Download failed: {e}", file=sys.stderr)
+        return []
+
+    if isinstance(raw.columns, pd.MultiIndex):
+        close = raw["Close"]
+    else:
+        close = raw[["Close"]].rename(columns={"Close": syms[0]})
+    close = close.dropna(how="all")
+
+    score = (
+        close.pct_change(5,  fill_method=None)
+        + close.pct_change(21, fill_method=None)
+        + close.pct_change(63, fill_method=None)
+    ) / 3
+
+    n_valid = score.notna().sum(axis=1)
+    rank = score.rank(axis=1, method="average")
+    rank = rank.sub(1).div((n_valid - 1).clip(lower=1), axis=0) * 100
+
+    def rank_at(sym, offset):
+        try:
+            v = rank[sym].iloc[offset]
+            return None if pd.isna(v) else int(round(v))
+        except Exception:
+            return None
+
+    rows = []
+    for sym, name in symbols.items():
+        try:
+            if sym not in close.columns:
+                print(f"  ⚠  {sym} not in response", file=sys.stderr)
+                continue
+            s = close[sym].dropna()
+            if len(s) < 70:        # need 63 bars for the 3M leg
+                continue
+
+            price = safe(s.iloc[-1])
+            rows.append({
+                "symbol":   sym,
+                "name":     name,
+                "price":    price,
+                "rank":     rank_at(sym, -1),
+                "rank_1d":  rank_at(sym, -2),
+                "rank_1w":  rank_at(sym, -6),
+                "rank_1m":  rank_at(sym, -22),
+                "d1":       pct(price, s.iloc[-2]),
+                "w1":       pct(price, s.iloc[-6]),
+                "m1":       pct(price, s.iloc[-22]),
+                "hi52pct":  pct(price, s.max()),
+            })
+        except Exception as e:
+            print(f"  ⚠  {sym}: {e}", file=sys.stderr)
+
+    rows.sort(key=lambda r: r["rank"] if r["rank"] is not None else -1, reverse=True)
+    return rows
+
+
 def build_snapshot() -> dict:
     snapshot = {}
     for group, symbols in GROUPS.items():
         print(f"  Fetching {group} ({len(symbols)} symbols)…")
         snapshot[group] = fetch_group(symbols)
 
-    # Pristine Market Analysis groups (with full indicator calculations)
+    # Mighty7under Market Analysis groups (with full indicator calculations)
     for group, symbols in PRISTINE_GROUPS.items():
         print(f"  Fetching {group} ({len(symbols)} symbols)…")
         snapshot[group] = fetch_pristine_group(symbols)
+
+    # RS rank groups (Dashboard rank movers / Sector Leaders / Industry RS)
+    for group, symbols in RS_GROUPS.items():
+        print(f"  Fetching {group} ({len(symbols)} symbols)…")
+        snapshot[group] = fetch_rs_group(symbols)
 
     return snapshot
 
