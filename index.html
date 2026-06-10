@@ -414,16 +414,6 @@
       </div>
     </div>
 
-    <!-- Ticker tape -->
-    <div style="margin-top:14px">
-      <div class="tv-hdr">Market Ticker Tape<span>TradingView</span></div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-        {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq"},{"proName":"FX_IDC:EURUSD","title":"EUR/USD"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},{"description":"Gold","proName":"TVC:GOLD"},{"description":"Oil","proName":"TVC:USOIL"},{"description":"VIX","proName":"CBOE:VIX"}],"showSymbolLogo":true,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
-        </script>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1050,11 +1040,13 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
     });
   }
 
-  // Run after data loads (tables are built dynamically)
-  const observer = new MutationObserver(() => {
-    document.querySelectorAll('#macro-tables, #equities-tables').forEach(linkifyTickers);
+  // Run after data loads (tables are built dynamically). Observe only the
+  // table containers — a body-wide observer would re-fire every second on
+  // the clock update.
+  ['macro-tables', 'equities-tables'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) new MutationObserver(() => linkifyTickers(el)).observe(el, { childList: true });
   });
-  observer.observe(document.body, { childList: true, subtree: true });
 
   // Also scan any static content
   document.addEventListener('DOMContentLoaded', () => {

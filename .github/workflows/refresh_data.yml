@@ -49,9 +49,13 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           # Only commit if something changed
-          git diff --cached --quiet \
-            || git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git pull --rebase origin main
+            git push origin HEAD
+          fi
 
       # ── 6. Upload site for Pages deployment ───────────────────────────────
       - name: Upload Pages artifact
