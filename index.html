@@ -87,10 +87,6 @@
   .wl-meta span{font-size:11px;color:var(--muted)}
   .wl-meta a{color:var(--accent2);font-size:11px;text-decoration:none}
 
-  /* PRISTINE TWO-PANEL LAYOUT */
-  .pristine-two-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .pristine-left-stack{display:flex;flex-direction:column;gap:12px}
-
   /* PRISTINE STAGE BADGES */
   .stg{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;min-width:28px;text-align:center}
   .stg-1A{background:#d4a017;color:#000}.stg-1B{background:#e8d44d;color:#000}.stg-1R{background:#e87800;color:#000}
@@ -120,6 +116,7 @@
   .rs-mrow .px{text-align:right;font-size:12px;font-weight:600}
   .rs-mrow .px .pts{display:block;font-weight:700}
   .rs-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  .rs-2col td,.rs-2col th{padding-left:8px;padding-right:8px}
   @media(max-width:1024px){.rs-movers{grid-template-columns:repeat(2,1fr)}.rs-2col{grid-template-columns:1fr}}
   @media(max-width:600px){.rs-movers{grid-template-columns:1fr}}
 
@@ -389,13 +386,13 @@
       <div class="card y"><div class="card-lbl">Gold</div>           <div class="card-val" id="c-gold">—</div><div class="card-chg" id="c-gold-c">—</div></div>
       <div class="card b"><div class="card-lbl">10Y Yield</div>      <div class="card-val" id="c-10y">—</div><div class="card-chg" id="c-10y-c">—</div></div>
     </div>
-    <div id="macro-tables"><div class="loading">Fetching market data…</div></div>
   </div>
 
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend · Daily</span></div>
     <div id="rs-movers" class="rs-movers"></div>
     <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
+    <div id="m7-tables"></div>
   </div>
 </div>
 
@@ -505,20 +502,12 @@
     <div id="wl-panels"></div>
   </div>
 
-  <hr style="border:none;border-top:1px solid var(--border);margin:0 0 20px">
-
-  <!-- MIGHTY7UNDER MARKET ANALYSIS (two-panel) -->
-  <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Auto-Sorted by %D</span></div>
-    <div id="pristine-tables"><div class="loading">Loading Mighty7under screeners…</div></div>
-  </div>
-
 </div>
 
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
     <div class="calc-grid">
       <div class="cp">
         <div class="cp-title">Trade Parameters</div>
@@ -766,12 +755,13 @@ function rsBadgeStyle(v){
     :`background:rgba(255,68,102,${((50-v)/50*.35).toFixed(2)})`;
 }
 
-function buildRSTable(rows,full=false){
+function buildRSTable(rows,full=false,stages=null){
   if(!rows?.length)return'<div class="loading">No data yet — populates after the next data refresh.</div>';
   const rankTd=(v,lbl)=>`<td data-label="${lbl}" style="text-align:center;font-weight:600;${rsBadgeStyle(v)}">${v==null?'—':v}</td>`;
   const th='<th style="text-align:center">Now</th><th style="text-align:center">1D</th><th style="text-align:center">1W</th><th style="text-align:center">1M</th>'
     +'<th style="text-align:left">Ticker</th><th style="text-align:left">Name</th><th>Day%</th><th>Wk%</th>'
-    +(full?'<th>Mth%</th><th>52W Hi%</th>':'');
+    +(full?'<th>Mth%</th><th>52W Hi%</th>':'')
+    +(stages?'<th class="th-tip" data-tip="Short-Term Stage\n10 EMA vs 20 SMA">ST ⇅</th><th class="th-tip" data-tip="Long-Term Stage\n50 SMA vs 200 SMA">LT ⇅</th>':'');
   const trs=rows.map(r=>`<tr>
     ${rankTd(r.rank,'Now')}${rankTd(r.rank_1d,'1D')}${rankTd(r.rank_1w,'1W')}${rankTd(r.rank_1m,'1M')}
     <td data-label="Ticker" style="text-align:left"><span class="sym-cell" style="color:var(--accent2);font-weight:600;letter-spacing:1px" onmouseenter="showTickerPopup(this,'${r.symbol}')" onmouseleave="hideTickerPopupDelayed()">${r.symbol}</span></td>
@@ -780,6 +770,8 @@ function buildRSTable(rows,full=false){
     <td class="${cls(r.w1)}" data-label="Wk%">${fmtP(r.w1)}</td>
     ${full?`<td class="${cls(r.m1)}" data-label="Mth%">${fmtP(r.m1)}</td>
     <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>`:''}
+    ${stages?`<td data-label="ST">${stgBadge(stages[r.symbol]?.st)}</td>
+    <td data-label="LT">${stgBadge(stages[r.symbol]?.lt)}</td>`:''}
   </tr>`).join('');
   return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
 }
@@ -805,6 +797,8 @@ function rsMoverCard(title,rows,prevKey,down){
 function renderRS(snap){
   const sec=snap.rs_sectors||[], ind=snap.rs_industries||[];
   if(!sec.length&&!ind.length)return;   // keep the "after next refresh" note
+  const stages={};
+  (snap.pristine_sectors||[]).forEach(r=>{stages[r.symbol]={st:r.st,lt:r.lt}});
   document.getElementById('rs-movers').innerHTML=[
     rsMoverCard('Daily Rank Up',ind,'rank_1d',false),
     rsMoverCard('Daily Rank Down',ind,'rank_1d',true),
@@ -813,7 +807,7 @@ function renderRS(snap){
   ].join('');
   document.getElementById('rs-tables').innerHTML=`<div class="rs-2col">
     <div>${grp('Sector Leaders',buildRSTable(sec,true),true)}</div>
-    <div>${grp('Industry RS Rank',buildRSTable(ind),true)}</div>
+    <div>${grp('Industry RS Rank — with Stages',buildRSTable(ind,false,stages),true)}</div>
   </div>`;
 }
 
@@ -828,7 +822,7 @@ async function loadData(){
     ]);
     snap=await sr.json(); events=await er.json(); meta=await mr.json();
   }catch(e){
-    document.getElementById('macro-tables').innerHTML='<div class="err">⚠ Cannot load data/snapshot.json — go to GitHub Actions → "Refresh Dashboard Data" → Run workflow first.</div>';
+    document.getElementById('rs-tables').innerHTML='<div class="err">⚠ Cannot load data/snapshot.json — go to GitHub Actions → "Refresh Dashboard Data" → Run workflow first.</div>';
     document.getElementById('updated-lbl').textContent='NO DATA';
     return;
   }
@@ -857,17 +851,6 @@ async function loadData(){
     document.getElementById('spy-fill').style.cssText=`width:${w}%;background:${spy.ytd>=0?'var(--green)':'var(--red)'}`;
   }
 
-  // Macro tables
-  document.getElementById('macro-tables').innerHTML=[
-    grp('US Index Futures',buildTable(snap.futures),true),
-    grp('Volatility &amp; Dollar',buildTable(snap.volatility)),
-    grp('Crypto',buildTable(snap.crypto)),
-    grp('Precious &amp; Base Metals',buildTable(snap.metals)),
-    grp('Energy Commodities',buildTable(snap.energy)),
-    grp('US Treasury Yields',buildTable(snap.yields)),
-    grp('Global Market Indices',buildTable(snap.global_indices)),
-  ].join('');
-
   // Equities
   const ss=[...(snap.sectors||[])].sort((a,b)=>(b.w1||0)-(a.w1||0));
   document.getElementById('equities-tables').innerHTML=[
@@ -875,16 +858,13 @@ async function loadData(){
     grp('S&amp;P 500 Sectors — Ranked by 1W',buildTable(ss,true)),
   ].join('');
 
-  // Mighty7under Market Analysis (two-panel layout)
-  const ptEl=document.getElementById('pristine-tables');
-  if(snap.pristine_equity_alt||snap.pristine_global_eq||snap.pristine_us_indices||snap.pristine_sectors){
-    const leftCol=[
-      grp('Equity Alternatives',buildPristineTable(snap.pristine_equity_alt,'Market'),true),
-      grp('Global Equities',buildPristineTable(snap.pristine_global_eq,'Region'),true),
-      grp('US Equity Indices',buildPristineTable(snap.pristine_us_indices,'Equity Index'),true),
-    ].join('');
-    const rightCol=grp('Mighty7under Sector Snapshot',buildPristineTable(snap.pristine_sectors,'Sector'),true);
-    ptEl.innerHTML=`<div class="pristine-two-panel"><div class="pristine-left-stack">${leftCol}</div><div>${rightCol}</div></div>`;
+  // Mighty7under stage tables (Dashboard, below the RS rank tables)
+  if(snap.pristine_equity_alt||snap.pristine_global_eq||snap.pristine_us_indices){
+    document.getElementById('m7-tables').innerHTML=`<div class="rs-2col" style="margin-top:14px">
+      <div>${grp('Equity Alternatives',buildPristineTable(snap.pristine_equity_alt,'Market'),true)}
+      ${grp('Global Equities',buildPristineTable(snap.pristine_global_eq,'Region'),true)}</div>
+      <div>${grp('US Equity Indices',buildPristineTable(snap.pristine_us_indices,'Equity Index'),true)}</div>
+    </div>`;
   }
 
   // RS Rank dashboard (movers + Sector Leaders + Industry RS Rank)
@@ -1138,7 +1118,7 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
   // Run after data loads (tables are built dynamically). Observe only the
   // table containers — a body-wide observer would re-fire every second on
   // the clock update.
-  ['macro-tables', 'equities-tables'].forEach(id => {
+  ['equities-tables'].forEach(id => {
     const el = document.getElementById(id);
     if (el) new MutationObserver(() => linkifyTickers(el)).observe(el, { childList: true });
   });
