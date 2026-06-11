@@ -16,7 +16,8 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -649,7 +650,7 @@ def main():
 
     meta = {
         "updated_utc": now_utc,
-        "updated_cst": datetime.now(timezone(timedelta(hours=-6))).strftime("%Y-%m-%d %H:%M CST"),
+        "updated_cst": datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d %H:%M %Z"),
         "source": "Yahoo Finance (yfinance)",
         "groups": {k: len(v) for k, v in snapshot.items()},
     }
