@@ -358,7 +358,7 @@
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
   <div class="nav-tabs" id="nav-tabs">
     <div class="nav-tab active" onclick="showPage('macro',this)">📊 Dashboard</div>
-    <div class="nav-tab" onclick="showPage('equities',this)">📈 Equities</div>
+    <div class="nav-tab" onclick="showPage('radar',this)">📡 RS Radar</div>
     <div class="nav-tab" onclick="showPage('charts',this)">🕯 Charts</div>
     <div class="nav-tab" onclick="showPage('breadth',this)">🧭 Breadth</div>
     <div class="nav-tab" onclick="showPage('calendar',this)">📅 Calendar</div>
@@ -389,18 +389,17 @@
   </div>
 
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend · Daily</span></div>
-    <div id="rs-movers" class="rs-movers"></div>
-    <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
-    <div id="m7-tables"></div>
+    <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Daily</span></div>
+    <div id="m7-tables"><div class="loading">Loading market analysis…</div></div>
   </div>
 </div>
 
-<!-- PAGE: EQUITIES -->
-<div class="page" id="page-equities">
+<!-- PAGE: RS RADAR -->
+<div class="page" id="page-radar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Equities Overview</span><span class="sec-sub">Ranked by 1W Performance</span></div>
-    <div id="equities-tables"><div class="loading">Fetching equities data…</div></div>
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">RS Radar</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend vs Peer Group · Daily</span></div>
+    <div id="rs-movers" class="rs-movers"></div>
+    <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
   </div>
 </div>
 
@@ -770,8 +769,8 @@ function buildRSTable(rows,full=false,stages=null){
     <td class="${cls(r.w1)}" data-label="Wk%">${fmtP(r.w1)}</td>
     ${full?`<td class="${cls(r.m1)}" data-label="Mth%">${fmtP(r.m1)}</td>
     <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>`:''}
-    ${stages?`<td data-label="ST">${stgBadge(stages[r.symbol]?.st)}</td>
-    <td data-label="LT">${stgBadge(stages[r.symbol]?.lt)}</td>`:''}
+    ${stages?`<td data-label="ST">${stgBadge(r.st||stages[r.symbol]?.st)}</td>
+    <td data-label="LT">${stgBadge(r.lt||stages[r.symbol]?.lt)}</td>`:''}
   </tr>`).join('');
   return`<table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>`;
 }
@@ -851,14 +850,7 @@ async function loadData(){
     document.getElementById('spy-fill').style.cssText=`width:${w}%;background:${spy.ytd>=0?'var(--green)':'var(--red)'}`;
   }
 
-  // Equities
-  const ss=[...(snap.sectors||[])].sort((a,b)=>(b.w1||0)-(a.w1||0));
-  document.getElementById('equities-tables').innerHTML=[
-    grp('Major ETFs',buildTable(snap.etfs),true),
-    grp('S&amp;P 500 Sectors — Ranked by 1W',buildTable(ss,true)),
-  ].join('');
-
-  // Mighty7under stage tables (Dashboard, below the RS rank tables)
+  // Mighty7under stage tables (Dashboard)
   if(snap.pristine_equity_alt||snap.pristine_global_eq||snap.pristine_us_indices){
     document.getElementById('m7-tables').innerHTML=`<div class="rs-2col" style="margin-top:14px">
       <div>${grp('Equity Alternatives',buildPristineTable(snap.pristine_equity_alt,'Market'),true)}
@@ -867,7 +859,7 @@ async function loadData(){
     </div>`;
   }
 
-  // RS Rank dashboard (movers + Sector Leaders + Industry RS Rank)
+  // RS Radar (movers + Sector Leaders + Industry RS Rank)
   renderRS(snap);
 
   // Calendar
@@ -1115,15 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => reloadMainChart(currentSymbo
     });
   }
 
-  // Run after data loads (tables are built dynamically). Observe only the
-  // table containers — a body-wide observer would re-fire every second on
-  // the clock update.
-  ['equities-tables'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) new MutationObserver(() => linkifyTickers(el)).observe(el, { childList: true });
-  });
-
-  // Also scan any static content
+  // Scan any static content
   document.addEventListener('DOMContentLoaded', () => {
     linkifyTickers(document.body);
   });

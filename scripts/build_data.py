@@ -145,13 +145,67 @@ PRISTINE_GROUPS = {
     },
 }
 
-# ── RS Rank universes (Dashboard) ─────────────────────────────────────────────
-# Sector Leaders uses the 11 SPDR sector ETFs; Industry RS Rank uses the
-# Mighty7under Market Analysis sector/industry list.
+# ── RS Rank universes (RS Radar) ──────────────────────────────────────────────
+# Sector Leaders uses the 11 Invesco EQUAL-WEIGHT sector ETFs (RSP*) so a few
+# mega-caps can't mask what the average stock in a sector is doing.
+# Industry RS Rank is a broad themed-ETF universe; ranks are percentiles
+# WITHIN this list, so changing its membership changes everyone's rank.
 
 RS_GROUPS = {
-    "rs_sectors":    GROUPS["sectors"],
-    "rs_industries": PRISTINE_GROUPS["pristine_sectors"],
+    "rs_sectors": {
+        "RSPT": "Technology",
+        "RSPF": "Financials",
+        "RSPH": "Health Care",
+        "RSPD": "Cons Disc",
+        "RSPN": "Industrials",
+        "RSPG": "Energy",
+        "RSPU": "Utilities",
+        "RSPR": "Real Estate",
+        "RSPM": "Materials",
+        "RSPC": "Comm Svcs",
+        "RSPS": "Cons Stpl",
+    },
+    "rs_industries": {
+        "SMH":  "Semiconductors",
+        "IGV":  "Tech-Software",
+        "CIBR": "Cybersecurity",
+        "FINX": "FinTech",
+        "IPAY": "Mobile Payments",
+        "QTUM": "Quantum-Tech",
+        "BLOK": "Blockchain",
+        "WGMI": "Bitcoin Miners",
+        "KARS": "Electric Cars",
+        "LIT":  "Lithium",
+        "ICLN": "Clean Energy",
+        "TAN":  "Solar",
+        "URA":  "Uranium",
+        "GRID": "Power Grid",
+        "XOP":  "Oil & Gas Exp.",
+        "GDX":  "Gold Miners",
+        "SIL":  "Silver Miners",
+        "COPX": "Copper Miners",
+        "REMX": "Rare Earth",
+        "SLX":  "Steel",
+        "WOOD": "Timber",
+        "MOO":  "Agribusiness",
+        "KRE":  "Regional Banks",
+        "KIE":  "Insurance",
+        "IAI":  "Broker-Dealers",
+        "XRT":  "Retail",
+        "PEJ":  "Leisure",
+        "JETS": "Global Jets",
+        "BOAT": "Marine Shipping",
+        "IYT":  "Transportation",
+        "ITB":  "Home Construction",
+        "ITA":  "Aerospace + Defense",
+        "UFO":  "Space",
+        "IHI":  "Med. Devices",
+        "XBI":  "Biotech",
+        "IBB":  "Biotechnology",
+        "KWEB": "China Internet",
+        "IPO":  "IPO",
+        "MSOS": "US Cannabis",
+    },
 }
 
 
@@ -498,6 +552,15 @@ def fetch_rs_group(symbols: dict) -> list:
                 continue
 
             price = safe(s.iloc[-1])
+
+            # Stage analysis (same definitions as the M7 stage tables)
+            st = classify_stage(s, calc_ema(s, 10), calc_sma(s, 20), lookback=30)
+            sma200 = calc_sma(s, 200)
+            if pd.isna(sma200.iloc[-1]):
+                lt = "N/A"
+            else:
+                lt = classify_stage(s, calc_sma(s, 50), sma200, lookback=30)
+
             rows.append({
                 "symbol":   sym,
                 "name":     name,
@@ -506,6 +569,8 @@ def fetch_rs_group(symbols: dict) -> list:
                 "rank_1d":  rank_at(sym, -2),
                 "rank_1w":  rank_at(sym, -6),
                 "rank_1m":  rank_at(sym, -22),
+                "st":       st,
+                "lt":       lt,
                 "d1":       pct(price, s.iloc[-2]),
                 "w1":       pct(price, s.iloc[-6]),
                 "m1":       pct(price, s.iloc[-22]),
