@@ -42,6 +42,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "data: watchlist update [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git pull --rebase origin main
+            # watchlists.json is generated — on conflict, keep this run's scrape
+            git pull --rebase -X theirs origin main
             git push origin HEAD
           fi

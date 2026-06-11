@@ -13,6 +13,11 @@ permissions:
   pages: write                # deploy to GitHub Pages
   id-token: write
 
+# Never run two refreshes at once — parallel runs race on the data commits
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
 jobs:
   refresh-and-deploy:
     runs-on: ubuntu-latest
@@ -53,7 +58,8 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "data: refresh market snapshot [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git pull --rebase origin main
+            # Data files are generated — on conflict, keep this run's fresh build
+            git pull --rebase -X theirs origin main
             git push origin HEAD
           fi
 
