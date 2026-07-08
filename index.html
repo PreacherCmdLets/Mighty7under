@@ -99,6 +99,41 @@
   .th-tip{position:relative;cursor:help}
   .th-tip:hover::after{content:attr(data-tip);position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:0 6px 20px rgba(16,24,40,.12);padding:6px 10px;font-size:11px;white-space:pre;z-index:100;border-radius:6px;letter-spacing:0;text-transform:none;font-weight:400;margin-top:4px;min-width:180px}
 
+  /* MARKET CONDITIONS */
+  .mc-top{display:grid;grid-template-columns:340px 1fr 270px;gap:12px;margin-bottom:12px;align-items:stretch}
+  .mc-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .mc-ptitle{font-size:12px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .mc-ptitle::before{content:'';width:3px;height:11px;background:var(--accent);flex-shrink:0}
+  .mc-chips{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  .mc-stat{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 6px;text-align:center}
+  .mc-stat .lbl{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;white-space:nowrap}
+  .mc-stat .val{font-size:15px;font-weight:700;margin:2px 0 5px}
+  .chip{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .chip.pos{background:rgba(22,163,74,.12);color:var(--green)}
+  .chip.neg{background:rgba(229,72,77,.12);color:var(--red)}
+  .chip.warn{background:rgba(217,119,6,.12);color:var(--yellow)}
+  .chip.neu{background:#e9edf2;color:var(--text2)}
+  .chip.big{font-size:12px;padding:3px 12px;margin-left:auto}
+  .mc-dd-row{display:flex;align-items:center;gap:8px;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eef1f5;font-size:12px}
+  .mc-dd-row:last-of-type{border-bottom:none}
+  .mc-tip{position:absolute;top:2px;background:var(--text);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;pointer-events:none;white-space:nowrap}
+  .mc-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .mc-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:8px;padding:11px 13px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .mc-card.up{border-left-color:var(--green)}
+  .mc-card.dn{border-left-color:var(--red)}
+  .mc-card .nm{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mc-card .sym{font-size:12px;font-weight:700;color:var(--accent2);cursor:pointer}
+  .mc-card .px{font-size:18px;font-weight:700;margin:2px 0}
+  .mc-card .meta{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11px;margin-top:5px}
+  .mc-bottom{display:grid;grid-template-columns:1.15fr 1.15fr 1fr;gap:12px;margin-top:12px;align-items:start}
+  .mc-leaders-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mc-right{display:flex;flex-direction:column;gap:12px}
+  .mc-legend{display:flex;gap:14px;font-size:10px;font-weight:600;color:var(--text2);margin-top:7px}
+  .mc-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  #mc-sector td,#mc-sector th{padding:6px 8px;font-size:12px}
+  @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
+  @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
+
   /* RS RANK DASHBOARD */
   .rs-movers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
   .rs-movers:empty{display:none}
@@ -378,6 +413,26 @@
 
 <!-- PAGE: MACRO -->
 <div class="page active" id="page-macro">
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">MC</span><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
+    <div id="mc-body"><div class="loading">Market conditions will appear after the next data refresh.</div></div>
+    <div class="mc-bottom" id="mc-bottom" style="display:none">
+      <div class="mc-leaders-grid" id="mc-leaders"></div>
+      <div class="mc-panel"><div class="mc-ptitle">Sector Leaders</div><div id="mc-sector"></div></div>
+      <div class="mc-right">
+        <div class="mc-panel"><div class="mc-ptitle">Treasury Yields — 1Y</div><div id="mc-yields"></div></div>
+        <div class="mc-panel"><div class="mc-ptitle">S5TH — S&amp;P 500 Above 200 SMA<span style="margin-left:auto;font-size:9px;color:var(--muted);font-weight:400">TRADINGVIEW</span></div>
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+            {"symbol":"INDEX:S5TH","width":"100%","height":190,"locale":"en","dateRange":"12M","colorTheme":"light","isTransparent":true,"autosize":false,"largeChartUrl":""}
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Macro Overview</span><span class="sec-sub">EOD · Yahoo Finance · Auto-refreshed Daily</span></div>
     <div class="cards">
@@ -810,6 +865,198 @@ function renderRS(snap){
   </div>`;
 }
 
+// MARKET CONDITIONS
+const MC_TV_SYM={'^VIX':'CBOE:VIX','BTC-USD':'BTCUSD'};
+function chip(txt,cls,big){return`<span class="chip ${cls}${big?' big':''}">${txt}</span>`}
+function mcStat(lbl,val,cls,txt){return`<div class="mc-stat"><div class="lbl">${lbl}</div><div class="val">${val}</div>${chip(txt,cls)}</div>`}
+function clsBreadth(v){return v==null?['neu','—']:v>=60?['pos','Positive']:v<=40?['neg','Negative']:['neu','Neutral']}
+function clsPerf(v){return v==null?['neu','—']:v>=1?['pos','Positive']:v<=-1?['neg','Negative']:['neu','Neutral']}
+function clsOffHigh(v){const a=v==null?null:Math.abs(v);return a==null?['neu','—']:a<5?['pos','Near High']:a>=10?['neg','Extended']:['neu','Neutral']}
+function clsVix(v){return v==null?['neu','—']:v<16?['pos','Calm']:v>24?['neg','Elevated']:['neu','Neutral']}
+function ddStatus(n){return n>=5?['Correction','neg']:n>=3?['Under Pressure','warn']:['Confirmed Uptrend','pos']}
+
+const MC_CHART={w:320,h:110,padR:30,padB:12,padT:6};
+function mcX(i,n){const{w,padR}=MC_CHART;return i/Math.max(1,n-1)*(w-padR-4)+2}
+function mcY(v){const{h,padB,padT}=MC_CHART;return padT+(1-v/100)*(h-padT-padB)}
+
+function breadthChartHTML(hist){
+  if(!hist?.length)return'<div class="loading">No history yet.</div>';
+  const{w,h,padR,padB,padT}=MC_CHART,n=hist.length;
+  const pts=hist.map((d,i)=>`${mcX(i,n).toFixed(1)},${mcY(d[1]).toFixed(1)}`).join(' ');
+  const lastV=hist[n-1][1];
+  const grid=[0,50,100].map(g=>`<line x1="2" y1="${mcY(g)}" x2="${w-padR-2}" y2="${mcY(g)}" stroke="var(--border)" stroke-width="1"${g===50?' stroke-dasharray="3 3"':''}/><text x="${w-padR+3}" y="${mcY(g)+3}" font-size="8" fill="var(--muted)">${g}</text>`).join('');
+  return`<div class="mc-chart" style="position:relative">
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
+      ${grid}${mcMonthLabels(hist,i=>mcX(i,n),MC_CHART.h-2)}
+      <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+      <line class="mc-cross" y1="${padT}" y2="${h-padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2" style="display:none"/>
+      <circle class="mc-dot" r="3" fill="var(--accent)" stroke="#fff" stroke-width="1.5" style="display:none"/>
+      <rect x="${w-padR}" y="${(mcY(lastV)-7).toFixed(1)}" width="26" height="13" rx="3" fill="var(--accent)"/>
+      <text x="${w-padR+13}" y="${(mcY(lastV)+3).toFixed(1)}" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">${Math.round(lastV)}</text>
+    </svg>
+    <div class="mc-tip" style="display:none"></div>
+  </div>`;
+}
+
+function attachBreadthHover(root,hist){
+  const box=root.querySelector('.mc-chart');if(!box||!hist?.length)return;
+  const svg=box.querySelector('svg'),cross=box.querySelector('.mc-cross'),
+        dot=box.querySelector('.mc-dot'),tip=box.querySelector('.mc-tip'),n=hist.length;
+  box.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect();
+    const relX=(ev.clientX-r.left)/r.width*MC_CHART.w;
+    let i=Math.round((relX-2)/(MC_CHART.w-MC_CHART.padR-4)*(n-1));
+    i=Math.max(0,Math.min(n-1,i));
+    const[d,v]=hist[i],px=mcX(i,n);
+    cross.setAttribute('x1',px);cross.setAttribute('x2',px);cross.style.display='block';
+    dot.setAttribute('cx',px);dot.setAttribute('cy',mcY(v));dot.style.display='block';
+    tip.textContent=`${d} · ${Number(v).toFixed(1)}%`;
+    tip.style.left=Math.min(Math.max(0,px/MC_CHART.w*r.width-40),r.width-95)+'px';
+    tip.style.display='block';
+  });
+  box.addEventListener('mouseleave',()=>{cross.style.display='none';dot.style.display='none';tip.style.display='none'});
+}
+
+const MC_MON=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function mcMonthLabels(hist,xFn,yPos){
+  let prev='';const out=[];
+  hist.forEach((r,i)=>{const m=r[0].slice(0,7);
+    if(m!==prev){prev=m;const mo=+r[0].slice(5,7);
+      if(mo%2===1)out.push(`<text x="${xFn(i).toFixed(1)}" y="${yPos}" font-size="8" fill="var(--muted)">${mo===1?r[0].slice(0,4):MC_MON[mo]}</text>`)}});
+  return out.join('');
+}
+
+const MC_YCH={w:320,h:140,padR:36,padT:8,padB:14};
+function yieldsChartHTML(hist){
+  if(!hist?.length)return'<div class="loading">Yield history appears after the next data refresh.</div>';
+  const{w,h,padR,padT,padB}=MC_YCH,n=hist.length;
+  const S=[{i:1,lbl:'10Y',col:'#d64550'},{i:2,lbl:'5Y',col:'#2f6fed'},{i:3,lbl:'3M',col:'#1a9e6e'}];
+  const vals=hist.flatMap(r=>[r[1],r[2],r[3]]).filter(v=>v!=null);
+  if(!vals.length)return'<div class="loading">—</div>';
+  const lo=Math.min(...vals),hi=Math.max(...vals),span=(hi-lo)||1;
+  const x=i=>i/Math.max(1,n-1)*(w-padR-4)+2;
+  const y=v=>padT+(1-(v-lo)/span)*(h-padT-padB);
+  const grid=[lo,(lo+hi)/2,hi].map(g=>`<line x1="2" y1="${y(g).toFixed(1)}" x2="${w-padR-2}" y2="${y(g).toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`).join('');
+  const lines=S.map(s=>{
+    const pts=hist.map((r,i)=>r[s.i]==null?null:`${x(i).toFixed(1)},${y(r[s.i]).toFixed(1)}`).filter(Boolean).join(' ');
+    let lv=null;for(let i=n-1;i>=0;i--){if(hist[i][s.i]!=null){lv=hist[i][s.i];break}}
+    return{...s,pts,lv};
+  });
+  const badges=lines.filter(s=>s.lv!=null).map(s=>({...s,by:y(s.lv)})).sort((a,b)=>a.by-b.by);
+  for(let i=1;i<badges.length;i++)if(badges[i].by-badges[i-1].by<13)badges[i].by=badges[i-1].by+13;
+  return`<div class="mc-chart" style="position:relative">
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
+      ${grid}${mcMonthLabels(hist,x,h-2)}
+      ${lines.map(s=>`<polyline points="${s.pts}" fill="none" stroke="${s.col}" stroke-width="1.6" stroke-linejoin="round"/>`).join('')}
+      <line class="mc-cross" y1="${padT}" y2="${h-padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2" style="display:none"/>
+      ${badges.map(s=>`<rect x="${w-padR}" y="${(s.by-6).toFixed(1)}" width="32" height="12" rx="3" fill="${s.col}"/><text x="${w-padR+16}" y="${(s.by+3).toFixed(1)}" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">${s.lv.toFixed(2)}</text>`).join('')}
+    </svg>
+    <div class="mc-tip" style="display:none"></div>
+  </div>
+  <div class="mc-legend">${S.map(s=>`<span><i style="background:${s.col}"></i>${s.lbl}</span>`).join('')}</div>`;
+}
+
+function attachYieldsHover(panel,hist){
+  const box=panel.querySelector('.mc-chart');if(!box||!hist?.length)return;
+  const svg=box.querySelector('svg'),cross=box.querySelector('.mc-cross'),tip=box.querySelector('.mc-tip'),n=hist.length;
+  const{w,padR}=MC_YCH;
+  const x=i=>i/Math.max(1,n-1)*(w-padR-4)+2;
+  box.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect();
+    const relX=(ev.clientX-r.left)/r.width*w;
+    let i=Math.round((relX-2)/(w-padR-4)*(n-1));i=Math.max(0,Math.min(n-1,i));
+    const row=hist[i],px=x(i);
+    cross.setAttribute('x1',px);cross.setAttribute('x2',px);cross.style.display='block';
+    tip.textContent=`${row[0]} · 10Y ${row[1]??'—'} · 5Y ${row[2]??'—'} · 3M ${row[3]??'—'}`;
+    tip.style.left=Math.min(Math.max(0,px/w*r.width-60),r.width-160)+'px';
+    tip.style.display='block';
+  });
+  box.addEventListener('mouseleave',()=>{cross.style.display='none';tip.style.display='none'});
+}
+
+function mcLeaderCard(title,rows,key,laggard){
+  const list=rows.filter(r=>r[key]!=null&&(laggard?r[key]<0:r[key]>0))
+    .sort((a,b)=>laggard?a[key]-b[key]:b[key]-a[key]).slice(0,3);
+  const body=list.length?list.map(r=>`<div class="rs-mrow">
+      <span class="rs-badge" style="${rsBadgeStyle(r.rank)}">${r.rank??'—'}</span>
+      <span class="nm">
+        <span class="t" onmouseenter="showTickerPopup(this,'${r.symbol}')" onmouseleave="hideTickerPopupDelayed()">${r.symbol}</span>
+        <span class="s">${r.name}</span>
+      </span>
+      <span class="px">${fmtN(r.price)}<span class="pts ${cls(r[key])}">${fmtP(r[key])}</span></span>
+    </div>`).join(''):'<div class="loading" style="padding:8px">—</div>';
+  return`<div class="rs-mcard ${laggard?'down':''}"><div class="rs-mtitle">${title}</div>${body}</div>`;
+}
+
+function mcSectorTable(sec){
+  if(!sec?.length)return'<div class="loading">—</div>';
+  const rankTd=(v,l)=>`<td data-label="${l}" style="text-align:center;font-weight:600;${rsBadgeStyle(v)}">${v==null?'—':v}</td>`;
+  const trs=sec.map(r=>`<tr>
+    ${rankTd(r.rank,'Now')}${rankTd(r.rank_1d,'1D')}${rankTd(r.rank_1w,'1W')}${rankTd(r.rank_1m,'1M')}
+    <td data-label="Name" style="text-align:left">${r.name}</td>
+    <td class="${cls(r.d1)}" data-label="Day%">${fmtP(r.d1)}</td>
+    <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>
+  </tr>`).join('');
+  return`<div style="overflow-x:auto"><table><thead><tr>
+    <th style="text-align:center">Now</th><th style="text-align:center">1D</th><th style="text-align:center">1W</th><th style="text-align:center">1M</th>
+    <th style="text-align:left">Name</th><th>Day%</th><th>52W Hi%</th></tr></thead><tbody>${trs}</tbody></table></div>`;
+}
+
+function renderMC(mc,snap){
+  const el=document.getElementById('mc-body');
+  if(!el||!mc||(!mc.breadth&&!mc.cards?.length))return;
+  const b=mc.breadth||{},p=mc.performance||{},d=mc.distribution||{};
+  const vix=(mc.cards||[]).find(c=>c.symbol==='^VIX')?.price;
+  const maxDD=Math.max(d.SPY?.today??0,d.QQQ?.today??0);
+  const overall=b.above_sma50==null?['neu','Neutral']
+    :(b.above_sma50>=65&&maxDD<=2)?['pos','Bullish']
+    :(b.above_sma50<=35||maxDD>=5)?['neg','Bearish']:['neu','Neutral'];
+  const bre=[['SMA 10',b.above_sma10],['SMA 20',b.above_sma20],['SMA 50',b.above_sma50],['SMA 200',b.above_sma200],['20 › 50',b.sma20_gt_50],['50 › 200',b.sma50_gt_200]]
+    .map(([l,v])=>{const[c,t]=clsBreadth(v);return mcStat(l,v==null?'—':fmtN(v,1)+'%',c,t)}).join('');
+  const perf=[['YTD',p.ytd,clsPerf],['1W',p.w1,clsPerf],['1M',p.m1,clsPerf],['1Y',p.y1,clsPerf],['52W High',p.off_52w_high,clsOffHigh],['VIX',vix,clsVix]]
+    .map(([l,v,f])=>{const[c,t]=f(v);return mcStat(l,l==='VIX'?(v==null?'—':fmtN(v,2)):fmtP(v),c,t)}).join('');
+  const dd=['SPY','QQQ'].map(s=>{const r=d[s];if(!r)return'';const[t,c]=ddStatus(r.today);
+    return`<div class="mc-dd-row"><b>${s}</b><span class="neu" style="white-space:nowrap">Today <b style="color:var(--text)">${r.today}</b> · 1D ago ${r.prev}</span>${chip(t,c)}</div>`}).join('');
+  const cards=(mc.cards||[]).map(c=>{
+    const up=(c.d1??0)>=0;
+    const disp=c.symbol.replace('^','').replace('-USD','');
+    const tv=MC_TV_SYM[c.symbol]||c.symbol;
+    const vol=c.vol_chg==null?'<span></span>':`<span class="neu">vol ${c.vol_chg>0?'+':''}${fmtN(c.vol_chg,1)}%</span>`;
+    return`<div class="mc-card ${up?'up':'dn'}">
+      <div class="nm">${c.name}</div>
+      <div class="sym sym-cell" onmouseenter="showTickerPopup(this,'${tv}')" onmouseleave="hideTickerPopupDelayed()">${disp}</div>
+      <div class="px">${fmtN(c.price)}</div>
+      <div class="meta"><span class="${cls(c.d1)}" style="font-weight:700">${fmtP(c.d1)}</span>${vol}</div>
+      <div class="meta">${chip(c.ema21==='above'?'21 EMA ▲':'21 EMA ▼',c.ema21==='above'?'pos':'neg')}</div>
+    </div>`}).join('');
+  el.innerHTML=`
+    <div class="mc-top">
+      <div class="mc-panel chart"><div class="mc-ptitle">% Above 50 SMA — 1Y ${chip(overall[1],overall[0],true)}</div>${breadthChartHTML(mc.breadth_hist)}</div>
+      <div class="mc-panel"><div class="mc-ptitle">Breadth &amp; Trend</div><div class="mc-chips">${bre}</div>
+        <div class="mc-ptitle" style="margin-top:13px">Market Performance — SPY</div><div class="mc-chips">${perf}</div></div>
+      <div class="mc-panel"><div class="mc-ptitle">Distribution Days</div>${dd}
+        <div style="font-size:10px;color:var(--muted);margin-top:9px;line-height:1.5">Down ≥0.2% on higher volume than the prior session · trailing 25 sessions</div></div>
+    </div>
+    <div class="mc-cards">${cards}</div>`;
+  attachBreadthHover(el,mc.breadth_hist);
+
+  // Bottom row: leaders/laggards, compact sector table, treasury yields
+  const ind=snap?.rs_industries||[],secs=snap?.rs_sectors||[];
+  if(ind.length||secs.length){
+    document.getElementById('mc-leaders').innerHTML=[
+      mcLeaderCard('Daily Leaders',ind,'d1',false),
+      mcLeaderCard('Daily Laggards',ind,'d1',true),
+      mcLeaderCard('Weekly Leaders',ind,'w1',false),
+      mcLeaderCard('Weekly Laggards',ind,'w1',true),
+    ].join('');
+    document.getElementById('mc-sector').innerHTML=mcSectorTable(secs);
+    const yEl=document.getElementById('mc-yields');
+    yEl.innerHTML=yieldsChartHTML(mc.yields_hist);
+    attachYieldsHover(yEl,mc.yields_hist);
+    document.getElementById('mc-bottom').style.display='grid';
+  }
+}
+
 // LOAD DATA
 async function loadData(){
   let snap,events,meta;
@@ -858,6 +1105,9 @@ async function loadData(){
       <div>${grp('US Equity Indices',buildPristineTable(snap.pristine_us_indices,'Equity Index'),true)}</div>
     </div>`;
   }
+
+  // Market Conditions (Dashboard)
+  renderMC(snap.market_conditions,snap);
 
   // RS Radar (movers + Sector Leaders + Industry RS Rank)
   renderRS(snap);

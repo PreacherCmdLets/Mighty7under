@@ -584,6 +584,142 @@ def fetch_rs_group(symbols: dict) -> list:
     return rows
 
 
+# ── Market Conditions (Dashboard) ─────────────────────────────────────────────
+
+MC_INDEX_CARDS = {
+    "RSP":     "S&P 500 Eq Wt",
+    "QQQE":    "Nasdaq 100 Eq Wt",
+    "IWM":     "Russell 2000",
+    "DIA":     "Dow Jones",
+    "BTC-USD": "Bitcoin",
+    "^VIX":    "Volatility",
+}
+
+
+def build_market_conditions() -> dict:
+    """
+    Dashboard "Market Conditions" block:
+      breadth       — % of the RS universe above key SMAs (+ MA alignment)
+      breadth_hist  — [date, % above 50-SMA] pairs for ~1y (trend chart)
+      performance   — SPY trailing returns and distance from 52-week high
+      distribution  — IBD-style distribution-day counts for SPY / QQQ
+      cards         — index cards with 21-EMA position and volume vs 50d avg
+    """
+    out = {}
+
+    # Breadth across the whole RS universe (sectors + industries)
+    syms = sorted(set(RS_GROUPS["rs_sectors"]) | set(RS_GROUPS["rs_industries"]))
+    try:
+        raw = yf.download(syms, period="2y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+        close = raw["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw[["Close"]]
+        close = close.dropna(how="all")
+        last = close.iloc[-1]
+
+        def pct_true(mask):
+            return round(float(mask.mean() * 100), 1) if len(mask) else None
+
+        breadth = {}
+        sma_last = {}
+        for p in (10, 20, 50, 200):
+            sma = close.rolling(p, min_periods=p).mean().iloc[-1]
+            sma_last[p] = sma
+            valid = last.notna() & sma.notna()
+            breadth[f"above_sma{p}"] = pct_true(last[valid] > sma[valid]) if valid.any() else None
+        v = sma_last[20].notna() & sma_last[50].notna()
+        breadth["sma20_gt_50"] = pct_true(sma_last[20][v] > sma_last[50][v]) if v.any() else None
+        v = sma_last[50].notna() & sma_last[200].notna()
+        breadth["sma50_gt_200"] = pct_true(sma_last[50][v] > sma_last[200][v]) if v.any() else None
+        out["breadth"] = breadth
+
+        # Daily % of universe above its 50-SMA, ~1 year (for the trend chart)
+        sma50_all = close.rolling(50, min_periods=50).mean()
+        valid_n = (close.notna() & sma50_all.notna()).sum(axis=1)
+        above_n = ((close > sma50_all) & sma50_all.notna()).sum(axis=1)
+        hist = (above_n / valid_n.clip(lower=1) * 100)[valid_n > 0].iloc[-252:]
+        out["breadth_hist"] = [[d.strftime("%Y-%m-%d"), round(float(x), 1)]
+                               for d, x in hist.items()]
+    except Exception as e:
+        print(f"  ⚠ market conditions breadth: {e}", file=sys.stderr)
+
+    # SPY / QQQ distribution days + SPY performance
+    try:
+        raw = yf.download(["SPY", "QQQ"], period="1y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+        dist = {}
+        for sym in ("SPY", "QQQ"):
+            c = raw["Close"][sym].dropna()
+            vol = raw["Volume"][sym].reindex(c.index)
+            # Distribution day: close down >= 0.2% on higher volume than prior day
+            dd = (c.pct_change() <= -0.002) & (vol > vol.shift(1))
+            dist[sym] = {"today": int(dd.iloc[-25:].sum()),
+                         "prev":  int(dd.iloc[-26:-1].sum())}
+        out["distribution"] = dist
+
+        spy = raw["Close"]["SPY"].dropna()
+        ytd = spy[spy.index >= f"{datetime.now().year}-01-01"]
+        out["performance"] = {
+            "ytd":          pct(spy.iloc[-1], ytd.iloc[0]) if len(ytd) else None,
+            "w1":           pct(spy.iloc[-1], spy.iloc[-6]),
+            "m1":           pct(spy.iloc[-1], spy.iloc[-22]),
+            "y1":           pct(spy.iloc[-1], spy.iloc[0]),
+            "off_52w_high": pct(spy.iloc[-1], spy.max()),
+        }
+    except Exception as e:
+        print(f"  ⚠ market conditions distribution: {e}", file=sys.stderr)
+
+    # Treasury yield history (10Y / 5Y / 3M) for the yields chart
+    try:
+        raw = yf.download(["^TNX", "^FVX", "^IRX"], period="1y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+        c = raw["Close"].dropna(how="all").ffill()
+        out["yields_hist"] = [
+            [d.strftime("%Y-%m-%d"),
+             safe(r.get("^TNX"), 3), safe(r.get("^FVX"), 3), safe(r.get("^IRX"), 3)]
+            for d, r in c.iterrows()
+        ]
+    except Exception as e:
+        print(f"  ⚠ market conditions yields: {e}", file=sys.stderr)
+
+    # Index cards: 21-EMA position + volume vs 50-day average
+    try:
+        raw = yf.download(list(MC_INDEX_CARDS.keys()), period="1y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+        cards = []
+        for sym, name in MC_INDEX_CARDS.items():
+            try:
+                if sym not in raw["Close"].columns:
+                    print(f"  ⚠  {sym} not in response", file=sys.stderr)
+                    continue
+                c = raw["Close"][sym].dropna()
+                if len(c) < 60:
+                    continue
+                price = safe(c.iloc[-1])
+                ema21 = calc_ema(c, 21).iloc[-1]
+                vol = raw["Volume"][sym].reindex(c.index).dropna()
+                vol_chg = None
+                if len(vol) > 51:
+                    avg50 = vol.iloc[-51:-1].mean()
+                    if avg50 and avg50 > 0:
+                        vol_chg = round(float(vol.iloc[-1] / avg50 - 1) * 100, 1)
+                cards.append({
+                    "symbol":  sym,
+                    "name":    name,
+                    "price":   price,
+                    "d1":      pct(price, c.iloc[-2]),
+                    "ema21":   "above" if (price is not None and not pd.isna(ema21)
+                                           and price > ema21) else "below",
+                    "vol_chg": vol_chg,
+                })
+            except Exception as e:
+                print(f"  ⚠  card {sym}: {e}", file=sys.stderr)
+        out["cards"] = cards
+    except Exception as e:
+        print(f"  ⚠ market conditions cards: {e}", file=sys.stderr)
+
+    return out
+
+
 def build_snapshot() -> dict:
     snapshot = {}
     for group, symbols in GROUPS.items():
@@ -595,10 +731,13 @@ def build_snapshot() -> dict:
         print(f"  Fetching {group} ({len(symbols)} symbols)…")
         snapshot[group] = fetch_pristine_group(symbols)
 
-    # RS rank groups (Dashboard rank movers / Sector Leaders / Industry RS)
+    # RS rank groups (RS Radar movers / Sector Leaders / Industry RS)
     for group, symbols in RS_GROUPS.items():
         print(f"  Fetching {group} ({len(symbols)} symbols)…")
         snapshot[group] = fetch_rs_group(symbols)
+
+    print("  Building market conditions…")
+    snapshot["market_conditions"] = build_market_conditions()
 
     return snapshot
 
