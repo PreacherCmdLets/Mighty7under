@@ -668,6 +668,19 @@ def build_market_conditions() -> dict:
     except Exception as e:
         print(f"  ⚠ market conditions distribution: {e}", file=sys.stderr)
 
+    # Treasury yield history (10Y / 5Y / 3M) for the yields chart
+    try:
+        raw = yf.download(["^TNX", "^FVX", "^IRX"], period="1y", interval="1d",
+                          auto_adjust=True, progress=False, threads=True)
+        c = raw["Close"].dropna(how="all").ffill()
+        out["yields_hist"] = [
+            [d.strftime("%Y-%m-%d"),
+             safe(r.get("^TNX"), 3), safe(r.get("^FVX"), 3), safe(r.get("^IRX"), 3)]
+            for d, r in c.iterrows()
+        ]
+    except Exception as e:
+        print(f"  ⚠ market conditions yields: {e}", file=sys.stderr)
+
     # Index cards: 21-EMA position + volume vs 50-day average
     try:
         raw = yf.download(list(MC_INDEX_CARDS.keys()), period="1y", interval="1d",

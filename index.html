@@ -125,8 +125,14 @@
   .mc-card .sym{font-size:12px;font-weight:700;color:var(--accent2);cursor:pointer}
   .mc-card .px{font-size:18px;font-weight:700;margin:2px 0}
   .mc-card .meta{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11px;margin-top:5px}
-  @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}}
+  .mc-bottom{display:grid;grid-template-columns:1.15fr 1.15fr 1fr;gap:12px;margin-top:12px;align-items:start}
+  .mc-leaders-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mc-right{display:flex;flex-direction:column;gap:12px}
+  .mc-legend{display:flex;gap:14px;font-size:10px;font-weight:600;color:var(--text2);margin-top:7px}
+  .mc-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  #mc-sector td,#mc-sector th{padding:6px 8px;font-size:12px}
+  @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
+  @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
   /* RS RANK DASHBOARD */
   .rs-movers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
@@ -410,6 +416,21 @@
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">MC</span><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
     <div id="mc-body"><div class="loading">Market conditions will appear after the next data refresh.</div></div>
+    <div class="mc-bottom" id="mc-bottom" style="display:none">
+      <div class="mc-leaders-grid" id="mc-leaders"></div>
+      <div class="mc-panel"><div class="mc-ptitle">Sector Leaders</div><div id="mc-sector"></div></div>
+      <div class="mc-right">
+        <div class="mc-panel"><div class="mc-ptitle">Treasury Yields — 1Y</div><div id="mc-yields"></div></div>
+        <div class="mc-panel"><div class="mc-ptitle">S5TH — S&amp;P 500 Above 200 SMA<span style="margin-left:auto;font-size:9px;color:var(--muted);font-weight:400">TRADINGVIEW</span></div>
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+            {"symbol":"INDEX:S5TH","width":"100%","height":190,"locale":"en","dateRange":"12M","colorTheme":"light","isTransparent":true,"autosize":false,"largeChartUrl":""}
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="section">
@@ -866,7 +887,7 @@ function breadthChartHTML(hist){
   const grid=[0,50,100].map(g=>`<line x1="2" y1="${mcY(g)}" x2="${w-padR-2}" y2="${mcY(g)}" stroke="var(--border)" stroke-width="1"${g===50?' stroke-dasharray="3 3"':''}/><text x="${w-padR+3}" y="${mcY(g)+3}" font-size="8" fill="var(--muted)">${g}</text>`).join('');
   return`<div class="mc-chart" style="position:relative">
     <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
-      ${grid}
+      ${grid}${mcMonthLabels(hist,i=>mcX(i,n),MC_CHART.h-2)}
       <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
       <line class="mc-cross" y1="${padT}" y2="${h-padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2" style="display:none"/>
       <circle class="mc-dot" r="3" fill="var(--accent)" stroke="#fff" stroke-width="1.5" style="display:none"/>
@@ -896,7 +917,92 @@ function attachBreadthHover(root,hist){
   box.addEventListener('mouseleave',()=>{cross.style.display='none';dot.style.display='none';tip.style.display='none'});
 }
 
-function renderMC(mc){
+const MC_MON=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function mcMonthLabels(hist,xFn,yPos){
+  let prev='';const out=[];
+  hist.forEach((r,i)=>{const m=r[0].slice(0,7);
+    if(m!==prev){prev=m;const mo=+r[0].slice(5,7);
+      if(mo%2===1)out.push(`<text x="${xFn(i).toFixed(1)}" y="${yPos}" font-size="8" fill="var(--muted)">${mo===1?r[0].slice(0,4):MC_MON[mo]}</text>`)}});
+  return out.join('');
+}
+
+const MC_YCH={w:320,h:140,padR:36,padT:8,padB:14};
+function yieldsChartHTML(hist){
+  if(!hist?.length)return'<div class="loading">Yield history appears after the next data refresh.</div>';
+  const{w,h,padR,padT,padB}=MC_YCH,n=hist.length;
+  const S=[{i:1,lbl:'10Y',col:'#d64550'},{i:2,lbl:'5Y',col:'#2f6fed'},{i:3,lbl:'3M',col:'#1a9e6e'}];
+  const vals=hist.flatMap(r=>[r[1],r[2],r[3]]).filter(v=>v!=null);
+  if(!vals.length)return'<div class="loading">—</div>';
+  const lo=Math.min(...vals),hi=Math.max(...vals),span=(hi-lo)||1;
+  const x=i=>i/Math.max(1,n-1)*(w-padR-4)+2;
+  const y=v=>padT+(1-(v-lo)/span)*(h-padT-padB);
+  const grid=[lo,(lo+hi)/2,hi].map(g=>`<line x1="2" y1="${y(g).toFixed(1)}" x2="${w-padR-2}" y2="${y(g).toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`).join('');
+  const lines=S.map(s=>{
+    const pts=hist.map((r,i)=>r[s.i]==null?null:`${x(i).toFixed(1)},${y(r[s.i]).toFixed(1)}`).filter(Boolean).join(' ');
+    let lv=null;for(let i=n-1;i>=0;i--){if(hist[i][s.i]!=null){lv=hist[i][s.i];break}}
+    return{...s,pts,lv};
+  });
+  const badges=lines.filter(s=>s.lv!=null).map(s=>({...s,by:y(s.lv)})).sort((a,b)=>a.by-b.by);
+  for(let i=1;i<badges.length;i++)if(badges[i].by-badges[i-1].by<13)badges[i].by=badges[i-1].by+13;
+  return`<div class="mc-chart" style="position:relative">
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
+      ${grid}${mcMonthLabels(hist,x,h-2)}
+      ${lines.map(s=>`<polyline points="${s.pts}" fill="none" stroke="${s.col}" stroke-width="1.6" stroke-linejoin="round"/>`).join('')}
+      <line class="mc-cross" y1="${padT}" y2="${h-padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2" style="display:none"/>
+      ${badges.map(s=>`<rect x="${w-padR}" y="${(s.by-6).toFixed(1)}" width="32" height="12" rx="3" fill="${s.col}"/><text x="${w-padR+16}" y="${(s.by+3).toFixed(1)}" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">${s.lv.toFixed(2)}</text>`).join('')}
+    </svg>
+    <div class="mc-tip" style="display:none"></div>
+  </div>
+  <div class="mc-legend">${S.map(s=>`<span><i style="background:${s.col}"></i>${s.lbl}</span>`).join('')}</div>`;
+}
+
+function attachYieldsHover(panel,hist){
+  const box=panel.querySelector('.mc-chart');if(!box||!hist?.length)return;
+  const svg=box.querySelector('svg'),cross=box.querySelector('.mc-cross'),tip=box.querySelector('.mc-tip'),n=hist.length;
+  const{w,padR}=MC_YCH;
+  const x=i=>i/Math.max(1,n-1)*(w-padR-4)+2;
+  box.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect();
+    const relX=(ev.clientX-r.left)/r.width*w;
+    let i=Math.round((relX-2)/(w-padR-4)*(n-1));i=Math.max(0,Math.min(n-1,i));
+    const row=hist[i],px=x(i);
+    cross.setAttribute('x1',px);cross.setAttribute('x2',px);cross.style.display='block';
+    tip.textContent=`${row[0]} · 10Y ${row[1]??'—'} · 5Y ${row[2]??'—'} · 3M ${row[3]??'—'}`;
+    tip.style.left=Math.min(Math.max(0,px/w*r.width-60),r.width-160)+'px';
+    tip.style.display='block';
+  });
+  box.addEventListener('mouseleave',()=>{cross.style.display='none';tip.style.display='none'});
+}
+
+function mcLeaderCard(title,rows,key,laggard){
+  const list=rows.filter(r=>r[key]!=null&&(laggard?r[key]<0:r[key]>0))
+    .sort((a,b)=>laggard?a[key]-b[key]:b[key]-a[key]).slice(0,3);
+  const body=list.length?list.map(r=>`<div class="rs-mrow">
+      <span class="rs-badge" style="${rsBadgeStyle(r.rank)}">${r.rank??'—'}</span>
+      <span class="nm">
+        <span class="t" onmouseenter="showTickerPopup(this,'${r.symbol}')" onmouseleave="hideTickerPopupDelayed()">${r.symbol}</span>
+        <span class="s">${r.name}</span>
+      </span>
+      <span class="px">${fmtN(r.price)}<span class="pts ${cls(r[key])}">${fmtP(r[key])}</span></span>
+    </div>`).join(''):'<div class="loading" style="padding:8px">—</div>';
+  return`<div class="rs-mcard ${laggard?'down':''}"><div class="rs-mtitle">${title}</div>${body}</div>`;
+}
+
+function mcSectorTable(sec){
+  if(!sec?.length)return'<div class="loading">—</div>';
+  const rankTd=(v,l)=>`<td data-label="${l}" style="text-align:center;font-weight:600;${rsBadgeStyle(v)}">${v==null?'—':v}</td>`;
+  const trs=sec.map(r=>`<tr>
+    ${rankTd(r.rank,'Now')}${rankTd(r.rank_1d,'1D')}${rankTd(r.rank_1w,'1W')}${rankTd(r.rank_1m,'1M')}
+    <td data-label="Name" style="text-align:left">${r.name}</td>
+    <td class="${cls(r.d1)}" data-label="Day%">${fmtP(r.d1)}</td>
+    <td class="${cls(r.hi52pct)}" data-label="52W Hi%">${fmtP(r.hi52pct)}</td>
+  </tr>`).join('');
+  return`<div style="overflow-x:auto"><table><thead><tr>
+    <th style="text-align:center">Now</th><th style="text-align:center">1D</th><th style="text-align:center">1W</th><th style="text-align:center">1M</th>
+    <th style="text-align:left">Name</th><th>Day%</th><th>52W Hi%</th></tr></thead><tbody>${trs}</tbody></table></div>`;
+}
+
+function renderMC(mc,snap){
   const el=document.getElementById('mc-body');
   if(!el||!mc||(!mc.breadth&&!mc.cards?.length))return;
   const b=mc.breadth||{},p=mc.performance||{},d=mc.distribution||{};
@@ -933,6 +1039,22 @@ function renderMC(mc){
     </div>
     <div class="mc-cards">${cards}</div>`;
   attachBreadthHover(el,mc.breadth_hist);
+
+  // Bottom row: leaders/laggards, compact sector table, treasury yields
+  const ind=snap?.rs_industries||[],secs=snap?.rs_sectors||[];
+  if(ind.length||secs.length){
+    document.getElementById('mc-leaders').innerHTML=[
+      mcLeaderCard('Daily Leaders',ind,'d1',false),
+      mcLeaderCard('Daily Laggards',ind,'d1',true),
+      mcLeaderCard('Weekly Leaders',ind,'w1',false),
+      mcLeaderCard('Weekly Laggards',ind,'w1',true),
+    ].join('');
+    document.getElementById('mc-sector').innerHTML=mcSectorTable(secs);
+    const yEl=document.getElementById('mc-yields');
+    yEl.innerHTML=yieldsChartHTML(mc.yields_hist);
+    attachYieldsHover(yEl,mc.yields_hist);
+    document.getElementById('mc-bottom').style.display='grid';
+  }
 }
 
 // LOAD DATA
@@ -985,7 +1107,7 @@ async function loadData(){
   }
 
   // Market Conditions (Dashboard)
-  renderMC(snap.market_conditions);
+  renderMC(snap.market_conditions,snap);
 
   // RS Radar (movers + Sector Leaders + Industry RS Rank)
   renderRS(snap);
