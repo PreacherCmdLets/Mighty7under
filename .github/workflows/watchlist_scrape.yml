@@ -2,7 +2,8 @@ name: Scrape Watchlists
 
 on:
   schedule:
-    - cron: "0 13 * * *"   # Daily 9 AM ET (13:00 UTC / 14:00 during EST)
+    - cron: "0 13 * * *"     # Daily 9 AM ET (13:00 UTC / 14:00 during EST)
+    - cron: "15 22 * * 1-5"  # Weekdays after US close (~6:15 PM ET) so breadth reflects the finished session
   workflow_dispatch:
 
 env:
@@ -37,7 +38,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/watchlists.json
+          git add data/watchlists.json data/breadth.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
