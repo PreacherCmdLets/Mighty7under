@@ -35,7 +35,11 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
 import pandas as pd
-from tradingview_screener import Query, col
+
+try:
+    from tradingview_screener import Query, col
+except ImportError:                      # 2.x exported Column instead of col
+    from tradingview_screener import Query, Column as col
 
 # ── Columns ───────────────────────────────────────────────────────────────────
 
