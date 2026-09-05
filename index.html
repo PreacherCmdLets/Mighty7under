@@ -134,6 +134,26 @@
   @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
   @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
+  /* SCAN RESULTS (Screener) */
+  .scan-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .scan-chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .scan-grp{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-left:6px}
+  .scan-chip{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;font-family:inherit}
+  .scan-chip:hover{border-color:var(--accent);color:var(--text)}
+  .scan-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .scan-chip .n{opacity:.65;margin-left:5px;font-weight:500}
+  .scan-btn{margin-left:auto;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
+  .scan-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .scan-wrap{border:1px solid var(--border);border-radius:8px;overflow-x:auto;background:var(--surface);box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .scan-wrap thead th{cursor:pointer;user-select:none;white-space:nowrap}
+  .scan-wrap thead th:hover{color:var(--text)}
+  .scan-wrap thead th .ar{opacity:.5;font-size:9px}
+  .hit-badge{display:inline-block;min-width:20px;padding:2px 6px;border-radius:5px;font-size:11px;font-weight:700;background:#e9edf2;color:var(--text2)}
+  .hit-badge.h2{background:rgba(47,111,237,.14);color:var(--accent)}
+  .hit-badge.h3{background:rgba(22,163,74,.16);color:var(--green)}
+  .tag{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:9px;font-weight:600;color:var(--text2);margin:1px 2px 1px 0;white-space:nowrap}
+  .scan-note{font-size:11px;color:var(--muted);margin-top:8px}
+
   /* RS RANK DASHBOARD */
   .rs-movers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
   .rs-movers:empty{display:none}
@@ -553,9 +573,15 @@
 <!-- PAGE: SCREENER -->
 <div class="page" id="page-screener">
 
+  <!-- SCAN RESULTS -->
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Scan Results</span><span class="sec-sub" id="scan-sub">TradingView Screener</span></div>
+    <div id="scan-body"><div class="loading">Scan results appear after the next data refresh.</div></div>
+  </div>
+
   <!-- WATCHLISTS (compact grid) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
     <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
     <div id="wl-panels"></div>
   </div>
@@ -565,7 +591,7 @@
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
+    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
     <div class="calc-grid">
       <div class="cp">
         <div class="cp-title">Trade Parameters</div>
@@ -693,6 +719,112 @@ function renderWLGrid(wlId, symbols, page) {
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
   }
+})();
+
+// SCAN RESULTS (data/scans.json — built by scripts/run_scans.py)
+let SCAN_DATA=null, scanView='multi', scanSort={key:'hits',dir:-1};
+const fmtBig=v=>v==null?'—':Math.abs(v)>=1e12?(v/1e12).toFixed(2)+'T'
+  :Math.abs(v)>=1e9?(v/1e9).toFixed(2)+'B'
+  :Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M'
+  :Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'K':Number(v).toFixed(0);
+
+const SCAN_COLS=[
+  {k:'ticker',l:'Ticker',left:true},{k:'name',l:'Company',left:true},
+  {k:'close',l:'Price'},{k:'chg',l:'Chg%'},{k:'vol',l:'Volume'},
+  {k:'mcap',l:'Mkt Cap'},{k:'float',l:'Float'},{k:'volm',l:'Vol.M'},
+  {k:'hits',l:'Hits'},{k:'scans',l:'Scans',left:true,nosort:true},
+];
+
+function scanVisibleRows(){
+  if(!SCAN_DATA)return[];
+  const rows=SCAN_DATA.rows||[];
+  const base=scanView==='all'?rows
+    :scanView==='multi'?rows.filter(r=>r.hits>1)
+    :rows.filter(r=>(r.scans||[]).includes(scanView));
+  const{key,dir}=scanSort;
+  return[...base].sort((a,b)=>{
+    const x=a[key],y=b[key];
+    if(x==null&&y==null)return 0;
+    if(x==null)return 1;
+    if(y==null)return -1;
+    return typeof x==='string'?dir*x.localeCompare(y):dir*(x-y);
+  });
+}
+
+function sortScans(k){
+  if(scanSort.key===k)scanSort.dir*=-1;
+  else scanSort={key:k,dir:(k==='ticker'||k==='name')?1:-1};
+  drawScans();
+}
+
+function setScanView(v){scanView=v;drawScans();}
+
+function copyScanTickers(){
+  const t=scanVisibleRows().map(r=>r.ticker).join(', ');
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('scan-copy');
+    if(!b)return;
+    b.textContent=`✓ Copied ${scanVisibleRows().length}`;
+    setTimeout(()=>{b.textContent='⧉ Copy tickers'},1600);
+  }).catch(()=>{});
+}
+
+function drawScans(){
+  const el=document.getElementById('scan-body');
+  if(!el||!SCAN_DATA)return;
+  const meta=SCAN_DATA.scans||[],rows=SCAN_DATA.rows||[];
+  const full=id=>{const s=meta.find(m=>m.id===id);
+    return s?(s.mcap_group?`${s.label} · ${s.mcap_group}`:s.label):id};
+  // Compact form for the in-row tags: "Mom 3M S" beats "Momentum 3M · $300M – $10B"
+  const tagLabel=id=>{const s=meta.find(m=>m.id===id);
+    if(!s)return id;
+    return s.group==='Momentum'
+      ?`${s.label.replace('Momentum','Mom')} ${s.mcap_group==='> $10B'?'L':'S'}`
+      :s.label.replace(' Stock','').replace(' Cont. Base','').replace('Daily ','');};
+
+  // Chips: All / Multi-hit, then one per scan grouped by family
+  let chips=`<button class="scan-chip ${scanView==='all'?'active':''}" onclick="setScanView('all')">All<span class="n">${rows.length}</span></button>
+    <button class="scan-chip ${scanView==='multi'?'active':''}" onclick="setScanView('multi')">Multi-hit<span class="n">${rows.filter(r=>r.hits>1).length}</span></button>`;
+  let lastGroup=null;
+  meta.forEach(s=>{
+    if(s.group!==lastGroup){chips+=`<span class="scan-grp">${s.group}</span>`;lastGroup=s.group}
+    chips+=`<button class="scan-chip ${scanView===s.id?'active':''}" onclick="setScanView('${s.id}')" title="${s.mcap_group||''}">${s.label}${s.timeframe&&s.group==='Momentum'?` <span class="n">${s.mcap_group==='> $10B'?'L':'S'}</span>`:''}<span class="n">${s.count}</span></button>`;
+  });
+
+  const vis=scanVisibleRows();
+  const head=SCAN_COLS.map(c=>c.nosort
+    ?`<th style="text-align:left">${c.l}</th>`
+    :`<th onclick="sortScans('${c.k}')" style="text-align:${c.left?'left':'right'}">${c.l}${scanSort.key===c.k?` <span class="ar">${scanSort.dir>0?'▲':'▼'}</span>`:''}</th>`).join('');
+
+  const body=vis.length?vis.map(r=>`<tr>
+    <td data-label="Ticker" style="text-align:left"><span class="sym-cell" style="color:var(--accent2);font-weight:700" onmouseenter="showTickerPopup(this,'${r.ticker}')" onmouseleave="hideTickerPopupDelayed()">${r.ticker}</span></td>
+    <td data-label="Company" style="text-align:left">${r.name||'—'}</td>
+    <td data-label="Price">${fmtN(r.close)}</td>
+    <td data-label="Chg%" class="${cls(r.chg)}" style="font-weight:600">${fmtP(r.chg)}</td>
+    <td data-label="Volume">${fmtBig(r.vol)}</td>
+    <td data-label="Mkt Cap">${fmtBig(r.mcap)}</td>
+    <td data-label="Float">${fmtBig(r.float)}</td>
+    <td data-label="Vol.M">${r.volm==null?'—':fmtN(r.volm,1)}</td>
+    <td data-label="Hits"><span class="hit-badge ${r.hits>=3?'h3':r.hits===2?'h2':''}">${r.hits}</span></td>
+    <td data-label="Scans" style="text-align:left">${(r.scans||[]).map(s=>`<span class="tag" title="${full(s)}">${tagLabel(s)}</span>`).join('')}</td>
+  </tr>`).join(''):`<tr><td colspan="${SCAN_COLS.length}" class="loading">No matches in this view.</td></tr>`;
+
+  el.innerHTML=`<div class="scan-bar"><div class="scan-chips">${chips}</div>
+      <button class="scan-btn" id="scan-copy" onclick="copyScanTickers()">⧉ Copy tickers</button></div>
+    <div class="scan-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>
+    <div class="scan-note">Showing ${vis.length} of ${rows.length} unique tickers${SCAN_DATA.failed?.length?` · ⚠ ${SCAN_DATA.failed.length} scan(s) failed this run`:''}</div>`;
+
+  const sub=document.getElementById('scan-sub');
+  if(sub)sub.textContent=`TradingView Screener · ${meta.length} scans · ${SCAN_DATA.updated_label||''}`;
+}
+
+(async()=>{
+  try{
+    const res=await fetch('data/scans.json?t='+Date.now());
+    if(!res.ok)return;
+    SCAN_DATA=await res.json();
+    if(SCAN_DATA?.rows?.length)drawScans();
+  }catch(e){console.warn('Scans not loaded:',e.message)}
 })();
 
 // CLOCK

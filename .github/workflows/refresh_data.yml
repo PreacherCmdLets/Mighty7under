@@ -47,6 +47,14 @@ jobs:
       - name: Build market data
         run: python scripts/build_data.py --out-dir data
 
+      # ── 4b. Run TradingView screener scans ─────────────────────────────────
+      # Non-fatal: if TradingView blocks or rate-limits the runner, the step
+      # exits non-zero without touching data/scans.json, so the site keeps
+      # serving the last good scan results instead of an empty board.
+      - name: Run TradingView scans
+        continue-on-error: true
+        run: python scripts/run_scans.py --out-dir data
+
       # ── 5. Commit refreshed data back to repo ──────────────────────────────
       - name: Commit data files
         run: |
