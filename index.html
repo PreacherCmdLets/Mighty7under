@@ -134,6 +134,21 @@
   @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
   @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
+  /* CATALYSTS & NEWS (Calendar) */
+  .news-2col{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start}
+  .news-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;box-shadow:0 1px 2px rgba(16,24,40,.04);margin-bottom:12px}
+  .news-tk{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding-bottom:7px;border-bottom:1px solid var(--border);margin-bottom:3px}
+  .news-tk .t{color:var(--accent2);cursor:pointer}
+  .news-tk .t:hover{text-decoration:underline dotted}
+  .news-tk .c{margin-left:auto;font-size:10px;font-weight:600;color:var(--muted)}
+  .news-item{display:block;padding:7px 0;border-bottom:1px solid #eef1f5;text-decoration:none;color:var(--text)}
+  .news-item:last-child{border-bottom:none}
+  .news-item .nt{font-size:12px;line-height:1.45;display:block}
+  .news-item:hover .nt{color:var(--accent)}
+  .news-item .nm{font-size:10px;color:var(--muted);margin-top:2px;display:block}
+  .news-scroll{max-height:620px;overflow-y:auto}
+  @media(max-width:900px){.news-2col{grid-template-columns:1fr}}
+
   /* SCAN RESULTS (Screener) */
   .scan-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
   .scan-chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1 1 100%}
@@ -211,7 +226,7 @@
   /* CALENDAR */
   .cal-tbl{width:100%;border-collapse:collapse}
   .cal-tbl th{padding:9px 13px;text-align:left;font-size:11px;letter-spacing:.4px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);text-transform:uppercase}
-  .cal-tbl td{padding:9px 13px;border-bottom:1px solid #eef1f5;font-size:13px}
+  .cal-tbl td{padding:9px 13px;border-bottom:1px solid #eef1f5;font-size:13px;text-align:left}
   .cal-tbl tr:last-child td{border-bottom:none}
   .cal-tbl tr:hover td{background:var(--surface2)}
   .ih{color:var(--red);font-size:11px;font-weight:600;text-transform:uppercase}
@@ -553,23 +568,22 @@
 <!-- PAGE: CALENDAR -->
 <div class="page" id="page-calendar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Economic Calendar</span><span class="sec-sub">Key Upcoming Events</span></div>
-    <div class="tv-full" style="margin-bottom:20px">
-      <div class="tv-hdr">Live Economic Calendar<span>TradingView</span></div>
-      <div class="tradingview-widget-container" style="height:500px">
-      <div class="tradingview-widget-container__widget" style="height:480px"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-economic-calendar.js" async>{"colorTheme":"light","isTransparent":false,"width":"100%","height":480,"locale":"en","importanceFilter":"-1,0,1","currencyFilter":"USD,EUR,GBP,JPY,AUD,CAD"}</script>
-    </div>
-    </div>
+    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
     <div class="tbl-group">
-      <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events — from events.json</span></div>
+      <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events</span><span id="cal-sub" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">Finviz</span></div>
       <div class="tbl-wrap open">
         <table class="cal-tbl">
-          <thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Country</th><th>Impact</th></tr></thead>
-          <tbody id="cal-body"><tr><td colspan="5" class="loading">Loading…</td></tr></tbody>
+          <thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Impact</th><th>For</th><th style="text-align:right">Actual</th><th style="text-align:right">Expected</th><th style="text-align:right">Prior</th></tr></thead>
+          <tbody id="cal-body"><tr><td colspan="8" class="loading">Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
+  </div>
+
+  <!-- CATALYSTS -->
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">05b</span><span class="sec-title">Catalysts &amp; News</span><span class="sec-sub" id="news-sub">Finviz</span></div>
+    <div id="news-body"><div class="loading">News appears after the next data refresh.</div></div>
   </div>
 </div>
 
@@ -722,6 +736,45 @@ function renderWLGrid(wlId, symbols, page) {
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
   }
+})();
+
+// CATALYSTS & NEWS (data/news.json — built by scripts/fetch_news.py)
+function newsItem(n){
+  return`<a class="news-item" href="${safeUrl(n.link)}" target="_blank" rel="noopener noreferrer">
+    <span class="nt">${esc(n.title)}</span>
+    <span class="nm">${esc([n.source,n.date].filter(Boolean).join(' · '))}</span></a>`;
+}
+
+// Drop malformed entries rather than rendering blank rows for them.
+const newsRows=a=>(Array.isArray(a)?a:[]).filter(n=>n&&n.title&&n.link);
+
+function renderNews(d){
+  const el=document.getElementById('news-body');
+  if(!el||!d)return;
+  const tks=Object.entries(d.tickers||{})
+    .map(([t,rows])=>[t,newsRows(rows)]).filter(([,rows])=>rows.length);
+  const cat=tks.length
+    ?tks.map(([t,rows])=>`<div class="news-card">
+        <div class="news-tk"><span class="t sym-cell" onmouseenter="showTickerPopup(this,'${esc(t)}')" onmouseleave="hideTickerPopupDelayed()">${esc(t)}</span>
+        <span class="c">${rows.length} stor${rows.length===1?'y':'ies'}</span></div>
+        ${rows.map(newsItem).join('')}</div>`).join('')
+    :'<div class="loading">No catalyst news yet — populates once scans have run.</div>';
+  const mktRows=newsRows(d.market);
+  const mkt=mktRows.length?mktRows.map(newsItem).join(''):'<div class="loading">No headlines.</div>';
+  el.innerHTML=`<div class="news-2col">
+    <div><div class="mc-ptitle">Catalysts — why your scan hits moved</div>${cat}</div>
+    <div><div class="mc-ptitle">Market Headlines</div><div class="news-card news-scroll">${mkt}</div></div>
+  </div>`;
+  const s=document.getElementById('news-sub');
+  if(s)s.textContent=`Finviz · ${tks.length} tickers · ${d.updated_label||''}`;
+}
+
+(async()=>{
+  try{
+    const res=await fetch('data/news.json?t='+Date.now());
+    if(!res.ok)return;
+    renderNews(await res.json());
+  }catch(e){console.warn('News not loaded:',e.message)}
 })();
 
 // SCAN RESULTS (data/scans.json — built by scripts/run_scans.py)
@@ -878,6 +931,10 @@ function toggleMobileNav(){
 }
 
 // HELPERS
+// Finviz headlines and event names are scraped third-party text — always
+// escape before it reaches innerHTML.
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||'')?esc(u):'#';
 const fmtN=(v,d=2)=>v==null?'—':Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fmtP=v=>v==null?'—':(v>0?'+':'')+fmtN(v)+'%';
 const cls=v=>v==null?'neu':v>0?'pos':v<0?'neg':'neu';
@@ -1270,12 +1327,30 @@ async function loadData(){
 
   // Calendar
   if(events?.length){
-    document.getElementById('cal-body').innerHTML=events.map(e=>`<tr>
-      <td data-label="Date">${e.date}</td><td data-label="Time">${e.time||'—'}</td><td data-label="Event">${e.event}</td><td data-label="Country">${e.country||'—'}</td>
+    const dayLbl=d=>{const t=new Date(d+'T12:00:00'),n=new Date();
+      const same=x=>x.toDateString()===t.toDateString();
+      if(same(n))return'Today';
+      const tm=new Date(n);tm.setDate(tm.getDate()+1);
+      if(same(tm))return'Tomorrow';
+      return t.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})};
+    let lastDate=null;
+    document.getElementById('cal-body').innerHTML=events.map(e=>{
+      const newDay=e.date!==lastDate; lastDate=e.date;
+      return`<tr${newDay?' style="border-top:2px solid var(--border)"':''}>
+      <td data-label="Date">${newDay?dayLbl(e.date):''}</td>
+      <td data-label="Time">${e.time||'—'}</td>
+      <td data-label="Event"${e.impact==='high'?' style="font-weight:600"':''}>${esc(e.event)}</td>
       <td data-label="Impact"><span class="i${(e.impact||'l')[0]}">${e.impact||'low'}</span></td>
-    </tr>`).join('');
+      <td data-label="For">${esc(e.for||'—')}</td>
+      <td data-label="Actual" style="text-align:right;font-weight:600">${esc(e.actual||'—')}</td>
+      <td data-label="Expected" style="text-align:right">${esc(e.expected||'—')}</td>
+      <td data-label="Prior" style="text-align:right;color:var(--text2)">${esc(e.prior||'—')}</td>
+    </tr>`}).join('');
+    const hi=events.filter(e=>e.impact==='high').length;
+    const cs=document.getElementById('cal-sub');
+    if(cs)cs.textContent=`Finviz · ${events.length} upcoming · ${hi} high impact`;
   }else{
-    document.getElementById('cal-body').innerHTML='<tr><td colspan="5" class="loading">No upcoming events</td></tr>';
+    document.getElementById('cal-body').innerHTML='<tr><td colspan="8" class="loading">No upcoming events</td></tr>';
   }
 
   // Ticker tape
