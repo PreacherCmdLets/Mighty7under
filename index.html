@@ -136,8 +136,9 @@
 
   /* SCAN RESULTS (Screener) */
   .scan-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-  .scan-chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .scan-grp{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-left:6px}
+  .scan-chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1 1 100%}
+  /* full-width so each scan family starts its own row */
+  .scan-grp{flex-basis:100%;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:9px 0 -1px}
   .scan-chip{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;font-family:inherit}
   .scan-chip:hover{border-color:var(--accent);color:var(--text)}
   .scan-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -773,13 +774,19 @@ function drawScans(){
   const el=document.getElementById('scan-body');
   if(!el||!SCAN_DATA)return;
   const meta=SCAN_DATA.scans||[],rows=SCAN_DATA.rows||[];
+  const isLarge=s=>s.mcap_group==='> $10B';
+  const capName=s=>s.mcap_group?(isLarge(s)?'Large Cap':'Small & Mid Cap'):'';
+  const tfShort=tf=>!tf?'':tf.replace(' Months','M').replace(' Month','M')
+    .replace(' Weeks','W').replace(' Week','W');
+  const groupKey=s=>s.mcap_group?`${s.group} · ${capName(s)} (${s.mcap_group})`:s.group;
   const full=id=>{const s=meta.find(m=>m.id===id);
-    return s?(s.mcap_group?`${s.label} · ${s.mcap_group}`:s.label):id};
-  // Compact form for the in-row tags: "Mom 3M S" beats "Momentum 3M · $300M – $10B"
+    if(!s)return id;
+    return s.mcap_group?`${s.label} · ${capName(s)} (${s.mcap_group})`:s.label};
+  // Compact in-row tags: "Mom 3M Small" beats "Momentum 3M · $300M – $10B"
   const tagLabel=id=>{const s=meta.find(m=>m.id===id);
     if(!s)return id;
     return s.group==='Momentum'
-      ?`${s.label.replace('Momentum','Mom')} ${s.mcap_group==='> $10B'?'L':'S'}`
+      ?`Mom ${tfShort(s.timeframe)} ${isLarge(s)?'Large':'Small'}`
       :s.label.replace(' Stock','').replace(' Cont. Base','').replace('Daily ','');};
 
   // Chips: All / Multi-hit, then one per scan grouped by family
@@ -787,8 +794,12 @@ function drawScans(){
     <button class="scan-chip ${scanView==='multi'?'active':''}" onclick="setScanView('multi')">Multi-hit<span class="n">${rows.filter(r=>r.hits>1).length}</span></button>`;
   let lastGroup=null;
   meta.forEach(s=>{
-    if(s.group!==lastGroup){chips+=`<span class="scan-grp">${s.group}</span>`;lastGroup=s.group}
-    chips+=`<button class="scan-chip ${scanView===s.id?'active':''}" onclick="setScanView('${s.id}')" title="${s.mcap_group||''}">${s.label}${s.timeframe&&s.group==='Momentum'?` <span class="n">${s.mcap_group==='> $10B'?'L':'S'}</span>`:''}<span class="n">${s.count}</span></button>`;
+    const gk=groupKey(s);
+    if(gk!==lastGroup){chips+=`<span class="scan-grp">${gk}</span>`;lastGroup=gk}
+    // Inside a momentum family the cap band is already in the header, so the
+    // chip only needs its timeframe.
+    const lbl=(s.group==='Momentum'&&s.timeframe)?tfShort(s.timeframe):s.label;
+    chips+=`<button class="scan-chip ${scanView===s.id?'active':''}" onclick="setScanView('${s.id}')" title="${full(s.id)}">${lbl}<span class="n">${s.count}</span></button>`;
   });
 
   const vis=scanVisibleRows();
