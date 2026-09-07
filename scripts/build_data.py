@@ -3,7 +3,6 @@ build_data.py  —  Mighty7under Market Dashboard
 ================================================
 Fetches data from Yahoo Finance (yfinance) and writes:
   data/snapshot.json   — prices, % changes, sparklines
-  data/events.json     — upcoming economic calendar events
   data/meta.json       — build timestamp + status
 
 Usage:
@@ -742,28 +741,6 @@ def build_snapshot() -> dict:
     return snapshot
 
 
-def build_events() -> list:
-    """
-    Return a list of upcoming known economic events.
-    investpy is unreliable / deprecated, so we return a static near-term
-    calendar that you can extend manually or replace with a paid API later.
-    """
-    now = datetime.now(timezone.utc)
-    events = [
-        {"date": "2026-03-12", "time": "08:30 ET", "event": "CPI (Feb)",          "impact": "high",   "country": "US"},
-        {"date": "2026-03-13", "time": "08:30 ET", "event": "PPI (Feb)",           "impact": "medium", "country": "US"},
-        {"date": "2026-03-19", "time": "14:00 ET", "event": "FOMC Rate Decision",  "impact": "high",   "country": "US"},
-        {"date": "2026-03-19", "time": "14:30 ET", "event": "Powell Press Conference","impact":"high",  "country": "US"},
-        {"date": "2026-03-20", "time": "08:30 ET", "event": "Jobless Claims",      "impact": "medium", "country": "US"},
-        {"date": "2026-03-28", "time": "08:30 ET", "event": "PCE Price Index (Feb)","impact":"high",   "country": "US"},
-        {"date": "2026-04-02", "time": "08:30 ET", "event": "Nonfarm Payrolls (Mar)","impact":"high",  "country": "US"},
-        {"date": "2026-04-10", "time": "08:30 ET", "event": "CPI (Mar)",           "impact": "high",   "country": "US"},
-    ]
-    # Filter to only future events
-    future = [e for e in events if e["date"] >= now.strftime("%Y-%m-%d")]
-    return future[:8]
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", default="data", help="Output directory")
@@ -775,17 +752,12 @@ def main():
     print("📡 Fetching market snapshot…")
     snapshot = build_snapshot()
 
-    print("📅 Building economic calendar…")
-    events = build_events()
-
     now_utc = datetime.now(timezone.utc).isoformat()
 
     # ── Write files ───────────────────────────────────────────────────────────
+    # events.json is written by scripts/fetch_news.py (live finviz calendar).
     with open(os.path.join(out, "snapshot.json"), "w") as f:
         json.dump(snapshot, f, indent=2)
-
-    with open(os.path.join(out, "events.json"), "w") as f:
-        json.dump(events, f, indent=2)
 
     meta = {
         "updated_utc": now_utc,

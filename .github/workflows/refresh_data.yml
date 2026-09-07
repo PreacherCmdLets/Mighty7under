@@ -59,6 +59,14 @@ jobs:
         continue-on-error: true
         run: python scripts/run_scans.py --out-dir data
 
+      # ── 4c. Finviz calendar + catalyst news ────────────────────────────────
+      # Runs after the scans so it can pull news for the tickers they caught.
+      # Non-fatal: finviz is behind Cloudflare and blocks by IP reputation, so
+      # a Wall leaves the previous events.json / news.json in place.
+      - name: Fetch calendar and news
+        continue-on-error: true
+        run: python scripts/fetch_news.py --out-dir data
+
       # ── 5. Commit refreshed data back to repo ──────────────────────────────
       - name: Commit data files
         run: |
