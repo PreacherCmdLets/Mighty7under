@@ -130,6 +130,23 @@ SCANS = [
          col("close") > col("SMA50"),
      ],
      "post": {"low_mult": 1.70, "ma": ("SMA10", 0.97)}},
+    # ── Pre-market ───────────────────────────────────────────────────────────
+    # Only meaningful while pre-market is open, so it is skipped outside
+    # 04:00–09:30 ET rather than republishing the morning's stale gaps.
+    # A price floor is essential here: without it the list is dominated by
+    # sub-$1 names where a "+30% pre-market move" is a few hundred shares.
+    {"id": "premarket_gappers", "label": "Pre-Market Gappers",
+     "group": "Pre-Market", "premarket_only": True,
+     "mcap": (300e6, None), "min_avg_vol": 300_000,
+     "cols": ["premarket_change", "premarket_volume", "premarket_close",
+              "premarket_gap"],
+     "sort_by": "premarket_change",
+     "extra": lambda: [
+         col("close") > 5,
+         col("premarket_change") > 3,
+         col("premarket_volume") > 50_000,
+     ]},
+
     {"id": "daily_tightness", "label": "Daily Tightness Swing",
      "group": "Growth & Tightness",
      "mcap": (300e6, None), "min_avg_vol": 300_000, "min_vol": 100_000,
@@ -140,9 +157,18 @@ SCANS = [
 
 # ── Query building ────────────────────────────────────────────────────────────
 
+def in_premarket_window() -> bool:
+    """True on a weekday between 04:00 and 09:30 US Eastern."""
+    now = datetime.now(ZoneInfo("America/New_York"))
+    if now.weekday() > 4:
+        return False
+    minutes = now.hour * 60 + now.minute
+    return 4 * 60 <= minutes < 9 * 60 + 30
+
+
 def columns_for(spec: dict) -> list:
     """Display columns plus whatever this scan's filters and post-filters need."""
-    cols = list(DISPLAY_COLS)
+    cols = list(DISPLAY_COLS) + list(spec.get("cols", []))
     if spec.get("perf"):
         cols.append(spec["perf"][0])
     post = spec.get("post") or {}
@@ -248,7 +274,8 @@ def merge_rows(results: list) -> list:
             row = rows.setdefault(ticker, {
                 "ticker": ticker, "name": None, "close": None, "chg": None,
                 "vol": None, "mcap": None, "float": None, "volm": None,
-                "rvol": None, "scans": [], "hits": 0,
+                "rvol": None, "pm_chg": None, "pm_vol": None,
+                "scans": [], "hits": 0,
             })
             if row["name"] is None and isinstance(r.get("description"), str):
                 row["name"] = r["description"]
@@ -256,7 +283,9 @@ def merge_rows(results: list) -> list:
                                   ("vol", "volume", 0), ("mcap", "market_cap_basic", 0),
                                   ("float", "float_shares_outstanding", 0),
                                   ("volm", "Volatility.M", 2),
-                                  ("rvol", "relative_volume_10d_calc", 2)):
+                                  ("rvol", "relative_volume_10d_calc", 2),
+                                  ("pm_chg", "premarket_change", 2),
+                                  ("pm_vol", "premarket_volume", 0)):
                 if row[key] is None and src in df.columns:
                     row[key] = num(r.get(src), dec)
             for src, key in PERF_KEYS.items():
@@ -299,14 +328,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", default="data")
     ap.add_argument("--limit", type=int, default=300, help="max rows per scan")
+    ap.add_argument("--include-premarket", action="store_true",
+                    help="run pre-market scans even outside 04:00–09:30 ET")
     args = ap.parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
 
-    print(f"🔍 Running {len(SCANS)} TradingView scans…")
+    pm_ok = args.include_premarket or in_premarket_window()
+    active = [s for s in SCANS if pm_ok or not s.get("premarket_only")]
+    if not pm_ok:
+        skipped = [s["id"] for s in SCANS if s.get("premarket_only")]
+        print(f"⏰ Outside 04:00–09:30 ET — skipping {', '.join(skipped)}")
+
+    print(f"🔍 Running {len(active)} TradingView scans…")
     results, failures = [], []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
-        futures = [ex.submit(run_scan, s, args.limit) for s in SCANS]
+        futures = [ex.submit(run_scan, s, args.limit) for s in active]
         for fut in concurrent.futures.as_completed(futures):
             spec, df, err = fut.result()
             if err:
@@ -330,6 +367,7 @@ def main():
         "mcap_group": s.get("mcap_group"), "timeframe": s.get("timeframe"),
         "count": int(len(by_id.get(s["id"], []))),
         "ok": s["id"] in by_id,
+        "skipped": bool(s.get("premarket_only") and not pm_ok),
     } for s in SCANS]
 
     rows = merge_rows(results)
