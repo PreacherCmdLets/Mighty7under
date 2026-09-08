@@ -134,6 +134,25 @@
   @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
   @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
+  /* MARKET MONITOR (Breadth) */
+  .mm-wrap{border:1px solid var(--border);border-radius:8px;overflow-x:auto;background:var(--surface);box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  /* Fixed layout + an explicit colgroup: with auto layout a 16-column table
+     wider than its container dumps all the slack into the first column and
+     desyncs the header from the body. */
+  .mm-tbl{border-collapse:collapse;font-size:12px;table-layout:fixed}
+  .mm-tbl th,.mm-tbl td{padding:6px 9px;text-align:center;white-space:nowrap}
+  .mm-tbl thead .grp th{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#fff;padding:6px 9px}
+  .mm-tbl thead .grp .g1{background:#9a7326}.mm-tbl thead .grp .g2{background:#2f7a52}.mm-tbl thead .grp .g3{background:#3b6ea8}
+  .mm-tbl thead .grp .g0{background:var(--surface2)}
+  /* NOT .sub — that global class sets display:block and would collapse the row */
+  .mm-tbl thead .mmsub th{font-size:9px;font-weight:600;letter-spacing:.3px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border);padding:6px 8px;line-height:1.25;white-space:normal}
+  .mm-tbl tbody tr:nth-child(even){background:#fafbfc}
+  .mm-tbl tbody tr:hover{background:var(--surface2)}
+  .mm-tbl td.d{text-align:left;font-weight:600;white-space:nowrap;min-width:76px}
+  .mm-tbl td.sep{border-left:1px solid var(--border)}
+  .mm-tbl th.sep{border-left:1px solid var(--border)}
+  .mm-note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6}
+
   /* CATALYSTS & NEWS (Calendar) */
   .news-2col{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start}
   .news-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;box-shadow:0 1px 2px rgba(16,24,40,.04);margin-bottom:12px}
@@ -554,14 +573,13 @@
 <div class="page" id="page-breadth">
   <div class="section">
     <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Market Breadth</span><span class="sec-sub">TradingView Breadth Watchlist · % of Stocks Above Key SMAs · Daily</span></div>
-    <div id="bm-wrap" style="margin-bottom:20px"><div class="loading">Loading breadth data…</div></div>
-    <div class="tv-full">
-      <div class="tv-hdr">S&P 500 Sector Heatmap<span>TradingView</span></div>
-      <div class="tradingview-widget-container" style="height:520px">
-      <div class="tradingview-widget-container__widget" style="height:500px"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>{"exchanges":[],"dataSource":"SPX500","grouping":"sector","blockSize":"market_cap_basic","blockColor":"change","locale":"en","colorTheme":"light","hasTopBar":false,"isZoomEnabled":true,"hasSymbolTooltip":true}</script>
-    </div>
-    </div>
+    <div id="bm-wrap"><div class="loading">Loading breadth data…</div></div>
+  </div>
+
+  <!-- MARKET MONITOR (StockBee-style daily breadth history) -->
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">04b</span><span class="sec-title">Market Monitor</span><span class="sec-sub" id="mm-sub">Daily Movers · Trend Windows · Context</span></div>
+    <div id="mm-wrap"><div class="loading">Market Monitor fills in from the next data refresh onward.</div></div>
   </div>
 </div>
 
@@ -736,6 +754,95 @@ function renderWLGrid(wlId, symbols, page) {
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
   }
+})();
+
+// MARKET MONITOR (data/breadth_monitor.json — built by scripts/breadth_monitor.py)
+// Column groups mirror the StockBee market monitor layout.
+const MM_COLS=[
+  {g:'Primary Breadth Indicators',cls:'g1',cols:[
+    {k:'up4',   l:'Stocks Up 4%+ Today',  scale:'pos'},
+    {k:'down4', l:'Stocks Down 4%+ Today',scale:'neg'},
+    {k:'ratio5',l:'5 Day Ratio',          scale:'ratio',dec:2},
+    {k:'ratio10',l:'10 Day Ratio',        scale:'ratio',dec:2}]},
+  {g:'Secondary Breadth Indicators',cls:'g2',cols:[
+    {k:'up25q',  l:'Up 25%+ Quarter', scale:'pos'},
+    {k:'down25q',l:'Down 25%+ Quarter',scale:'neg'},
+    {k:'up25m',  l:'Up 25%+ Month',   scale:'pos'},
+    {k:'down25m',l:'Down 25%+ Month', scale:'neg'},
+    {k:'up50m',  l:'Up 50%+ Month',   scale:'pos'},
+    {k:'down50m',l:'Down 50%+ Month', scale:'neg'},
+    {k:'up13m',  l:'Up 13%+ Month',   scale:'pos'},
+    {k:'down13m',l:'Down 13%+ Month', scale:'neg'}]},
+  {g:'Context',cls:'g3',cols:[
+    {k:'atr10x',  l:'10x ATR Extension'},
+    {k:'t2108',   l:'T2108 · % > 40D SMA',suffix:'%',dec:2,scale:'t2108'},
+    {k:'universe',l:'Broad Universe'}]},
+];
+
+// Shade a cell by where it sits in its own column's range — the same relative
+// read the StockBee monitor gives, without inventing absolute thresholds.
+function mmShade(v,col,stats){
+  if(v==null)return'';
+  if(col.scale==='ratio')
+    return v>=2?'background:rgba(22,163,74,.30)':v>=1.25?'background:rgba(22,163,74,.16)'
+      :v<=.5?'background:rgba(229,72,77,.30)':v<=.8?'background:rgba(229,72,77,.16)':'';
+  if(col.scale==='t2108')
+    return v>=70?'background:rgba(22,163,74,.26)':v>=50?'background:rgba(22,163,74,.13)'
+      :v<=30?'background:rgba(229,72,77,.26)':v<=50?'background:rgba(229,72,77,.13)':'';
+  if(!col.scale)return'';
+  const s=stats[col.k];
+  if(!s||s.max===s.min)return'';
+  const t=(v-s.min)/(s.max-s.min);
+  if(t<0.55)return'';                       // only the notable end gets colour
+  const a=((t-0.55)/0.45*0.30).toFixed(2);
+  return col.scale==='neg'?`background:rgba(229,72,77,${a})`:`background:rgba(22,163,74,${a})`;
+}
+
+function renderMM(d){
+  const el=document.getElementById('mm-wrap');
+  if(!el||!d?.rows?.length)return;
+  const rows=d.rows;
+  const flat=MM_COLS.flatMap(g=>g.cols);
+  const stats={};
+  flat.forEach(c=>{const v=rows.map(r=>r[c.k]).filter(x=>x!=null);
+    if(v.length)stats[c.k]={min:Math.min(...v),max:Math.max(...v)}});
+
+  const grpRow=`<tr class="grp"><th class="g0"></th>${MM_COLS.map(g=>
+    `<th class="${g.cls} sep" colspan="${g.cols.length}">${g.g}</th>`).join('')}</tr>`;
+  const subRow=`<tr class="mmsub"><th>Date</th>${MM_COLS.map(g=>g.cols.map((c,i)=>
+    `<th${i===0?' class="sep"':''}>${c.l}</th>`).join('')).join('')}</tr>`;
+
+  const body=rows.map(r=>{
+    const d2=new Date(r.date+'T12:00:00');
+    const lbl=d2.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'});
+    const cells=MM_COLS.map(g=>g.cols.map((c,i)=>{
+      const v=r[c.k];
+      const txt=v==null?'—':(c.dec?Number(v).toFixed(c.dec):Number(v).toLocaleString('en-US'))+(c.suffix||'');
+      return `<td class="${i===0?'sep':''}" style="${mmShade(v,c,stats)}">${txt}</td>`;
+    }).join('')).join('');
+    return`<tr><td class="d">${lbl}</td>${cells}</tr>`;
+  }).join('');
+
+  // Explicit total width: with table-layout:fixed an auto/max-content width
+  // lets the one unpinned column swallow the leftover space.
+  const DATE_W=82,COL_W=64;
+  const colgroup=`<colgroup><col style="width:${DATE_W}px">${flat.map(()=>`<col style="width:${COL_W}px">`).join('')}</colgroup>`;
+  el.innerHTML=`<div class="mm-wrap"><table class="mm-tbl" style="width:${DATE_W+COL_W*flat.length}px">${colgroup}
+      <thead>${grpRow}${subRow}</thead><tbody>${body}</tbody></table></div>
+    <div class="mm-note">Counts across ${Number(rows[0].universe||0).toLocaleString('en-US')} US common stocks (NASDAQ/NYSE/AMEX).
+      Ratios are up-4% over down-4% summed across 5 and 10 recorded sessions${d.days_recorded<10?` — ${10-d.days_recorded} more session(s) until the 10-day ratio fills in`:''}.
+      T2108 is the share above its 40-day SMA. 10x ATR extension counts stocks more than 10 ATRs above their 50-day SMA.
+      StockBee's 34-day window is shown as 1 month — TradingView exposes no 34-day performance field.</div>`;
+  const s=document.getElementById('mm-sub');
+  if(s)s.textContent=`${d.days_recorded} session(s) recorded · ${d.updated_label||''}`;
+}
+
+(async()=>{
+  try{
+    const res=await fetch('data/breadth_monitor.json?t='+Date.now());
+    if(!res.ok)return;
+    renderMM(await res.json());
+  }catch(e){console.warn('Market monitor not loaded:',e.message)}
 })();
 
 // CATALYSTS & NEWS (data/news.json — built by scripts/fetch_news.py)

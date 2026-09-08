@@ -59,6 +59,14 @@ jobs:
         continue-on-error: true
         run: python scripts/run_scans.py --out-dir data
 
+      # ── 4b2. StockBee-style market breadth counts ──────────────────────────
+      # ~15 tiny scanner calls that read only totalCount. Appends one row per
+      # session to data/breadth_history.json; the 5/10-day ratios need that
+      # history because the scanner is point-in-time.
+      - name: Build market monitor
+        continue-on-error: true
+        run: python scripts/breadth_monitor.py --out-dir data
+
       # ── 4c. Finviz calendar + catalyst news ────────────────────────────────
       # Runs after the scans so it can pull news for the tickers they caught.
       # Non-fatal: finviz is behind Cloudflare and blocks by IP reputation, so
