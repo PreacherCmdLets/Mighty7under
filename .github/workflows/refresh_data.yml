@@ -67,6 +67,14 @@ jobs:
         continue-on-error: true
         run: python scripts/breadth_monitor.py --out-dir data
 
+      # ── 4b3. Scan validation (backtest) ────────────────────────────────────
+      # Heavier than the other steps (downloads 2y of bars for ~800 tickers),
+      # and the answer barely moves day to day — so only on the close run.
+      - name: Backtest scans
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 21 * * 1-5'
+        continue-on-error: true
+        run: python scripts/backtest.py --out-dir data
+
       # ── 4c. Finviz calendar + catalyst news ────────────────────────────────
       # Runs after the scans so it can pull news for the tickers they caught.
       # Non-fatal: finviz is behind Cloudflare and blocks by IP reputation, so
