@@ -190,11 +190,14 @@ def main():
         rec["ratio10"] = ratio(history, dates[i:], "up4", "down4", 10)
         rows.append(rec)
 
+    live_days = sum(1 for r in history.values() if not r.get("backfilled"))
     payload = {
         "updated_utc": datetime.now(timezone.utc).isoformat(),
         "updated_label": datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d %H:%M %Z"),
         "source": "TradingView Screener",
         "days_recorded": len(history),
+        "days_live": live_days,
+        "days_backfilled": len(history) - live_days,
         "rows": rows,
     }
     with open(os.path.join(args.out_dir, "breadth_monitor.json"), "w", encoding="utf-8") as f:
