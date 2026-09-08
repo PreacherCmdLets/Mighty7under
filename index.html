@@ -134,6 +134,16 @@
   @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
   @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
+  /* BACKTEST */
+  .bt-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+  .bt-stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .bt-stat .l{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  .bt-stat .v{font-size:19px;font-weight:700;margin-top:3px}
+  .bt-wrap{border:1px solid var(--border);border-radius:8px;overflow-x:auto;background:var(--surface);box-shadow:0 1px 2px rgba(16,24,40,.04);margin-bottom:8px}
+  .bt-caveat{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:11px 14px;font-size:11px;line-height:1.65;color:#78550c;margin-bottom:16px}
+  .bt-caveat b{color:#5c3f06}
+  .edge-pos{color:var(--green);font-weight:700}.edge-neg{color:var(--red);font-weight:700}
+
   /* MARKET MONITOR (Breadth) */
   .mm-wrap{border:1px solid var(--border);border-radius:8px;overflow-x:auto;background:var(--surface);box-shadow:0 1px 2px rgba(16,24,40,.04)}
   /* Fixed layout + an explicit colgroup: with auto layout a 16-column table
@@ -466,6 +476,7 @@
     <div class="nav-tab" onclick="showPage('breadth',this)">🧭 Breadth</div>
     <div class="nav-tab" onclick="showPage('calendar',this)">📅 Calendar</div>
     <div class="nav-tab" onclick="showPage('screener',this)">🔍 Screener</div>
+    <div class="nav-tab" onclick="showPage('backtest',this)">🧪 Backtest</div>
     <div class="nav-tab" onclick="showPage('calc',this)">⚖️ Position Sizer</div>
   </div>
   <div class="nav-meta">
@@ -623,6 +634,14 @@
 
 </div>
 
+<!-- PAGE: BACKTEST -->
+<div class="page" id="page-backtest">
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
+    <div id="bt-body"><div class="loading">Backtest results appear after the next data refresh.</div></div>
+  </div>
+</div>
+
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
@@ -754,6 +773,60 @@ function renderWLGrid(wlId, symbols, page) {
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
   }
+})();
+
+// BACKTEST (data/backtest.json — built by scripts/backtest.py)
+function btTable(rows,horizons,empty){
+  if(!rows?.length)return`<div class="loading">${empty}</div>`;
+  const th=`<th style="text-align:left">Scan</th><th>Detections</th>`
+    +horizons.map(h=>`<th>${h}D</th>`).join('')
+    +`<th class="th-tip" data-tip="Average ${horizons[horizons.length-1]}-day return minus the universe average\nover the same window — the actual edge">vs Baseline</th>`
+    +`<th>Win %</th><th>Median</th>`;
+  const last=horizons[horizons.length-1];
+  const trs=rows.map(r=>{
+    const edge=r['edge'+last];
+    return`<tr>
+      <td style="text-align:left;font-weight:600">${esc(r.label||r.id)}</td>
+      <td>${(r.n||0).toLocaleString('en-US')}</td>
+      ${horizons.map(h=>`<td class="${cls(r['r'+h])}">${r['r'+h]==null?'—':fmtP(r['r'+h])}</td>`).join('')}
+      <td class="${edge==null?'':edge>0?'edge-pos':'edge-neg'}">${edge==null?'—':fmtP(edge)}</td>
+      <td>${r.win==null?'—':fmtN(r.win,1)+'%'}</td>
+      <td class="${cls(r.median)}">${r.median==null?'—':fmtP(r.median)}</td>
+    </tr>`}).join('');
+  return`<div class="bt-wrap"><table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div>`;
+}
+
+function renderBT(d){
+  const el=document.getElementById('bt-body');
+  if(!el||!d)return;
+  const H=d.horizons||[1,5,10,20],last=H[H.length-1],b=d.baseline||{};
+  const stat=(l,v)=>`<div class="bt-stat"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+  el.innerHTML=`
+    <div class="bt-stats">
+      ${stat('Universe',(d.universe_size||0).toLocaleString('en-US')+' stocks')}
+      ${stat('Window',`${d.window?.start||'—'} → ${d.window?.end||'—'}`)}
+      ${stat('Sessions',(d.sessions||0).toLocaleString('en-US'))}
+      ${stat(`Baseline ${last}D`,b['r'+last]==null?'—':fmtP(b['r'+last]))}
+    </div>
+    <div class="bt-caveat"><b>Read this before trusting the numbers.</b>
+      The reconstructed results replay the price rules over stocks that <b>trade today</b>, so names that were delisted or collapsed are missing — that flatters every scan (survivorship bias).
+      Market-cap, float and volatility gates use <b>today's</b> values, not the values on the historical date.
+      Scans with fundamental filters can't be reconstructed at all (no point-in-time EPS/revenue), so they appear only under Recorded Picks.
+      The column that matters is <b>vs Baseline</b>: beating zero means the scan beat buying a random stock from the same universe over the same window.</div>
+    <div class="mc-ptitle">Reconstructed — price rules replayed over history</div>
+    ${btTable(d.reconstructed,H,'No reconstructed results.')}
+    <div class="mc-ptitle" style="margin-top:16px">Recorded Picks — what the live scans actually published</div>
+    ${btTable(d.live,H,'No recorded picks with enough forward history yet — this fills in as scan history accumulates.')}`;
+  const s=document.getElementById('bt-sub');
+  if(s)s.textContent=`${(d.reconstructed||[]).length} reconstructed · ${(d.live||[]).length} live · ${d.updated_label||''}`;
+}
+
+(async()=>{
+  try{
+    const res=await fetch('data/backtest.json?t='+Date.now());
+    if(!res.ok)return;
+    renderBT(await res.json());
+  }catch(e){console.warn('Backtest not loaded:',e.message)}
 })();
 
 // MARKET MONITOR (data/breadth_monitor.json — built by scripts/breadth_monitor.py)
