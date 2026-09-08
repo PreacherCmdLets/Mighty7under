@@ -887,7 +887,8 @@ function renderMM(d){
 
   const body=rows.map(r=>{
     const d2=new Date(r.date+'T12:00:00');
-    const lbl=d2.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'});
+    const lbl=d2.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'})
+      +(r.backfilled?'<span title="Reconstructed from price history — see note below" style="color:var(--muted);font-weight:400"> ·r</span>':'');
     const cells=MM_COLS.map(g=>g.cols.map((c,i)=>{
       const v=r[c.k];
       const txt=v==null?'—':(c.dec?Number(v).toFixed(c.dec):Number(v).toLocaleString('en-US'))+(c.suffix||'');
@@ -904,6 +905,7 @@ function renderMM(d){
       <thead>${grpRow}${subRow}</thead><tbody>${body}</tbody></table></div>
     <div class="mm-note">Counts across ${Number(rows[0].universe||0).toLocaleString('en-US')} US common stocks (NASDAQ/NYSE/AMEX).
       Ratios are up-4% over down-4% summed across 5 and 10 recorded sessions${d.days_recorded<10?` — ${10-d.days_recorded} more session(s) until the 10-day ratio fills in`:''}.
+      ${d.days_backfilled?`<b>·r</b> marks the ${d.days_backfilled} session(s) reconstructed from price history rather than recorded live — the universe there is what trades today, so delisted names are missing (survivorship bias). ${d.days_live} session(s) are live.`:''}
       T2108 is the share above its 40-day SMA. 10x ATR extension counts stocks more than 10 ATRs above their 50-day SMA.
       StockBee's 34-day window is shown as 1 month — TradingView exposes no 34-day performance field.</div>`;
   const s=document.getElementById('mm-sub');

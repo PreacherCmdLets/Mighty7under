@@ -1,0 +1,64 @@
+name: Backfill Market Monitor
+
+# Manual only. Reconstructs past Market Monitor sessions from price history so
+# the table is not stuck on a single row while live history accumulates.
+# Live-recorded days are never overwritten.
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "Years of history to reconstruct"
+        required: false
+        default: "1"
+      limit:
+        description: "Cap the universe (0 = all, matches the live monitor)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data          # share the data lock with the main refresh
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Reconstruct history
+        run: |
+          python scripts/breadth_backfill.py \
+            --out-dir data \
+            --years "${{ github.event.inputs.years }}" \
+            --limit "${{ github.event.inputs.limit }}"
+
+      - name: Republish the monitor table
+        run: python scripts/breadth_monitor.py --out-dir data
+
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: backfill market monitor history [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git pull --rebase -X theirs origin main
+            git push origin HEAD
+          fi
