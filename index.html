@@ -40,8 +40,10 @@
 
   /* SECTION */
   .sec-hdr{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--border)}
-  .sec-num{font-weight:800;font-size:30px;color:#dbe2ea;line-height:1}
-  .sec-title{font-size:18px;font-weight:700;letter-spacing:.2px}
+  /* Section numbers were a hangover from the single-page layout — with tab
+     navigation they carried no order and had started colliding (two 07s). */
+  .sec-title{font-size:18px;font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:10px}
+  .sec-title::before{content:'';width:4px;height:18px;border-radius:2px;background:var(--accent);flex-shrink:0}
   .sec-sub{font-size:11px;color:var(--muted);letter-spacing:.4px;margin-left:auto}
   .section{margin-bottom:36px}
 
@@ -309,8 +311,8 @@
     .page{padding:12px}
 
     /* Section header */
-    .sec-num{font-size:26px}
-    .sec-title{font-size:15px;letter-spacing:2px}
+    .sec-title{font-size:15px;letter-spacing:.2px;gap:8px}
+    .sec-title::before{height:15px;width:3px}
     .sec-sub{display:none}
     .section{margin-bottom:24px}
 
@@ -493,7 +495,7 @@
 <!-- PAGE: MACRO -->
 <div class="page active" id="page-macro">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">MC</span><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
     <div id="mc-body"><div class="loading">Market conditions will appear after the next data refresh.</div></div>
     <div class="mc-bottom" id="mc-bottom" style="display:none">
       <div class="mc-leaders-grid" id="mc-leaders"></div>
@@ -513,7 +515,7 @@
   </div>
 
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Macro Overview</span><span class="sec-sub">EOD · Yahoo Finance · Auto-refreshed Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Macro Overview</span><span class="sec-sub">EOD · Yahoo Finance · Auto-refreshed Daily</span></div>
     <div class="cards">
       <div class="card">  <div class="card-lbl">S&P 500 Futures</div><div class="card-val" id="c-es">—</div><div class="card-chg" id="c-es-c">—</div></div>
       <div class="card r"><div class="card-lbl">VIX</div>            <div class="card-val" id="c-vix">—</div><div class="card-chg" id="c-vix-c">—</div></div>
@@ -523,7 +525,7 @@
   </div>
 
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Daily</span></div>
     <div id="m7-tables"><div class="loading">Loading market analysis…</div></div>
   </div>
 </div>
@@ -531,7 +533,7 @@
 <!-- PAGE: RS RADAR -->
 <div class="page" id="page-radar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">RS Radar</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend vs Peer Group · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">RS Radar</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend vs Peer Group · Daily</span></div>
     <div id="rs-movers" class="rs-movers"></div>
     <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
   </div>
@@ -540,7 +542,7 @@
 <!-- PAGE: CHARTS -->
 <div class="page" id="page-charts">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView · Interactive</span></div>
+    <div class="sec-hdr"><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView · Interactive</span></div>
 
     <!-- Search + Timeframe Controls -->
     <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
@@ -583,13 +585,13 @@
 <!-- PAGE: BREADTH -->
 <div class="page" id="page-breadth">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Market Breadth</span><span class="sec-sub">TradingView Breadth Watchlist · % of Stocks Above Key SMAs · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Breadth</span><span class="sec-sub">TradingView Breadth Watchlist · % of Stocks Above Key SMAs · Daily</span></div>
     <div id="bm-wrap"><div class="loading">Loading breadth data…</div></div>
   </div>
 
   <!-- MARKET MONITOR (StockBee-style daily breadth history) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">04b</span><span class="sec-title">Market Monitor</span><span class="sec-sub" id="mm-sub">Daily Movers · Trend Windows · Context</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Monitor</span><span class="sec-sub" id="mm-sub">Daily Movers · Trend Windows · Context</span></div>
     <div id="mm-wrap"><div class="loading">Market Monitor fills in from the next data refresh onward.</div></div>
   </div>
 </div>
@@ -597,7 +599,7 @@
 <!-- PAGE: CALENDAR -->
 <div class="page" id="page-calendar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
+    <div class="sec-hdr"><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
     <div class="tbl-group">
       <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events</span><span id="cal-sub" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">Finviz</span></div>
       <div class="tbl-wrap open">
@@ -611,7 +613,7 @@
 
   <!-- CATALYSTS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">05b</span><span class="sec-title">Catalysts &amp; News</span><span class="sec-sub" id="news-sub">Finviz</span></div>
+    <div class="sec-hdr"><span class="sec-title">Catalysts &amp; News</span><span class="sec-sub" id="news-sub">Finviz</span></div>
     <div id="news-body"><div class="loading">News appears after the next data refresh.</div></div>
   </div>
 </div>
@@ -621,19 +623,19 @@
 
   <!-- SCAN RESULTS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Scan Results</span><span class="sec-sub" id="scan-sub">TradingView Screener</span></div>
+    <div class="sec-hdr"><span class="sec-title">Scan Results</span><span class="sec-sub" id="scan-sub">TradingView Screener</span></div>
     <div id="scan-body"><div class="loading">Scan results appear after the next data refresh.</div></div>
   </div>
 
   <!-- FINVIZ SAVED SCREENS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06b</span><span class="sec-title">Finviz Screens</span><span class="sec-sub" id="fv-sub">Saved Screens</span></div>
+    <div class="sec-hdr"><span class="sec-title">Finviz Screens</span><span class="sec-sub" id="fv-sub">Saved Screens</span></div>
     <div id="fv-body"><div class="loading">Finviz screens appear after the next data refresh.</div></div>
   </div>
 
   <!-- WATCHLISTS (compact grid) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
+    <div class="sec-hdr"><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
     <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
     <div id="wl-panels"></div>
   </div>
@@ -643,7 +645,7 @@
 <!-- PAGE: BACKTEST -->
 <div class="page" id="page-backtest">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
+    <div class="sec-hdr"><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
     <div id="bt-body"><div class="loading">Backtest results appear after the next data refresh.</div></div>
   </div>
 </div>
@@ -651,7 +653,7 @@
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
+    <div class="sec-hdr"><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
     <div class="calc-grid">
       <div class="cp">
         <div class="cp-title">Trade Parameters</div>
