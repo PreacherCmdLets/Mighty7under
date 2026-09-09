@@ -75,6 +75,12 @@ jobs:
         continue-on-error: true
         run: python scripts/backtest.py --out-dir data
 
+      # ── 4b4. Finviz saved screens ──────────────────────────────────────────
+      # 14 screens, spaced ~1.5s apart. Same Cloudflare caveat as the news step.
+      - name: Run Finviz screens
+        continue-on-error: true
+        run: python scripts/finviz_screens.py --out-dir data
+
       # ── 4c. Finviz calendar + catalyst news ────────────────────────────────
       # Runs after the scans so it can pull news for the tickers they caught.
       # Non-fatal: finviz is behind Cloudflare and blocks by IP reputation, so
