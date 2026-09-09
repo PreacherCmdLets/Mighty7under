@@ -40,8 +40,10 @@
 
   /* SECTION */
   .sec-hdr{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--border)}
-  .sec-num{font-weight:800;font-size:30px;color:#dbe2ea;line-height:1}
-  .sec-title{font-size:18px;font-weight:700;letter-spacing:.2px}
+  /* Section numbers were a hangover from the single-page layout — with tab
+     navigation they carried no order and had started colliding (two 07s). */
+  .sec-title{font-size:18px;font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:10px}
+  .sec-title::before{content:'';width:4px;height:18px;border-radius:2px;background:var(--accent);flex-shrink:0}
   .sec-sub{font-size:11px;color:var(--muted);letter-spacing:.4px;margin-left:auto}
   .section{margin-bottom:36px}
 
@@ -309,8 +311,8 @@
     .page{padding:12px}
 
     /* Section header */
-    .sec-num{font-size:26px}
-    .sec-title{font-size:15px;letter-spacing:2px}
+    .sec-title{font-size:15px;letter-spacing:.2px;gap:8px}
+    .sec-title::before{height:15px;width:3px}
     .sec-sub{display:none}
     .section{margin-bottom:24px}
 
@@ -493,7 +495,7 @@
 <!-- PAGE: MACRO -->
 <div class="page active" id="page-macro">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">MC</span><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Conditions</span><span class="sec-sub">Breadth · Trend · Distribution · RS Universe · Daily</span></div>
     <div id="mc-body"><div class="loading">Market conditions will appear after the next data refresh.</div></div>
     <div class="mc-bottom" id="mc-bottom" style="display:none">
       <div class="mc-leaders-grid" id="mc-leaders"></div>
@@ -513,7 +515,7 @@
   </div>
 
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Macro Overview</span><span class="sec-sub">EOD · Yahoo Finance · Auto-refreshed Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Macro Overview</span><span class="sec-sub">EOD · Yahoo Finance · Auto-refreshed Daily</span></div>
     <div class="cards">
       <div class="card">  <div class="card-lbl">S&P 500 Futures</div><div class="card-val" id="c-es">—</div><div class="card-chg" id="c-es-c">—</div></div>
       <div class="card r"><div class="card-lbl">VIX</div>            <div class="card-val" id="c-vix">—</div><div class="card-chg" id="c-vix-c">—</div></div>
@@ -523,7 +525,7 @@
   </div>
 
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">M7</span><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Mighty7under Market Analysis</span><span class="sec-sub">Top-Down · Stage Analysis · Daily</span></div>
     <div id="m7-tables"><div class="loading">Loading market analysis…</div></div>
   </div>
 </div>
@@ -531,7 +533,7 @@
 <!-- PAGE: RS RADAR -->
 <div class="page" id="page-radar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">RS Radar</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend vs Peer Group · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">RS Radar</span><span class="sec-sub">RS Percentile Ranks · 1W+1M+3M Blend vs Peer Group · Daily</span></div>
     <div id="rs-movers" class="rs-movers"></div>
     <div id="rs-tables"><div class="loading">RS rank data will appear after the next data refresh.</div></div>
   </div>
@@ -540,7 +542,7 @@
 <!-- PAGE: CHARTS -->
 <div class="page" id="page-charts">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView · Interactive</span></div>
+    <div class="sec-hdr"><span class="sec-title">Live Charts</span><span class="sec-sub">TradingView · Interactive</span></div>
 
     <!-- Search + Timeframe Controls -->
     <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
@@ -583,13 +585,13 @@
 <!-- PAGE: BREADTH -->
 <div class="page" id="page-breadth">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Market Breadth</span><span class="sec-sub">TradingView Breadth Watchlist · % of Stocks Above Key SMAs · Daily</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Breadth</span><span class="sec-sub">TradingView Breadth Watchlist · % of Stocks Above Key SMAs · Daily</span></div>
     <div id="bm-wrap"><div class="loading">Loading breadth data…</div></div>
   </div>
 
   <!-- MARKET MONITOR (StockBee-style daily breadth history) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">04b</span><span class="sec-title">Market Monitor</span><span class="sec-sub" id="mm-sub">Daily Movers · Trend Windows · Context</span></div>
+    <div class="sec-hdr"><span class="sec-title">Market Monitor</span><span class="sec-sub" id="mm-sub">Daily Movers · Trend Windows · Context</span></div>
     <div id="mm-wrap"><div class="loading">Market Monitor fills in from the next data refresh onward.</div></div>
   </div>
 </div>
@@ -597,7 +599,7 @@
 <!-- PAGE: CALENDAR -->
 <div class="page" id="page-calendar">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
+    <div class="sec-hdr"><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
     <div class="tbl-group">
       <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events</span><span id="cal-sub" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">Finviz</span></div>
       <div class="tbl-wrap open">
@@ -611,7 +613,7 @@
 
   <!-- CATALYSTS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">05b</span><span class="sec-title">Catalysts &amp; News</span><span class="sec-sub" id="news-sub">Finviz</span></div>
+    <div class="sec-hdr"><span class="sec-title">Catalysts &amp; News</span><span class="sec-sub" id="news-sub">Finviz</span></div>
     <div id="news-body"><div class="loading">News appears after the next data refresh.</div></div>
   </div>
 </div>
@@ -621,13 +623,19 @@
 
   <!-- SCAN RESULTS -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Scan Results</span><span class="sec-sub" id="scan-sub">TradingView Screener</span></div>
+    <div class="sec-hdr"><span class="sec-title">Scan Results</span><span class="sec-sub" id="scan-sub">TradingView Screener</span></div>
     <div id="scan-body"><div class="loading">Scan results appear after the next data refresh.</div></div>
+  </div>
+
+  <!-- FINVIZ SAVED SCREENS -->
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">Finviz Screens</span><span class="sec-sub" id="fv-sub">Saved Screens</span></div>
+    <div id="fv-body"><div class="loading">Finviz screens appear after the next data refresh.</div></div>
   </div>
 
   <!-- WATCHLISTS (compact grid) -->
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
+    <div class="sec-hdr"><span class="sec-title">Watchlists</span><span class="sec-sub">TradingView · Updated Weekly</span></div>
     <div id="wl-tabs" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
     <div id="wl-panels"></div>
   </div>
@@ -637,7 +645,7 @@
 <!-- PAGE: BACKTEST -->
 <div class="page" id="page-backtest">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
+    <div class="sec-hdr"><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
     <div id="bt-body"><div class="loading">Backtest results appear after the next data refresh.</div></div>
   </div>
 </div>
@@ -645,7 +653,7 @@
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
+    <div class="sec-hdr"><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
     <div class="calc-grid">
       <div class="cp">
         <div class="cp-title">Trade Parameters</div>
@@ -773,6 +781,96 @@ function renderWLGrid(wlId, symbols, page) {
   } catch(e) {
     console.warn('Watchlists not loaded:', e.message);
   }
+})();
+
+// FINVIZ SAVED SCREENS (data/finviz_screens.json — scripts/finviz_screens.py)
+let FV_DATA=null, fvView='multi', fvSort={key:'hits',dir:-1};
+
+function fvRows(){
+  if(!FV_DATA)return[];
+  const rows=FV_DATA.rows||[];
+  const base=fvView==='all'?rows
+    :fvView==='multi'?rows.filter(r=>r.hits>1)
+    :rows.filter(r=>(r.screens||[]).includes(fvView));
+  const{key,dir}=fvSort;
+  return[...base].sort((a,b)=>{
+    const x=a[key],y=b[key];
+    if(x==null&&y==null)return 0; if(x==null)return 1; if(y==null)return -1;
+    return typeof x==='string'?dir*x.localeCompare(y):dir*(x-y);
+  });
+}
+function fvSortBy(k){
+  if(fvSort.key===k)fvSort.dir*=-1;
+  else fvSort={key:k,dir:(k==='ticker'||k==='name'||k==='sector')?1:-1};
+  drawFV();
+}
+function setFVView(v){fvView=v;drawFV();}
+function copyFVTickers(){
+  const t=fvRows().map(r=>r.ticker).join(', ');
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('fv-copy'); if(!b)return;
+    b.textContent=`✓ Copied ${fvRows().length}`;
+    setTimeout(()=>{b.textContent='⧉ Copy tickers'},1600);
+  }).catch(()=>{});
+}
+
+const FV_COLS=[
+  {k:'ticker',l:'Ticker',left:true},{k:'name',l:'Company',left:true},
+  {k:'sector',l:'Sector',left:true},{k:'close',l:'Price'},{k:'chg',l:'Chg%'},
+  {k:'vol',l:'Volume'},{k:'mcap',l:'Mkt Cap'},{k:'hits',l:'Hits'},
+  {k:'screens',l:'Screens',left:true,nosort:true},
+];
+
+function drawFV(){
+  const el=document.getElementById('fv-body');
+  if(!el||!FV_DATA)return;
+  const meta=FV_DATA.screens||[],rows=FV_DATA.rows||[];
+  const label=id=>meta.find(m=>m.id===id)?.label||id;
+
+  let chips=`<button class="scan-chip ${fvView==='all'?'active':''}" onclick="setFVView('all')">All<span class="n">${rows.length}</span></button>
+    <button class="scan-chip ${fvView==='multi'?'active':''}" onclick="setFVView('multi')">Multi-hit<span class="n">${rows.filter(r=>r.hits>1).length}</span></button>`;
+  let lastGroup=null;
+  meta.forEach(s=>{
+    if(s.group!==lastGroup){chips+=`<span class="scan-grp">${esc(s.group)}</span>`;lastGroup=s.group}
+    chips+=`<button class="scan-chip ${fvView===s.id?'active':''}" onclick="setFVView('${s.id}')" title="Open this screen on finviz">${esc(s.label)}<span class="n">${s.count}</span></button>`;
+  });
+
+  const vis=fvRows();
+  const cell={
+    ticker:r=>`<span class="sym-cell" style="color:var(--accent2);font-weight:700" onmouseenter="showTickerPopup(this,'${esc(r.ticker)}')" onmouseleave="hideTickerPopupDelayed()">${esc(r.ticker)}</span>`,
+    name:r=>esc(r.name||'—'),
+    sector:r=>`<span style="font-size:11px;color:var(--text2)">${esc(r.sector||'—')}</span>`,
+    close:r=>fmtN(r.close),
+    chg:r=>`<span class="${cls(r.chg)}" style="font-weight:600">${fmtP(r.chg)}</span>`,
+    vol:r=>fmtBig(r.vol),
+    mcap:r=>fmtBig(r.mcap),
+    hits:r=>`<span class="hit-badge ${r.hits>=3?'h3':r.hits===2?'h2':''}">${r.hits}</span>`,
+    screens:r=>(r.screens||[]).map(s=>`<span class="tag">${esc(label(s))}</span>`).join(''),
+  };
+  const head=FV_COLS.map(c=>c.nosort
+    ?`<th style="text-align:left">${c.l}</th>`
+    :`<th onclick="fvSortBy('${c.k}')" style="text-align:${c.left?'left':'right'}">${c.l}${fvSort.key===c.k?` <span class="ar">${fvSort.dir>0?'▲':'▼'}</span>`:''}</th>`).join('');
+  const body=vis.length
+    ?vis.map(r=>`<tr>${FV_COLS.map(c=>`<td data-label="${c.l}"${c.left?' style="text-align:left"':''}>${cell[c.k](r)}</td>`).join('')}</tr>`).join('')
+    :`<tr><td colspan="${FV_COLS.length}" class="loading">No matches in this view.</td></tr>`;
+
+  const active=meta.find(m=>m.id===fvView);
+  el.innerHTML=`<div class="scan-bar"><div class="scan-chips">${chips}</div>
+      ${active?`<a class="scan-btn" href="${safeUrl(active.url)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none">↗ Open on Finviz</a>`:''}
+      <button class="scan-btn" id="fv-copy" onclick="copyFVTickers()">⧉ Copy tickers</button></div>
+    <div class="scan-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>
+    <div class="scan-note">Showing ${vis.length} of ${rows.length} unique tickers${FV_DATA.failed?.length?` · ⚠ ${FV_DATA.failed.length} screen(s) failed this run`:''}</div>`;
+  const s=document.getElementById('fv-sub');
+  if(s)s.textContent=`Finviz · ${meta.length} saved screens · ${FV_DATA.updated_label||''}`;
+}
+
+(async()=>{
+  try{
+    const res=await fetch('data/finviz_screens.json?t='+Date.now());
+    if(!res.ok)return;
+    FV_DATA=await res.json();
+    if(FV_DATA?.rows?.length)drawFV();
+  }catch(e){console.warn('Finviz screens not loaded:',e.message)}
 })();
 
 // BACKTEST (data/backtest.json — built by scripts/backtest.py)
