@@ -1,6 +1,6 @@
 {
-  "updated_utc": "2026-09-15T17:46:04.142517+00:00",
-  "updated_label": "2026-09-15 12:46 CDT",
+  "updated_utc": "2026-09-15T23:41:08.424215+00:00",
+  "updated_label": "2026-09-15 18:41 CDT",
   "source": "Finviz",
   "screens": [
     {
@@ -31,7 +31,7 @@
       "id": "net_pos_inst",
       "label": "Net-Positive Institution",
       "group": "Institutional & Growth",
-      "count": 38,
+      "count": 55,
       "ok": true,
       "url": "https://finviz.com/screener.ashx?v=111&f=cap_midover,fa_salesqoq_high,fa_salesyoyttm_high,sh_avgvol_o500,sh_curvol_o2000,sh_insttrans_pos,ta_highlow20d_b5h,ta_highlow50d_b5h,ta_volatility_wo4&ft=4"
     },
@@ -39,7 +39,7 @@
       "id": "adr_weekly",
       "label": "ADR% Weekly",
       "group": "Institutional & Growth",
-      "count": 38,
+      "count": 41,
       "ok": true,
       "url": "https://finviz.com/screener.ashx?v=111&f=cap_midover,fa_salesqoq_high,fa_salesyoyttm_high,sh_avgvol_o2000,sh_curvol_o1000,sh_insttrans_pos,ta_highlow20d_a5h,ta_highlow50d_a5h,ta_volatility_wo4&ft=4"
     },
@@ -63,7 +63,7 @@
       "id": "bull_snorts",
       "label": "Bull Snorts",
       "group": "Momentum & Setups",
-      "count": 19,
+      "count": 25,
       "ok": true,
       "url": "https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_price_o20,sh_relvol_o3&ft=4"
     },
@@ -87,7 +87,7 @@
       "id": "new_high",
       "label": "New High",
       "group": "Momentum & Setups",
-      "count": 52,
+      "count": 64,
       "ok": true,
       "url": "https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_price_o20,ta_highlow52w_nh&ft=4"
     },
@@ -95,7 +95,7 @@
       "id": "pm_base",
       "label": "PM Base",
       "group": "Momentum & Setups",
-      "count": 22,
+      "count": 30,
       "ok": true,
       "url": "https://finviz.com/screener.ashx?v=111&f=cap_smallover,sh_avgvol_o1000,sh_curvol_o1000,sh_insttrans_pos,sh_price_o1,ta_alltime_b70h,ta_highlow50d_a15h,ta_highlow52w_b30h,ta_perf_ytddown,ta_sma200_-20to20-a,ta_volatility_wo4&ft=4"
     },
@@ -114,10 +114,10 @@
       "name": "Vera Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 33.16,
+      "close": 33.67,
       "chg": null,
-      "vol": 8701264.0,
-      "mcap": 2390000000.0,
+      "vol": 10492656.0,
+      "mcap": 2430000000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -132,10 +132,10 @@
       "name": "Sailpoint Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 20.27,
+      "close": 19.98,
       "chg": null,
-      "vol": 4415621.0,
-      "mcap": 11580000000.0,
+      "vol": 6969068.0,
+      "mcap": 11410000000.0,
       "pe": null,
       "screens": [
         "hot_theme",
@@ -145,14 +145,48 @@
       "hits": 3
     },
     {
+      "ticker": "CRK",
+      "name": "Comstock Resources Inc",
+      "sector": "Energy",
+      "industry": "Oil & Gas E&P",
+      "close": 14.31,
+      "chg": null,
+      "vol": 1924630.0,
+      "mcap": 4200000000.0,
+      "pe": 8.31,
+      "screens": [
+        "high_tight_flag",
+        "pm_hottest",
+        "pm_base"
+      ],
+      "hits": 3
+    },
+    {
       "ticker": "PRME",
       "name": "Prime Medicine Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 3.2,
+      "close": 3.14,
       "chg": null,
-      "vol": 1639417.0,
-      "mcap": 580750000.0,
+      "vol": 2574562.0,
+      "mcap": 569520000.0,
+      "pe": null,
+      "screens": [
+        "high_tight_flag",
+        "pm_hottest",
+        "pm_base"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "PROK",
+      "name": "ProKidney Corp",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 1.74,
+      "chg": null,
+      "vol": 1201120.0,
+      "mcap": 526040000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -166,11 +200,11 @@
       "name": "AXT Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 57.48,
+      "close": 57.7,
       "chg": null,
-      "vol": 3049027.0,
-      "mcap": 3770000000.0,
-      "pe": 3090.32,
+      "vol": 4699444.0,
+      "mcap": 3780000000.0,
+      "pe": 3102.15,
       "screens": [
         "net_pos_inst",
         "adr_weekly",
@@ -183,11 +217,11 @@
       "name": "Bloom Energy Corp",
       "sector": "Industrials",
       "industry": "Electrical Equipment & Parts",
-      "close": 261.38,
+      "close": 259.35,
       "chg": null,
-      "vol": 7050586.0,
-      "mcap": 76980000000.0,
-      "pe": 356.15,
+      "vol": 10732657.0,
+      "mcap": 76390000000.0,
+      "pe": 353.39,
       "screens": [
         "net_pos_inst",
         "adr_weekly",
@@ -200,10 +234,10 @@
       "name": "BitMine Immersion Technologies Inc",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 24.14,
+      "close": 23.6,
       "chg": null,
-      "vol": 24138043.0,
-      "mcap": 14560000000.0,
+      "vol": 52461374.0,
+      "mcap": 14240000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -217,10 +251,10 @@
       "name": "Cerebras Systems Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 183.77,
+      "close": 184.03,
       "chg": null,
-      "vol": 2351849.0,
-      "mcap": 41140000000.0,
+      "vol": 3570114.0,
+      "mcap": 41190000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -234,10 +268,10 @@
       "name": "Figma Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 24.56,
+      "close": 23.88,
       "chg": null,
-      "vol": 5218924.0,
-      "mcap": 13090000000.0,
+      "vol": 8486764.0,
+      "mcap": 12730000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -247,14 +281,48 @@
       "hits": 3
     },
     {
+      "ticker": "HUT",
+      "name": "Hut 8 Corp",
+      "sector": "Financial",
+      "industry": "Capital Markets",
+      "close": 87.09,
+      "chg": null,
+      "vol": 3818737.0,
+      "mcap": 10730000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly",
+        "doublers"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "LITE",
+      "name": "Lumentum Holdings Inc",
+      "sector": "Technology",
+      "industry": "Communication Equipment",
+      "close": 838.96,
+      "chg": null,
+      "vol": 2898831.0,
+      "mcap": 75250000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly",
+        "doublers"
+      ],
+      "hits": 3
+    },
+    {
       "ticker": "NAVN",
       "name": "Navan Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 22.27,
+      "close": 22.42,
       "chg": null,
-      "vol": 2150881.0,
-      "mcap": 5800000000.0,
+      "vol": 4622343.0,
+      "mcap": 5840000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -268,10 +336,10 @@
       "name": "Nebius Group NV",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 208.82,
+      "close": 207.37,
       "chg": null,
-      "vol": 5635331.0,
-      "mcap": 56770000000.0,
+      "vol": 10480093.0,
+      "mcap": 56370000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -281,19 +349,36 @@
       "hits": 3
     },
     {
-      "ticker": "RGTI",
-      "name": "Rigetti Computing Inc",
-      "sector": "Technology",
-      "industry": "Computer Hardware",
-      "close": 15.24,
+      "ticker": "OSCR",
+      "name": "Oscar Health Inc",
+      "sector": "Healthcare",
+      "industry": "Healthcare Plans",
+      "close": 32.44,
       "chg": null,
-      "vol": 7257520.0,
-      "mcap": 5090000000.0,
-      "pe": null,
+      "vol": 4265767.0,
+      "mcap": 10010000000.0,
+      "pe": 23.69,
       "screens": [
         "net_pos_inst",
         "adr_weekly",
-        "pm_base"
+        "fundies"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "P",
+      "name": "Everpure Inc",
+      "sector": "Technology",
+      "industry": "Computer Hardware",
+      "close": 96.97,
+      "chg": null,
+      "vol": 3068616.0,
+      "mcap": 32310000000.0,
+      "pe": 132.31,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly",
+        "gappers"
       ],
       "hits": 3
     },
@@ -302,11 +387,28 @@
       "name": "Caredx Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 53.21,
+      "close": 52.64,
       "chg": null,
-      "vol": 394290.0,
-      "mcap": 2750000000.0,
-      "pe": 25.65,
+      "vol": 950081.0,
+      "mcap": 2720000000.0,
+      "pe": 25.37,
+      "screens": [
+        "fundies",
+        "doublers",
+        "new_high"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "FTNT",
+      "name": "Fortinet Inc",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "close": 172.37,
+      "chg": null,
+      "vol": 4391429.0,
+      "mcap": 126470000000.0,
+      "pe": 60.74,
       "screens": [
         "fundies",
         "doublers",
@@ -319,10 +421,10 @@
       "name": "Forgent Power Solutions Inc",
       "sector": "Industrials",
       "industry": "Electrical Equipment & Parts",
-      "close": 31.57,
+      "close": 31.36,
       "chg": null,
-      "vol": 21921101.0,
-      "mcap": 9610000000.0,
+      "vol": 32395739.0,
+      "mcap": 9550000000.0,
       "pe": null,
       "screens": [
         "ipo",
@@ -332,13 +434,47 @@
       "hits": 3
     },
     {
+      "ticker": "BUG",
+      "name": "Global X Cybersecurity ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 45.3,
+      "chg": null,
+      "vol": 3812173.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "bull_snorts",
+        "new_high",
+        "liquid_etfs"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "AMDL",
+      "name": "GraniteShares 2x Long AMD Daily ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 54.88,
+      "chg": null,
+      "vol": 1791148.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "gappers",
+        "doublers",
+        "liquid_etfs"
+      ],
+      "hits": 3
+    },
+    {
       "ticker": "INTW",
       "name": "GraniteShares 2x Long INTC Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 21.3,
+      "close": 21.14,
       "chg": null,
-      "vol": 1939739.0,
+      "vol": 2554040.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -353,10 +489,10 @@
       "name": "Verastem Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 7.41,
+      "close": 7.34,
       "chg": null,
-      "vol": 1112360.0,
-      "mcap": 671530000.0,
+      "vol": 2840171.0,
+      "mcap": 664730000.0,
       "pe": null,
       "screens": [
         "hot_theme",
@@ -369,10 +505,10 @@
       "name": "Atlas Energy Solutions Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
-      "close": 13.66,
+      "close": 13.63,
       "chg": null,
-      "vol": 1220876.0,
-      "mcap": 1710000000.0,
+      "vol": 2920221.0,
+      "mcap": 1700000000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -385,27 +521,11 @@
       "name": "Capricor Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 8.43,
+      "close": 8.56,
       "chg": null,
-      "vol": 1098347.0,
-      "mcap": 490110000.0,
+      "vol": 2174562.0,
+      "mcap": 497670000.0,
       "pe": null,
-      "screens": [
-        "high_tight_flag",
-        "pm_hottest"
-      ],
-      "hits": 2
-    },
-    {
-      "ticker": "CRK",
-      "name": "Comstock Resources Inc",
-      "sector": "Energy",
-      "industry": "Oil & Gas E&P",
-      "close": 14.62,
-      "chg": null,
-      "vol": 703189.0,
-      "mcap": 4290000000.0,
-      "pe": 8.5,
       "screens": [
         "high_tight_flag",
         "pm_hottest"
@@ -417,10 +537,10 @@
       "name": "Canadian Solar Inc",
       "sector": "Technology",
       "industry": "Solar",
-      "close": 12.31,
+      "close": 12.24,
       "chg": null,
-      "vol": 677012.0,
-      "mcap": 836150000.0,
+      "vol": 1397949.0,
+      "mcap": 831050000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -433,10 +553,10 @@
       "name": "Monte Rosa Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 13.21,
+      "close": 12.99,
       "chg": null,
-      "vol": 526958.0,
-      "mcap": 1130000000.0,
+      "vol": 1265339.0,
+      "mcap": 1110000000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -449,10 +569,10 @@
       "name": "Groupon Inc",
       "sector": "Communication Services",
       "industry": "Internet Content & Information",
-      "close": 18.69,
+      "close": 18.75,
       "chg": null,
-      "vol": 327432.0,
-      "mcap": 760030000.0,
+      "vol": 794688.0,
+      "mcap": 762470000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -465,10 +585,10 @@
       "name": "Ramaco Resources Inc",
       "sector": "Basic Materials",
       "industry": "Coking Coal",
-      "close": 9.92,
+      "close": 10.04,
       "chg": null,
-      "vol": 816323.0,
-      "mcap": 576370000.0,
+      "vol": 1975463.0,
+      "mcap": 583590000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -481,10 +601,10 @@
       "name": "Merlin Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 3.08,
+      "close": 3.05,
       "chg": null,
-      "vol": 498353.0,
-      "mcap": 310790000.0,
+      "vol": 727679.0,
+      "mcap": 308260000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -499,7 +619,7 @@
       "industry": "Specialty Industrial Machinery",
       "close": 15.78,
       "chg": null,
-      "vol": 747679.0,
+      "vol": 1161771.0,
       "mcap": 847350000.0,
       "pe": null,
       "screens": [
@@ -513,26 +633,10 @@
       "name": "New Era Energy & Digital Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 5.57,
+      "close": 5.46,
       "chg": null,
-      "vol": 2894473.0,
-      "mcap": 593990000.0,
-      "pe": null,
-      "screens": [
-        "high_tight_flag",
-        "pm_hottest"
-      ],
-      "hits": 2
-    },
-    {
-      "ticker": "PROK",
-      "name": "ProKidney Corp",
-      "sector": "Healthcare",
-      "industry": "Biotechnology",
-      "close": 1.75,
-      "chg": null,
-      "vol": 801702.0,
-      "mcap": 530570000.0,
+      "vol": 5146924.0,
+      "mcap": 581810000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -545,10 +649,10 @@
       "name": "Serve Robotics Inc",
       "sector": "Industrials",
       "industry": "Integrated Freight & Logistics",
-      "close": 4.38,
+      "close": 4.33,
       "chg": null,
-      "vol": 1674883.0,
-      "mcap": 379340000.0,
+      "vol": 2406089.0,
+      "mcap": 375440000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -561,10 +665,10 @@
       "name": "ARS Pharmaceuticals Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 4.27,
+      "close": 4.25,
       "chg": null,
-      "vol": 1495576.0,
-      "mcap": 424490000.0,
+      "vol": 2776038.0,
+      "mcap": 422650000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -577,11 +681,11 @@
       "name": "Upstart Holdings Inc",
       "sector": "Financial",
       "industry": "Credit Services",
-      "close": 25.35,
+      "close": 25.28,
       "chg": null,
-      "vol": 1486528.0,
-      "mcap": 2470000000.0,
-      "pe": 46.16,
+      "vol": 3133401.0,
+      "mcap": 2460000000.0,
+      "pe": 46.03,
       "screens": [
         "high_tight_flag",
         "pm_hottest"
@@ -593,10 +697,10 @@
       "name": "Velo3D Inc",
       "sector": "Technology",
       "industry": "Computer Hardware",
-      "close": 9.88,
+      "close": 9.82,
       "chg": null,
-      "vol": 483790.0,
-      "mcap": 317470000.0,
+      "vol": 881757.0,
+      "mcap": 315700000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -609,10 +713,10 @@
       "name": "Wolfspeed Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 23.82,
+      "close": 24.02,
       "chg": null,
-      "vol": 1243780.0,
-      "mcap": 1260000000.0,
+      "vol": 2058737.0,
+      "mcap": 1270000000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -625,10 +729,10 @@
       "name": "Whitefiber Inc",
       "sector": "Technology",
       "industry": "Information Technology Services",
-      "close": 16.87,
+      "close": 16.82,
       "chg": null,
-      "vol": 720475.0,
-      "mcap": 655390000.0,
+      "vol": 1363991.0,
+      "mcap": 653430000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -641,10 +745,10 @@
       "name": "Xanadu Quantum Technologies Ltd",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 7.85,
+      "close": 7.8,
       "chg": null,
-      "vol": 1246506.0,
-      "mcap": 2390000000.0,
+      "vol": 1754224.0,
+      "mcap": 2370000000.0,
       "pe": null,
       "screens": [
         "high_tight_flag",
@@ -653,14 +757,46 @@
       "hits": 2
     },
     {
+      "ticker": "AADX",
+      "name": "Applied Aerospace & Defense Inc",
+      "sector": "Industrials",
+      "industry": "Aerospace & Defense",
+      "close": 12.22,
+      "chg": null,
+      "vol": 2865139.0,
+      "mcap": 2110000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst",
+        "ipo"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "AFRM",
+      "name": "Affirm Holdings Inc",
+      "sector": "Financial",
+      "industry": "Credit Services",
+      "close": 72.09,
+      "chg": null,
+      "vol": 3493223.0,
+      "mcap": 24320000000.0,
+      "pe": 13.06,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly"
+      ],
+      "hits": 2
+    },
+    {
       "ticker": "ASTS",
       "name": "AST SpaceMobile Inc",
       "sector": "Technology",
       "industry": "Communication Equipment",
-      "close": 59.34,
+      "close": 58.77,
       "chg": null,
-      "vol": 4301264.0,
-      "mcap": 23090000000.0,
+      "vol": 7193587.0,
+      "mcap": 22870000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -673,10 +809,10 @@
       "name": "Aurora Innovation Inc",
       "sector": "Consumer Cyclical",
       "industry": "Auto Parts",
-      "close": 6.49,
+      "close": 6.44,
       "chg": null,
-      "vol": 12454951.0,
-      "mcap": 13000000000.0,
+      "vol": 24109763.0,
+      "mcap": 12910000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -689,10 +825,10 @@
       "name": "Butterfly Network Inc",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 7.71,
+      "close": 7.8,
       "chg": null,
-      "vol": 4685794.0,
-      "mcap": 2090000000.0,
+      "vol": 7109749.0,
+      "mcap": 2120000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -705,10 +841,10 @@
       "name": "Bitdeer Technologies Group",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 10.98,
+      "close": 10.91,
       "chg": null,
-      "vol": 4847258.0,
-      "mcap": 2980000000.0,
+      "vol": 8897804.0,
+      "mcap": 2970000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -721,11 +857,11 @@
       "name": "Webull Corp",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 8.64,
+      "close": 8.66,
       "chg": null,
-      "vol": 6566081.0,
-      "mcap": 4580000000.0,
-      "pe": 105.46,
+      "vol": 16060549.0,
+      "mcap": 4590000000.0,
+      "pe": 105.74,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -737,10 +873,10 @@
       "name": "Clover Health Investments Corp",
       "sector": "Healthcare",
       "industry": "Healthcare Plans",
-      "close": 4.61,
+      "close": 4.66,
       "chg": null,
-      "vol": 5985942.0,
-      "mcap": 2450000000.0,
+      "vol": 9656576.0,
+      "mcap": 2480000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -749,15 +885,15 @@
       "hits": 2
     },
     {
-      "ticker": "HIMS",
-      "name": "Hims & Hers Health Inc",
-      "sector": "Healthcare",
-      "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 28.22,
+      "ticker": "DDOG",
+      "name": "Datadog Inc",
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "close": 230.27,
       "chg": null,
-      "vol": 4752122.0,
-      "mcap": 6580000000.0,
-      "pe": null,
+      "vol": 4029099.0,
+      "mcap": 82680000000.0,
+      "pe": 470.42,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -769,11 +905,11 @@
       "name": "Robinhood Markets Inc",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 110.41,
+      "close": 110.45,
       "chg": null,
-      "vol": 14060081.0,
-      "mcap": 99270000000.0,
-      "pe": 48.89,
+      "vol": 28725165.0,
+      "mcap": 99300000000.0,
+      "pe": 48.91,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -785,10 +921,10 @@
       "name": "ImmunityBio Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 7.94,
+      "close": 8.14,
       "chg": null,
-      "vol": 4354073.0,
-      "mcap": 8410000000.0,
+      "vol": 8948714.0,
+      "mcap": 8630000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst",
@@ -801,11 +937,11 @@
       "name": "Samsara Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 42.36,
+      "close": 41.65,
       "chg": null,
-      "vol": 2822793.0,
-      "mcap": 24810000000.0,
-      "pe": 275.06,
+      "vol": 8173939.0,
+      "mcap": 24390000000.0,
+      "pe": 270.45,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -817,11 +953,11 @@
       "name": "Karman Holdings Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 37.74,
+      "close": 37.47,
       "chg": null,
-      "vol": 2118608.0,
-      "mcap": 5000000000.0,
-      "pe": 134.42,
+      "vol": 4314269.0,
+      "mcap": 4970000000.0,
+      "pe": 133.44,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -833,9 +969,9 @@
       "name": "Redwire Corp",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 10.77,
+      "close": 10.75,
       "chg": null,
-      "vol": 6131803.0,
+      "vol": 10306547.0,
       "mcap": 2690000000.0,
       "pe": null,
       "screens": [
@@ -845,15 +981,47 @@
       "hits": 2
     },
     {
-      "ticker": "SMCI",
-      "name": "Super Micro Computer Inc",
-      "sector": "Technology",
-      "industry": "Computer Hardware",
-      "close": 36.2,
+      "ticker": "RKLB",
+      "name": "Rocket Lab Corp",
+      "sector": "Industrials",
+      "industry": "Aerospace & Defense",
+      "close": 63.55,
       "chg": null,
-      "vol": 16066746.0,
-      "mcap": 23780000000.0,
-      "pe": 11.01,
+      "vol": 20440998.0,
+      "mcap": 38030000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "RSI",
+      "name": "Rush Street Interactive Inc",
+      "sector": "Consumer Cyclical",
+      "industry": "Gambling",
+      "close": 26.07,
+      "chg": null,
+      "vol": 3048629.0,
+      "mcap": 6040000000.0,
+      "pe": 87.93,
+      "screens": [
+        "net_pos_inst",
+        "adr_weekly"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "SEI",
+      "name": "Solaris Energy Infrastructure Inc",
+      "sector": "Energy",
+      "industry": "Oil & Gas Equipment & Services",
+      "close": 61.62,
+      "chg": null,
+      "vol": 2510255.0,
+      "mcap": 4720000000.0,
+      "pe": 78.29,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -865,11 +1033,11 @@
       "name": "Sandisk Corp",
       "sector": "Technology",
       "industry": "Computer Hardware",
-      "close": 1535.03,
+      "close": 1530.9,
       "chg": null,
-      "vol": 4759124.0,
-      "mcap": 224760000000.0,
-      "pe": 21.06,
+      "vol": 6865453.0,
+      "mcap": 224150000000.0,
+      "pe": 21.0,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -881,11 +1049,11 @@
       "name": "Venture Global Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 15.44,
+      "close": 15.29,
       "chg": null,
-      "vol": 6824129.0,
-      "mcap": 38590000000.0,
-      "pe": 11.73,
+      "vol": 10809723.0,
+      "mcap": 38230000000.0,
+      "pe": 11.62,
       "screens": [
         "net_pos_inst",
         "adr_weekly"
@@ -893,34 +1061,34 @@
       "hits": 2
     },
     {
-      "ticker": "HUT",
-      "name": "Hut 8 Corp",
-      "sector": "Financial",
-      "industry": "Capital Markets",
-      "close": 87.01,
+      "ticker": "ZETA",
+      "name": "Zeta Global Holdings Corp",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "close": 31.04,
       "chg": null,
-      "vol": 1645910.0,
-      "mcap": 10730000000.0,
+      "vol": 3326346.0,
+      "mcap": 7790000000.0,
       "pe": null,
       "screens": [
-        "adr_weekly",
-        "doublers"
+        "net_pos_inst",
+        "adr_weekly"
       ],
       "hits": 2
     },
     {
-      "ticker": "LITE",
-      "name": "Lumentum Holdings Inc",
+      "ticker": "BRZE",
+      "name": "Braze Inc",
       "sector": "Technology",
-      "industry": "Communication Equipment",
-      "close": 839.03,
+      "industry": "Software - Application",
+      "close": 25.42,
       "chg": null,
-      "vol": 1917325.0,
-      "mcap": 75260000000.0,
+      "vol": 1552768.0,
+      "mcap": 2890000000.0,
       "pe": null,
       "screens": [
         "adr_weekly",
-        "doublers"
+        "pm_base"
       ],
       "hits": 2
     },
@@ -929,10 +1097,10 @@
       "name": "Netskope Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 17.52,
+      "close": 17.47,
       "chg": null,
-      "vol": 5991781.0,
-      "mcap": 7160000000.0,
+      "vol": 10942878.0,
+      "mcap": 7140000000.0,
       "pe": null,
       "screens": [
         "adr_weekly",
@@ -941,63 +1109,15 @@
       "hits": 2
     },
     {
-      "ticker": "OSCR",
-      "name": "Oscar Health Inc",
-      "sector": "Healthcare",
-      "industry": "Healthcare Plans",
-      "close": 32.61,
-      "chg": null,
-      "vol": 1951715.0,
-      "mcap": 10070000000.0,
-      "pe": 23.82,
-      "screens": [
-        "adr_weekly",
-        "fundies"
-      ],
-      "hits": 2
-    },
-    {
-      "ticker": "P",
-      "name": "Everpure Inc",
-      "sector": "Technology",
-      "industry": "Computer Hardware",
-      "close": 97.49,
-      "chg": null,
-      "vol": 1388412.0,
-      "mcap": 32480000000.0,
-      "pe": 133.01,
-      "screens": [
-        "adr_weekly",
-        "gappers"
-      ],
-      "hits": 2
-    },
-    {
       "ticker": "DK",
       "name": "Delek US Holdings Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
-      "close": 78.07,
+      "close": 78.14,
       "chg": null,
-      "vol": 706565.0,
+      "vol": 1768775.0,
       "mcap": 4780000000.0,
-      "pe": 21.95,
-      "screens": [
-        "fundies",
-        "doublers"
-      ],
-      "hits": 2
-    },
-    {
-      "ticker": "FTNT",
-      "name": "Fortinet Inc",
-      "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "close": 172.6,
-      "chg": null,
-      "vol": 2237285.0,
-      "mcap": 126640000000.0,
-      "pe": 60.82,
+      "pe": 21.97,
       "screens": [
         "fundies",
         "doublers"
@@ -1009,14 +1129,46 @@
       "name": "PBF Energy Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
-      "close": 75.74,
+      "close": 74.72,
       "chg": null,
-      "vol": 6764415.0,
-      "mcap": 8980000000.0,
-      "pe": 6.7,
+      "vol": 9380281.0,
+      "mcap": 8860000000.0,
+      "pe": 6.61,
       "screens": [
         "fundies",
         "bull_snorts"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "PSX",
+      "name": "Phillips 66",
+      "sector": "Energy",
+      "industry": "Oil & Gas Refining & Marketing",
+      "close": 264.93,
+      "chg": null,
+      "vol": 2879414.0,
+      "mcap": 105710000000.0,
+      "pe": 15.08,
+      "screens": [
+        "fundies",
+        "new_high"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "SLDE",
+      "name": "Slide Insurance Holdings Inc",
+      "sector": "Financial",
+      "industry": "Insurance - Property & Casualty",
+      "close": 26.48,
+      "chg": null,
+      "vol": 1353729.0,
+      "mcap": 3090000000.0,
+      "pe": 6.45,
+      "screens": [
+        "fundies",
+        "new_high"
       ],
       "hits": 2
     },
@@ -1027,7 +1179,7 @@
       "industry": "Insurance Brokers",
       "close": 32.49,
       "chg": null,
-      "vol": 5841622.0,
+      "vol": 12036204.0,
       "mcap": 4530000000.0,
       "pe": null,
       "screens": [
@@ -1041,9 +1193,9 @@
       "name": "Fidelity Ethereum Fund",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 24.18,
+      "close": 24.05,
       "chg": null,
-      "vol": 3802596.0,
+      "vol": 6525447.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1053,30 +1205,30 @@
       "hits": 2
     },
     {
-      "ticker": "ACMR",
-      "name": "ACM Research Inc",
-      "sector": "Technology",
-      "industry": "Semiconductor Equipment & Materials",
-      "close": 63.51,
+      "ticker": "SDGR",
+      "name": "Schrodinger Inc",
+      "sector": "Healthcare",
+      "industry": "Health Information Services",
+      "close": 23.25,
       "chg": null,
-      "vol": 589612.0,
-      "mcap": 4420000000.0,
-      "pe": 30.17,
+      "vol": 3796199.0,
+      "mcap": 1740000000.0,
+      "pe": null,
       "screens": [
-        "gappers",
-        "doublers"
+        "bull_snorts",
+        "new_high"
       ],
       "hits": 2
     },
     {
-      "ticker": "ARWR",
-      "name": "Arrowhead Pharmaceuticals Inc",
-      "sector": "Healthcare",
-      "industry": "Biotechnology",
-      "close": 72.8,
+      "ticker": "AEHR",
+      "name": "Aehr Test Systems",
+      "sector": "Technology",
+      "industry": "Semiconductor Equipment & Materials",
+      "close": 81.58,
       "chg": null,
-      "vol": 2149245.0,
-      "mcap": 10280000000.0,
+      "vol": 1876182.0,
+      "mcap": 2660000000.0,
       "pe": null,
       "screens": [
         "gappers",
@@ -1089,9 +1241,9 @@
       "name": "ProShares Ultra Bloomberg Natural Gas 2x Shares",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 20.22,
+      "close": 20.42,
       "chg": null,
-      "vol": 3034393.0,
+      "vol": 4190212.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1105,9 +1257,9 @@
       "name": "T-REX 2X Long SKHY Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.35,
+      "close": 25.72,
       "chg": null,
-      "vol": 189685.0,
+      "vol": 241208.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1121,9 +1273,9 @@
       "name": "Defiance Daily Target 2x Short IONQ ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 30.23,
+      "close": 30.12,
       "chg": null,
-      "vol": 114545.0,
+      "vol": 144544.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1133,18 +1285,18 @@
       "hits": 2
     },
     {
-      "ticker": "AMDL",
-      "name": "GraniteShares 2x Long AMD Daily ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 54.45,
+      "ticker": "ADPT",
+      "name": "Adaptive Biotechnologies Corp",
+      "sector": "Healthcare",
+      "industry": "Diagnostics & Research",
+      "close": 26.68,
       "chg": null,
-      "vol": 1621016.0,
-      "mcap": null,
+      "vol": 4124387.0,
+      "mcap": 4260000000.0,
       "pe": null,
       "screens": [
         "doublers",
-        "liquid_etfs"
+        "new_high"
       ],
       "hits": 2
     },
@@ -1153,11 +1305,27 @@
       "name": "APA Corp",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 47.22,
+      "close": 47.41,
       "chg": null,
-      "vol": 3491091.0,
-      "mcap": 16540000000.0,
-      "pe": 9.99,
+      "vol": 6432642.0,
+      "mcap": 16610000000.0,
+      "pe": 10.03,
+      "screens": [
+        "doublers",
+        "new_high"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "BNO",
+      "name": "United States Brent Oil Fund LP",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 63.56,
+      "chg": null,
+      "vol": 2558232.0,
+      "mcap": null,
+      "pe": null,
       "screens": [
         "doublers",
         "new_high"
@@ -1169,11 +1337,11 @@
       "name": "Crowdstrike Holdings Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 242.03,
+      "close": 242.49,
       "chg": null,
-      "vol": 10932305.0,
-      "mcap": 247820000000.0,
-      "pe": 6779.55,
+      "vol": 17220346.0,
+      "mcap": 248290000000.0,
+      "pe": 6792.44,
       "screens": [
         "doublers",
         "new_high"
@@ -1185,11 +1353,27 @@
       "name": "Dell Technologies Inc",
       "sector": "Technology",
       "industry": "Computer Hardware",
-      "close": 548.41,
+      "close": 543.51,
       "chg": null,
-      "vol": 7459316.0,
-      "mcap": 348690000000.0,
-      "pe": 31.84,
+      "vol": 9821108.0,
+      "mcap": 345570000000.0,
+      "pe": 31.55,
+      "screens": [
+        "doublers",
+        "new_high"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "DINO",
+      "name": "HF Sinclair Corp",
+      "sector": "Energy",
+      "industry": "Oil & Gas Refining & Marketing",
+      "close": 112.25,
+      "chg": null,
+      "vol": 2899547.0,
+      "mcap": 19960000000.0,
+      "pe": 10.71,
       "screens": [
         "doublers",
         "new_high"
@@ -1201,9 +1385,9 @@
       "name": "GraniteShares 2x Long DELL Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 34.35,
+      "close": 33.74,
       "chg": null,
-      "vol": 2137181.0,
+      "vol": 2403392.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1217,11 +1401,11 @@
       "name": "Okeanis Eco Tankers Corp",
       "sector": "Industrials",
       "industry": "Marine Shipping",
-      "close": 82.33,
+      "close": 82.73,
       "chg": null,
-      "vol": 813801.0,
-      "mcap": 3160000000.0,
-      "pe": 7.68,
+      "vol": 1135248.0,
+      "mcap": 3170000000.0,
+      "pe": 7.71,
       "screens": [
         "doublers",
         "new_high"
@@ -1233,11 +1417,11 @@
       "name": "Frontline Plc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 51.52,
+      "close": 51.59,
       "chg": null,
-      "vol": 3812548.0,
-      "mcap": 11470000000.0,
-      "pe": 7.72,
+      "vol": 5659090.0,
+      "mcap": 11490000000.0,
+      "pe": 7.73,
       "screens": [
         "doublers",
         "new_high"
@@ -1249,10 +1433,10 @@
       "name": "Guardant Health Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 177.08,
+      "close": 175.65,
       "chg": null,
-      "vol": 1509902.0,
-      "mcap": 23760000000.0,
+      "vol": 2853128.0,
+      "mcap": 23570000000.0,
       "pe": null,
       "screens": [
         "doublers",
@@ -1265,9 +1449,9 @@
       "name": "Direxion Daily S&P Oil & Gas Exp. & Prod. Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 50.55,
+      "close": 50.14,
       "chg": null,
-      "vol": 735772.0,
+      "vol": 913529.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1281,11 +1465,11 @@
       "name": "Marinemax Inc",
       "sector": "Consumer Cyclical",
       "industry": "Specialty Retail",
-      "close": 52.48,
+      "close": 52.5,
       "chg": null,
-      "vol": 613878.0,
+      "vol": 970070.0,
       "mcap": 1160000000.0,
-      "pe": 363.42,
+      "pe": 363.57,
       "screens": [
         "doublers",
         "new_high"
@@ -1297,11 +1481,11 @@
       "name": "International Seaways Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 108.29,
+      "close": 107.74,
       "chg": null,
-      "vol": 491386.0,
-      "mcap": 5360000000.0,
-      "pe": 6.92,
+      "vol": 1047154.0,
+      "mcap": 5340000000.0,
+      "pe": 6.88,
       "screens": [
         "doublers",
         "new_high"
@@ -1313,11 +1497,11 @@
       "name": "Marathon Petroleum Corp",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
-      "close": 412.08,
+      "close": 410.84,
       "chg": null,
-      "vol": 1325017.0,
-      "mcap": 115720000000.0,
-      "pe": 14.19,
+      "vol": 2877758.0,
+      "mcap": 115370000000.0,
+      "pe": 14.14,
       "screens": [
         "doublers",
         "new_high"
@@ -1329,9 +1513,9 @@
       "name": "Direxion Daily MU Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 28.14,
+      "close": 28.3,
       "chg": null,
-      "vol": 9672381.0,
+      "vol": 12266707.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1345,9 +1529,9 @@
       "name": "GraniteShares 2x Long MRVL Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.76,
+      "close": 25.63,
       "chg": null,
-      "vol": 1218864.0,
+      "vol": 1410872.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -1361,10 +1545,10 @@
       "name": "Natera Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 348.59,
+      "close": 350.78,
       "chg": null,
-      "vol": 1252787.0,
-      "mcap": 50250000000.0,
+      "vol": 1775734.0,
+      "mcap": 50560000000.0,
       "pe": null,
       "screens": [
         "doublers",
@@ -1377,30 +1561,14 @@
       "name": "Okta Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 190.16,
+      "close": 190.45,
       "chg": null,
-      "vol": 2151377.0,
-      "mcap": 33240000000.0,
-      "pe": 114.88,
+      "vol": 3924749.0,
+      "mcap": 33290000000.0,
+      "pe": 115.05,
       "screens": [
         "doublers",
         "new_high"
-      ],
-      "hits": 2
-    },
-    {
-      "ticker": "BUG",
-      "name": "Global X Cybersecurity ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 45.29,
-      "chg": null,
-      "vol": 1455017.0,
-      "mcap": null,
-      "pe": null,
-      "screens": [
-        "new_high",
-        "liquid_etfs"
       ],
       "hits": 2
     },
@@ -1409,10 +1577,10 @@
       "name": "Strive Inc",
       "sector": "Financial",
       "industry": "Asset Management",
-      "close": 28.0,
+      "close": 27.57,
       "chg": null,
-      "vol": 6015967.0,
-      "mcap": 2610000000.0,
+      "vol": 10789318.0,
+      "mcap": 2570000000.0,
       "pe": null,
       "screens": [
         "hot_theme"
@@ -1424,13 +1592,28 @@
       "name": "Replimune Group Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 12.81,
+      "close": 13.03,
       "chg": null,
-      "vol": 1238630.0,
-      "mcap": 1210000000.0,
+      "vol": 2154803.0,
+      "mcap": 1230000000.0,
       "pe": null,
       "screens": [
         "hot_theme"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "ALAB",
+      "name": "Astera Labs Inc",
+      "sector": "Technology",
+      "industry": "Semiconductors",
+      "close": 252.54,
+      "chg": null,
+      "vol": 3022596.0,
+      "mcap": 43810000000.0,
+      "pe": 124.34,
+      "screens": [
+        "net_pos_inst"
       ],
       "hits": 1
     },
@@ -1439,11 +1622,11 @@
       "name": "Alignment Healthcare Inc",
       "sector": "Healthcare",
       "industry": "Healthcare Plans",
-      "close": 10.04,
+      "close": 10.37,
       "chg": null,
-      "vol": 13582546.0,
-      "mcap": 2080000000.0,
-      "pe": 53.78,
+      "vol": 28550630.0,
+      "mcap": 2150000000.0,
+      "pe": 55.54,
       "screens": [
         "net_pos_inst"
       ],
@@ -1454,11 +1637,11 @@
       "name": "Almonty Industries Inc",
       "sector": "Basic Materials",
       "industry": "Other Industrial Metals & Mining",
-      "close": 14.23,
+      "close": 14.04,
       "chg": null,
-      "vol": 2726779.0,
-      "mcap": 4110000000.0,
-      "pe": 58.03,
+      "vol": 4802032.0,
+      "mcap": 4050000000.0,
+      "pe": 57.26,
       "screens": [
         "net_pos_inst"
       ],
@@ -1469,10 +1652,10 @@
       "name": "Applied Digital Corp",
       "sector": "Technology",
       "industry": "Information Technology Services",
-      "close": 23.74,
+      "close": 23.42,
       "chg": null,
-      "vol": 8104061.0,
-      "mcap": 6920000000.0,
+      "vol": 13536695.0,
+      "mcap": 6830000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1484,10 +1667,10 @@
       "name": "Biocryst Pharmaceuticals Inc",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 8.03,
+      "close": 8.16,
       "chg": null,
-      "vol": 2049534.0,
-      "mcap": 2050000000.0,
+      "vol": 6113033.0,
+      "mcap": 2090000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1499,10 +1682,10 @@
       "name": "CoreWeave Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 81.53,
+      "close": 80.92,
       "chg": null,
-      "vol": 8835252.0,
-      "mcap": 44970000000.0,
+      "vol": 15664013.0,
+      "mcap": 44630000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1514,11 +1697,41 @@
       "name": "Dicks Sporting Goods Inc",
       "sector": "Consumer Cyclical",
       "industry": "Specialty Retail",
-      "close": 125.06,
+      "close": 123.72,
       "chg": null,
-      "vol": 3776877.0,
-      "mcap": 11120000000.0,
-      "pe": 13.43,
+      "vol": 5875893.0,
+      "mcap": 11000000000.0,
+      "pe": 13.29,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FLY",
+      "name": "Firefly Aerospace Inc",
+      "sector": "Industrials",
+      "industry": "Aerospace & Defense",
+      "close": 20.49,
+      "chg": null,
+      "vol": 2863555.0,
+      "mcap": 3430000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "HIMS",
+      "name": "Hims & Hers Health Inc",
+      "sector": "Healthcare",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "close": 27.85,
+      "chg": null,
+      "vol": 8157588.0,
+      "mcap": 6500000000.0,
+      "pe": null,
       "screens": [
         "net_pos_inst"
       ],
@@ -1529,10 +1742,25 @@
       "name": "Joby Aviation Inc",
       "sector": "Industrials",
       "industry": "Airports & Air Services",
-      "close": 6.26,
+      "close": 6.13,
       "chg": null,
-      "vol": 15370941.0,
-      "mcap": 6200000000.0,
+      "vol": 26813757.0,
+      "mcap": 6060000000.0,
+      "pe": null,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "LEGN",
+      "name": "Legend Biotech Corp ADR",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 17.67,
+      "chg": null,
+      "vol": 3472541.0,
+      "mcap": 3420000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1544,10 +1772,10 @@
       "name": "Intuitive Machines Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 13.97,
+      "close": 13.87,
       "chg": null,
-      "vol": 3071564.0,
-      "mcap": 3200000000.0,
+      "vol": 6305701.0,
+      "mcap": 3180000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1559,10 +1787,10 @@
       "name": "MP Materials Corp",
       "sector": "Basic Materials",
       "industry": "Other Industrial Metals & Mining",
-      "close": 49.46,
+      "close": 49.17,
       "chg": null,
-      "vol": 2634458.0,
-      "mcap": 8810000000.0,
+      "vol": 4516879.0,
+      "mcap": 8760000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1574,10 +1802,10 @@
       "name": "Nuvation Bio Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 5.74,
+      "close": 5.8,
       "chg": null,
-      "vol": 4406747.0,
-      "mcap": 2020000000.0,
+      "vol": 7052384.0,
+      "mcap": 2040000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1589,11 +1817,26 @@
       "name": "Ondas Inc",
       "sector": "Technology",
       "industry": "Communication Equipment",
-      "close": 7.32,
+      "close": 7.24,
       "chg": null,
-      "vol": 45624894.0,
-      "mcap": 4180000000.0,
-      "pe": 81.82,
+      "vol": 67772392.0,
+      "mcap": 4140000000.0,
+      "pe": 80.98,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "OUST",
+      "name": "Ouster Inc",
+      "sector": "Technology",
+      "industry": "Electronic Components",
+      "close": 32.79,
+      "chg": null,
+      "vol": 2326405.0,
+      "mcap": 2360000000.0,
+      "pe": null,
       "screens": [
         "net_pos_inst"
       ],
@@ -1604,10 +1847,10 @@
       "name": "Planet Labs PBC",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 16.1,
+      "close": 16.02,
       "chg": null,
-      "vol": 4775665.0,
-      "mcap": 5860000000.0,
+      "vol": 8412198.0,
+      "mcap": 5830000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1615,14 +1858,14 @@
       "hits": 1
     },
     {
-      "ticker": "RKLB",
-      "name": "Rocket Lab Corp",
-      "sector": "Industrials",
-      "industry": "Aerospace & Defense",
-      "close": 63.44,
+      "ticker": "RGTI",
+      "name": "Rigetti Computing Inc",
+      "sector": "Technology",
+      "industry": "Computer Hardware",
+      "close": 15.09,
       "chg": null,
-      "vol": 14384030.0,
-      "mcap": 37970000000.0,
+      "vol": 12300857.0,
+      "mcap": 5040000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1636,9 +1879,54 @@
       "industry": "Solar",
       "close": 8.4,
       "chg": null,
-      "vol": 3250337.0,
+      "vol": 7432597.0,
       "mcap": 2020000000.0,
-      "pe": 5.64,
+      "pe": 5.65,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SMCI",
+      "name": "Super Micro Computer Inc",
+      "sector": "Technology",
+      "industry": "Computer Hardware",
+      "close": 35.64,
+      "chg": null,
+      "vol": 26693881.0,
+      "mcap": 23410000000.0,
+      "pe": 10.84,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "TPG",
+      "name": "TPG Inc",
+      "sector": "Financial",
+      "industry": "Asset Management",
+      "close": 47.4,
+      "chg": null,
+      "vol": 3078587.0,
+      "mcap": 18230000000.0,
+      "pe": 71.53,
+      "screens": [
+        "net_pos_inst"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "TVTX",
+      "name": "Travere Therapeutics Inc",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 62.51,
+      "chg": null,
+      "vol": 2097900.0,
+      "mcap": 5890000000.0,
+      "pe": null,
       "screens": [
         "net_pos_inst"
       ],
@@ -1649,10 +1937,10 @@
       "name": "Energy Fuels Inc",
       "sector": "Energy",
       "industry": "Uranium",
-      "close": 11.74,
+      "close": 11.86,
       "chg": null,
-      "vol": 5045701.0,
-      "mcap": 3110000000.0,
+      "vol": 8418685.0,
+      "mcap": 3140000000.0,
       "pe": null,
       "screens": [
         "net_pos_inst"
@@ -1660,17 +1948,17 @@
       "hits": 1
     },
     {
-      "ticker": "AFRM",
-      "name": "Affirm Holdings Inc",
-      "sector": "Financial",
-      "industry": "Credit Services",
-      "close": 72.16,
+      "ticker": "VIAV",
+      "name": "Viavi Solutions Inc",
+      "sector": "Technology",
+      "industry": "Communication Equipment",
+      "close": 33.76,
       "chg": null,
-      "vol": 1783261.0,
-      "mcap": 24350000000.0,
-      "pe": 13.07,
+      "vol": 4135138.0,
+      "mcap": 8330000000.0,
+      "pe": null,
       "screens": [
-        "adr_weekly"
+        "net_pos_inst"
       ],
       "hits": 1
     },
@@ -1679,26 +1967,41 @@
       "name": "Applovin Corp",
       "sector": "Communication Services",
       "industry": "Advertising Agencies",
-      "close": 331.32,
+      "close": 331.46,
       "chg": null,
-      "vol": 3205841.0,
-      "mcap": 110880000000.0,
-      "pe": 25.47,
+      "vol": 6603953.0,
+      "mcap": 110920000000.0,
+      "pe": 25.48,
       "screens": [
         "adr_weekly"
       ],
       "hits": 1
     },
     {
-      "ticker": "DDOG",
-      "name": "Datadog Inc",
+      "ticker": "CLS",
+      "name": "Celestica Inc",
+      "sector": "Technology",
+      "industry": "Electronic Components",
+      "close": 316.81,
+      "chg": null,
+      "vol": 1581695.0,
+      "mcap": 39950000000.0,
+      "pe": 32.91,
+      "screens": [
+        "adr_weekly"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FROG",
+      "name": "JFrog Ltd",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 228.53,
+      "close": 94.8,
       "chg": null,
-      "vol": 1633804.0,
-      "mcap": 82060000000.0,
-      "pe": 466.86,
+      "vol": 1777983.0,
+      "mcap": 11690000000.0,
+      "pe": null,
       "screens": [
         "adr_weekly"
       ],
@@ -1709,10 +2012,10 @@
       "name": "Iovance Biotherapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 9.25,
+      "close": 9.36,
       "chg": null,
-      "vol": 5890916.0,
-      "mcap": 4190000000.0,
+      "vol": 11089527.0,
+      "mcap": 4240000000.0,
       "pe": null,
       "screens": [
         "adr_weekly"
@@ -1724,10 +2027,10 @@
       "name": "Cloudflare Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 331.24,
+      "close": 327.23,
       "chg": null,
-      "vol": 1721480.0,
-      "mcap": 117950000000.0,
+      "vol": 3187590.0,
+      "mcap": 116520000000.0,
       "pe": null,
       "screens": [
         "adr_weekly"
@@ -1739,10 +2042,10 @@
       "name": "Roblox Corp",
       "sector": "Communication Services",
       "industry": "Electronic Gaming & Multimedia",
-      "close": 50.67,
+      "close": 50.24,
       "chg": null,
-      "vol": 3681258.0,
-      "mcap": 36200000000.0,
+      "vol": 8011809.0,
+      "mcap": 35890000000.0,
       "pe": null,
       "screens": [
         "adr_weekly"
@@ -1754,26 +2057,11 @@
       "name": "Rubrik Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 101.53,
+      "close": 103.55,
       "chg": null,
-      "vol": 1923119.0,
-      "mcap": 21050000000.0,
+      "vol": 3742925.0,
+      "mcap": 21470000000.0,
       "pe": null,
-      "screens": [
-        "adr_weekly"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SEI",
-      "name": "Solaris Energy Infrastructure Inc",
-      "sector": "Energy",
-      "industry": "Oil & Gas Equipment & Services",
-      "close": 62.22,
-      "chg": null,
-      "vol": 1229949.0,
-      "mcap": 4760000000.0,
-      "pe": 79.04,
       "screens": [
         "adr_weekly"
       ],
@@ -1784,10 +2072,10 @@
       "name": "Atlassian Corp",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 191.55,
+      "close": 189.81,
       "chg": null,
-      "vol": 1216209.0,
-      "mcap": 48490000000.0,
+      "vol": 2186485.0,
+      "mcap": 48050000000.0,
       "pe": null,
       "screens": [
         "adr_weekly"
@@ -1795,15 +2083,15 @@
       "hits": 1
     },
     {
-      "ticker": "ZETA",
-      "name": "Zeta Global Holdings Corp",
+      "ticker": "TTMI",
+      "name": "TTM Technologies Inc",
       "sector": "Technology",
-      "industry": "Software - Infrastructure",
-      "close": 31.24,
+      "industry": "Electronic Components",
+      "close": 112.46,
       "chg": null,
-      "vol": 1837743.0,
-      "mcap": 7840000000.0,
-      "pe": null,
+      "vol": 1586951.0,
+      "mcap": 11850000000.0,
+      "pe": 50.76,
       "screens": [
         "adr_weekly"
       ],
@@ -1814,26 +2102,11 @@
       "name": "Enterprise Products Partners L P",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 38.82,
+      "close": 38.81,
       "chg": null,
-      "vol": 981513.0,
-      "mcap": 83830000000.0,
+      "vol": 1910184.0,
+      "mcap": 83810000000.0,
       "pe": 13.49,
-      "screens": [
-        "fundies"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "FIVE",
-      "name": "Five Below Inc",
-      "sector": "Consumer Cyclical",
-      "industry": "Specialty Retail",
-      "close": 237.57,
-      "chg": null,
-      "vol": 509659.0,
-      "mcap": 13080000000.0,
-      "pe": 21.31,
       "screens": [
         "fundies"
       ],
@@ -1844,11 +2117,11 @@
       "name": "GigaCloud Technology Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 52.84,
+      "close": 52.69,
       "chg": null,
-      "vol": 136311.0,
-      "mcap": 1890000000.0,
-      "pe": 12.52,
+      "vol": 347493.0,
+      "mcap": 1880000000.0,
+      "pe": 12.48,
       "screens": [
         "fundies"
       ],
@@ -1859,11 +2132,11 @@
       "name": "Halozyme Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 106.47,
+      "close": 106.25,
       "chg": null,
-      "vol": 407507.0,
-      "mcap": 12080000000.0,
-      "pe": 31.81,
+      "vol": 1055682.0,
+      "mcap": 12060000000.0,
+      "pe": 31.74,
       "screens": [
         "fundies"
       ],
@@ -1874,11 +2147,11 @@
       "name": "Hinge Health Inc",
       "sector": "Healthcare",
       "industry": "Health Information Services",
-      "close": 94.96,
+      "close": 92.39,
       "chg": null,
-      "vol": 550284.0,
-      "mcap": 7660000000.0,
-      "pe": 73.13,
+      "vol": 1163698.0,
+      "mcap": 7460000000.0,
+      "pe": 71.15,
       "screens": [
         "fundies"
       ],
@@ -1889,11 +2162,11 @@
       "name": "Harmony Biosciences Holdings Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 41.48,
+      "close": 42.17,
       "chg": null,
-      "vol": 341432.0,
-      "mcap": 2420000000.0,
-      "pe": 13.44,
+      "vol": 1212619.0,
+      "mcap": 2460000000.0,
+      "pe": 13.67,
       "screens": [
         "fundies"
       ],
@@ -1904,11 +2177,11 @@
       "name": "Incyte Corp",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 121.23,
+      "close": 121.74,
       "chg": null,
-      "vol": 572048.0,
-      "mcap": 24570000000.0,
-      "pe": 15.45,
+      "vol": 1564556.0,
+      "mcap": 24680000000.0,
+      "pe": 15.52,
       "screens": [
         "fundies"
       ],
@@ -1919,11 +2192,11 @@
       "name": "Cheniere Energy Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 272.93,
+      "close": 270.98,
       "chg": null,
-      "vol": 597521.0,
-      "mcap": 56370000000.0,
-      "pe": 20.31,
+      "vol": 1900262.0,
+      "mcap": 55970000000.0,
+      "pe": 20.16,
       "screens": [
         "fundies"
       ],
@@ -1934,11 +2207,11 @@
       "name": "Netapp Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 190.66,
+      "close": 189.93,
       "chg": null,
-      "vol": 1002501.0,
-      "mcap": 37450000000.0,
-      "pe": 26.91,
+      "vol": 2422403.0,
+      "mcap": 37310000000.0,
+      "pe": 26.81,
       "screens": [
         "fundies"
       ],
@@ -1949,26 +2222,11 @@
       "name": "Par Pacific Holdings Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
-      "close": 85.26,
+      "close": 83.6,
       "chg": null,
-      "vol": 316490.0,
-      "mcap": 4270000000.0,
-      "pe": 4.98,
-      "screens": [
-        "fundies"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SLDE",
-      "name": "Slide Insurance Holdings Inc",
-      "sector": "Financial",
-      "industry": "Insurance - Property & Casualty",
-      "close": 26.32,
-      "chg": null,
-      "vol": 463827.0,
-      "mcap": 3070000000.0,
-      "pe": 6.41,
+      "vol": 986313.0,
+      "mcap": 4190000000.0,
+      "pe": 4.88,
       "screens": [
         "fundies"
       ],
@@ -1979,28 +2237,13 @@
       "name": "Valero Energy Corp",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
-      "close": 396.88,
+      "close": 397.04,
       "chg": null,
-      "vol": 2042688.0,
-      "mcap": 114270000000.0,
-      "pe": 16.46,
+      "vol": 3618815.0,
+      "mcap": 114320000000.0,
+      "pe": 16.47,
       "screens": [
         "fundies"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "AADX",
-      "name": "Applied Aerospace & Defense Inc",
-      "sector": "Industrials",
-      "industry": "Aerospace & Defense",
-      "close": 12.34,
-      "chg": null,
-      "vol": 1428074.0,
-      "mcap": 2130000000.0,
-      "pe": null,
-      "screens": [
-        "ipo"
       ],
       "hits": 1
     },
@@ -2009,11 +2252,11 @@
       "name": "Alliance Laundry Holdings Inc",
       "sector": "Consumer Cyclical",
       "industry": "Furnishings, Fixtures & Appliances",
-      "close": 21.18,
+      "close": 21.1,
       "chg": null,
-      "vol": 280369.0,
-      "mcap": 4210000000.0,
-      "pe": 23.84,
+      "vol": 1003174.0,
+      "mcap": 4190000000.0,
+      "pe": 23.75,
       "screens": [
         "ipo"
       ],
@@ -2024,10 +2267,10 @@
       "name": "BETA Technologies Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 20.6,
+      "close": 20.66,
       "chg": null,
-      "vol": 934639.0,
-      "mcap": 4820000000.0,
+      "vol": 2736853.0,
+      "mcap": 4830000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2039,10 +2282,10 @@
       "name": "Bending Spoons S.p.A",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 39.36,
+      "close": 39.4,
       "chg": null,
-      "vol": 848870.0,
-      "mcap": 25210000000.0,
+      "vol": 1566309.0,
+      "mcap": 25230000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2054,10 +2297,10 @@
       "name": "Csquare Inc",
       "sector": "Technology",
       "industry": "Information Technology Services",
-      "close": 17.88,
+      "close": 17.94,
       "chg": null,
-      "vol": 679151.0,
-      "mcap": 2980000000.0,
+      "vol": 1332352.0,
+      "mcap": 2990000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2069,10 +2312,10 @@
       "name": "DPC Holdings PLC",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 39.51,
+      "close": 40.06,
       "chg": null,
-      "vol": 285123.0,
-      "mcap": 5900000000.0,
+      "vol": 896867.0,
+      "mcap": 5980000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2084,11 +2327,11 @@
       "name": "Equipmentshare.Com Inc",
       "sector": "Industrials",
       "industry": "Rental & Leasing Services",
-      "close": 17.69,
+      "close": 17.68,
       "chg": null,
-      "vol": 780643.0,
+      "vol": 1892605.0,
       "mcap": 4490000000.0,
-      "pe": 228.26,
+      "pe": 228.13,
       "screens": [
         "ipo"
       ],
@@ -2099,10 +2342,10 @@
       "name": "ERock Inc",
       "sector": "Industrials",
       "industry": "Specialty Industrial Machinery",
-      "close": 11.27,
+      "close": 11.04,
       "chg": null,
-      "vol": 1018400.0,
-      "mcap": 2470000000.0,
+      "vol": 1995529.0,
+      "mcap": 2420000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2114,10 +2357,10 @@
       "name": "FedEx Freight Holding Company Inc",
       "sector": "Industrials",
       "industry": "Integrated Freight & Logistics",
-      "close": 125.76,
+      "close": 126.94,
       "chg": null,
-      "vol": 855022.0,
-      "mcap": 18800000000.0,
+      "vol": 1524659.0,
+      "mcap": 18980000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2129,10 +2372,10 @@
       "name": "Fermi Inc",
       "sector": "Real Estate",
       "industry": "REIT - Specialty",
-      "close": 4.73,
+      "close": 4.74,
       "chg": null,
-      "vol": 12113508.0,
-      "mcap": 3030000000.0,
+      "vol": 22818880.0,
+      "mcap": 3040000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2144,10 +2387,10 @@
       "name": "Fervo Energy Co",
       "sector": "Utilities",
       "industry": "Utilities - Renewable",
-      "close": 15.13,
+      "close": 15.16,
       "chg": null,
-      "vol": 1785884.0,
-      "mcap": 4460000000.0,
+      "vol": 3497595.0,
+      "mcap": 4470000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2159,10 +2402,10 @@
       "name": "Generate Biomedicines Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 16.05,
+      "close": 16.19,
       "chg": null,
-      "vol": 490972.0,
-      "mcap": 2060000000.0,
+      "vol": 959596.0,
+      "mcap": 2080000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2174,10 +2417,10 @@
       "name": "Honeywell Aerospace Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 162.54,
+      "close": 158.49,
       "chg": null,
-      "vol": 2641218.0,
-      "mcap": 51520000000.0,
+      "vol": 5281130.0,
+      "mcap": 50240000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2189,10 +2432,10 @@
       "name": "Innio NV",
       "sector": "Industrials",
       "industry": "Specialty Industrial Machinery",
-      "close": 17.85,
+      "close": 17.79,
       "chg": null,
-      "vol": 2034178.0,
-      "mcap": 13390000000.0,
+      "vol": 3992831.0,
+      "mcap": 13340000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2204,10 +2447,10 @@
       "name": "Janus Living Inc",
       "sector": "Real Estate",
       "industry": "REIT - Residential",
-      "close": 31.38,
+      "close": 31.59,
       "chg": null,
-      "vol": 859670.0,
-      "mcap": 9660000000.0,
+      "vol": 1972739.0,
+      "mcap": 9730000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2219,10 +2462,10 @@
       "name": "Jersey Mike's Subs Inc",
       "sector": "Consumer Cyclical",
       "industry": "Restaurants",
-      "close": 20.78,
+      "close": 20.75,
       "chg": null,
-      "vol": 1133416.0,
-      "mcap": 6600000000.0,
+      "vol": 2714842.0,
+      "mcap": 6590000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2234,10 +2477,10 @@
       "name": "Madison Air Solutions Corp",
       "sector": "Industrials",
       "industry": "Building Products & Equipment",
-      "close": 23.99,
+      "close": 23.9,
       "chg": null,
-      "vol": 2626929.0,
-      "mcap": 12030000000.0,
+      "vol": 4869481.0,
+      "mcap": 11990000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2249,10 +2492,10 @@
       "name": "Mobility Global Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 20.38,
+      "close": 20.34,
       "chg": null,
-      "vol": 1440356.0,
-      "mcap": 6010000000.0,
+      "vol": 3378486.0,
+      "mcap": 6000000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2264,11 +2507,11 @@
       "name": "Medline Inc",
       "sector": "Healthcare",
       "industry": "Medical Instruments & Supplies",
-      "close": 32.23,
+      "close": 32.11,
       "chg": null,
-      "vol": 3785482.0,
-      "mcap": 42370000000.0,
-      "pe": 37.79,
+      "vol": 7280561.0,
+      "mcap": 42220000000.0,
+      "pe": 37.65,
       "screens": [
         "ipo"
       ],
@@ -2279,11 +2522,11 @@
       "name": "Magnum Ice Cream Company NV",
       "sector": "Consumer Defensive",
       "industry": "Packaged Foods",
-      "close": 19.21,
+      "close": 19.18,
       "chg": null,
-      "vol": 274270.0,
-      "mcap": 11760000000.0,
-      "pe": 56.51,
+      "vol": 520392.0,
+      "mcap": 11740000000.0,
+      "pe": 56.43,
       "screens": [
         "ipo"
       ],
@@ -2294,10 +2537,10 @@
       "name": "MiniMed Group Inc",
       "sector": "Healthcare",
       "industry": "Medical Instruments & Supplies",
-      "close": 22.14,
+      "close": 22.01,
       "chg": null,
-      "vol": 1264337.0,
-      "mcap": 6230000000.0,
+      "vol": 2127190.0,
+      "mcap": 6190000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2309,10 +2552,10 @@
       "name": "SOLV Energy Inc",
       "sector": "Utilities",
       "industry": "Utilities - Renewable",
-      "close": 25.44,
+      "close": 25.71,
       "chg": null,
-      "vol": 844553.0,
-      "mcap": 5150000000.0,
+      "vol": 1827785.0,
+      "mcap": 5200000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2324,10 +2567,10 @@
       "name": "Octave Intelligence Plc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 18.71,
+      "close": 18.54,
       "chg": null,
-      "vol": 922361.0,
-      "mcap": 5020000000.0,
+      "vol": 1636159.0,
+      "mcap": 4980000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2339,10 +2582,10 @@
       "name": "Pattern Group Inc",
       "sector": "Consumer Cyclical",
       "industry": "Internet Retail",
-      "close": 19.38,
+      "close": 19.44,
       "chg": null,
-      "vol": 422078.0,
-      "mcap": 3440000000.0,
+      "vol": 1879372.0,
+      "mcap": 3450000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2356,7 +2599,7 @@
       "industry": "Capital Markets",
       "close": 11.2,
       "chg": null,
-      "vol": 10510030.0,
+      "vol": 21567592.0,
       "mcap": 2220000000.0,
       "pe": 17.24,
       "screens": [
@@ -2369,11 +2612,11 @@
       "name": "Qnity Electronics Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 111.85,
+      "close": 114.59,
       "chg": null,
-      "vol": 1352155.0,
-      "mcap": 23400000000.0,
-      "pe": 40.05,
+      "vol": 2515667.0,
+      "mcap": 23970000000.0,
+      "pe": 41.03,
       "screens": [
         "ipo"
       ],
@@ -2384,10 +2627,10 @@
       "name": "Quantinuum Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 48.9,
+      "close": 48.65,
       "chg": null,
-      "vol": 809507.0,
-      "mcap": 12880000000.0,
+      "vol": 1287330.0,
+      "mcap": 12810000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2399,11 +2642,11 @@
       "name": "Solstice Advanced Materials Inc",
       "sector": "Basic Materials",
       "industry": "Specialty Chemicals",
-      "close": 57.03,
+      "close": 57.16,
       "chg": null,
-      "vol": 938306.0,
-      "mcap": 9060000000.0,
-      "pe": 43.27,
+      "vol": 2119153.0,
+      "mcap": 9080000000.0,
+      "pe": 43.37,
       "screens": [
         "ipo"
       ],
@@ -2414,10 +2657,10 @@
       "name": "Stubhub Holdings Inc",
       "sector": "Communication Services",
       "industry": "Internet Content & Information",
-      "close": 5.91,
+      "close": 5.88,
       "chg": null,
-      "vol": 1782594.0,
-      "mcap": 2260000000.0,
+      "vol": 4437763.0,
+      "mcap": 2250000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2429,10 +2672,10 @@
       "name": "Sunbelt Rentals Holdings Inc",
       "sector": "Industrials",
       "industry": "Rental & Leasing Services",
-      "close": 72.14,
+      "close": 71.89,
       "chg": null,
-      "vol": 2055039.0,
-      "mcap": 29560000000.0,
+      "vol": 3818687.0,
+      "mcap": 29460000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2444,10 +2687,10 @@
       "name": "Versigent Plc",
       "sector": "Consumer Cyclical",
       "industry": "Auto Parts",
-      "close": 45.76,
+      "close": 45.19,
       "chg": null,
-      "vol": 199477.0,
-      "mcap": 3240000000.0,
+      "vol": 629983.0,
+      "mcap": 3200000000.0,
       "pe": null,
       "screens": [
         "ipo"
@@ -2459,11 +2702,11 @@
       "name": "Versant Media Group Inc",
       "sector": "Communication Services",
       "industry": "Entertainment",
-      "close": 37.53,
+      "close": 37.49,
       "chg": null,
-      "vol": 491959.0,
-      "mcap": 5210000000.0,
-      "pe": 7.06,
+      "vol": 1493731.0,
+      "mcap": 5200000000.0,
+      "pe": 7.05,
       "screens": [
         "ipo"
       ],
@@ -2474,11 +2717,11 @@
       "name": "WaterBridge Infrastructure LLC",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
-      "close": 31.49,
+      "close": 31.5,
       "chg": null,
-      "vol": 233472.0,
+      "vol": 471729.0,
       "mcap": 3890000000.0,
-      "pe": 421.59,
+      "pe": 421.69,
       "screens": [
         "ipo"
       ],
@@ -2489,13 +2732,28 @@
       "name": "X-Energy Inc",
       "sector": "Industrials",
       "industry": "Specialty Industrial Machinery",
-      "close": 14.79,
+      "close": 15.02,
       "chg": null,
-      "vol": 2880229.0,
-      "mcap": 6010000000.0,
+      "vol": 4739056.0,
+      "mcap": 6110000000.0,
       "pe": null,
       "screens": [
         "ipo"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AMX",
+      "name": "America Movil SAB de CV ADR",
+      "sector": "Communication Services",
+      "industry": "Telecom Services",
+      "close": 23.2,
+      "chg": null,
+      "vol": 7123247.0,
+      "mcap": 71010000000.0,
+      "pe": 13.98,
+      "screens": [
+        "bull_snorts"
       ],
       "hits": 1
     },
@@ -2504,11 +2762,41 @@
       "name": "Ascendis Pharma A/S",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 232.17,
+      "close": 239.77,
       "chg": null,
-      "vol": 1643506.0,
-      "mcap": 15250000000.0,
-      "pe": 17.69,
+      "vol": 2961707.0,
+      "mcap": 15750000000.0,
+      "pe": 18.27,
+      "screens": [
+        "bull_snorts"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "BGFI",
+      "name": "BNY Mellon Global Fixed Income ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 24.63,
+      "chg": null,
+      "vol": 2845293.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "bull_snorts"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "CTA",
+      "name": "Simplify Managed Futures Strategy ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 31.0,
+      "chg": null,
+      "vol": 1671557.0,
+      "mcap": null,
+      "pe": null,
       "screens": [
         "bull_snorts"
       ],
@@ -2519,9 +2807,9 @@
       "name": "Direxion Financial Bear 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 33.67,
+      "close": 33.31,
       "chg": null,
-      "vol": 2401460.0,
+      "vol": 3116249.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2534,9 +2822,9 @@
       "name": "Schwab Fundamental U.S. Small Company ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 36.01,
+      "close": 35.98,
       "chg": null,
-      "vol": 1929911.0,
+      "vol": 3703237.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2549,9 +2837,9 @@
       "name": "iShares U.S. Healthcare Providers ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 57.22,
+      "close": 57.06,
       "chg": null,
-      "vol": 1827354.0,
+      "vol": 2030691.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2560,13 +2848,43 @@
       "hits": 1
     },
     {
-      "ticker": "IUSB",
-      "name": "iShares Core Universal USD Bond ETF",
+      "ticker": "IHI",
+      "name": "iShares U.S. Medical Devices ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 44.71,
+      "close": 51.78,
       "chg": null,
-      "vol": 7687449.0,
+      "vol": 9697497.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "bull_snorts"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "IYT",
+      "name": "iShares U.S. Transportation ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 81.82,
+      "chg": null,
+      "vol": 2629626.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "bull_snorts"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "KSTR",
+      "name": "KraneShares China Technology & Semiconductor STAR 50 Index ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 22.45,
+      "chg": null,
+      "vol": 2786719.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2579,41 +2897,11 @@
       "name": "Methanex Corp",
       "sector": "Basic Materials",
       "industry": "Chemicals",
-      "close": 63.8,
+      "close": 64.46,
       "chg": null,
-      "vol": 2433062.0,
-      "mcap": 4940000000.0,
-      "pe": 56.16,
-      "screens": [
-        "bull_snorts"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PZA",
-      "name": "Invesco National AMT-Free Municipal Bond ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 22.02,
-      "chg": null,
-      "vol": 3323563.0,
-      "mcap": null,
-      "pe": null,
-      "screens": [
-        "bull_snorts"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SCMB",
-      "name": "Schwab Municipal Bond ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 24.58,
-      "chg": null,
-      "vol": 4863432.0,
-      "mcap": null,
-      "pe": null,
+      "vol": 3058740.0,
+      "mcap": 4990000000.0,
+      "pe": 56.75,
       "screens": [
         "bull_snorts"
       ],
@@ -2624,9 +2912,24 @@
       "name": "Schwab Mortgage-Backed Securities ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 24.44,
+      "close": 24.5,
       "chg": null,
-      "vol": 2316760.0,
+      "vol": 2520891.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "bull_snorts"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SMTH",
+      "name": "ALPS Smith Core Plus Bond ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 25.0,
+      "chg": null,
+      "vol": 6925481.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2639,9 +2942,9 @@
       "name": "State Street SPDR Portfolio Corporate Bond ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 27.95,
+      "close": 27.98,
       "chg": null,
-      "vol": 1669127.0,
+      "vol": 1799126.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2650,14 +2953,14 @@
       "hits": 1
     },
     {
-      "ticker": "SPTI",
-      "name": "State Street SPDR Portfolio Intermediate Term Treasury ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 27.56,
+      "ticker": "SRRK",
+      "name": "Scholar Rock Holding Corp",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 50.0,
       "chg": null,
-      "vol": 4710810.0,
-      "mcap": null,
+      "vol": 5251283.0,
+      "mcap": 6090000000.0,
       "pe": null,
       "screens": [
         "bull_snorts"
@@ -2669,11 +2972,11 @@
       "name": "Sysco Corp",
       "sector": "Consumer Defensive",
       "industry": "Food Distribution",
-      "close": 79.51,
+      "close": 79.6,
       "chg": null,
-      "vol": 8871360.0,
-      "mcap": 38090000000.0,
-      "pe": 21.76,
+      "vol": 13661243.0,
+      "mcap": 38140000000.0,
+      "pe": 21.78,
       "screens": [
         "bull_snorts"
       ],
@@ -2684,26 +2987,26 @@
       "name": "Torm Plc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 34.14,
+      "close": 34.93,
       "chg": null,
-      "vol": 6400274.0,
-      "mcap": 3500000000.0,
-      "pe": 5.62,
+      "vol": 8387494.0,
+      "mcap": 3580000000.0,
+      "pe": 5.75,
       "screens": [
         "bull_snorts"
       ],
       "hits": 1
     },
     {
-      "ticker": "VRP",
-      "name": "Invesco Variable Rate Preferred ETF",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 23.99,
+      "ticker": "UTHR",
+      "name": "United Therapeutics Corp",
+      "sector": "Healthcare",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "close": 500.35,
       "chg": null,
-      "vol": 1217861.0,
-      "mcap": null,
-      "pe": null,
+      "vol": 1604927.0,
+      "mcap": 21460000000.0,
+      "pe": 17.9,
       "screens": [
         "bull_snorts"
       ],
@@ -2714,11 +3017,11 @@
       "name": "nVent Electric plc",
       "sector": "Industrials",
       "industry": "Electrical Equipment & Parts",
-      "close": 147.43,
+      "close": 146.8,
       "chg": null,
-      "vol": 961342.0,
-      "mcap": 23860000000.0,
-      "pe": 40.73,
+      "vol": 2030117.0,
+      "mcap": 23760000000.0,
+      "pe": 40.55,
       "screens": [
         "gappers"
       ],
@@ -2729,9 +3032,9 @@
       "name": "ProShares UltraShort Bitcoin ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 37.03,
+      "close": 37.5,
       "chg": null,
-      "vol": 853742.0,
+      "vol": 1775942.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2744,9 +3047,24 @@
       "name": "Corgi SK hynix 2x Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.3,
+      "close": 25.53,
       "chg": null,
-      "vol": 180714.0,
+      "vol": 222455.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "gappers"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SKHU",
+      "name": "ProShares Ultra SK hynix",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 20.21,
+      "chg": null,
+      "vol": 237608.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2759,9 +3077,9 @@
       "name": "GraniteShares 2x Long SK Hynix Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.39,
+      "close": 25.8,
       "chg": null,
-      "vol": 1637314.0,
+      "vol": 1931013.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2774,26 +3092,11 @@
       "name": "Direxion Daily Semiconductor Bull 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 101.37,
+      "close": 102.32,
       "chg": null,
-      "vol": 44389812.0,
+      "vol": 57066818.0,
       "mcap": null,
       "pe": null,
-      "screens": [
-        "gappers"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "VRT",
-      "name": "Vertiv Holdings Co",
-      "sector": "Industrials",
-      "industry": "Electrical Equipment & Parts",
-      "close": 236.3,
-      "chg": null,
-      "vol": 3079934.0,
-      "mcap": 90970000000.0,
-      "pe": 53.47,
       "screens": [
         "gappers"
       ],
@@ -2804,11 +3107,11 @@
       "name": "Waystar Holding Corp",
       "sector": "Healthcare",
       "industry": "Health Information Services",
-      "close": 26.65,
+      "close": 26.67,
       "chg": null,
-      "vol": 3768347.0,
+      "vol": 5680099.0,
       "mcap": 5110000000.0,
-      "pe": 37.95,
+      "pe": 37.98,
       "screens": [
         "gappers"
       ],
@@ -2819,9 +3122,9 @@
       "name": "Direxion Daily FTSE China Bear 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 31.06,
+      "close": 31.25,
       "chg": null,
-      "vol": 348103.0,
+      "vol": 631467.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -2834,10 +3137,10 @@
       "name": "Applied Optoelectronics Inc",
       "sector": "Technology",
       "industry": "Communication Equipment",
-      "close": 95.8,
+      "close": 95.29,
       "chg": null,
-      "vol": 2764879.0,
-      "mcap": 8130000000.0,
+      "vol": 4597423.0,
+      "mcap": 8090000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -2845,15 +3148,15 @@
       "hits": 1
     },
     {
-      "ticker": "AEHR",
-      "name": "Aehr Test Systems",
+      "ticker": "ACMR",
+      "name": "ACM Research Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 81.59,
+      "close": 63.94,
       "chg": null,
-      "vol": 1330526.0,
-      "mcap": 2660000000.0,
-      "pe": null,
+      "vol": 1261757.0,
+      "mcap": 4450000000.0,
+      "pe": 30.37,
       "screens": [
         "doublers"
       ],
@@ -2864,10 +3167,10 @@
       "name": "Arteris Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 20.11,
+      "close": 20.41,
       "chg": null,
-      "vol": 239769.0,
-      "mcap": 988520000.0,
+      "vol": 558175.0,
+      "mcap": 1000000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -2879,11 +3182,11 @@
       "name": "Applied Materials Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 418.1,
+      "close": 421.17,
       "chg": null,
-      "vol": 2870035.0,
-      "mcap": 331800000000.0,
-      "pe": 36.05,
+      "vol": 5636844.0,
+      "mcap": 334240000000.0,
+      "pe": 36.32,
       "screens": [
         "doublers"
       ],
@@ -2894,11 +3197,11 @@
       "name": "Advanced Micro Devices Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 502.8,
+      "close": 504.2,
       "chg": null,
-      "vol": 11261758.0,
-      "mcap": 820810000000.0,
-      "pe": 129.04,
+      "vol": 17128796.0,
+      "mcap": 823090000000.0,
+      "pe": 129.4,
       "screens": [
         "doublers"
       ],
@@ -2909,10 +3212,10 @@
       "name": "Amylyx Pharmaceuticals Inc",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 32.85,
+      "close": 33.15,
       "chg": null,
-      "vol": 634932.0,
-      "mcap": 4120000000.0,
+      "vol": 1828438.0,
+      "mcap": 4160000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -2924,9 +3227,9 @@
       "name": "AnaptysBio Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 54.63,
+      "close": 54.68,
       "chg": null,
-      "vol": 171650.0,
+      "vol": 351791.0,
       "mcap": 1620000000.0,
       "pe": null,
       "screens": [
@@ -2939,9 +3242,9 @@
       "name": "Alto Neuroscience Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 30.28,
+      "close": 30.25,
       "chg": null,
-      "vol": 166285.0,
+      "vol": 420373.0,
       "mcap": 1190000000.0,
       "pe": null,
       "screens": [
@@ -2965,15 +3268,30 @@
       "hits": 1
     },
     {
+      "ticker": "ARWR",
+      "name": "Arrowhead Pharmaceuticals Inc",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 70.67,
+      "chg": null,
+      "vol": 4371863.0,
+      "mcap": 9980000000.0,
+      "pe": null,
+      "screens": [
+        "doublers"
+      ],
+      "hits": 1
+    },
+    {
       "ticker": "ASX",
       "name": "ASE Technology Holding CoLtd ADR",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 36.93,
+      "close": 37.12,
       "chg": null,
-      "vol": 1642519.0,
-      "mcap": 81200000000.0,
-      "pe": 43.21,
+      "vol": 4190221.0,
+      "mcap": 81620000000.0,
+      "pe": 43.43,
       "screens": [
         "doublers"
       ],
@@ -2984,11 +3302,11 @@
       "name": "ATI Inc",
       "sector": "Industrials",
       "industry": "Metal Fabrication",
-      "close": 185.5,
+      "close": 186.69,
       "chg": null,
-      "vol": 715225.0,
-      "mcap": 25260000000.0,
-      "pe": 54.23,
+      "vol": 1857742.0,
+      "mcap": 25420000000.0,
+      "pe": 54.58,
       "screens": [
         "doublers"
       ],
@@ -2999,11 +3317,11 @@
       "name": "Astronics Corp",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 67.48,
+      "close": 66.64,
       "chg": null,
-      "vol": 400182.0,
-      "mcap": 2900000000.0,
-      "pe": 35.76,
+      "vol": 745052.0,
+      "mcap": 2860000000.0,
+      "pe": 35.31,
       "screens": [
         "doublers"
       ],
@@ -3014,11 +3332,11 @@
       "name": "Aura Minerals Inc",
       "sector": "Basic Materials",
       "industry": "Gold",
-      "close": 85.1,
+      "close": 85.77,
       "chg": null,
-      "vol": 675993.0,
-      "mcap": 7130000000.0,
-      "pe": 24.15,
+      "vol": 1053719.0,
+      "mcap": 7190000000.0,
+      "pe": 24.34,
       "screens": [
         "doublers"
       ],
@@ -3029,10 +3347,10 @@
       "name": "Axogen Inc",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 44.76,
+      "close": 44.97,
       "chg": null,
-      "vol": 477215.0,
-      "mcap": 2410000000.0,
+      "vol": 1397062.0,
+      "mcap": 2420000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3044,11 +3362,11 @@
       "name": "Aya Gold & Silver Inc",
       "sector": "Basic Materials",
       "industry": "Silver",
-      "close": 26.34,
+      "close": 26.7,
       "chg": null,
-      "vol": 471341.0,
-      "mcap": 3790000000.0,
-      "pe": 34.45,
+      "vol": 943586.0,
+      "mcap": 3850000000.0,
+      "pe": 34.92,
       "screens": [
         "doublers"
       ],
@@ -3059,25 +3377,10 @@
       "name": "Bandwidth Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 50.44,
+      "close": 50.08,
       "chg": null,
-      "vol": 498057.0,
-      "mcap": 1620000000.0,
-      "pe": null,
-      "screens": [
-        "doublers"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "BNO",
-      "name": "United States Brent Oil Fund LP",
-      "sector": "Financial",
-      "industry": "Exchange Traded Fund",
-      "close": 63.87,
-      "chg": null,
-      "vol": 1827376.0,
-      "mcap": null,
+      "vol": 971788.0,
+      "mcap": 1610000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3089,11 +3392,11 @@
       "name": "BrightSpring Health Services Inc",
       "sector": "Healthcare",
       "industry": "Health Information Services",
-      "close": 58.58,
+      "close": 58.84,
       "chg": null,
-      "vol": 538601.0,
-      "mcap": 11590000000.0,
-      "pe": 43.75,
+      "vol": 1428898.0,
+      "mcap": 11640000000.0,
+      "pe": 43.95,
       "screens": [
         "doublers"
       ],
@@ -3104,11 +3407,11 @@
       "name": "Centerra Gold Inc",
       "sector": "Basic Materials",
       "industry": "Gold",
-      "close": 21.73,
+      "close": 22.08,
       "chg": null,
-      "vol": 546294.0,
-      "mcap": 4250000000.0,
-      "pe": 6.93,
+      "vol": 965659.0,
+      "mcap": 4320000000.0,
+      "pe": 7.04,
       "screens": [
         "doublers"
       ],
@@ -3119,9 +3422,9 @@
       "name": "Cullinan Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 20.49,
+      "close": 20.54,
       "chg": null,
-      "vol": 538867.0,
+      "vol": 1060770.0,
       "mcap": 1320000000.0,
       "pe": null,
       "screens": [
@@ -3134,10 +3437,10 @@
       "name": "Cg Oncology Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 73.37,
+      "close": 72.55,
       "chg": null,
-      "vol": 275514.0,
-      "mcap": 6500000000.0,
+      "vol": 1037349.0,
+      "mcap": 6430000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3149,11 +3452,11 @@
       "name": "CIENA Corp",
       "sector": "Technology",
       "industry": "Communication Equipment",
-      "close": 332.42,
+      "close": 334.33,
       "chg": null,
-      "vol": 1473200.0,
-      "mcap": 47140000000.0,
-      "pe": 74.18,
+      "vol": 2799246.0,
+      "mcap": 47410000000.0,
+      "pe": 74.6,
       "screens": [
         "doublers"
       ],
@@ -3164,10 +3467,10 @@
       "name": "Calumet Inc",
       "sector": "Basic Materials",
       "industry": "Specialty Chemicals",
-      "close": 57.18,
+      "close": 57.55,
       "chg": null,
-      "vol": 498959.0,
-      "mcap": 5030000000.0,
+      "vol": 1194662.0,
+      "mcap": 5060000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3179,10 +3482,10 @@
       "name": "Centene Corp",
       "sector": "Healthcare",
       "industry": "Healthcare Plans",
-      "close": 67.45,
+      "close": 67.66,
       "chg": null,
-      "vol": 1157454.0,
-      "mcap": 33320000000.0,
+      "vol": 3579413.0,
+      "mcap": 33420000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3194,10 +3497,10 @@
       "name": "Cogent Biosciences Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 32.94,
+      "close": 32.74,
       "chg": null,
-      "vol": 851594.0,
-      "mcap": 5720000000.0,
+      "vol": 1712437.0,
+      "mcap": 5680000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3209,11 +3512,11 @@
       "name": "Coherent Corp",
       "sector": "Technology",
       "industry": "Scientific & Technical Instruments",
-      "close": 270.43,
+      "close": 271.17,
       "chg": null,
-      "vol": 2671108.0,
-      "mcap": 52960000000.0,
-      "pe": 65.76,
+      "vol": 4339524.0,
+      "mcap": 53100000000.0,
+      "pe": 65.94,
       "screens": [
         "doublers"
       ],
@@ -3224,10 +3527,10 @@
       "name": "Cohu Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 48.8,
+      "close": 49.97,
       "chg": null,
-      "vol": 393976.0,
-      "mcap": 2310000000.0,
+      "vol": 1116117.0,
+      "mcap": 2370000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3239,11 +3542,11 @@
       "name": "Darling Ingredients Inc",
       "sector": "Consumer Defensive",
       "industry": "Packaged Foods",
-      "close": 66.33,
+      "close": 66.54,
       "chg": null,
-      "vol": 962374.0,
-      "mcap": 10470000000.0,
-      "pe": 17.82,
+      "vol": 2463651.0,
+      "mcap": 10500000000.0,
+      "pe": 17.88,
       "screens": [
         "doublers"
       ],
@@ -3254,26 +3557,11 @@
       "name": "Definium Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 37.02,
+      "close": 36.82,
       "chg": null,
-      "vol": 2750379.0,
-      "mcap": 4970000000.0,
+      "vol": 4524384.0,
+      "mcap": 4950000000.0,
       "pe": null,
-      "screens": [
-        "doublers"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "DINO",
-      "name": "HF Sinclair Corp",
-      "sector": "Energy",
-      "industry": "Oil & Gas Refining & Marketing",
-      "close": 111.86,
-      "chg": null,
-      "vol": 1333931.0,
-      "mcap": 19890000000.0,
-      "pe": 10.68,
       "screens": [
         "doublers"
       ],
@@ -3284,10 +3572,10 @@
       "name": "Damora Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 25.27,
+      "close": 24.75,
       "chg": null,
-      "vol": 900296.0,
-      "mcap": 1560000000.0,
+      "vol": 1677964.0,
+      "mcap": 1530000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3299,10 +3587,10 @@
       "name": "Dianthus Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 104.96,
+      "close": 104.77,
       "chg": null,
-      "vol": 207454.0,
-      "mcap": 5870000000.0,
+      "vol": 478987.0,
+      "mcap": 5860000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3314,11 +3602,11 @@
       "name": "DigitalOcean Holdings Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 115.64,
+      "close": 117.85,
       "chg": null,
-      "vol": 631092.0,
-      "mcap": 13600000000.0,
-      "pe": 52.72,
+      "vol": 1520726.0,
+      "mcap": 13860000000.0,
+      "pe": 53.73,
       "screens": [
         "doublers"
       ],
@@ -3329,11 +3617,11 @@
       "name": "Enerflex Ltd",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
-      "close": 21.94,
+      "close": 22.4,
       "chg": null,
-      "vol": 120689.0,
-      "mcap": 2680000000.0,
-      "pe": 50.78,
+      "vol": 406479.0,
+      "mcap": 2740000000.0,
+      "pe": 51.84,
       "screens": [
         "doublers"
       ],
@@ -3344,10 +3632,10 @@
       "name": "Enliven Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 53.23,
+      "close": 53.36,
       "chg": null,
-      "vol": 355008.0,
-      "mcap": 3900000000.0,
+      "vol": 866993.0,
+      "mcap": 3910000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3359,11 +3647,11 @@
       "name": "Eton Pharmaceuticals Inc",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 55.09,
+      "close": 54.93,
       "chg": null,
-      "vol": 179751.0,
+      "vol": 543844.0,
       "mcap": 1570000000.0,
-      "pe": 145.68,
+      "pe": 145.24,
       "screens": [
         "doublers"
       ],
@@ -3374,10 +3662,10 @@
       "name": "Edgewise Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 43.83,
+      "close": 43.63,
       "chg": null,
-      "vol": 455338.0,
-      "mcap": 4760000000.0,
+      "vol": 2969633.0,
+      "mcap": 4740000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3389,9 +3677,9 @@
       "name": "iShares MSCI South Korea ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 176.26,
+      "close": 176.49,
       "chg": null,
-      "vol": 4633016.0,
+      "vol": 7080330.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -3404,9 +3692,9 @@
       "name": "Franklin FTSE South Korea ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 58.07,
+      "close": 58.17,
       "chg": null,
-      "vol": 220153.0,
+      "vol": 325786.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -3419,11 +3707,11 @@
       "name": "FormFactor Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 100.68,
+      "close": 101.69,
       "chg": null,
-      "vol": 501183.0,
-      "mcap": 7870000000.0,
-      "pe": 69.03,
+      "vol": 969355.0,
+      "mcap": 7940000000.0,
+      "pe": 69.72,
       "screens": [
         "doublers"
       ],
@@ -3434,10 +3722,10 @@
       "name": "Fastly Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 24.94,
+      "close": 24.3,
       "chg": null,
-      "vol": 3208908.0,
-      "mcap": 3970000000.0,
+      "vol": 5285783.0,
+      "mcap": 3870000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3449,10 +3737,10 @@
       "name": "Glaukos Corp",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 171.15,
+      "close": 171.68,
       "chg": null,
-      "vol": 162076.0,
-      "mcap": 10100000000.0,
+      "vol": 621747.0,
+      "mcap": 10130000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3464,10 +3752,10 @@
       "name": "Globalstar Inc",
       "sector": "Communication Services",
       "industry": "Telecom Services",
-      "close": 81.99,
+      "close": 81.83,
       "chg": null,
-      "vol": 168090.0,
-      "mcap": 10620000000.0,
+      "vol": 508073.0,
+      "mcap": 10600000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3479,11 +3767,11 @@
       "name": "Haemonetics Corp",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 105.14,
+      "close": 106.2,
       "chg": null,
-      "vol": 156055.0,
-      "mcap": 4780000000.0,
-      "pe": 51.29,
+      "vol": 440074.0,
+      "mcap": 4830000000.0,
+      "pe": 51.8,
       "screens": [
         "doublers"
       ],
@@ -3494,9 +3782,9 @@
       "name": "Helmerich & Payne Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Drilling",
-      "close": 43.39,
+      "close": 43.45,
       "chg": null,
-      "vol": 345762.0,
+      "vol": 1020332.0,
       "mcap": 4340000000.0,
       "pe": null,
       "screens": [
@@ -3509,11 +3797,11 @@
       "name": "Hewlett Packard Enterprise Co",
       "sector": "Technology",
       "industry": "Communication Equipment",
-      "close": 56.08,
+      "close": 55.88,
       "chg": null,
-      "vol": 12772534.0,
-      "mcap": 74440000000.0,
-      "pe": 29.24,
+      "vol": 23303981.0,
+      "mcap": 74180000000.0,
+      "pe": 29.14,
       "screens": [
         "doublers"
       ],
@@ -3524,10 +3812,10 @@
       "name": "Hycroft Mining Holding Corp",
       "sector": "Basic Materials",
       "industry": "Gold",
-      "close": 20.24,
+      "close": 20.7,
       "chg": null,
-      "vol": 1068551.0,
-      "mcap": 1890000000.0,
+      "vol": 1869695.0,
+      "mcap": 1930000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3539,10 +3827,10 @@
       "name": "Ichor Holdings Ltd",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 50.21,
+      "close": 51.09,
       "chg": null,
-      "vol": 280102.0,
-      "mcap": 1880000000.0,
+      "vol": 627749.0,
+      "mcap": 1910000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3554,11 +3842,11 @@
       "name": "Illumina Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 225.2,
+      "close": 222.29,
       "chg": null,
-      "vol": 1566302.0,
-      "mcap": 34010000000.0,
-      "pe": 41.97,
+      "vol": 3148857.0,
+      "mcap": 33570000000.0,
+      "pe": 41.43,
       "screens": [
         "doublers"
       ],
@@ -3569,9 +3857,9 @@
       "name": "Immunome Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 23.98,
+      "close": 23.95,
       "chg": null,
-      "vol": 385455.0,
+      "vol": 1332817.0,
       "mcap": 2720000000.0,
       "pe": null,
       "screens": [
@@ -3584,10 +3872,10 @@
       "name": "Immunovant Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 36.53,
+      "close": 36.65,
       "chg": null,
-      "vol": 549176.0,
-      "mcap": 7550000000.0,
+      "vol": 1574046.0,
+      "mcap": 7570000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3599,10 +3887,10 @@
       "name": "Intel Corp",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 97.47,
+      "close": 97.14,
       "chg": null,
-      "vol": 51560860.0,
-      "mcap": 515260000000.0,
+      "vol": 84960321.0,
+      "mcap": 513490000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3614,11 +3902,11 @@
       "name": "Iridium Communications Inc",
       "sector": "Communication Services",
       "industry": "Telecom Services",
-      "close": 46.69,
+      "close": 47.09,
       "chg": null,
-      "vol": 347862.0,
-      "mcap": 4950000000.0,
-      "pe": 53.2,
+      "vol": 971141.0,
+      "mcap": 4990000000.0,
+      "pe": 53.66,
       "screens": [
         "doublers"
       ],
@@ -3629,11 +3917,11 @@
       "name": "J.B. Hunt Transport Services Inc",
       "sector": "Industrials",
       "industry": "Integrated Freight & Logistics",
-      "close": 273.55,
+      "close": 273.05,
       "chg": null,
-      "vol": 192466.0,
-      "mcap": 25690000000.0,
-      "pe": 38.78,
+      "vol": 513055.0,
+      "mcap": 25640000000.0,
+      "pe": 38.71,
       "screens": [
         "doublers"
       ],
@@ -3644,11 +3932,11 @@
       "name": "Kulicke & Soffa Industries Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 78.75,
+      "close": 78.79,
       "chg": null,
-      "vol": 209526.0,
+      "vol": 684040.0,
       "mcap": 4120000000.0,
-      "pe": 36.16,
+      "pe": 36.18,
       "screens": [
         "doublers"
       ],
@@ -3659,11 +3947,11 @@
       "name": "Kiniksa Pharmaceuticals International Plc",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 74.74,
+      "close": 75.15,
       "chg": null,
-      "vol": 211233.0,
-      "mcap": 5830000000.0,
-      "pe": 75.99,
+      "vol": 488982.0,
+      "mcap": 5860000000.0,
+      "pe": 76.41,
       "screens": [
         "doublers"
       ],
@@ -3674,10 +3962,10 @@
       "name": "Kodiak Sciences Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 32.72,
+      "close": 32.99,
       "chg": null,
-      "vol": 372507.0,
-      "mcap": 2060000000.0,
+      "vol": 819624.0,
+      "mcap": 2070000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3689,25 +3977,10 @@
       "name": "Kymera Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 112.49,
+      "close": 113.15,
       "chg": null,
-      "vol": 258024.0,
-      "mcap": 9350000000.0,
-      "pe": null,
-      "screens": [
-        "doublers"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "LIND",
-      "name": "Lindblad Expeditions Holdings Inc",
-      "sector": "Consumer Cyclical",
-      "industry": "Travel Services",
-      "close": 26.15,
-      "chg": null,
-      "vol": 651598.0,
-      "mcap": 1720000000.0,
+      "vol": 901014.0,
+      "mcap": 9410000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3719,11 +3992,11 @@
       "name": "Liquidia Corp",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 65.24,
+      "close": 65.72,
       "chg": null,
-      "vol": 720718.0,
-      "mcap": 5840000000.0,
-      "pe": 47.82,
+      "vol": 1372165.0,
+      "mcap": 5880000000.0,
+      "pe": 48.17,
       "screens": [
         "doublers"
       ],
@@ -3734,11 +4007,11 @@
       "name": "Lam Research Corp",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 267.08,
+      "close": 270.87,
       "chg": null,
-      "vol": 4447770.0,
-      "mcap": 334210000000.0,
-      "pe": 46.34,
+      "vol": 8939356.0,
+      "mcap": 338950000000.0,
+      "pe": 46.99,
       "screens": [
         "doublers"
       ],
@@ -3749,10 +4022,10 @@
       "name": "MBX Biosciences Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 60.14,
+      "close": 61.08,
       "chg": null,
-      "vol": 391163.0,
-      "mcap": 2900000000.0,
+      "vol": 652629.0,
+      "mcap": 2940000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3764,10 +4037,10 @@
       "name": "Moderna Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 144.24,
+      "close": 143.77,
       "chg": null,
-      "vol": 4407289.0,
-      "mcap": 57590000000.0,
+      "vol": 8411246.0,
+      "mcap": 57400000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3779,11 +4052,11 @@
       "name": "Marvell Technology Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 222.16,
+      "close": 221.7,
       "chg": null,
-      "vol": 8694295.0,
-      "mcap": 194810000000.0,
-      "pe": 73.15,
+      "vol": 12745605.0,
+      "mcap": 194410000000.0,
+      "pe": 73.0,
       "screens": [
         "doublers"
       ],
@@ -3794,11 +4067,11 @@
       "name": "Marex Group Ltd",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 69.44,
+      "close": 68.4,
       "chg": null,
-      "vol": 191591.0,
-      "mcap": 4990000000.0,
-      "pe": 12.94,
+      "vol": 438264.0,
+      "mcap": 4920000000.0,
+      "pe": 12.75,
       "screens": [
         "doublers"
       ],
@@ -3809,11 +4082,11 @@
       "name": "ArcelorMittal SA",
       "sector": "Basic Materials",
       "industry": "Steel",
-      "close": 73.22,
+      "close": 73.3,
       "chg": null,
-      "vol": 661761.0,
-      "mcap": 55210000000.0,
-      "pe": 30.84,
+      "vol": 1065471.0,
+      "mcap": 55270000000.0,
+      "pe": 30.87,
       "screens": [
         "doublers"
       ],
@@ -3824,11 +4097,11 @@
       "name": "Micron Technology Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 924.97,
+      "close": 927.6,
       "chg": null,
-      "vol": 13075835.0,
-      "mcap": 1044650000000.0001,
-      "pe": 20.94,
+      "vol": 20416208.0,
+      "mcap": 1047619999999.9999,
+      "pe": 21.0,
       "screens": [
         "doublers"
       ],
@@ -3839,10 +4112,10 @@
       "name": "MaxLinear Inc",
       "sector": "Technology",
       "industry": "Semiconductors",
-      "close": 66.79,
+      "close": 67.12,
       "chg": null,
-      "vol": 946141.0,
-      "mcap": 6060000000.0,
+      "vol": 1919618.0,
+      "mcap": 6090000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3854,11 +4127,11 @@
       "name": "National Energy Services Reunited Corp",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
-      "close": 32.67,
+      "close": 32.09,
       "chg": null,
-      "vol": 529771.0,
-      "mcap": 3300000000.0,
-      "pe": 35.89,
+      "vol": 1615942.0,
+      "mcap": 3240000000.0,
+      "pe": 35.25,
       "screens": [
         "doublers"
       ],
@@ -3869,10 +4142,10 @@
       "name": "Nurix Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 24.36,
+      "close": 24.83,
       "chg": null,
-      "vol": 535719.0,
-      "mcap": 2530000000.0,
+      "vol": 1251072.0,
+      "mcap": 2580000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3884,11 +4157,11 @@
       "name": "Onto Innovation Inc",
       "sector": "Technology",
       "industry": "Semiconductor Equipment & Materials",
-      "close": 240.6,
+      "close": 244.16,
       "chg": null,
-      "vol": 853588.0,
-      "mcap": 11810000000.0,
-      "pe": 90.05,
+      "vol": 1837548.0,
+      "mcap": 11980000000.0,
+      "pe": 91.38,
       "screens": [
         "doublers"
       ],
@@ -3899,10 +4172,10 @@
       "name": "Oruka Therapeutics Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 91.33,
+      "close": 92.2,
       "chg": null,
-      "vol": 393700.0,
-      "mcap": 6050000000.0,
+      "vol": 784740.0,
+      "mcap": 6100000000.0,
       "pe": null,
       "screens": [
         "doublers"
@@ -3914,11 +4187,11 @@
       "name": "PACS Group Inc",
       "sector": "Healthcare",
       "industry": "Medical Care Facilities",
-      "close": 42.4,
+      "close": 42.09,
       "chg": null,
-      "vol": 310954.0,
-      "mcap": 6710000000.0,
-      "pe": 25.41,
+      "vol": 1012291.0,
+      "mcap": 6660000000.0,
+      "pe": 25.22,
       "screens": [
         "doublers"
       ],
@@ -3929,9 +4202,9 @@
       "name": "Atkore Inc",
       "sector": "Industrials",
       "industry": "Electrical Equipment & Parts",
-      "close": 94.57,
+      "close": 94.55,
       "chg": null,
-      "vol": 700664.0,
+      "vol": 1029891.0,
       "mcap": 3190000000.0,
       "pe": null,
       "screens": [
@@ -3944,11 +4217,11 @@
       "name": "Atricure Inc",
       "sector": "Healthcare",
       "industry": "Medical Instruments & Supplies",
-      "close": 56.31,
+      "close": 56.22,
       "chg": null,
-      "vol": 678834.0,
+      "vol": 1432387.0,
       "mcap": 2860000000.0,
-      "pe": 260.07,
+      "pe": 259.68,
       "screens": [
         "new_high"
       ],
@@ -3959,11 +4232,11 @@
       "name": "Best Buy Co Inc",
       "sector": "Consumer Cyclical",
       "industry": "Specialty Retail",
-      "close": 93.19,
+      "close": 93.24,
       "chg": null,
-      "vol": 1629271.0,
-      "mcap": 19540000000.0,
-      "pe": 15.51,
+      "vol": 3680739.0,
+      "mcap": 19560000000.0,
+      "pe": 15.52,
       "screens": [
         "new_high"
       ],
@@ -3974,9 +4247,9 @@
       "name": "abrdn Bloomberg All Commodity Strategy K-1 Free ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 26.82,
+      "close": 26.77,
       "chg": null,
-      "vol": 695103.0,
+      "vol": 1219838.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -3989,11 +4262,11 @@
       "name": "Chord Energy Corp",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 156.58,
+      "close": 157.0,
       "chg": null,
-      "vol": 239788.0,
-      "mcap": 8560000000.0,
-      "pe": 10.5,
+      "vol": 545483.0,
+      "mcap": 8590000000.0,
+      "pe": 10.52,
       "screens": [
         "new_high"
       ],
@@ -4004,11 +4277,11 @@
       "name": "Conoco Phillips",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 141.44,
+      "close": 141.22,
       "chg": null,
-      "vol": 3529460.0,
-      "mcap": 169920000000.0,
-      "pe": 18.74,
+      "vol": 6562512.0,
+      "mcap": 169650000000.0,
+      "pe": 18.71,
       "screens": [
         "new_high"
       ],
@@ -4019,11 +4292,41 @@
       "name": "Corebridge Financial Inc",
       "sector": "Financial",
       "industry": "Asset Management",
-      "close": 35.07,
+      "close": 35.02,
       "chg": null,
-      "vol": 1999304.0,
-      "mcap": 15630000000.0,
-      "pe": 19.94,
+      "vol": 4912064.0,
+      "mcap": 15610000000.0,
+      "pe": 19.91,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "CVI",
+      "name": "CVR Energy Inc",
+      "sector": "Energy",
+      "industry": "Oil & Gas Refining & Marketing",
+      "close": 52.17,
+      "chg": null,
+      "vol": 1021894.0,
+      "mcap": 5240000000.0,
+      "pe": 75.98,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "CVX",
+      "name": "Chevron Corp",
+      "sector": "Energy",
+      "industry": "Oil & Gas Integrated",
+      "close": 217.77,
+      "chg": null,
+      "vol": 9561366.0,
+      "mcap": 430260000000.0,
+      "pe": 20.88,
       "screens": [
         "new_high"
       ],
@@ -4034,11 +4337,11 @@
       "name": "CoreCivic Inc",
       "sector": "Industrials",
       "industry": "Security & Protection Services",
-      "close": 35.36,
+      "close": 35.38,
       "chg": null,
-      "vol": 808212.0,
+      "vol": 2169365.0,
       "mcap": 3500000000.0,
-      "pe": 28.17,
+      "pe": 28.19,
       "screens": [
         "new_high"
       ],
@@ -4049,9 +4352,9 @@
       "name": "Invesco DB Commodity Index Tracking Fund",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 33.76,
+      "close": 33.68,
       "chg": null,
-      "vol": 579878.0,
+      "vol": 820217.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4064,9 +4367,9 @@
       "name": "iMGP DBi Managed Futures Strategy ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 32.28,
+      "close": 32.24,
       "chg": null,
-      "vol": 1434135.0,
+      "vol": 2193860.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4079,11 +4382,11 @@
       "name": "Dropbox Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 38.1,
+      "close": 37.63,
       "chg": null,
-      "vol": 2004005.0,
-      "mcap": 8280000000.0,
-      "pe": 21.16,
+      "vol": 4288338.0,
+      "mcap": 8180000000.0,
+      "pe": 20.9,
       "screens": [
         "new_high"
       ],
@@ -4094,11 +4397,11 @@
       "name": "Quest Diagnostics Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 246.82,
+      "close": 247.08,
       "chg": null,
-      "vol": 668240.0,
-      "mcap": 27240000000.0,
-      "pe": 26.18,
+      "vol": 1374084.0,
+      "mcap": 27270000000.0,
+      "pe": 26.21,
       "screens": [
         "new_high"
       ],
@@ -4109,11 +4412,11 @@
       "name": "DHT Holdings Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 22.08,
+      "close": 22.14,
       "chg": null,
-      "vol": 3527908.0,
-      "mcap": 3560000000.0,
-      "pe": 7.51,
+      "vol": 6058707.0,
+      "mcap": 3570000000.0,
+      "pe": 7.53,
       "screens": [
         "new_high"
       ],
@@ -4124,11 +4427,11 @@
       "name": "Dynatrace Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 54.89,
+      "close": 55.17,
       "chg": null,
-      "vol": 3735182.0,
-      "mcap": 15860000000.0,
-      "pe": 109.08,
+      "vol": 7673729.0,
+      "mcap": 15940000000.0,
+      "pe": 109.64,
       "screens": [
         "new_high"
       ],
@@ -4139,10 +4442,10 @@
       "name": "EOG Resources Inc",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 153.8,
+      "close": 153.74,
       "chg": null,
-      "vol": 1576660.0,
-      "mcap": 80670000000.0,
+      "vol": 3576283.0,
+      "mcap": 80640000000.0,
       "pe": 11.96,
       "screens": [
         "new_high"
@@ -4154,11 +4457,56 @@
       "name": "Equinor ASA ADR",
       "sector": "Energy",
       "industry": "Oil & Gas Integrated",
-      "close": 45.8,
+      "close": 45.75,
       "chg": null,
-      "vol": 2119586.0,
-      "mcap": 109500000000.0,
-      "pe": 12.46,
+      "vol": 3364519.0,
+      "mcap": 109380000000.0,
+      "pe": 12.45,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "EXPD",
+      "name": "Expeditors International Of Washington Inc",
+      "sector": "Industrials",
+      "industry": "Integrated Freight & Logistics",
+      "close": 193.9,
+      "chg": null,
+      "vol": 938767.0,
+      "mcap": 25210000000.0,
+      "pe": 28.21,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FTXN",
+      "name": "First Trust Nasdaq Oil & Gas ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 41.84,
+      "chg": null,
+      "vol": 86899.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FXN",
+      "name": "First Trust Energy AlphaDEX Fund",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 24.35,
+      "chg": null,
+      "vol": 406354.0,
+      "mcap": null,
+      "pe": null,
       "screens": [
         "new_high"
       ],
@@ -4169,9 +4517,9 @@
       "name": "iShares Global Government Bond USD Hedged Active ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 49.99,
+      "close": 50.11,
       "chg": null,
-      "vol": 300134.0,
+      "vol": 425182.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4184,9 +4532,24 @@
       "name": "iShares S&P GSCI Commodity Indexed Trust",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 37.26,
+      "close": 37.15,
       "chg": null,
-      "vol": 680565.0,
+      "vol": 880857.0,
+      "mcap": null,
+      "pe": null,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "IALT",
+      "name": "iShares Systematic Alternatives Active ETF",
+      "sector": "Financial",
+      "industry": "Exchange Traded Fund",
+      "close": 29.42,
+      "chg": null,
+      "vol": 1196067.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4199,11 +4562,11 @@
       "name": "IQVIA Holdings Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 270.03,
+      "close": 269.67,
       "chg": null,
-      "vol": 684775.0,
-      "mcap": 44450000000.0,
-      "pe": 33.5,
+      "vol": 1439159.0,
+      "mcap": 44390000000.0,
+      "pe": 33.45,
       "screens": [
         "new_high"
       ],
@@ -4214,9 +4577,9 @@
       "name": "iShares Global Energy ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 60.6,
+      "close": 60.58,
       "chg": null,
-      "vol": 227688.0,
+      "vol": 343929.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4229,11 +4592,11 @@
       "name": "Dorian LPG Ltd",
       "sector": "Energy",
       "industry": "Oil & Gas Midstream",
-      "close": 56.55,
+      "close": 56.82,
       "chg": null,
-      "vol": 338917.0,
-      "mcap": 2420000000.0,
-      "pe": 7.5,
+      "vol": 623159.0,
+      "mcap": 2430000000.0,
+      "pe": 7.54,
       "screens": [
         "new_high"
       ],
@@ -4244,11 +4607,26 @@
       "name": "LTC Properties Inc",
       "sector": "Real Estate",
       "industry": "REIT - Healthcare Facilities",
-      "close": 43.28,
+      "close": 43.46,
       "chg": null,
-      "vol": 340267.0,
-      "mcap": 2330000000.0,
-      "pe": 15.86,
+      "vol": 969421.0,
+      "mcap": 2340000000.0,
+      "pe": 15.93,
+      "screens": [
+        "new_high"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "MTCH",
+      "name": "Match Group Inc",
+      "sector": "Communication Services",
+      "industry": "Internet Content & Information",
+      "close": 44.4,
+      "chg": null,
+      "vol": 5011994.0,
+      "mcap": 10190000000.0,
+      "pe": 15.68,
       "screens": [
         "new_high"
       ],
@@ -4259,9 +4637,9 @@
       "name": "Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 20.14,
+      "close": 20.1,
       "chg": null,
-      "vol": 4017448.0,
+      "vol": 7624291.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4274,26 +4652,11 @@
       "name": "Permian Resources Holdings Inc",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 24.56,
+      "close": 24.49,
       "chg": null,
-      "vol": 4909862.0,
-      "mcap": 20570000000.0,
-      "pe": 16.3,
-      "screens": [
-        "new_high"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PSX",
-      "name": "Phillips 66",
-      "sector": "Energy",
-      "industry": "Oil & Gas Refining & Marketing",
-      "close": 266.07,
-      "chg": null,
-      "vol": 1289236.0,
-      "mcap": 106170000000.0,
-      "pe": 15.14,
+      "vol": 10408417.0,
+      "mcap": 20510000000.0,
+      "pe": 16.26,
       "screens": [
         "new_high"
       ],
@@ -4304,26 +4667,11 @@
       "name": "Revvity Inc",
       "sector": "Healthcare",
       "industry": "Diagnostics & Research",
-      "close": 138.39,
+      "close": 140.19,
       "chg": null,
-      "vol": 1326808.0,
-      "mcap": 15440000000.0,
-      "pe": 65.73,
-      "screens": [
-        "new_high"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SDGR",
-      "name": "Schrodinger Inc",
-      "sector": "Healthcare",
-      "industry": "Health Information Services",
-      "close": 22.7,
-      "chg": null,
-      "vol": 1987982.0,
-      "mcap": 1700000000.0,
-      "pe": null,
+      "vol": 3694238.0,
+      "mcap": 15640000000.0,
+      "pe": 66.58,
       "screens": [
         "new_high"
       ],
@@ -4334,11 +4682,11 @@
       "name": "Shell Plc ADR",
       "sector": "Energy",
       "industry": "Oil & Gas Integrated",
-      "close": 99.06,
+      "close": 98.95,
       "chg": null,
-      "vol": 3070637.0,
-      "mcap": 283660000000.0,
-      "pe": 10.94,
+      "vol": 5051041.0,
+      "mcap": 283360000000.0,
+      "pe": 10.93,
       "screens": [
         "new_high"
       ],
@@ -4349,11 +4697,11 @@
       "name": "SM Energy Co",
       "sector": "Energy",
       "industry": "Oil & Gas E&P",
-      "close": 41.47,
+      "close": 41.29,
       "chg": null,
-      "vol": 2691062.0,
-      "mcap": 9860000000.0,
-      "pe": 8.17,
+      "vol": 4824699.0,
+      "mcap": 9820000000.0,
+      "pe": 8.14,
       "screens": [
         "new_high"
       ],
@@ -4364,11 +4712,11 @@
       "name": "Suncor Energy Inc",
       "sector": "Energy",
       "industry": "Oil & Gas Integrated",
-      "close": 71.84,
+      "close": 71.87,
       "chg": null,
-      "vol": 2001909.0,
-      "mcap": 84030000000.0,
-      "pe": 13.24,
+      "vol": 4237744.0,
+      "mcap": 84060000000.0,
+      "pe": 13.25,
       "screens": [
         "new_high"
       ],
@@ -4379,11 +4727,11 @@
       "name": "Teva- Pharmaceutical Industries Ltd",
       "sector": "Healthcare",
       "industry": "Drug Manufacturers - Specialty & Generic",
-      "close": 38.98,
+      "close": 39.25,
       "chg": null,
-      "vol": 3100408.0,
-      "mcap": 45420000000.0,
-      "pe": 64.99,
+      "vol": 7127348.0,
+      "mcap": 45740000000.0,
+      "pe": 65.44,
       "screens": [
         "new_high"
       ],
@@ -4394,10 +4742,10 @@
       "name": "10x Genomics Inc",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 75.15,
+      "close": 74.39,
       "chg": null,
-      "vol": 1549926.0,
-      "mcap": 9790000000.0,
+      "vol": 2905823.0,
+      "mcap": 9690000000.0,
       "pe": null,
       "screens": [
         "new_high"
@@ -4409,9 +4757,9 @@
       "name": "ProShares Ultra Bloomberg Crude Oil 2x Shares",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 54.27,
+      "close": 53.89,
       "chg": null,
-      "vol": 2145299.0,
+      "vol": 2769145.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4424,9 +4772,9 @@
       "name": "United States Oil Fund",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 162.95,
+      "close": 161.86,
       "chg": null,
-      "vol": 5219256.0,
+      "vol": 6852383.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4439,9 +4787,9 @@
       "name": "State Street SPDR S&P Oil & Gas Exploration & Production ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 200.4,
+      "close": 199.7,
       "chg": null,
-      "vol": 1857602.0,
+      "vol": 3352852.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4456,7 +4804,7 @@
       "industry": "Oil & Gas Integrated",
       "close": 57.61,
       "chg": null,
-      "vol": 1073689.0,
+      "vol": 1637387.0,
       "mcap": 22660000000.0,
       "pe": 19.1,
       "screens": [
@@ -4469,10 +4817,10 @@
       "name": "Ziff Davis Inc",
       "sector": "Communication Services",
       "industry": "Advertising Agencies",
-      "close": 58.83,
+      "close": 59.21,
       "chg": null,
-      "vol": 344953.0,
-      "mcap": 2020000000.0,
+      "vol": 974643.0,
+      "mcap": 2030000000.0,
       "pe": null,
       "screens": [
         "new_high"
@@ -4484,10 +4832,10 @@
       "name": "Archer Aviation Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 5.45,
+      "close": 5.47,
       "chg": null,
-      "vol": 14958923.0,
-      "mcap": 4200000000.0,
+      "vol": 24703953.0,
+      "mcap": 4210000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4499,10 +4847,10 @@
       "name": "C3.ai Inc",
       "sector": "Technology",
       "industry": "Software - Infrastructure",
-      "close": 10.95,
+      "close": 10.79,
       "chg": null,
-      "vol": 2514329.0,
-      "mcap": 1760000000.0,
+      "vol": 4407285.0,
+      "mcap": 1730000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4514,10 +4862,25 @@
       "name": "Altimmune Inc",
       "sector": "Healthcare",
       "industry": "Biotechnology",
-      "close": 3.29,
+      "close": 3.23,
       "chg": null,
-      "vol": 1305438.0,
-      "mcap": 639770000.0,
+      "vol": 2339053.0,
+      "mcap": 628290000.0,
+      "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AQST",
+      "name": "Aquestive Therapeutics Inc",
+      "sector": "Healthcare",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "close": 4.81,
+      "chg": null,
+      "vol": 1607333.0,
+      "mcap": 603710000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4529,9 +4892,9 @@
       "name": "Asana Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 9.52,
+      "close": 9.5,
       "chg": null,
-      "vol": 1918700.0,
+      "vol": 5748478.0,
       "mcap": 2180000000.0,
       "pe": null,
       "screens": [
@@ -4544,10 +4907,10 @@
       "name": "Bit Digital Inc",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 1.49,
+      "close": 1.46,
       "chg": null,
-      "vol": 18981334.0,
-      "mcap": 538350000.0,
+      "vol": 27845154.0,
+      "mcap": 526520000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4555,14 +4918,29 @@
       "hits": 1
     },
     {
-      "ticker": "CLNE",
-      "name": "Clean Energy Fuels Corp",
-      "sector": "Energy",
-      "industry": "Oil & Gas Refining & Marketing",
-      "close": 1.79,
+      "ticker": "BTGO",
+      "name": "BitGo Holdings Inc",
+      "sector": "Financial",
+      "industry": "Capital Markets",
+      "close": 7.25,
       "chg": null,
-      "vol": 1178578.0,
-      "mcap": 395700000.0,
+      "vol": 3047054.0,
+      "mcap": 852210000.0,
+      "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "CNXC",
+      "name": "Concentrix Corp",
+      "sector": "Technology",
+      "industry": "Information Technology Services",
+      "close": 29.21,
+      "chg": null,
+      "vol": 1143286.0,
+      "mcap": 1780000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4574,11 +4952,26 @@
       "name": "Coty Inc",
       "sector": "Consumer Defensive",
       "industry": "Household & Personal Products",
-      "close": 2.66,
+      "close": 2.65,
       "chg": null,
-      "vol": 2124966.0,
-      "mcap": 2350000000.0,
+      "vol": 4992202.0,
+      "mcap": 2330000000.0,
       "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "DUOL",
+      "name": "Duolingo Inc",
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "close": 153.92,
+      "chg": null,
+      "vol": 1378488.0,
+      "mcap": 7200000000.0,
+      "pe": 18.46,
       "screens": [
         "pm_base"
       ],
@@ -4589,10 +4982,25 @@
       "name": "Forward Industries Inc",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 6.32,
+      "close": 6.08,
       "chg": null,
-      "vol": 1676579.0,
-      "mcap": 466920000.0,
+      "vol": 2631765.0,
+      "mcap": 448990000.0,
+      "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "GLXY",
+      "name": "Galaxy Digital Inc",
+      "sector": "Financial",
+      "industry": "Capital Markets",
+      "close": 22.29,
+      "chg": null,
+      "vol": 6913514.0,
+      "mcap": 8710000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4604,11 +5012,11 @@
       "name": "Kyndryl Holdings Inc",
       "sector": "Technology",
       "industry": "Information Technology Services",
-      "close": 13.57,
+      "close": 13.24,
       "chg": null,
-      "vol": 1351387.0,
-      "mcap": 2960000000.0,
-      "pe": 37.83,
+      "vol": 2959071.0,
+      "mcap": 2880000000.0,
+      "pe": 36.91,
       "screens": [
         "pm_base"
       ],
@@ -4619,11 +5027,11 @@
       "name": "Lyft Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 15.86,
+      "close": 15.69,
       "chg": null,
-      "vol": 4377071.0,
-      "mcap": 6010000000.0,
-      "pe": 2.22,
+      "vol": 10884484.0,
+      "mcap": 5940000000.0,
+      "pe": 2.19,
       "screens": [
         "pm_base"
       ],
@@ -4634,10 +5042,10 @@
       "name": "Strategy Inc",
       "sector": "Technology",
       "industry": "Software - Application",
-      "close": 132.35,
+      "close": 129.6,
       "chg": null,
-      "vol": 10472169.0,
-      "mcap": 50850000000.0,
+      "vol": 23102485.0,
+      "mcap": 49800000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4649,10 +5057,10 @@
       "name": "N-able Inc",
       "sector": "Technology",
       "industry": "Information Technology Services",
-      "close": 4.09,
+      "close": 4.03,
       "chg": null,
-      "vol": 1215456.0,
-      "mcap": 773570000.0,
+      "vol": 2387080.0,
+      "mcap": 761290000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4664,11 +5072,26 @@
       "name": "Energy Vault Holdings Inc",
       "sector": "Utilities",
       "industry": "Utilities - Renewable",
-      "close": 4.12,
+      "close": 4.11,
       "chg": null,
-      "vol": 1647603.0,
-      "mcap": 750090000.0,
+      "vol": 3526456.0,
+      "mcap": 747360000.0,
       "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "ODD",
+      "name": "ODDITY Tech Ltd",
+      "sector": "Consumer Defensive",
+      "industry": "Household & Personal Products",
+      "close": 17.95,
+      "chg": null,
+      "vol": 1318218.0,
+      "mcap": 827930000.0,
+      "pe": 75.33,
       "screens": [
         "pm_base"
       ],
@@ -4679,10 +5102,10 @@
       "name": "Pacific Biosciences of California Inc",
       "sector": "Healthcare",
       "industry": "Medical Devices",
-      "close": 1.37,
+      "close": 1.34,
       "chg": null,
-      "vol": 3641302.0,
-      "mcap": 425840000.0,
+      "vol": 5595139.0,
+      "mcap": 416510000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4690,14 +5113,14 @@
       "hits": 1
     },
     {
-      "ticker": "RXRX",
-      "name": "Recursion Pharmaceuticals Inc",
+      "ticker": "PRGO",
+      "name": "Perrigo Company plc",
       "sector": "Healthcare",
-      "industry": "Biotechnology",
-      "close": 3.27,
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "close": 13.56,
       "chg": null,
-      "vol": 7381656.0,
-      "mcap": 1750000000.0,
+      "vol": 2281567.0,
+      "mcap": 1880000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4709,10 +5132,10 @@
       "name": "Sharplink Inc",
       "sector": "Financial",
       "industry": "Capital Markets",
-      "close": 8.51,
+      "close": 8.33,
       "chg": null,
-      "vol": 4256478.0,
-      "mcap": 1850000000.0,
+      "vol": 8466966.0,
+      "mcap": 1810000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4724,10 +5147,25 @@
       "name": "Virgin Galactic Holdings Inc",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
-      "close": 3.07,
+      "close": 3.04,
       "chg": null,
-      "vol": 3640604.0,
-      "mcap": 465400000.0,
+      "vol": 6244110.0,
+      "mcap": 460850000.0,
+      "pe": null,
+      "screens": [
+        "pm_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "VRDN",
+      "name": "Viridian Therapeutics Inc",
+      "sector": "Healthcare",
+      "industry": "Biotechnology",
+      "close": 21.83,
+      "chg": null,
+      "vol": 1210696.0,
+      "mcap": 2470000000.0,
       "pe": null,
       "screens": [
         "pm_base"
@@ -4739,9 +5177,9 @@
       "name": "Leverage Shares 2X Long AAOI Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 1.95,
+      "close": 1.93,
       "chg": null,
-      "vol": 1241788.0,
+      "vol": 1611856.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4754,9 +5192,9 @@
       "name": "Tradr 2X Long AAOI Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 8.73,
+      "close": 8.64,
       "chg": null,
-      "vol": 3177363.0,
+      "vol": 3783845.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4769,9 +5207,9 @@
       "name": "Tradr 2X Short AAOI Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 15.89,
+      "close": 16.08,
       "chg": null,
-      "vol": 547001.0,
+      "vol": 607847.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4784,9 +5222,9 @@
       "name": "Direxion Daily AAPL Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 43.95,
+      "close": 44.15,
       "chg": null,
-      "vol": 569367.0,
+      "vol": 790870.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4799,9 +5237,9 @@
       "name": "Leverage Shares 2X Long ADBE Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 4.53,
+      "close": 4.36,
       "chg": null,
-      "vol": 1155905.0,
+      "vol": 1730142.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4814,9 +5252,9 @@
       "name": "ProShares Ultra Silver 2x Shares",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 74.51,
+      "close": 75.12,
       "chg": null,
-      "vol": 1231002.0,
+      "vol": 2023527.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4829,9 +5267,9 @@
       "name": "Direxion Daily AMD Bear 1X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 28.07,
+      "close": 27.99,
       "chg": null,
-      "vol": 182449.0,
+      "vol": 240869.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4844,9 +5282,9 @@
       "name": "Direxion Daily AMZN Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 34.22,
+      "close": 34.19,
       "chg": null,
-      "vol": 1172395.0,
+      "vol": 1668155.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4859,9 +5297,9 @@
       "name": "Tradr 2X Long APLD Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 6.7,
+      "close": 6.51,
       "chg": null,
-      "vol": 1475536.0,
+      "vol": 2132467.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4874,9 +5312,9 @@
       "name": "Tradr 2X Long APP Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.27,
+      "close": 14.28,
       "chg": null,
-      "vol": 638528.0,
+      "vol": 811410.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4889,9 +5327,9 @@
       "name": "ARK Genomic Revolution ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 47.58,
+      "close": 47.71,
       "chg": null,
-      "vol": 2455835.0,
+      "vol": 3043239.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4904,9 +5342,9 @@
       "name": "Tradr 2X Long ASTS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.99,
+      "close": 9.76,
       "chg": null,
-      "vol": 1847449.0,
+      "vol": 2365803.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4919,9 +5357,9 @@
       "name": "Tradr 2X Long AXTI Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 5.03,
+      "close": 5.06,
       "chg": null,
-      "vol": 6076667.0,
+      "vol": 7279134.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4934,9 +5372,9 @@
       "name": "Tradr 2X Long BE Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 33.6,
+      "close": 33.06,
       "chg": null,
-      "vol": 889407.0,
+      "vol": 1292881.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4949,9 +5387,9 @@
       "name": "Tradr 2X Short BE Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 6.27,
+      "close": 6.38,
       "chg": null,
-      "vol": 2050189.0,
+      "vol": 2772231.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4964,9 +5402,9 @@
       "name": "ProShares Ultra Bitcoin ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 12.99,
+      "close": 12.77,
       "chg": null,
-      "vol": 5322505.0,
+      "vol": 8857623.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4979,9 +5417,9 @@
       "name": "2x Bitcoin ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 16.75,
+      "close": 16.48,
       "chg": null,
-      "vol": 11338090.0,
+      "vol": 19217905.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -4994,9 +5432,9 @@
       "name": "T-REX 2X Long BMNR Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 17.98,
+      "close": 17.15,
       "chg": null,
-      "vol": 4320305.0,
+      "vol": 7515371.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5009,9 +5447,9 @@
       "name": "Defiance Daily Target 2X Short BMNR ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 5.61,
+      "close": 5.83,
       "chg": null,
-      "vol": 2897371.0,
+      "vol": 5082736.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5024,9 +5462,9 @@
       "name": "Bitwise Solana Staking ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 13.73,
+      "close": 13.46,
       "chg": null,
-      "vol": 1661602.0,
+      "vol": 3113790.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5039,9 +5477,9 @@
       "name": "T-Rex 2X Inverse Bitcoin Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 3.58,
+      "close": 3.63,
       "chg": null,
-      "vol": 14741337.0,
+      "vol": 28360708.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5056,7 +5494,7 @@
       "industry": "Exchange Traded Fund",
       "close": 2.96,
       "chg": null,
-      "vol": 5632199.0,
+      "vol": 7126259.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5069,9 +5507,9 @@
       "name": "GraniteShares 2x Long COIN Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 5.48,
+      "close": 5.03,
       "chg": null,
-      "vol": 19356614.0,
+      "vol": 38368440.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5084,9 +5522,9 @@
       "name": "T-REX 2X Inverse CRWV Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 3.43,
+      "close": 3.48,
       "chg": null,
-      "vol": 4271173.0,
+      "vol": 6885141.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5099,9 +5537,9 @@
       "name": "ProShares Ultra CRCL",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 21.21,
+      "close": 19.73,
       "chg": null,
-      "vol": 605146.0,
+      "vol": 1160460.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5114,9 +5552,9 @@
       "name": "T-REX 2X Inverse CRCL Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 2.1,
+      "close": 2.19,
       "chg": null,
-      "vol": 2712468.0,
+      "vol": 7296100.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5129,9 +5567,9 @@
       "name": "Leverage Shares 2X Long CRCL Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.35,
+      "close": 13.47,
       "chg": null,
-      "vol": 2625953.0,
+      "vol": 5425694.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5144,9 +5582,9 @@
       "name": "Tradr 2X Long CRDO Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 5.55,
+      "close": 5.57,
       "chg": null,
-      "vol": 2731054.0,
+      "vol": 3591182.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5159,9 +5597,9 @@
       "name": "Leverage Shares 2X Long CRM Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 10.19,
+      "close": 9.83,
       "chg": null,
-      "vol": 1057240.0,
+      "vol": 1411145.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5174,9 +5612,9 @@
       "name": "Leverage Shares 2X Long CRWV Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 16.23,
+      "close": 15.98,
       "chg": null,
-      "vol": 588154.0,
+      "vol": 1181729.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5189,9 +5627,9 @@
       "name": "Tradr 2X Long CRWV Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 13.53,
+      "close": 13.33,
       "chg": null,
-      "vol": 379279.0,
+      "vol": 562496.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5204,9 +5642,9 @@
       "name": "Defiance Daily Target 2X Short AMD ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 13.95,
+      "close": 13.83,
       "chg": null,
-      "vol": 1002137.0,
+      "vol": 1309290.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5219,9 +5657,9 @@
       "name": "Direxion Daily S&P Oil & Gas Exp. & Prod. Bear 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 30.69,
+      "close": 30.91,
       "chg": null,
-      "vol": 653511.0,
+      "vol": 1196710.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5234,9 +5672,9 @@
       "name": "Direxion Daily Real Estate Bull 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.53,
+      "close": 9.56,
       "chg": null,
-      "vol": 1771770.0,
+      "vol": 2717786.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5249,9 +5687,9 @@
       "name": "Direxion Daily Gold Miners Index Bear 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 36.06,
+      "close": 35.73,
       "chg": null,
-      "vol": 420002.0,
+      "vol": 618482.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5264,9 +5702,9 @@
       "name": "Direxion Daily Energy Bear 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 8.4,
+      "close": 8.42,
       "chg": null,
-      "vol": 11616455.0,
+      "vol": 15022925.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5279,9 +5717,9 @@
       "name": "Grayscale Ethereum Staking Mini ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 23.18,
+      "close": 23.05,
       "chg": null,
-      "vol": 3743319.0,
+      "vol": 7542484.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5294,9 +5732,9 @@
       "name": "iShares Ethereum Trust ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 18.32,
+      "close": 18.2,
       "chg": null,
-      "vol": 33569953.0,
+      "vol": 74444647.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5309,9 +5747,9 @@
       "name": "Grayscale Ethereum Staking ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 19.52,
+      "close": 19.41,
       "chg": null,
-      "vol": 4388310.0,
+      "vol": 8940312.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5324,9 +5762,9 @@
       "name": "ProShares Ultra Ether ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 16.19,
+      "close": 15.99,
       "chg": null,
-      "vol": 1524502.0,
+      "vol": 2948039.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5339,9 +5777,9 @@
       "name": "2x Ether ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.2,
+      "close": 24.9,
       "chg": null,
-      "vol": 7160641.0,
+      "vol": 13589786.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5354,9 +5792,9 @@
       "name": "GraniteShares 2x Long META Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 27.52,
+      "close": 27.75,
       "chg": null,
-      "vol": 735758.0,
+      "vol": 958054.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5369,9 +5807,9 @@
       "name": "MicroSectors FANG+ 3X Leveraged ETNs",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 31.76,
+      "close": 31.63,
       "chg": null,
-      "vol": 1370265.0,
+      "vol": 2139419.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5384,9 +5822,9 @@
       "name": "Leverage Shares 2x Long FUTU Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 4.0,
+      "close": 3.91,
       "chg": null,
-      "vol": 295898.0,
+      "vol": 382970.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5399,9 +5837,9 @@
       "name": "MicroSectors Gold Miners -3X Inverse Leveraged ETNs",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 19.46,
+      "close": 19.12,
       "chg": null,
-      "vol": 1681323.0,
+      "vol": 2084120.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5414,9 +5852,9 @@
       "name": "MicroSectors Gold Miners 3X Leveraged ETN",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 132.2,
+      "close": 134.27,
       "chg": null,
-      "vol": 780338.0,
+      "vol": 978805.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5429,9 +5867,9 @@
       "name": "Direxion Daily GOOGL Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 100.38,
+      "close": 101.24,
       "chg": null,
-      "vol": 606255.0,
+      "vol": 765479.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5444,9 +5882,9 @@
       "name": "Leverage Shares 2X Long GLW Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 11.59,
+      "close": 11.71,
       "chg": null,
-      "vol": 736132.0,
+      "vol": 876284.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5459,9 +5897,9 @@
       "name": "Grayscale Solana Staking ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 7.55,
+      "close": 7.41,
       "chg": null,
-      "vol": 1812881.0,
+      "vol": 3598136.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5474,9 +5912,9 @@
       "name": "Defiance Daily Target 2X Long IONQ ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 20.32,
+      "close": 20.04,
       "chg": null,
-      "vol": 693271.0,
+      "vol": 861259.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5489,9 +5927,9 @@
       "name": "Defiance Daily Target 2X Long IREN ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.64,
+      "close": 9.72,
       "chg": null,
-      "vol": 3389773.0,
+      "vol": 4695417.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5504,9 +5942,9 @@
       "name": "Tradr 2X Long IREN Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.0,
+      "close": 14.07,
       "chg": null,
-      "vol": 1221808.0,
+      "vol": 1885201.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5519,9 +5957,9 @@
       "name": "Tradr 2X Short IREN Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.91,
+      "close": 9.85,
       "chg": null,
-      "vol": 1042700.0,
+      "vol": 1407675.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5534,9 +5972,9 @@
       "name": "ProShares UltraShort Bloomberg Natural Gas -2x Shares",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 28.65,
+      "close": 28.36,
       "chg": null,
-      "vol": 1570147.0,
+      "vol": 2090358.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5549,9 +5987,9 @@
       "name": "Direxion Daily MSCI South Korea Bull 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 18.54,
+      "close": 18.6,
       "chg": null,
-      "vol": 14077814.0,
+      "vol": 16561610.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5564,9 +6002,9 @@
       "name": "Direxion Daily S&P Biotech Bear 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 7.8,
+      "close": 7.72,
       "chg": null,
-      "vol": 15539571.0,
+      "vol": 20252716.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5579,9 +6017,9 @@
       "name": "Tradr 2X Long ALAB Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 8.1,
+      "close": 7.85,
       "chg": null,
-      "vol": 559541.0,
+      "vol": 791672.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5594,9 +6032,9 @@
       "name": "Tradr 2X Long LITE Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.85,
+      "close": 25.78,
       "chg": null,
-      "vol": 1089748.0,
+      "vol": 1393915.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5609,9 +6047,9 @@
       "name": "Tradr 2X Short LITE Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 8.46,
+      "close": 8.45,
       "chg": null,
-      "vol": 1538113.0,
+      "vol": 1869649.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5624,9 +6062,9 @@
       "name": "Direxion Daily SpaceX Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 15.55,
+      "close": 15.47,
       "chg": null,
-      "vol": 1206131.0,
+      "vol": 1604012.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5639,9 +6077,9 @@
       "name": "Defiance Daily Target 2X Long LUNR ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 3.36,
+      "close": 3.3,
       "chg": null,
-      "vol": 826601.0,
+      "vol": 1076417.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5656,7 +6094,7 @@
       "industry": "Exchange Traded Fund",
       "close": 23.58,
       "chg": null,
-      "vol": 403394.0,
+      "vol": 712296.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5669,9 +6107,9 @@
       "name": "Direxion Daily META Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 26.64,
+      "close": 26.84,
       "chg": null,
-      "vol": 5302207.0,
+      "vol": 6382813.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5684,9 +6122,9 @@
       "name": "GraniteShares 2x Long MSFT Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 25.13,
+      "close": 24.88,
       "chg": null,
-      "vol": 88965.0,
+      "vol": 140979.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5699,9 +6137,9 @@
       "name": "Direxion Daily MSFT Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 37.82,
+      "close": 37.43,
       "chg": null,
-      "vol": 1403577.0,
+      "vol": 1842342.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5714,9 +6152,9 @@
       "name": "AdvisorShares Pure US Cannabis ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 4.95,
+      "close": 4.93,
       "chg": null,
-      "vol": 2343562.0,
+      "vol": 3224151.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5729,9 +6167,9 @@
       "name": "AdvisorShares MSOS 2x Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 2.96,
+      "close": 2.93,
       "chg": null,
-      "vol": 600669.0,
+      "vol": 783881.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5744,9 +6182,9 @@
       "name": "T-Rex 2X Long MSTR Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 31.03,
+      "close": 29.63,
       "chg": null,
-      "vol": 3495715.0,
+      "vol": 5678394.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5759,9 +6197,9 @@
       "name": "Defiance Daily Target 2x Long MSTR ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.28,
+      "close": 13.64,
       "chg": null,
-      "vol": 5917758.0,
+      "vol": 10333740.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5774,9 +6212,9 @@
       "name": "YieldMax MSTR Option Income Strategy ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.84,
+      "close": 14.56,
       "chg": null,
-      "vol": 1827304.0,
+      "vol": 3977576.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5789,9 +6227,9 @@
       "name": "T-Rex 2X Inverse MSTR Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 4.23,
+      "close": 4.39,
       "chg": null,
-      "vol": 18468518.0,
+      "vol": 34844292.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5804,9 +6242,9 @@
       "name": "Direxion Daily MU Bear 1X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 10.72,
+      "close": 10.69,
       "chg": null,
-      "vol": 2708989.0,
+      "vol": 3947876.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5819,9 +6257,9 @@
       "name": "GraniteShares 2x Long MU Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 19.57,
+      "close": 19.67,
       "chg": null,
-      "vol": 1670384.0,
+      "vol": 1989622.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5834,9 +6272,9 @@
       "name": "Defiance Daily Target 2X Short MU ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.4,
+      "close": 9.35,
       "chg": null,
-      "vol": 3985527.0,
+      "vol": 4907316.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5849,9 +6287,9 @@
       "name": "Direxion Daily Homebuilders & Supplies Bull 3X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 30.85,
+      "close": 30.66,
       "chg": null,
-      "vol": 537813.0,
+      "vol": 868700.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5864,9 +6302,9 @@
       "name": "Tema Space Innovators ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 22.65,
+      "close": 22.61,
       "chg": null,
-      "vol": 809291.0,
+      "vol": 1092871.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5879,9 +6317,9 @@
       "name": "Leverage Shares 2X Long NBIS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 14.56,
+      "close": 14.37,
       "chg": null,
-      "vol": 728524.0,
+      "vol": 1048936.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5894,9 +6332,9 @@
       "name": "GraniteShares 2x Long NBIS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 21.12,
+      "close": 20.84,
       "chg": null,
-      "vol": 1413139.0,
+      "vol": 1983279.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5909,9 +6347,9 @@
       "name": "Tradr 2X Short NBIS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 6.86,
+      "close": 6.96,
       "chg": null,
-      "vol": 3317099.0,
+      "vol": 4462388.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5924,9 +6362,9 @@
       "name": "Tradr 2X Long NBIS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 21.64,
+      "close": 21.35,
       "chg": null,
-      "vol": 487147.0,
+      "vol": 671201.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5939,9 +6377,9 @@
       "name": "Direxion Daily NFLX Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 17.89,
+      "close": 17.65,
       "chg": null,
-      "vol": 532779.0,
+      "vol": 882827.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5954,9 +6392,9 @@
       "name": "GraniteShares 2x Long NOW Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 8.38,
+      "close": 7.99,
       "chg": null,
-      "vol": 3326029.0,
+      "vol": 4284877.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5969,9 +6407,9 @@
       "name": "GraniteShares 2x Short NVDA Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 4.24,
+      "close": 4.22,
       "chg": null,
-      "vol": 67929372.0,
+      "vol": 82401331.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5984,9 +6422,9 @@
       "name": "GraniteShares 2x Long NVDA Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 31.68,
+      "close": 31.87,
       "chg": null,
-      "vol": 5092633.0,
+      "vol": 8215168.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -5999,9 +6437,9 @@
       "name": "T-Rex 2X Inverse NVIDIA Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.56,
+      "close": 9.5,
       "chg": null,
-      "vol": 2299419.0,
+      "vol": 2877948.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -6014,9 +6452,9 @@
       "name": "T-Rex 2X Long NVIDIA Daily Target ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 17.88,
+      "close": 17.99,
       "chg": null,
-      "vol": 3034156.0,
+      "vol": 3514249.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -6029,9 +6467,9 @@
       "name": "Defiance Daily Target 2x Long OKLO ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 9.45,
+      "close": 9.35,
       "chg": null,
-      "vol": 963907.0,
+      "vol": 1248573.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -6044,9 +6482,9 @@
       "name": "Leverage Shares 2X Long ONDS Daily ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 2.15,
+      "close": 2.1,
       "chg": null,
-      "vol": 1942214.0,
+      "vol": 2815119.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -6059,9 +6497,9 @@
       "name": "Defiance Daily Target 2X Long ONDS ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 5.36,
+      "close": 5.22,
       "chg": null,
-      "vol": 467355.0,
+      "vol": 577564.0,
       "mcap": null,
       "pe": null,
       "screens": [
@@ -6074,9 +6512,9 @@
       "name": "Direxion Daily ORCL Bull 2X ETF",
       "sector": "Financial",
       "industry": "Exchange Traded Fund",
-      "close": 7.24,
+      "close": 6.98,
       "chg": null,
-      "vol": 2432374.0,
+      "vol": 3985275.0,
       "mcap": null,
       "pe": null,
       "screens": [
