@@ -287,6 +287,24 @@
   .rr-tbl th{font-size:11px;letter-spacing:.4px;font-weight:600;color:var(--muted);padding:6px 11px;border-bottom:1px solid var(--border);text-transform:uppercase;text-align:left}
   .rr-tbl td{padding:6px 11px;font-size:13px;border-bottom:1px solid #eef1f5;text-align:left}
   .rr-tbl tr:last-child td{border-bottom:none}
+  .calc-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,24,40,.04);margin-bottom:12px}
+  .calc-hint{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.55}
+  .calc-adv{margin-top:6px;border-top:1px solid var(--border);padding-top:10px}
+  .calc-adv summary{font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;letter-spacing:.3px}
+  .calc-adv summary:hover{color:var(--accent)}
+  .bind-note{font-size:11px;line-height:1.6;padding:10px 13px;border-radius:8px;margin-bottom:12px;border:1px solid}
+  .bind-note.risk{background:rgba(229,72,77,.07);border-color:rgba(229,72,77,.3);color:#9b2c2f}
+  .bind-note.edge{background:rgba(47,111,237,.07);border-color:rgba(47,111,237,.3);color:#1b4fa8}
+  .bind-note b{font-weight:700}
+  .tl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .tl-card{border:1px solid var(--border);border-radius:8px;padding:11px 13px;background:var(--surface2)}
+  .tl-card .tl-h{font-size:11px;font-weight:700;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+  .tl-card ul{margin:0;padding-left:15px}
+  .tl-card li{font-size:11px;line-height:1.6;color:var(--text2);margin-bottom:4px}
+  .tl-card.d0{border-top:3px solid #16a34a}.tl-card.d02{border-top:3px solid #2f6fed}
+  .tl-card.d3{border-top:3px solid #d97706}.tl-card.d4{border-top:3px solid #a855f7}
+  @media(max-width:900px){.tl-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.tl-grid{grid-template-columns:1fr}}
 
   .loading{color:var(--muted);font-size:12px;letter-spacing:.4px;padding:18px;text-align:center}
   .err{color:var(--red);padding:11px 14px;font-size:12px}
@@ -653,7 +671,7 @@
 <!-- PAGE: POSITION SIZER -->
 <div class="page" id="page-calc">
   <div class="section">
-    <div class="sec-hdr"><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">Risk-Based · Fixed Fractional</span></div>
+    <div class="sec-hdr"><span class="sec-title">Position Sizing Calculator</span><span class="sec-sub">3-Stop Ladder · Edge-Based Sizing · T+3 Management</span></div>
     <div class="calc-grid">
       <div class="cp">
         <div class="cp-title">Trade Parameters</div>
@@ -663,23 +681,62 @@
         </div>
         <div class="form-row"><label class="form-lbl">Account Equity (USD)</label><input class="form-input" id="equity" type="number" value="100000" oninput="calc()"></div>
         <div class="form-row"><label class="form-lbl">Risk Per Trade (%)</label><input class="form-input" id="risk-pct" type="number" value="1" step="0.1" min="0.1" max="10" oninput="calc()"></div>
-        <div class="form-row"><label class="form-lbl">Entry Price ($)</label><input class="form-input" id="entry" type="number" value="150" oninput="calc()"></div>
-        <div class="form-row"><label class="form-lbl">Stop Loss ($)</label><input class="form-input" id="stop" type="number" value="144" oninput="calc()"></div>
-        <div class="form-row"><label class="form-lbl">Ticker (optional)</label><input class="form-input" id="ticker-inp" type="text" placeholder="e.g. AAPL" style="text-transform:uppercase"></div>
-        <button class="calc-btn" onclick="calc()">CALCULATE POSITION</button>
+        <div class="form-row"><label class="form-lbl">Ticker <span style="text-transform:none;font-weight:400">— looks up edges</span></label><input class="form-input" id="ticker-inp" type="text" placeholder="e.g. PAYS" style="text-transform:uppercase" oninput="lookupEdges()"></div>
+        <div class="form-row"><label class="form-lbl">Entry Price ($)</label><input class="form-input" id="entry" type="number" value="150" step="0.01" oninput="calc()"></div>
+        <div class="form-row"><label class="form-lbl">Final Stop — LoD ($)</label><input class="form-input" id="lod" type="number" value="144" step="0.01" oninput="calc()"></div>
+        <div class="form-row"><label class="form-lbl">Edges Present</label>
+          <input class="form-input" id="edges" type="number" value="0" min="0" max="8" step="1" oninput="calc()">
+          <div id="edge-src" class="calc-hint">Base 10% + 2.5% per edge</div>
+        </div>
+        <details class="calc-adv">
+          <summary>ATR targets (optional)</summary>
+          <div class="form-row" style="margin-top:10px"><label class="form-lbl">ATR ($)</label><input class="form-input" id="atr" type="number" value="" step="0.01" placeholder="e.g. 3.20" oninput="calc()"></div>
+          <div class="form-row"><label class="form-lbl">50-Day MA ($)</label><input class="form-input" id="sma50" type="number" value="" step="0.01" placeholder="e.g. 138.00" oninput="calc()"></div>
+          <div class="calc-hint">Drives the 4x / 8x / 10x ATR-from-50MA profit rules.</div>
+        </details>
       </div>
+
       <div>
-        <div class="calc-result" style="margin-bottom:14px">
-          <div class="res-row"><span class="res-lbl">Shares to Trade</span><span class="res-val pos" id="r-shares">—</span></div>
-          <div class="res-row"><span class="res-lbl">Max Risk $</span><span class="res-val neg" id="r-risk">—</span></div>
+        <div class="calc-result" style="margin-bottom:12px">
+          <div class="res-row"><span class="res-lbl">Total Shares</span><span class="res-val pos" id="r-shares">—</span></div>
+          <div class="res-row"><span class="res-lbl">Per Tranche (33%)</span><span class="res-val" id="r-tranche">—</span></div>
           <div class="res-row"><span class="res-lbl">Position Value</span><span class="res-val" id="r-value">—</span></div>
-          <div class="res-row"><span class="res-lbl">Risk Per Share</span><span class="res-val" id="r-rps">—</span></div>
           <div class="res-row"><span class="res-lbl">% of Equity</span><span class="res-val" id="r-pct">—</span></div>
+          <div class="res-row"><span class="res-lbl">Risk if Fully Stopped</span><span class="res-val neg" id="r-risk">—</span></div>
+          <div class="res-row"><span class="res-lbl">1R (first stop)</span><span class="res-val" id="r-runit">—</span></div>
         </div>
-        <div style="background:var(--surface);border:1px solid var(--border);padding:18px">
-          <div class="bc-title" style="margin-bottom:7px">R:R Targets</div>
-          <table class="rr-tbl"><thead><tr><th>R Multiple</th><th>Target Price</th><th>P&amp;L</th></tr></thead><tbody id="rr-body"></tbody></table>
+        <div id="bind-note" class="bind-note"></div>
+        <div class="calc-panel">
+          <div class="cp-title" style="margin-bottom:8px">Stop Ladder — 33% each</div>
+          <table class="rr-tbl"><thead><tr><th>Level</th><th>Price</th><th>Shares</th><th>Loss</th><th>Cumulative</th></tr></thead><tbody id="ladder-body"></tbody></table>
+          <div class="calc-hint" id="ladder-hint"></div>
         </div>
+        <div class="calc-panel">
+          <div class="cp-title" style="margin-bottom:8px">Targets &amp; Actions</div>
+          <table class="rr-tbl"><thead><tr><th>Level</th><th>Price</th><th>Gain</th><th>Action</th></tr></thead><tbody id="rr-body"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-panel" style="margin-top:16px">
+      <div class="cp-title" style="margin-bottom:10px">Management Timeline</div>
+      <div class="tl-grid">
+        <div class="tl-card d0"><div class="tl-h">Day 0 · Entry</div><ul>
+          <li>Three stops at 33% each, evenly spaced entry → LoD</li>
+          <li>Powerful catalyst: 1/3 at 2R, 1/3 at 10x ATR from 50-MA</li></ul></div>
+        <div class="tl-card d02"><div class="tl-h">Day 0–2 · Profit taking</div><ul>
+          <li>Profit &gt; 2R → shave 33%, adjust remaining stop sizes</li>
+          <li>&gt; 4R before Day 4 → consolidate all stops at breakeven</li>
+          <li>33%/66% stop hit before Day 4 → alert at prior day high; if triggered add 50% of remaining</li></ul></div>
+        <div class="tl-card d3"><div class="tl-h">Day 3 · Adjustment</div><ul>
+          <li>Reduce position size by 33%</li>
+          <li>Collapse to a single stop at breakeven</li></ul></div>
+        <div class="tl-card d4"><div class="tl-h">Day 4+ · ORL trail</div><ul>
+          <li>10-MA as mental stop</li>
+          <li>Close below on day X → stop to b/e on X+1 premarket, then to ORL</li>
+          <li>Trend follow-up at 8–10x ATR from 50-MA → close 1/3</li>
+          <li>Sideways below 4x ATR from 50-MA → add 50% of remaining</li>
+          <li>Repeat for X+n until exit</li></ul></div>
       </div>
     </div>
   </div>
@@ -1700,28 +1757,107 @@ function setDir(d){
   document.getElementById('btn-short').className='dir-btn'+(d==='short'?' as':'');
   calc();
 }
+// Edge sizing ladder from the notes: 10% base, +2.5% per edge.
+const EDGE_BASE=10, EDGE_STEP=2.5;
+
+// The ticker's edge count is already in the site's own data — a scan or
+// screen hit IS an edge — so the Ticker field fills it in.
+function lookupEdges(){
+  const t=(document.getElementById('ticker-inp').value||'').trim().toUpperCase();
+  const hint=document.getElementById('edge-src');
+  if(!t){hint.textContent='Base 10% + 2.5% per edge';calc();return}
+  const src=[];
+  let n=0;
+  const scan=(SCAN_DATA?.rows||[]).find(r=>r.ticker===t);
+  if(scan){n+=scan.hits||0;(scan.scans||[]).forEach(s=>{
+    const m=(SCAN_DATA.scans||[]).find(x=>x.id===s);
+    src.push(m?(m.mcap_group?`${m.label} ${m.mcap_group==='> $10B'?'L':'S'}`:m.label):s);
+  })}
+  const fv=(FV_DATA?.rows||[]).find(r=>r.ticker===t);
+  if(fv){n+=fv.hits||0;(fv.screens||[]).forEach(s=>src.push(
+    (FV_DATA.screens||[]).find(m=>m.id===s)?.label||s))}
+  if(n){
+    document.getElementById('edges').value=n;
+    hint.innerHTML=`<b>${n} edge${n===1?'':'s'}</b> found for ${esc(t)}: ${esc(src.slice(0,4).join(', '))}${src.length>4?` +${src.length-4} more`:''}`;
+  }else{
+    hint.textContent=`${t} is not in today's scans or screens — set edges manually.`;
+  }
+  calc();
+}
+
 function calc(){
   const equity=+document.getElementById('equity').value||0;
   const rpct=+document.getElementById('risk-pct').value||0;
   const entry=+document.getElementById('entry').value||0;
-  const stop=+document.getElementById('stop').value||0;
-  const rps=Math.abs(entry-stop); if(!rps)return;
-  const maxRisk=equity*rpct/100;
-  const shares=Math.floor(maxRisk/rps);
+  const lod=+document.getElementById('lod').value||0;
+  const edges=Math.max(0,+document.getElementById('edges').value||0);
+  const D=Math.abs(entry-lod);
+  if(!D||!entry||!equity)return;
+  const sign=dir==='long'?1:-1;
+
+  // R is the FIRST 33% stop distance, not the full stop — that is what makes
+  // "shave 33% at 2R on day 0-2" a reachable move rather than an 8% one.
+  const R=D/3;
+
+  // Three tranches behind three stops costs 2/3 of the risk a single stop at
+  // the same final level would:  (S/3)(D/3 + 2D/3 + D) = 2SD/3.
+  // So the same risk budget supports 1.5x the shares.
+  const budget=equity*rpct/100;
+  const sRisk=3*budget/(2*D);
+  const edgePct=EDGE_BASE+edges*EDGE_STEP;
+  const sEdge=equity*edgePct/100/entry;
+  const riskBinds=sRisk<=sEdge;
+  const shares=Math.max(0,Math.floor(Math.min(sRisk,sEdge)/3)*3);   // keep tranches equal
+  const tranche=shares/3;
   const posVal=shares*entry;
-  const pctEq=posVal/equity*100;
+  const risk=2*shares*D/3;
+
   document.getElementById('r-shares').textContent=shares.toLocaleString();
-  document.getElementById('r-risk').textContent=fmt$(maxRisk);
+  document.getElementById('r-tranche').textContent=tranche.toLocaleString()+' × 3';
   document.getElementById('r-value').textContent=fmt$(posVal);
-  document.getElementById('r-rps').textContent=fmt$(rps);
-  document.getElementById('r-pct').textContent=pctEq.toFixed(1)+'%';
-  const mult=dir==='long'?1:-1;
-  document.getElementById('rr-body').innerHTML=[1,1.5,2,3,4,5].map(r=>{
-    const target=entry+mult*rps*r;
-    const pnl=shares*rps*r;
-    const c=mult>0?'pos':'neg';
-    return`<tr><td style="color:var(--accent)">${r}R</td><td>${fmt$(target)}</td><td class="${c}">${mult>0?'+':'−'}${fmt$(pnl)}</td></tr>`;
+  document.getElementById('r-pct').textContent=(posVal/equity*100).toFixed(1)+'%';
+  document.getElementById('r-risk').textContent=`${fmt$(risk)} · ${(risk/equity*100).toFixed(2)}%`;
+  document.getElementById('r-runit').textContent=fmt$(R)+'/sh';
+
+  const single=Math.floor(budget/D);
+  document.getElementById('bind-note').className='bind-note '+(riskBinds?'risk':'edge');
+  document.getElementById('bind-note').innerHTML=riskBinds
+    ? `<b>Risk-capped.</b> The ${rpct}% budget allows ${Math.floor(sRisk).toLocaleString()} shares; ${edges} edge${edges===1?'':'s'} would have allowed ${Math.floor(sEdge).toLocaleString()} (${edgePct}% of equity). The 3-stop ladder still buys you size — a single stop at ${fmt$(lod)} would cap you at ${single.toLocaleString()}.`
+    : `<b>Concentration-capped.</b> ${edges} edge${edges===1?'':'s'} allows ${edgePct}% of equity = ${Math.floor(sEdge).toLocaleString()} shares, while the ${rpct}% risk budget would have permitted ${Math.floor(sRisk).toLocaleString()}. Actual risk drops to ${(risk/equity*100).toFixed(2)}%.`;
+
+  // Stop ladder — evenly spaced entry -> LoD, a third of the size behind each.
+  let cum=0;
+  document.getElementById('ladder-body').innerHTML=[1,2,3].map(k=>{
+    const price=entry-sign*(D*k/3);
+    const loss=tranche*(D*k/3);
+    cum+=loss;
+    const lbl=k===3?'Final · LoD':`${k===1?'33':'66'}%`;
+    return`<tr><td style="color:var(--accent)">${lbl}</td><td>${fmt$(price)}</td>
+      <td>${tranche.toLocaleString()}</td><td class="neg">−${fmt$(loss)}</td><td class="neg">−${fmt$(cum)}</td></tr>`;
   }).join('');
+  document.getElementById('ladder-hint').textContent=
+    `Laddered stops risk ${fmt$(risk)} versus ${fmt$(shares*D)} if all ${shares.toLocaleString()} shares sat behind the LoD alone — two thirds the exposure for the same position.`;
+
+  // Targets, with the action each one triggers.
+  const ACTIONS={2:'Shave 33% (Day 0–2)',4:'&gt; 4R before Day 4 → all stops to breakeven'};
+  let rows=[1,2,3,4,6].map(m=>{
+    const price=entry+sign*R*m;
+    const gain=shares*R*m;
+    return`<tr><td style="color:var(--accent)">${m}R</td><td>${fmt$(price)}</td>
+      <td class="pos">+${fmt$(gain)}</td><td style="font-size:11px">${ACTIONS[m]||'—'}</td></tr>`;
+  }).join('');
+
+  const atr=+document.getElementById('atr').value||0;
+  const sma50=+document.getElementById('sma50').value||0;
+  if(atr>0&&sma50>0){
+    const ATR_ACTIONS={4:'Sideways below this → add 50% of remaining',8:'Trend follow-up → close 1/3',10:'Take 1/3 (powerful catalyst)'};
+    rows+=[4,8,10].map(k=>{
+      const price=sma50+sign*k*atr;
+      return`<tr><td style="color:var(--accent2)">${k}× ATR</td><td>${fmt$(price)}</td>
+        <td class="neu" style="font-size:11px">from 50-MA</td><td style="font-size:11px">${ATR_ACTIONS[k]}</td></tr>`;
+    }).join('');
+  }
+  document.getElementById('rr-body').innerHTML=rows;
 }
 calc();
 </script>
