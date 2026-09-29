@@ -1,0 +1,43 @@
+name: Deploy Pages
+
+# Publishes the site whenever main changes — a merged PR, or a data commit
+# from any of the pipeline workflows.
+#
+# Until this existed, GitHub Pages was only published as the last two steps of
+# refresh_data.yml, which runs on a schedule. Merging a PR therefore changed
+# main without changing the site: code sat undeployed until the next scheduled
+# data refresh, up to about eight hours later.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Pages allows one deployment at a time. Superseding an in-flight deploy is
+# correct here: the newest commit is the one worth publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."             # serve entire repo root
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
