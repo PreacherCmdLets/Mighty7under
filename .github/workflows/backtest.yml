@@ -1,0 +1,67 @@
+name: Backtest Scans
+
+# Split out of refresh_data.yml. It used to be a step there gated on
+#   if: github.event.schedule == '35 21 * * 1-5'
+# which never matched a single run — GitHub delays scheduled workflows under
+# load and the reported schedule string did not line up, so the step silently
+# skipped for three weeks and data/backtest.json was never created. Its own
+# workflow needs no condition and fails visibly.
+on:
+  schedule:
+    # 22:30 UTC — after the US close, once a day on weekdays
+    - cron: "30 22 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      universe:
+        description: "How many liquid US tickers to replay"
+        required: false
+        default: "800"
+      years:
+        description: "Years of daily bars"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data          # share the data lock with the main refresh
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run backtest
+        run: |
+          python scripts/backtest.py \
+            --out-dir data \
+            --universe "${{ github.event.inputs.universe || '800' }}" \
+            --years "${{ github.event.inputs.years || '2' }}"
+
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: backtest scan validation [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git pull --rebase -X theirs origin main
+            git push origin HEAD
+          fi

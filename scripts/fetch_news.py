@@ -1,9 +1,15 @@
 """
-fetch_news.py  —  Mighty7under Finviz Calendar & Catalyst News
-==============================================================
+fetch_news.py  —  Mighty7under Finviz Catalyst News
+===================================================
 Scrapes finviz via the finvizfinance library and writes:
-  data/events.json  — upcoming US economic calendar (Key Events table)
   data/news.json    — market headlines + per-ticker catalyst news
+
+It used to write data/events.json too, but finviz retired its economic
+calendar: calendar.ashx now serves an EARNINGS calendar (ticker, epsEstimate,
+salesEstimate), whose rows share only the `date` field with what
+finvizfinance.calendar expects. That produced correctly-dated events with
+blank names, so the calendar half was removed and the Calendar tab now uses
+the live TradingView economic-calendar embed instead.
 
 The ticker list is taken from data/scans.json: the names your scans caught,
 most-hit first, so the catalyst feed explains the moves you are actually
@@ -22,20 +28,13 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
 import pandas as pd
 
-from finvizfinance.calendar import Calendar
 from finvizfinance.news import News
 from finvizfinance.quote import finvizfinance
-
-# finviz importance 3/2/1 -> the impact levels the Key Events table styles.
-IMPACT = {"3": "high", "2": "medium", "1": "low"}
-
-# "Tue Sep 08, 08:15 AM" / "Mon Sep 07"
-DT_FORMATS = ("%a %b %d, %I:%M %p", "%a %b %d")
 
 
 def clean(v):
@@ -44,55 +43,6 @@ def clean(v):
         return None
     s = str(v).strip()
     return None if s in ("", "-", "nan", "None") else s
-
-
-def parse_when(text: str, today: datetime):
-    """
-    Turn finviz's "Tue Sep 08, 08:15 AM" into (iso_date, time_label).
-
-    The string carries no year, so assume the calendar's own window: anything
-    more than ~6 months behind today has rolled into next year.
-    """
-    text = (text or "").strip()
-    for fmt in DT_FORMATS:
-        try:
-            dt = datetime.strptime(text, fmt).replace(year=today.year)
-        except ValueError:
-            continue
-        if dt.date() < today.date() - timedelta(days=180):
-            dt = dt.replace(year=today.year + 1)
-        has_time = fmt == DT_FORMATS[0]
-        return dt.strftime("%Y-%m-%d"), (dt.strftime("%I:%M %p").lstrip("0") if has_time else "All day")
-    return None, None
-
-
-def build_events(limit: int = 40) -> list:
-    """Upcoming US economic releases, today onward, highest impact first."""
-    df = Calendar().calendar()
-    if df is None or df.empty:
-        return []
-
-    today = datetime.now(ZoneInfo("America/New_York"))
-    events = []
-    for _, r in df.iterrows():
-        iso, tlabel = parse_when(r.get("Datetime"), today)
-        if iso is None or iso < today.strftime("%Y-%m-%d"):
-            continue        # drop already-released rows
-        impact = IMPACT.get(clean(r.get("Impact")) or "", "low")
-        events.append({
-            "date":     iso,
-            "time":     tlabel,
-            "event":    clean(r.get("Release")) or "—",
-            "impact":   impact,
-            "country":  "US",
-            "for":      clean(r.get("For")),
-            "actual":   clean(r.get("Actual")),
-            "expected": clean(r.get("Expected")),
-            "prior":    clean(r.get("Prior")),
-        })
-
-    events.sort(key=lambda e: (e["date"], e["time"]))
-    return events[:limit]
 
 
 def frame_rows(df: pd.DataFrame, n: int) -> list:
@@ -145,18 +95,6 @@ def main():
 
     ok = False
 
-    # ── Economic calendar ────────────────────────────────────────────────────
-    print("📅 Fetching finviz economic calendar…")
-    try:
-        events = build_events()
-        with open(os.path.join(args.out_dir, "events.json"), "w", encoding="utf-8") as f:
-            json.dump(events, f, indent=2)
-        high = sum(1 for e in events if e["impact"] == "high")
-        print(f"  ✓ {len(events)} upcoming events ({high} high impact)")
-        ok = True
-    except Exception as e:
-        print(f"  ✗ calendar: {type(e).__name__}: {e}", file=sys.stderr)
-
     # ── News ─────────────────────────────────────────────────────────────────
     news = {
         "updated_utc": datetime.now(timezone.utc).isoformat(),
@@ -192,7 +130,7 @@ def main():
 
     if not ok:
         # Everything failed (almost certainly a Cloudflare block). Leave the
-        # previous events.json / news.json in place.
+        # previous news.json in place.
         print("✗ All finviz fetches failed — keeping previous files", file=sys.stderr)
         sys.exit(1)
 
