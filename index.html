@@ -619,11 +619,11 @@
   <div class="section">
     <div class="sec-hdr"><span class="sec-title">Economic Calendar</span><span class="sec-sub">Upcoming US Releases</span></div>
     <div class="tbl-group">
-      <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events</span><span id="cal-sub" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">Finviz</span></div>
+      <div class="tbl-toggle open" onclick="tgl(this)"><span class="arr">▸</span><span class="gn">Key Events</span><span id="cal-sub" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">Nasdaq</span></div>
       <div class="tbl-wrap open">
         <table class="cal-tbl">
-          <thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Impact</th><th>For</th><th style="text-align:right">Actual</th><th style="text-align:right">Expected</th><th style="text-align:right">Prior</th></tr></thead>
-          <tbody id="cal-body"><tr><td colspan="8" class="loading">Loading…</td></tr></tbody>
+          <thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Impact</th><th style="text-align:right">Actual</th><th style="text-align:right">Consensus</th><th style="text-align:right">Previous</th></tr></thead>
+          <tbody id="cal-body"><tr><td colspan="7" class="loading">Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -945,7 +945,7 @@ function btTable(rows,horizons,empty){
       <td>${(r.n||0).toLocaleString('en-US')}</td>
       ${horizons.map(h=>`<td class="${cls(r['r'+h])}">${r['r'+h]==null?'—':fmtP(r['r'+h])}</td>`).join('')}
       <td class="${edge==null?'':edge>0?'edge-pos':'edge-neg'}">${edge==null?'—':fmtP(edge)}</td>
-      <td>${r.win==null?'—':fmtN(r.win,1)+'%'}</td>
+      <td${r.win_h&&r.win_h!==last?` title="measured at ${r.win_h}D — not enough history for ${last}D yet"`:''}>${r.win==null?'—':fmtN(r.win,1)+'%'+(r.win_h&&r.win_h!==last?`<span style="font-size:9px;color:var(--muted)"> @${r.win_h}D</span>`:'')}</td>
       <td class="${cls(r.median)}">${r.median==null?'—':fmtP(r.median)}</td>
     </tr>`}).join('');
   return`<div class="bt-wrap"><table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div>`;
@@ -1675,19 +1675,18 @@ async function loadData(){
       const newDay=e.date!==lastDate; lastDate=e.date;
       return`<tr${newDay?' style="border-top:2px solid var(--border)"':''}>
       <td data-label="Date">${newDay?dayLbl(e.date):''}</td>
-      <td data-label="Time">${e.time||'—'}</td>
+      <td data-label="Time" style="white-space:nowrap">${esc(e.time||'—')}</td>
       <td data-label="Event"${e.impact==='high'?' style="font-weight:600"':''}>${esc(e.event)}</td>
       <td data-label="Impact"><span class="i${(e.impact||'l')[0]}">${e.impact||'low'}</span></td>
-      <td data-label="For">${esc(e.for||'—')}</td>
       <td data-label="Actual" style="text-align:right;font-weight:600">${esc(e.actual||'—')}</td>
-      <td data-label="Expected" style="text-align:right">${esc(e.expected||'—')}</td>
-      <td data-label="Prior" style="text-align:right;color:var(--text2)">${esc(e.prior||'—')}</td>
+      <td data-label="Consensus" style="text-align:right">${esc(e.expected||'—')}</td>
+      <td data-label="Previous" style="text-align:right;color:var(--text2)">${esc(e.prior||'—')}</td>
     </tr>`}).join('');
     const hi=events.filter(e=>e.impact==='high').length;
     const cs=document.getElementById('cal-sub');
-    if(cs)cs.textContent=`Finviz · ${events.length} upcoming · ${hi} high impact`;
+    if(cs)cs.textContent=`Nasdaq · ${events.length} upcoming · ${hi} high impact`;
   }else{
-    document.getElementById('cal-body').innerHTML='<tr><td colspan="8" class="loading">No upcoming events</td></tr>';
+    document.getElementById('cal-body').innerHTML='<tr><td colspan="7" class="loading">No upcoming events</td></tr>';
   }
 
   // Ticker tape

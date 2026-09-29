@@ -67,21 +67,20 @@ jobs:
         continue-on-error: true
         run: python scripts/breadth_monitor.py --out-dir data
 
-      # ── 4b3. Scan validation (backtest) ────────────────────────────────────
-      # Heavier than the other steps (downloads 2y of bars for ~800 tickers),
-      # and the answer barely moves day to day — so only on the close run.
-      - name: Backtest scans
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 21 * * 1-5'
-        continue-on-error: true
-        run: python scripts/backtest.py --out-dir data
-
       # ── 4b4. Finviz saved screens ──────────────────────────────────────────
       # 14 screens, spaced ~1.5s apart. Same Cloudflare caveat as the news step.
       - name: Run Finviz screens
         continue-on-error: true
         run: python scripts/finviz_screens.py --out-dir data
 
-      # ── 4c. Finviz calendar + catalyst news ────────────────────────────────
+      # ── 4b5. Economic calendar (Nasdaq) ────────────────────────────────────
+      # finviz retired its economic calendar and TradingView's widget script
+      # now 403s, so events.json comes from Nasdaq's public JSON endpoint.
+      - name: Fetch economic calendar
+        continue-on-error: true
+        run: python scripts/fetch_calendar.py --out-dir data
+
+      # ── 4c. Finviz catalyst news ───────────────────────────────────────────
       # Runs after the scans so it can pull news for the tickers they caught.
       # Non-fatal: finviz is behind Cloudflare and blocks by IP reputation, so
       # a Wall leaves the previous events.json / news.json in place.
