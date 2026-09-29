@@ -14,8 +14,6 @@ on:
 
 permissions:
   contents: write             # commit data/ back to repo
-  pages: write                # deploy to GitHub Pages
-  id-token: write
 
 # Never run two refreshes at once — parallel runs race on the data commits
 concurrency:
@@ -23,11 +21,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refresh-and-deploy:
+  refresh-data:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       # ── 1. Checkout ────────────────────────────────────────────────────────
@@ -104,13 +99,6 @@ jobs:
             git push origin HEAD
           fi
 
-      # ── 6. Upload site for Pages deployment ───────────────────────────────
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "."             # serve entire repo root
-
-      # ── 7. Deploy to GitHub Pages ──────────────────────────────────────────
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # Publishing moved to deploy.yml, which fires on every push to main —
+      # so a merged PR reaches the site immediately instead of waiting for the
+      # next scheduled refresh, and the data commit above triggers it too.

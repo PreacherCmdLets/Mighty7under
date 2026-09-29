@@ -1677,6 +1677,18 @@ async function loadData(){
   renderRS(snap);
 
   // Calendar
+  // Releases arrive stamped ET (market time). You trade from Central, so show
+  // CT first with ET alongside — both zones change DST on the same dates, so
+  // CT is always ET − 1h and no tz database is needed.
+  const ctLabel=lbl=>{
+    const m=/^(\d{1,2}):(\d{2})\s*ET$/.exec((lbl||'').trim());
+    if(!m)return esc(lbl||'—');
+    let h=+m[1]-1, prev=false;
+    if(h<0){h+=24;prev=true}            // e.g. 00:15 ET is 23:15 CT the day before
+    const ct=`${String(h).padStart(2,'0')}:${m[2]}`;
+    return `<b>${ct} CT</b>${prev?'<span style="color:var(--red);font-size:9px"> prev day</span>':''}`
+      +`<span style="color:var(--muted);font-size:10px"> · ${esc(m[1].padStart(2,'0'))}:${m[2]} ET</span>`;
+  };
   if(events?.length){
     const dayLbl=d=>{const t=new Date(d+'T12:00:00'),n=new Date();
       const same=x=>x.toDateString()===t.toDateString();
@@ -1689,7 +1701,7 @@ async function loadData(){
       const newDay=e.date!==lastDate; lastDate=e.date;
       return`<tr${newDay?' style="border-top:2px solid var(--border)"':''}>
       <td data-label="Date">${newDay?dayLbl(e.date):''}</td>
-      <td data-label="Time" style="white-space:nowrap">${esc(e.time||'—')}</td>
+      <td data-label="Time" style="white-space:nowrap">${ctLabel(e.time)}</td>
       <td data-label="Event"${e.impact==='high'?' style="font-weight:600"':''}>${esc(e.event)}</td>
       <td data-label="Impact"><span class="i${(e.impact||'l')[0]}">${e.impact||'low'}</span></td>
       <td data-label="Actual" style="text-align:right;font-weight:600">${esc(e.actual||'—')}</td>
