@@ -681,7 +681,13 @@
         </div>
         <div class="form-row"><label class="form-lbl">Account Equity (USD)</label><input class="form-input" id="equity" type="number" value="100000" oninput="calc()"></div>
         <div class="form-row"><label class="form-lbl">Risk Per Trade (%)</label><input class="form-input" id="risk-pct" type="number" value="1" step="0.1" min="0.1" max="10" oninput="calc()"></div>
-        <div class="form-row"><label class="form-lbl">Ticker <span style="text-transform:none;font-weight:400">— looks up edges</span></label><input class="form-input" id="ticker-inp" type="text" placeholder="e.g. PAYS" style="text-transform:uppercase" oninput="lookupEdges()"></div>
+        <div class="form-row"><label class="form-lbl">Ticker <span style="text-transform:none;font-weight:400">— looks up edges</span></label>
+          <div style="display:flex;gap:6px">
+            <input class="form-input" id="ticker-inp" type="text" placeholder="e.g. PAYS" style="text-transform:uppercase" oninput="lookupEdges()" onkeydown="if(event.key==='Enter')fetchLive()">
+            <button class="scan-btn" id="live-btn" onclick="fetchLive()" style="white-space:nowrap" title="Pull last price, day low, ATR and 50-MA">⟳ Live</button>
+          </div>
+          <div id="live-status" class="calc-hint"></div>
+        </div>
         <div class="form-row"><label class="form-lbl">Entry Price ($)</label><input class="form-input" id="entry" type="number" value="150" step="0.01" oninput="calc()"></div>
         <div class="form-row"><label class="form-lbl">Final Stop — LoD ($)</label><input class="form-input" id="lod" type="number" value="144" step="0.01" oninput="calc()"></div>
         <div class="form-row"><label class="form-lbl">Edges Present</label>
@@ -692,7 +698,15 @@
           <summary>ATR targets (optional)</summary>
           <div class="form-row" style="margin-top:10px"><label class="form-lbl">ATR ($)</label><input class="form-input" id="atr" type="number" value="" step="0.01" placeholder="e.g. 3.20" oninput="calc()"></div>
           <div class="form-row"><label class="form-lbl">50-Day MA ($)</label><input class="form-input" id="sma50" type="number" value="" step="0.01" placeholder="e.g. 138.00" oninput="calc()"></div>
-          <div class="calc-hint">Drives the 4x / 8x / 10x ATR-from-50MA profit rules.</div>
+          <div class="calc-hint">Drives the 4x / 8x / 10x ATR-from-50MA profit rules. ⟳ Live fills these too.</div>
+        </details>
+        <details class="calc-adv">
+          <summary>Live data key</summary>
+          <div class="form-row" style="margin-top:10px">
+            <label class="form-lbl">Twelve Data API key</label>
+            <input class="form-input" id="td-key" type="password" placeholder="paste key" oninput="saveKey()">
+          </div>
+          <div class="calc-hint">Stored only in this browser (localStorage) — never committed to the repo and not visible to anyone else who opens the site. Free tier at twelvedata.com allows 800 requests/day; each ⟳ Live uses three.</div>
         </details>
       </div>
 
@@ -1759,6 +1773,79 @@ function setDir(d){
 // Edge sizing ladder from the notes: 10% base, +2.5% per edge.
 const EDGE_BASE=10, EDGE_STEP=2.5;
 
+// ── Live quotes (Twelve Data) ───────────────────────────────────────────────
+// The key lives in localStorage, never in the repo: this is a public static
+// page, so a hardcoded key would sit in git history and burn the quota of
+// anyone who opened the site.
+const TD_KEY='m7_td_key';
+function saveKey(){
+  try{localStorage.setItem(TD_KEY,document.getElementById('td-key').value.trim())}catch(e){}
+}
+function loadKey(){
+  try{
+    const k=localStorage.getItem(TD_KEY)||'';
+    const el=document.getElementById('td-key');
+    if(el)el.value=k;
+    return k;
+  }catch(e){return''}
+}
+
+const liveMsg=(html,cls)=>{
+  const el=document.getElementById('live-status');
+  if(el)el.innerHTML=cls?`<span class="${cls}">${html}</span>`:html;
+};
+
+async function td(path,params,key){
+  const q=new URLSearchParams({...params,apikey:key});
+  const r=await fetch(`https://api.twelvedata.com/${path}?${q}`);
+  const j=await r.json();
+  // Twelve Data reports errors as 200 with a `code`, not an HTTP status.
+  if(j&&j.code&&j.code!==200)throw new Error(j.message||`error ${j.code}`);
+  return j;
+}
+
+async function fetchLive(){
+  const t=(document.getElementById('ticker-inp').value||'').trim().toUpperCase();
+  if(!t){liveMsg('Enter a ticker first.','neg');return}
+  const key=loadKey();
+  if(!key){liveMsg('No API key — open “Live data key” below and paste one.','neg');return}
+
+  const btn=document.getElementById('live-btn');
+  btn.disabled=true; btn.textContent='…';
+  liveMsg('Fetching…');
+  try{
+    // quote is the one that matters; ATR/SMA only drive the optional targets,
+    // so a failure there must not block entry and LoD.
+    const [q,a,s]=await Promise.all([
+      td('quote',{symbol:t},key),
+      td('atr',{symbol:t,interval:'1day',time_period:14,outputsize:1},key).catch(()=>null),
+      td('sma',{symbol:t,interval:'1day',time_period:50,outputsize:1},key).catch(()=>null),
+    ]);
+    const close=parseFloat(q.close), low=parseFloat(q.low);
+    if(!isFinite(close)||!isFinite(low))throw new Error('no price in response');
+
+    document.getElementById('entry').value=close.toFixed(2);
+    document.getElementById('lod').value=low.toFixed(2);
+    const atr=parseFloat(a?.values?.[0]?.atr);
+    const sma=parseFloat(s?.values?.[0]?.sma);
+    if(isFinite(atr))document.getElementById('atr').value=atr.toFixed(2);
+    if(isFinite(sma))document.getElementById('sma50').value=sma.toFixed(2);
+
+    lookupEdges();     // also refreshes the edge count, then calls calc()
+
+    const open=q.is_market_open===true||q.is_market_open==='true';
+    const stamp=esc(q.datetime||'');
+    liveMsg(open
+      ? `<b>${esc(t)}</b> ${fmt$(close)} · LoD ${fmt$(low)} · ${stamp} — <b>market open, the low can still fall</b>, so re-pull before you commit size.`
+      : `<b>${esc(t)}</b> ${fmt$(close)} · LoD ${fmt$(low)} · ${stamp} — market closed, low is final.`,
+      open?'neu':'pos');
+  }catch(e){
+    liveMsg(`Live fetch failed: ${esc(e.message)} — enter Entry and LoD by hand.`,'neg');
+  }finally{
+    btn.disabled=false; btn.textContent='⟳ Live';
+  }
+}
+
 // The ticker's edge count is already in the site's own data — a scan or
 // screen hit IS an edge — so the Ticker field fills it in.
 function lookupEdges(){
@@ -1858,6 +1945,7 @@ function calc(){
   }
   document.getElementById('rr-body').innerHTML=rows;
 }
+loadKey();
 calc();
 </script>
 
