@@ -14,17 +14,27 @@ Why Nasdaq and not finviz or TradingView:
   * Nasdaq's public calendar endpoint returns clean JSON per day and needs no
     key: gmt, country, eventName, actual, consensus, previous, description.
 
-Two quirks in Nasdaq's response, both verified against releases whose weekday
-is fixed, and both corrected here:
+Two quirks in Nasdaq's response, both corrected here:
 
-  * The `date` query parameter runs ONE DAY LATE. Asking for 2026-10-03 returns
-    Nonfarm Payrolls (always a Friday; the real date was 2026-10-02), asking for
-    2026-10-02 returns Initial Jobless Claims (always a Thursday) and the ISM
-    Manufacturing PMI (first business day, 2026-10-01). So a release dated T is
-    fetched by requesting T+1. If Nasdaq ever fixes this the calendar will shift
-    a day early — the check is simply whether Nonfarm Payrolls lands on a Friday.
+  * Each event is returned under TWO query dates — its real date and the day
+    after. Nonfarm Payrolls (always a Friday) comes back for both 2026-10-02
+    and 2026-10-03, and nothing in a row says which date it belongs to. So an
+    event's real date is the EARLIEST query date it appears under, and a repeat
+    on the immediately following day is dropped as the same event. The window
+    therefore starts a day before `today`, purely so an event that truly
+    belongs to yesterday is recognised as yesterday's rather than being
+    mistaken for today's. A gap of more than one day means a genuinely separate
+    release (weekly Jobless Claims, for instance), so those are kept.
   * The `gmt` field is NOT GMT. Nonfarm Payrolls reads 08:30 and the ISM PMI
     10:00, which are their Eastern release times. Labelled ET accordingly.
+
+Sanity check if this ever drifts: Nonfarm Payrolls must land on a Friday and
+Initial Jobless Claims on a Thursday.
+
+Note that repeated names on the SAME day are kept deliberately. Nasdaq lists
+"Core PCE Price Index" twice at 08:30 — once month-over-month (consensus 0.3%)
+and once year-over-year (consensus 3.4%) — distinguished only in `description`.
+Both are watched, so collapsing them would drop real data.
 
 Nasdaq carries no importance field, so `impact` here is DERIVED from the event
 name against the list below — it is our classification, not Nasdaq's.
@@ -99,12 +109,15 @@ def main():
 
     print(f"📅 Fetching {args.days} days of economic events…")
     events, failures = [], 0
-    for i in range(args.days):
-        release = today + timedelta(days=i)          # the date we want
-        query = (release + timedelta(days=1)).isoformat()   # Nasdaq runs a day late
-        day = release.isoformat()
+    # seen[(name, time)] = the last day this event was assigned to, so a repeat
+    # on the very next day is recognised as the same release rather than a new one.
+    seen = {}
+    start = today - timedelta(days=1)      # see the docstring: one day of lead-in
+    for i in range(args.days + 1):
+        day_date = start + timedelta(days=i)
+        day = day_date.isoformat()
         try:
-            rows = fetch_day(session, query)
+            rows = fetch_day(session, day)
         except Exception as e:
             failures += 1
             print(f"  ✗ {day}: {type(e).__name__}: {e}", file=sys.stderr)
@@ -119,9 +132,19 @@ def main():
                 continue
             gmt = clean(r.get("gmt")) or ""
             # Field is named `gmt` but carries Eastern times (see module docstring).
+            label = f"{gmt} ET" if re.match(r"^\d{1,2}:\d{2}$", gmt) else (gmt or "—")
+
+            key = (name, label)
+            if seen.get(key) == day_date - timedelta(days=1):
+                seen[key] = day_date       # same release, echoed a day later
+                continue
+            seen[key] = day_date
+
+            if day_date < today:           # lead-in day exists only to anchor dates
+                continue
             events.append({
                 "date":     day,
-                "time":     f"{gmt} ET" if re.match(r"^\d{1,2}:\d{2}$", gmt) else (gmt or "—"),
+                "time":     label,
                 "event":    name,
                 "impact":   impact_of(name),
                 "country":  "US",
@@ -131,7 +154,7 @@ def main():
             })
             kept += 1
         print(f"  ✓ {day}: {kept}")
-        if i < args.days - 1:
+        if i < args.days:
             time.sleep(args.delay)
 
     if not events:
