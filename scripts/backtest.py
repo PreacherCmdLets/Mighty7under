@@ -175,7 +175,9 @@ def summarise(name: str, label: str, mask: pd.DataFrame, fwd: dict,
     out = {"id": name, "label": label}
     n = 0
     for h in HORIZONS:
-        vals = fwd[h].where(mask).stack(dropna=True)
+        # .stack(dropna=True) was removed in pandas 2.3+; stack then drop, which
+        # behaves identically on both the old and new implementations.
+        vals = fwd[h].where(mask).stack().dropna()
         vals = vals[np.isfinite(vals)]
         if h == HORIZONS[-1]:
             n = int(vals.size)
@@ -191,10 +193,9 @@ def summarise(name: str, label: str, mask: pd.DataFrame, fwd: dict,
     return out if n else None
 
 
-def live_validation(out_dir: str, close: pd.DataFrame, fwd: dict,
-                    baseline: dict) -> list:
-    """Forward returns on the picks actually recorded by run_scans.py."""
-    picks = {}          # scan_id -> list of (date, ticker)
+def load_picks(out_dir: str) -> dict:
+    """scan_id -> [(date, ticker)] from every recorded scan_history file."""
+    picks = {}
     for path in sorted(glob.glob(os.path.join(out_dir, "scan_history", "*.json"))):
         try:
             with open(path, encoding="utf-8") as fh:
@@ -206,7 +207,12 @@ def live_validation(out_dir: str, close: pd.DataFrame, fwd: dict,
             for sid, tickers in (scans or {}).items():
                 for t in tickers or []:
                     picks.setdefault(sid, []).append((day, t))
+    return picks
 
+
+def live_validation(picks: dict, close: pd.DataFrame, fwd: dict,
+                    baseline: dict) -> list:
+    """Forward returns on the picks actually recorded by run_scans.py."""
     rows = []
     for sid, entries in sorted(picks.items()):
         rec = {"id": sid, "label": SCAN_LABELS.get(sid, sid), "n": 0}
@@ -230,10 +236,20 @@ def live_validation(out_dir: str, close: pd.DataFrame, fwd: dict,
             b = baseline.get(f"r{h}")
             rec[f"edge{h}"] = (round(rec[f"r{h}"] - b, 2)
                                if rec[f"r{h}"] is not None and b is not None else None)
-        last = vals_by_h[HORIZONS[-1]]
-        rec["n"] = len(last)
-        rec["win"] = round(float(np.mean([x > 0 for x in last])) * 100, 1) if last else None
-        rec["median"] = round(float(np.median(last)) * 100, 2) if last else None
+        # Count picks at the SHORTEST horizon: scan history is young, so the
+        # longest horizon is often empty (a 20-session forward return needs 20
+        # sessions after the pick) and counting off it would report n=0 while
+        # the shorter horizons clearly have data.
+        rec["n"] = len(vals_by_h[HORIZONS[0]])
+        # Win rate and median come from the deepest horizon that actually has
+        # data, and rec["win_h"] says which, so the UI never implies 20-day
+        # evidence it does not have.
+        scored = [h for h in HORIZONS if vals_by_h[h]]
+        best = scored[-1] if scored else None
+        vals = vals_by_h[best] if best else []
+        rec["win_h"] = best
+        rec["win"] = round(float(np.mean([x > 0 for x in vals])) * 100, 1) if vals else None
+        rec["median"] = round(float(np.median(vals)) * 100, 2) if vals else None
         if any(rec[f"r{h}"] is not None for h in HORIZONS):
             rows.append(rec)
     return rows
@@ -271,7 +287,7 @@ def main():
     # Baseline: hold anything in the universe for the same horizon.
     baseline = {}
     for h in HORIZONS:
-        v = fwd[h].stack(dropna=True)
+        v = fwd[h].stack().dropna()
         v = v[np.isfinite(v)]
         baseline[f"r{h}"] = round(float(v.mean()) * 100, 2) if v.size else None
     print(f"  ✓ baseline 20d: {baseline.get('r20')}%")
@@ -298,8 +314,28 @@ def main():
         except Exception as e:
             print(f"  ✗ {name}: {type(e).__name__}: {e}", file=sys.stderr)
 
+    # ── Live pass ────────────────────────────────────────────────────────────
+    # The picks are mostly small caps with tiny float, while the universe above
+    # is the most liquid names — measured overlap was 7% (19 of 271), so the
+    # live table would validate almost nothing off the universe frame alone.
+    # Download the picked tickers themselves and score them on their own frame,
+    # leaving the universe (and therefore the baseline) untouched.
     print("📌 Validating recorded picks…")
-    live = live_validation(args.out_dir, close, fwd, baseline)
+    picks = load_picks(args.out_dir)
+    pick_tickers = sorted({t for entries in picks.values() for _, t in entries})
+    live = []
+    if pick_tickers:
+        missing = [t for t in pick_tickers if t not in close.columns]
+        live_close = close
+        if missing:
+            print(f"  ↓ {len(missing)} picked ticker(s) not in the universe — fetching")
+            extra, _, _ = download_prices(missing, args.years)
+            if extra is not None and not extra.empty:
+                live_close = pd.concat(
+                    [close, extra.reindex(index=close.index)], axis=1)
+                live_close = live_close.loc[:, ~live_close.columns.duplicated()]
+        live_fwd = {h: live_close.shift(-h) / live_close - 1 for h in HORIZONS}
+        live = live_validation(picks, live_close, live_fwd, baseline)
     print(f"  ✓ {len(live)} scan(s) with recorded picks")
 
     payload = {

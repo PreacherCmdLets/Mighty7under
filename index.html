@@ -945,7 +945,7 @@ function btTable(rows,horizons,empty){
       <td>${(r.n||0).toLocaleString('en-US')}</td>
       ${horizons.map(h=>`<td class="${cls(r['r'+h])}">${r['r'+h]==null?'—':fmtP(r['r'+h])}</td>`).join('')}
       <td class="${edge==null?'':edge>0?'edge-pos':'edge-neg'}">${edge==null?'—':fmtP(edge)}</td>
-      <td>${r.win==null?'—':fmtN(r.win,1)+'%'}</td>
+      <td${r.win_h&&r.win_h!==last?` title="measured at ${r.win_h}D — not enough history for ${last}D yet"`:''}>${r.win==null?'—':fmtN(r.win,1)+'%'+(r.win_h&&r.win_h!==last?`<span style="font-size:9px;color:var(--muted)"> @${r.win_h}D</span>`:'')}</td>
       <td class="${cls(r.median)}">${r.median==null?'—':fmtP(r.median)}</td>
     </tr>`}).join('');
   return`<div class="bt-wrap"><table><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div>`;
