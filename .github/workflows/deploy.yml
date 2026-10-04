@@ -7,9 +7,23 @@ name: Deploy Pages
 # refresh_data.yml, which runs on a schedule. Merging a PR therefore changed
 # main without changing the site: code sat undeployed until the next scheduled
 # data refresh, up to about eight hours later.
+#
+# `push` alone is NOT enough, and relying on it froze the site for five days.
+# GitHub deliberately suppresses push-triggered workflows for commits made with
+# GITHUB_TOKEN, so the pipeline's own data commits — pushed by
+# github-actions[bot] — never fired this. `workflow_run` covers them: it fires
+# when a data workflow finishes, whoever pushed. `push` still covers human
+# merges, which is the faster path for a code change.
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows:
+      - "Refresh Dashboard Data"
+      - "Scrape Watchlists"
+      - "Backtest Scans"
+      - "Backfill Market Monitor"
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -32,6 +46,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # On a workflow_run the default checkout is the SHA that started the
+          # triggering workflow — i.e. before its data commit. Take main's head
+          # so the deploy carries the data that run just produced.
+          ref: main
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
