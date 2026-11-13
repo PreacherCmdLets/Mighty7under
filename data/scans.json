@@ -1,6 +1,6 @@
 {
-  "updated_utc": "2026-11-13T02:05:16.646292+00:00",
-  "updated_label": "2026-11-12 20:05 CST",
+  "updated_utc": "2026-11-13T19:58:06.851007+00:00",
+  "updated_label": "2026-11-13 13:58 CST",
   "source": "TradingView Screener",
   "scans": [
     {
@@ -9,7 +9,7 @@
       "group": "Momentum",
       "mcap_group": "$300M \u2013 $10B",
       "timeframe": "1 Week",
-      "count": 15,
+      "count": 13,
       "ok": true,
       "skipped": false
     },
@@ -19,7 +19,7 @@
       "group": "Momentum",
       "mcap_group": "$300M \u2013 $10B",
       "timeframe": "1 Month",
-      "count": 24,
+      "count": 29,
       "ok": true,
       "skipped": false
     },
@@ -39,7 +39,7 @@
       "group": "Momentum",
       "mcap_group": "$300M \u2013 $10B",
       "timeframe": "6 Months",
-      "count": 12,
+      "count": 11,
       "ok": true,
       "skipped": false
     },
@@ -49,7 +49,7 @@
       "group": "Momentum",
       "mcap_group": "> $10B",
       "timeframe": "1 Week",
-      "count": 2,
+      "count": 0,
       "ok": true,
       "skipped": false
     },
@@ -59,7 +59,7 @@
       "group": "Momentum",
       "mcap_group": "> $10B",
       "timeframe": "1 Month",
-      "count": 2,
+      "count": 3,
       "ok": true,
       "skipped": false
     },
@@ -79,7 +79,7 @@
       "group": "Momentum",
       "mcap_group": "> $10B",
       "timeframe": "6 Months",
-      "count": 1,
+      "count": 2,
       "ok": true,
       "skipped": false
     },
@@ -89,7 +89,7 @@
       "group": "Growth & Tightness",
       "mcap_group": null,
       "timeframe": null,
-      "count": 56,
+      "count": 54,
       "ok": true,
       "skipped": false
     },
@@ -99,7 +99,7 @@
       "group": "Growth & Tightness",
       "mcap_group": null,
       "timeframe": null,
-      "count": 3,
+      "count": 5,
       "ok": true,
       "skipped": false
     },
@@ -109,7 +109,7 @@
       "group": "Growth & Tightness",
       "mcap_group": null,
       "timeframe": null,
-      "count": 7,
+      "count": 6,
       "ok": true,
       "skipped": false
     },
@@ -139,7 +139,7 @@
       "group": "Growth & Tightness",
       "mcap_group": null,
       "timeframe": null,
-      "count": 26,
+      "count": 19,
       "ok": true,
       "skipped": false
     }
@@ -148,13 +148,35 @@
     {
       "ticker": "APPN",
       "name": "Appian Corporation",
-      "close": 55.15,
-      "chg": 2.89,
-      "vol": 1102451.0,
-      "mcap": 3936832676.0,
+      "close": 54.75,
+      "chg": -0.73,
+      "vol": 401783.0,
+      "mcap": 3908279259.0,
       "float": 36406308.0,
-      "volm": 7.03,
-      "rvol": 1.0,
+      "volm": 7.05,
+      "rvol": 0.37,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small",
+        "mom_1m_small",
+        "strongest_jk",
+        "daily_tightness"
+      ],
+      "hits": 4,
+      "perf_6m": 184.27,
+      "perf_1m": 42.32
+    },
+    {
+      "ticker": "VIA",
+      "name": "Via Transportation, Inc.",
+      "close": 42.54,
+      "chg": 1.02,
+      "vol": 396626.0,
+      "mcap": 3500696822.0,
+      "float": 32577248.0,
+      "volm": 6.36,
+      "rvol": 0.4,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -163,210 +185,179 @@
         "strongest_jk"
       ],
       "hits": 3,
-      "perf_6m": 186.34,
-      "perf_1m": 42.32
+      "perf_6m": 193.38,
+      "perf_1m": 32.73
     },
     {
-      "ticker": "SEZL",
-      "name": "Sezzle Inc.",
-      "close": 154.67,
-      "chg": 1.32,
-      "vol": 550889.0,
-      "mcap": 5225278499.0,
-      "float": 18700294.0,
-      "volm": 7.54,
-      "rvol": 0.67,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "strongest_jk",
-        "daily_tightness",
-        "fundamental_growth"
-      ],
-      "hits": 3
-    },
-    {
-      "ticker": "KNSA",
-      "name": "Kiniksa Pharmaceuticals International, plc",
-      "close": 96.28,
-      "chg": 0.54,
-      "vol": 368780.0,
-      "mcap": 7564883797.0,
-      "float": 45530686.0,
-      "volm": 5.52,
-      "rvol": 0.4,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "strongest_jk",
-        "daily_tightness",
-        "fundamental_growth"
-      ],
-      "hits": 3
-    },
-    {
-      "ticker": "AVEX",
-      "name": "AEVEX Corp.",
-      "close": 13.76,
-      "chg": 13.44,
-      "vol": 5950155.0,
-      "mcap": 1744341126.0,
-      "float": 32444130.0,
-      "volm": 11.66,
-      "rvol": 3.49,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "post_earnings_base"
-      ],
-      "hits": 2,
-      "perf_w": 33.46
-    },
-    {
-      "ticker": "PANL",
-      "name": "Pangaea Logistics Solutions Ltd.",
-      "close": 9.46,
-      "chg": 7.01,
-      "vol": 1512761.0,
-      "mcap": 619381876.0,
-      "float": 31303417.0,
-      "volm": 4.82,
-      "rvol": 3.07,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "fundamental_growth"
-      ],
-      "hits": 2,
-      "perf_w": 24.47
-    },
-    {
-      "ticker": "ALIT",
-      "name": "Alight, Inc.",
-      "close": 12.52,
-      "chg": 2.45,
-      "vol": 428475.0,
-      "mcap": 337541171.0,
-      "float": 22659849.0,
-      "volm": 10.28,
-      "rvol": 0.39,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small",
-        "daily_tightness"
-      ],
-      "hits": 2,
-      "perf_1m": 34.19
-    },
-    {
-      "ticker": "FCN",
-      "name": "FTI Consulting, Inc.",
-      "close": 198.62,
-      "chg": 0.71,
-      "vol": 302221.0,
-      "mcap": 5413226732.0,
-      "float": 26598518.0,
-      "volm": 3.72,
-      "rvol": 0.47,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small",
-        "daily_tightness"
-      ],
-      "hits": 2,
-      "perf_1m": 42.94
-    },
-    {
-      "ticker": "EPAM",
-      "name": "EPAM Systems, Inc.",
-      "close": 163.83,
-      "chg": 0.62,
-      "vol": 796720.0,
-      "mcap": 8359153268.0,
-      "float": 49232229.0,
-      "volm": 4.76,
-      "rvol": 0.4,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small",
-        "daily_tightness"
-      ],
-      "hits": 2,
-      "perf_1m": 43.48
-    },
-    {
-      "ticker": "ALMR",
-      "name": "Alamar Biosciences, Inc.",
-      "close": 31.76,
-      "chg": 0.47,
-      "vol": 430435.0,
-      "mcap": 2206737288.0,
-      "float": 35879351.0,
-      "volm": 9.33,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "mom_1m_small"
-      ],
-      "hits": 2,
-      "perf_w": 21.97,
-      "perf_1m": 32.94
-    },
-    {
-      "ticker": "DIOD",
-      "name": "Diodes Incorporated",
-      "close": 91.6,
-      "chg": 0.36,
-      "vol": 400605.0,
-      "mcap": 4186147870.0,
-      "float": 44614872.0,
-      "volm": 6.26,
-      "rvol": 0.62,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "strongest_jk"
-      ],
-      "hits": 2,
-      "perf_w": 21.21
-    },
-    {
-      "ticker": "OPRT",
-      "name": "Oportun Financial Corporation",
-      "close": 11.76,
-      "chg": -0.34,
-      "vol": 612439.0,
-      "mcap": 541898677.0,
-      "float": 42103989.0,
-      "volm": 4.9,
-      "rvol": 0.65,
+      "ticker": "CRCT",
+      "name": "Cricut, Inc.",
+      "close": 8.57,
+      "chg": 0.82,
+      "vol": 575506.0,
+      "mcap": 1785162314.0,
+      "float": 45756283.0,
+      "volm": 6.12,
+      "rvol": 0.27,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_6m_small",
+        "mom_1m_small",
         "daily_tightness"
       ],
-      "hits": 2,
-      "perf_6m": 120.64
+      "hits": 3,
+      "perf_6m": 114.25,
+      "perf_1m": 31.44
     },
     {
-      "ticker": "SRZN",
-      "name": "Surrozen, Inc.",
-      "close": 31.67,
-      "chg": -0.66,
-      "vol": 134042.0,
-      "mcap": 603682841.0,
-      "float": 9879508.0,
-      "volm": 7.92,
-      "rvol": 0.73,
+      "ticker": "SEZL",
+      "name": "Sezzle Inc.",
+      "close": 154.72,
+      "chg": 0.03,
+      "vol": 182322.0,
+      "mcap": 5226967816.0,
+      "float": 18700294.0,
+      "volm": 7.4,
+      "rvol": 0.22,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth",
+        "strongest_jk",
+        "daily_tightness"
+      ],
+      "hits": 3
+    },
+    {
+      "ticker": "OPRT",
+      "name": "Oportun Financial Corporation",
+      "close": 11.72,
+      "chg": -0.34,
+      "vol": 167684.0,
+      "mcap": 540055486.0,
+      "float": 42103989.0,
+      "volm": 4.76,
+      "rvol": 0.18,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small",
+        "mom_1m_small",
+        "daily_tightness"
+      ],
+      "hits": 3,
+      "perf_6m": 119.89,
+      "perf_1m": 31.1
+    },
+    {
+      "ticker": "DCTH",
+      "name": "Delcath Systems, Inc.",
+      "close": 20.64,
+      "chg": -3.46,
+      "vol": 380504.0,
+      "mcap": 718025672.0,
+      "float": 32181219.0,
+      "volm": 5.27,
+      "rvol": 0.33,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "mom_1w_small",
+        "fundamental_growth"
+      ],
+      "hits": 3,
+      "perf_1m": 35.43,
+      "perf_w": 42.34
+    },
+    {
+      "ticker": "LRMR",
+      "name": "Larimar Therapeutics, Inc.",
+      "close": 3.06,
+      "chg": 13.15,
+      "vol": 1681168.0,
+      "mcap": 317362370.0,
+      "float": 48004646.0,
+      "volm": 10.42,
+      "rvol": 1.44,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_1m": 42.09,
+      "perf_w": 29.72
+    },
+    {
+      "ticker": "PUBM",
+      "name": "PubMatic, Inc.",
+      "close": 20.5,
+      "chg": 7.78,
+      "vol": 1247046.0,
+      "mcap": 933234845.0,
+      "float": 36877108.0,
+      "volm": 6.47,
+      "rvol": 1.62,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_6m": 117.16,
+      "perf_w": 22.46
+    },
+    {
+      "ticker": "AZTA",
+      "name": "Azenta, Inc.",
+      "close": 44.85,
+      "chg": 2.27,
+      "vol": 382594.0,
+      "mcap": 1965025602.0,
+      "float": 43118374.0,
+      "volm": 6.35,
+      "rvol": 0.37,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_6m": 170.7,
+      "perf_w": 20.32
+    },
+    {
+      "ticker": "ECO",
+      "name": "Okeanis Eco Tankers Corp.",
+      "close": 88.94,
+      "chg": 1.45,
+      "vol": 638201.0,
+      "mcap": 3410738866.0,
+      "float": 20001093.0,
+      "volm": 5.15,
+      "rvol": 0.61,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth",
+        "strongest_jk"
+      ],
+      "hits": 2
+    },
+    {
+      "ticker": "TREE",
+      "name": "LendingTree, Inc.",
+      "close": 35.74,
+      "chg": 1.22,
+      "vol": 124742.0,
+      "mcap": 501939248.0,
+      "float": 12126844.0,
+      "volm": 6.31,
+      "rvol": 0.22,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -374,36 +365,115 @@
         "daily_tightness"
       ],
       "hits": 2,
-      "perf_1m": 31.74
+      "perf_1m": 46.24
     },
     {
-      "ticker": "COCO",
-      "name": "The Vita Coco Company, Inc.",
-      "close": 64.7,
-      "chg": -0.93,
-      "vol": 1048149.0,
-      "mcap": 3692031477.0,
-      "float": 48104035.0,
+      "ticker": "LMRI",
+      "name": "Lumexa Imaging Holdings, Inc.",
+      "close": 15.08,
+      "chg": 0.94,
+      "vol": 151052.0,
+      "mcap": 1448810568.0,
+      "float": 25565262.0,
       "volm": 5.31,
-      "rvol": 0.92,
+      "rvol": 0.3,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "daily_tightness",
-        "fundamental_growth"
+        "mom_6m_small",
+        "mom_1m_small"
+      ],
+      "hits": 2,
+      "perf_6m": 110.32,
+      "perf_1m": 44.58
+    },
+    {
+      "ticker": "EPAM",
+      "name": "EPAM Systems, Inc.",
+      "close": 165.26,
+      "chg": 0.87,
+      "vol": 478011.0,
+      "mcap": 8432116354.0,
+      "float": 49232229.0,
+      "volm": 4.77,
+      "rvol": 0.24,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "daily_tightness"
+      ],
+      "hits": 2,
+      "perf_1m": 42.22
+    },
+    {
+      "ticker": "PRAX",
+      "name": "Praxis Precision Medicines, Inc.",
+      "close": 326.96,
+      "chg": 0.68,
+      "vol": 194746.0,
+      "mcap": 9139040156.0,
+      "float": 26289207.0,
+      "volm": 6.04,
+      "rvol": 0.4,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_1m": 36.39,
+      "perf_w": 22.33
+    },
+    {
+      "ticker": "ANRO",
+      "name": "Alto Neuroscience, Inc.",
+      "close": 30.61,
+      "chg": -0.03,
+      "vol": 356659.0,
+      "mcap": 1227786186.0,
+      "float": 36339740.0,
+      "volm": 7.62,
+      "rvol": 0.53,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_1m": 40.22,
+      "perf_w": 38.38
+    },
+    {
+      "ticker": "KNSA",
+      "name": "Kiniksa Pharmaceuticals International, plc",
+      "close": 96.0,
+      "chg": -0.29,
+      "vol": 238630.0,
+      "mcap": 7542883455.0,
+      "float": 45530686.0,
+      "volm": 5.5,
+      "rvol": 0.29,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth",
+        "strongest_jk"
       ],
       "hits": 2
     },
     {
       "ticker": "MAX",
       "name": "MediaAlpha, Inc.",
-      "close": 14.81,
-      "chg": -1.07,
-      "vol": 671836.0,
-      "mcap": 876634598.0,
+      "close": 14.67,
+      "chg": -0.95,
+      "vol": 194926.0,
+      "mcap": 868347718.0,
       "float": 26895226.0,
-      "volm": 5.72,
-      "rvol": 0.4,
+      "volm": 5.79,
+      "rvol": 0.13,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -411,77 +481,18 @@
         "daily_tightness"
       ],
       "hits": 2,
-      "perf_1m": 45.62
+      "perf_1m": 41.6
     },
     {
-      "ticker": "VIA",
-      "name": "Via Transportation, Inc.",
-      "close": 42.11,
-      "chg": -1.64,
-      "vol": 996954.0,
-      "mcap": 3465311372.0,
-      "float": 32577248.0,
-      "volm": 6.44,
-      "rvol": 1.06,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small",
-        "strongest_jk"
-      ],
-      "hits": 2,
-      "perf_6m": 190.41
-    },
-    {
-      "ticker": "ONT",
-      "name": "Onterris, Inc.",
-      "close": 23.08,
-      "chg": -1.66,
-      "vol": 578919.0,
-      "mcap": 811256993.0,
-      "float": 31943330.0,
-      "volm": 6.51,
-      "rvol": 0.86,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "mom_1m_small"
-      ],
-      "hits": 2,
-      "perf_w": 27.06,
-      "perf_1m": 74.45
-    },
-    {
-      "ticker": "ARDT",
-      "name": "Ardent Health, Inc.",
-      "close": 17.68,
-      "chg": -2.8,
-      "vol": 626232.0,
-      "mcap": 2491755380.0,
-      "float": 21968037.0,
-      "volm": 4.94,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small",
-        "mom_1m_small"
-      ],
-      "hits": 2,
-      "perf_w": 20.68,
-      "perf_1m": 52.68
-    },
-    {
-      "ticker": "TRAX",
-      "name": "First Tracks Biotherapeutics, Inc.",
-      "close": 48.7,
-      "chg": -3.62,
-      "vol": 311346.0,
-      "mcap": 2046271797.0,
-      "float": 35854926.0,
-      "volm": 7.95,
-      "rvol": 0.49,
+      "ticker": "SGHT",
+      "name": "Sight Sciences, Inc.",
+      "close": 10.87,
+      "chg": -1.14,
+      "vol": 141349.0,
+      "mcap": 603865558.0,
+      "float": 36198158.0,
+      "volm": 6.2,
+      "rvol": 0.26,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -489,19 +500,39 @@
         "mom_1m_small"
       ],
       "hits": 2,
-      "perf_6m": 171.01,
-      "perf_1m": 44.42
+      "perf_6m": 110.15,
+      "perf_1m": 32.34
+    },
+    {
+      "ticker": "CMCO",
+      "name": "Columbus McKinnon Corporation",
+      "close": 20.63,
+      "chg": -2.46,
+      "vol": 164211.0,
+      "mcap": 596755107.0,
+      "float": 28021400.0,
+      "volm": 6.4,
+      "rvol": 0.23,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small",
+        "mom_1w_small"
+      ],
+      "hits": 2,
+      "perf_1m": 31.99,
+      "perf_w": 23.02
     },
     {
       "ticker": "CHPT",
       "name": "ChargePoint Holdings, Inc.",
-      "close": 12.05,
-      "chg": -3.68,
-      "vol": 626391.0,
-      "mcap": 323546417.0,
+      "close": 11.65,
+      "chg": -3.32,
+      "vol": 427092.0,
+      "mcap": 312806287.0,
       "float": 23721569.0,
-      "volm": 8.29,
-      "rvol": 0.64,
+      "volm": 8.49,
+      "rvol": 0.44,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -509,79 +540,19 @@
         "mom_1m_small"
       ],
       "hits": 2,
-      "perf_3m": 92.49,
-      "perf_1m": 67.59
+      "perf_3m": 86.1,
+      "perf_1m": 65.25
     },
     {
-      "ticker": "CRCT",
-      "name": "Cricut, Inc.",
-      "close": 8.5,
-      "chg": -4.28,
-      "vol": 1000489.0,
-      "mcap": 1770581081.0,
-      "float": 45756283.0,
-      "volm": 6.05,
-      "rvol": 0.49,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small",
-        "mom_1m_small"
-      ],
-      "hits": 2,
-      "perf_6m": 112.5,
-      "perf_1m": 30.57
-    },
-    {
-      "ticker": "LMRI",
-      "name": "Lumexa Imaging Holdings, Inc.",
-      "close": 14.94,
-      "chg": -6.33,
-      "vol": 397702.0,
-      "mcap": 1435360095.0,
-      "float": 25565262.0,
-      "volm": 5.27,
-      "rvol": 0.83,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small",
-        "mom_1m_small"
-      ],
-      "hits": 2,
-      "perf_6m": 108.37,
-      "perf_1m": 38.85
-    },
-    {
-      "ticker": "ETON",
-      "name": "Eton Pharmaceuticals, Inc.",
-      "close": 61.45,
-      "chg": -10.16,
-      "vol": 1017322.0,
-      "mcap": 1772354126.0,
-      "float": 27421174.0,
-      "volm": 6.62,
-      "rvol": 1.37,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small",
-        "mom_1w_small"
-      ],
-      "hits": 2,
-      "perf_6m": 111.6,
-      "perf_w": 20.14
-    },
-    {
-      "ticker": "ENGN",
-      "name": "enGene Therapeutics Inc.",
-      "close": 2.28,
-      "chg": 26.67,
-      "vol": 11909681.0,
-      "mcap": 152797187.0,
-      "float": 28439314.0,
-      "volm": 7.61,
-      "rvol": 10.57,
+      "ticker": "SLSN",
+      "name": "Solesence, Inc.",
+      "close": 1.73,
+      "chg": 90.32,
+      "vol": 14440333.0,
+      "mcap": 64218166.0,
+      "float": 18331837.0,
+      "volm": 10.24,
+      "rvol": 74.72,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -590,15 +561,15 @@
       "hits": 1
     },
     {
-      "ticker": "CURI",
-      "name": "CuriosityStream Inc.",
-      "close": 2.86,
-      "chg": 20.68,
-      "vol": 6187036.0,
-      "mcap": 169706751.0,
-      "float": 40207310.0,
-      "volm": 5.65,
-      "rvol": 9.84,
+      "ticker": "LFMD",
+      "name": "LifeMD, Inc.",
+      "close": 2.2,
+      "chg": 32.94,
+      "vol": 5513234.0,
+      "mcap": 106046659.0,
+      "float": 39173369.0,
+      "volm": 9.31,
+      "rvol": 4.59,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -607,960 +578,117 @@
       "hits": 1
     },
     {
-      "ticker": "PUBM",
-      "name": "PubMatic, Inc.",
-      "close": 19.02,
-      "chg": 3.88,
-      "vol": 1273912.0,
-      "mcap": 865859795.0,
-      "float": 36877108.0,
-      "volm": 6.31,
-      "rvol": 1.89,
+      "ticker": "LFTO",
+      "name": "Liftoff Mobile, Inc.",
+      "close": 23.72,
+      "chg": 26.78,
+      "vol": 6903529.0,
+      "mcap": 4016543640.0,
+      "float": 31124659.0,
+      "volm": 6.96,
+      "rvol": 7.86,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_6m_small"
+        "post_earnings_base"
       ],
-      "hits": 1,
-      "perf_6m": 101.48
+      "hits": 1
     },
     {
-      "ticker": "INSW",
-      "name": "International Seaways, Inc.",
-      "close": 104.65,
-      "chg": 3.34,
-      "vol": 566967.0,
-      "mcap": 5353406772.0,
-      "float": 43425530.0,
-      "volm": 5.49,
+      "ticker": "MRLN",
+      "name": "Merlin, Inc.",
+      "close": 1.21,
+      "chg": 25.47,
+      "vol": 38212555.0,
+      "mcap": 122292013.0,
+      "float": 27641030.0,
+      "volm": 13.09,
+      "rvol": 14.17,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "post_earnings_base"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PICS",
+      "name": "PicS N.V.",
+      "close": 7.42,
+      "chg": 6.68,
+      "vol": 574734.0,
+      "mcap": 962187502.0,
+      "float": 22152580.0,
+      "volm": 8.44,
+      "rvol": 0.99,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "BRCB",
+      "name": "Black Rock Coffee Bar, Inc.",
+      "close": 10.28,
+      "chg": 6.64,
+      "vol": 503634.0,
+      "mcap": 507447514.0,
+      "float": 21731991.0,
+      "volm": 9.35,
       "rvol": 0.68,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "AAON",
-      "name": "AAON, Inc.",
-      "close": 78.8,
-      "chg": 3.24,
-      "vol": 1300832.0,
-      "mcap": 6498047681.0,
-      "float": 68913334.0,
-      "volm": 7.77,
-      "rvol": 0.62,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "CHRD",
-      "name": "Chord Energy Corporation",
-      "close": 147.05,
-      "chg": 2.5,
-      "vol": 515094.0,
-      "mcap": 7820588928.0,
-      "float": 50914298.0,
-      "volm": 3.94,
-      "rvol": 0.53,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "YOU",
-      "name": "Clear Secure, Inc.",
-      "close": 56.79,
-      "chg": 2.49,
-      "vol": 1426826.0,
-      "mcap": 7456407169.0,
-      "float": 92468609.0,
-      "volm": 5.06,
-      "rvol": 0.68,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ECO",
-      "name": "Okeanis Eco Tankers Corp.",
-      "close": 87.67,
-      "chg": 2.24,
-      "vol": 1283490.0,
-      "mcap": 3362036009.0,
-      "float": 20001093.0,
-      "volm": 5.43,
-      "rvol": 1.3,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "strongest_jk"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "HAE",
-      "name": "Haemonetics Corporation",
-      "close": 122.71,
-      "chg": 1.8,
-      "vol": 597593.0,
-      "mcap": 5587907884.0,
-      "float": 44681031.0,
-      "volm": 3.44,
-      "rvol": 0.76,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small"
-      ],
-      "hits": 1,
-      "perf_6m": 114.27
-    },
-    {
-      "ticker": "CSTL",
-      "name": "Castle Biosciences, Inc.",
-      "close": 34.5,
-      "chg": 1.5,
-      "vol": 440801.0,
-      "mcap": 1063231082.0,
-      "float": 30201934.0,
-      "volm": 5.55,
-      "rvol": 0.81,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
         "daily_tightness"
       ],
       "hits": 1
     },
     {
-      "ticker": "KNTK",
-      "name": "Kinetik Holdings Inc.",
-      "close": 54.48,
-      "chg": 1.43,
-      "vol": 1022807.0,
-      "mcap": 8956612060.0,
-      "float": 64449614.0,
-      "volm": 3.92,
-      "rvol": 0.77,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PARR",
-      "name": "Par Pacific Holdings, Inc. Common Stock",
-      "close": 72.03,
-      "chg": 1.19,
-      "vol": 464635.0,
-      "mcap": 3607043553.0,
-      "float": 48659571.0,
-      "volm": 5.96,
-      "rvol": 0.45,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "OSPN",
-      "name": "OneSpan Inc.",
-      "close": 22.43,
-      "chg": 1.13,
-      "vol": 588851.0,
-      "mcap": 827550166.0,
-      "float": 36148603.0,
-      "volm": 5.36,
-      "rvol": 0.5,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "CVI",
-      "name": "CVR Energy Inc.",
-      "close": 41.06,
-      "chg": 1.11,
-      "vol": 1575483.0,
-      "mcap": 4127786559.0,
-      "float": 29328813.0,
-      "volm": 6.74,
-      "rvol": 0.44,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "AMPH",
-      "name": "Amphastar Pharmaceuticals, Inc.",
-      "close": 28.87,
-      "chg": 0.94,
-      "vol": 374915.0,
-      "mcap": 1231367674.0,
-      "float": 30988828.0,
-      "volm": 3.75,
-      "rvol": 0.65,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "LPG",
-      "name": "Dorian LPG Ltd.",
-      "close": 47.8,
-      "chg": 0.84,
-      "vol": 481829.0,
-      "mcap": 2053644655.0,
-      "float": 36960038.0,
-      "volm": 4.64,
-      "rvol": 0.71,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SGHT",
-      "name": "Sight Sciences, Inc.",
-      "close": 10.99,
-      "chg": 0.64,
-      "vol": 459127.0,
-      "mcap": 610812947.0,
-      "float": 36198158.0,
-      "volm": 6.28,
-      "rvol": 0.85,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_6m_small"
-      ],
-      "hits": 1,
-      "perf_6m": 112.57
-    },
-    {
-      "ticker": "OOMA",
-      "name": "Ooma, Inc.",
-      "close": 18.39,
-      "chg": 0.49,
-      "vol": 162538.0,
-      "mcap": 507563986.0,
-      "float": 24250188.0,
-      "volm": 3.72,
-      "rvol": 0.66,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "WHD",
-      "name": "Cactus, Inc. Class A Common Stock",
-      "close": 61.75,
-      "chg": 0.46,
-      "vol": 952577.0,
-      "mcap": 4957340917.0,
-      "float": 69825387.0,
-      "volm": 4.73,
-      "rvol": 1.16,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PI",
-      "name": "Impinj, Inc.",
-      "close": 175.32,
-      "chg": 0.44,
-      "vol": 135246.0,
-      "mcap": 5410301664.0,
-      "float": 30055337.0,
-      "volm": 6.26,
-      "rvol": 0.34,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "BRZE",
-      "name": "Braze, Inc.",
-      "close": 46.61,
-      "chg": 0.28,
-      "vol": 3823933.0,
-      "mcap": 5294170084.0,
-      "float": 87730569.0,
-      "volm": 1.63,
-      "rvol": 0.62,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "GCT",
-      "name": "GigaCloud Technology Inc",
-      "close": 64.79,
-      "chg": 0.19,
-      "vol": 656527.0,
-      "mcap": 2286846912.0,
-      "float": 26834550.0,
-      "volm": 5.34,
-      "rvol": 0.86,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "strongest_jk"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PAYS",
-      "name": "Paysign, Inc.",
-      "close": 9.49,
-      "chg": 0.11,
-      "vol": 1926932.0,
-      "mcap": 539547620.0,
-      "float": 41323695.0,
-      "volm": 8.57,
-      "rvol": 1.32,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ARW",
-      "name": "Arrow Electronics, Inc.",
-      "close": 198.2,
-      "chg": 0.09,
-      "vol": 398288.0,
-      "mcap": 10020498495.0,
-      "float": 50133019.0,
-      "volm": 4.55,
-      "rvol": 0.63,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "TMDX",
-      "name": "TransMedics Group, Inc.",
-      "close": 92.0,
-      "chg": -0.01,
-      "vol": 1054603.0,
-      "mcap": 3195517301.0,
-      "float": 33391539.0,
-      "volm": 6.32,
-      "rvol": 0.66,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small"
-      ],
-      "hits": 1,
-      "perf_w": 26.91
-    },
-    {
-      "ticker": "ATRO",
-      "name": "Astronics Corporation",
-      "close": 60.31,
-      "chg": -0.03,
-      "vol": 625651.0,
-      "mcap": 2594980460.0,
-      "float": 35208478.0,
-      "volm": 6.19,
-      "rvol": 0.93,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ANIP",
-      "name": "ANI Pharmaceuticals, Inc.",
-      "close": 71.06,
-      "chg": -0.04,
-      "vol": 361301.0,
-      "mcap": 1615179163.0,
-      "float": 19972435.0,
-      "volm": 3.21,
-      "rvol": 0.57,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "MAN",
-      "name": "ManpowerGroup",
-      "close": 46.05,
-      "chg": -0.13,
-      "vol": 461030.0,
-      "mcap": 2141581502.0,
-      "float": 45686218.0,
-      "volm": 4.49,
-      "rvol": 0.78,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SLDE",
-      "name": "Slide Insurance Holdings, Inc.",
-      "close": 25.96,
-      "chg": -0.31,
-      "vol": 764347.0,
-      "mcap": 3043775051.0,
-      "float": 73761360.0,
-      "volm": 3.63,
-      "rvol": 0.64,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PCOR",
-      "name": "Procore Technologies, Inc.",
-      "close": 77.23,
-      "chg": -0.37,
-      "vol": 1668536.0,
-      "mcap": 11553513696.0,
-      "float": 123518509.0,
-      "volm": 4.33,
-      "rvol": 0.37,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_large"
-      ],
-      "hits": 1,
-      "perf_1m": 37.35
-    },
-    {
-      "ticker": "SBCF",
-      "name": "Seacoast Banking Corporation of Florida",
-      "close": 33.58,
-      "chg": -0.42,
-      "vol": 562434.0,
-      "mcap": 3239868316.0,
-      "float": 94692454.0,
-      "volm": 2.45,
-      "rvol": 0.7,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "TYL",
-      "name": "Tyler Technologies, Inc.",
-      "close": 423.59,
-      "chg": -0.45,
-      "vol": 579960.0,
-      "mcap": 16841736886.0,
-      "float": 39549172.0,
-      "volm": 3.58,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "BLZE",
-      "name": "Backblaze, Inc.",
-      "close": 8.79,
-      "chg": -0.45,
-      "vol": 1371400.0,
-      "mcap": 555528002.0,
-      "float": 59800914.0,
-      "volm": 10.27,
-      "rvol": 0.37,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "GKOS",
-      "name": "Glaukos Corporation",
-      "close": 246.03,
-      "chg": -0.46,
-      "vol": 808479.0,
-      "mcap": 14564206809.0,
-      "float": 56846665.0,
-      "volm": 5.3,
-      "rvol": 0.29,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_large"
-      ],
-      "hits": 1,
-      "perf_1m": 45.12
-    },
-    {
-      "ticker": "TNK",
-      "name": "Teekay Tankers Ltd.",
-      "close": 88.5,
-      "chg": -0.52,
-      "vol": 1204598.0,
-      "mcap": 3069189907.0,
-      "float": 23997598.0,
-      "volm": 4.51,
-      "rvol": 2.23,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "EME",
-      "name": "EMCOR Group, Inc.",
-      "close": 662.77,
-      "chg": -0.6,
-      "vol": 261362.0,
-      "mcap": 29017399234.0,
-      "float": 43461997.0,
-      "volm": 4.19,
-      "rvol": 0.39,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "STRL",
-      "name": "Sterling Infrastructure, Inc.",
-      "close": 301.6,
-      "chg": -0.74,
-      "vol": 785464.0,
-      "mcap": 9199565276.0,
-      "float": 29765194.0,
-      "volm": 9.01,
-      "rvol": 0.52,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "PHAT",
-      "name": "Phathom Pharmaceuticals, Inc.",
-      "close": 6.23,
-      "chg": -0.8,
-      "vol": 1087626.0,
-      "mcap": 506446229.0,
-      "float": 51476298.0,
-      "volm": 10.04,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "SAIC",
-      "name": "Science Applications International Corporation",
-      "close": 151.24,
-      "chg": -0.87,
-      "vol": 313786.0,
-      "mcap": 6336598835.0,
-      "float": 41487422.0,
-      "volm": 3.62,
-      "rvol": 0.72,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "RMNI",
-      "name": "Rimini Street, Inc.",
-      "close": 5.59,
-      "chg": -0.89,
-      "vol": 440623.0,
-      "mcap": 518170623.0,
-      "float": 47514208.0,
-      "volm": 4.97,
-      "rvol": 0.65,
+      "ticker": "ALIT",
+      "name": "Alight, Inc.",
+      "close": 13.34,
+      "chg": 6.55,
+      "vol": 216770.0,
+      "mcap": 359648505.0,
+      "float": 22659849.0,
+      "volm": 10.55,
+      "rvol": 0.2,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_1m_small"
       ],
       "hits": 1,
-      "perf_1m": 37.01
+      "perf_1m": 46.75
     },
     {
-      "ticker": "TRIN",
-      "name": "Trinity Capital Inc.",
-      "close": 17.87,
-      "chg": -0.89,
-      "vol": 852850.0,
-      "mcap": 1765844475.0,
-      "float": 94927785.0,
-      "volm": 2.15,
-      "rvol": 0.87,
+      "ticker": "MGN",
+      "name": "Megan Holdings Limited",
+      "close": 3.56,
+      "chg": 4.71,
+      "vol": 220286.0,
+      "mcap": 57790788.0,
+      "float": 871836.0,
+      "volm": 15.68,
+      "rvol": 4.6,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "fundamental_growth"
+        "post_earnings_base"
       ],
       "hits": 1
     },
     {
-      "ticker": "RYZ",
-      "name": "Ryerson Holding Corporation",
-      "close": 30.18,
-      "chg": -0.92,
-      "vol": 450197.0,
-      "mcap": 1560598400.0,
-      "float": 44317902.0,
-      "volm": 5.39,
-      "rvol": 0.51,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "FDS",
-      "name": "FactSet Research Systems Inc.",
-      "close": 331.71,
-      "chg": -0.95,
-      "vol": 373479.0,
-      "mcap": 11694207543.0,
-      "float": 35143672.0,
-      "volm": 3.67,
-      "rvol": 0.42,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "TPC",
-      "name": "Tutor Perini Corporation",
-      "close": 100.33,
-      "chg": -1.0,
-      "vol": 1081599.0,
-      "mcap": 5274259468.0,
-      "float": 47298207.0,
-      "volm": 4.53,
-      "rvol": 1.18,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small"
-      ],
-      "hits": 1,
-      "perf_w": 24.0
-    },
-    {
-      "ticker": "INNV",
-      "name": "InnovAge Holding Corp.",
-      "close": 9.4,
-      "chg": -1.05,
-      "vol": 310119.0,
-      "mcap": 1282691073.0,
-      "float": 31913472.0,
-      "volm": 4.51,
-      "rvol": 0.51,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "AOSL",
-      "name": "Alpha and Omega Semiconductor Limited",
-      "close": 30.53,
-      "chg": -1.07,
-      "vol": 614289.0,
-      "mcap": 925498642.0,
-      "float": 25031964.0,
-      "volm": 8.34,
-      "rvol": 0.71,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small"
-      ],
-      "hits": 1,
-      "perf_w": 52.65
-    },
-    {
-      "ticker": "FEIM",
-      "name": "Frequency Electronics, Inc.",
-      "close": 67.25,
-      "chg": -1.44,
-      "vol": 163844.0,
-      "mcap": 758128576.0,
-      "float": 9912793.0,
-      "volm": 7.06,
-      "rvol": 0.74,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "FICO",
-      "name": "Fair Isaac Corporation",
-      "close": 717.38,
-      "chg": -1.57,
-      "vol": 550487.0,
-      "mcap": 15338251012.0,
-      "float": 20667826.0,
-      "volm": 5.24,
-      "rvol": 0.69,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "STRZ",
-      "name": "Starz Entertainment Corp.",
-      "close": 26.29,
-      "chg": -1.61,
-      "vol": 182158.0,
-      "mcap": 453727686.0,
-      "float": 11289313.0,
-      "volm": 9.1,
-      "rvol": 0.47,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "MTSI",
-      "name": "MACOM Technology Solutions Holdings, Inc.",
-      "close": 245.76,
-      "chg": -1.64,
-      "vol": 1161107.0,
-      "mcap": 18768918796.0,
-      "float": 71120935.0,
-      "volm": 7.65,
-      "rvol": 0.44,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "CDNA",
-      "name": "CareDx, Inc.",
-      "close": 79.81,
-      "chg": -1.68,
-      "vol": 685842.0,
-      "mcap": 4193439628.0,
-      "float": 47826033.0,
-      "volm": 6.81,
-      "rvol": 0.41,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ANRO",
-      "name": "Alto Neuroscience, Inc.",
-      "close": 30.62,
-      "chg": -1.7,
-      "vol": 1288571.0,
-      "mcap": 1228187243.0,
-      "float": 36339740.0,
-      "volm": 7.55,
-      "rvol": 2.19,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small"
-      ],
-      "hits": 1,
-      "perf_w": 32.78
-    },
-    {
-      "ticker": "MAZE",
-      "name": "Maze Therapeutics, Inc.",
-      "close": 36.09,
-      "chg": -1.74,
-      "vol": 451365.0,
-      "mcap": 1973521788.0,
-      "float": 33954858.0,
-      "volm": 5.53,
-      "rvol": 0.83,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 31.05
-    },
-    {
-      "ticker": "IESC",
-      "name": "IES Holdings, Inc.",
-      "close": 174.17,
-      "chg": -1.78,
-      "vol": 276339.0,
-      "mcap": 7015513196.0,
-      "float": 39383557.0,
-      "volm": 7.45,
-      "rvol": 0.44,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "DCTH",
-      "name": "Delcath Systems, Inc.",
-      "close": 21.38,
-      "chg": -1.79,
-      "vol": 1091856.0,
-      "mcap": 743768886.0,
-      "float": 32181219.0,
-      "volm": 5.22,
-      "rvol": 1.01,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "NXST",
-      "name": "Nexstar Media Group, Inc.",
-      "close": 205.97,
-      "chg": -1.8,
-      "vol": 448544.0,
-      "mcap": 6348207253.0,
-      "float": 28684642.0,
-      "volm": 3.63,
-      "rvol": 0.92,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "INDP",
-      "name": "Indaptus Therapeutics, Inc.",
-      "close": 3.15,
-      "chg": -1.87,
-      "vol": 118325.0,
-      "mcap": 483781097.0,
-      "float": 7223836.0,
-      "volm": 12.26,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "IMAX",
-      "name": "Imax Corporation",
-      "close": 47.89,
-      "chg": -1.88,
-      "vol": 815816.0,
-      "mcap": 2643667135.0,
-      "float": 44826853.0,
-      "volm": 3.62,
+      "ticker": "ELF",
+      "name": "e.l.f. Beauty, Inc.",
+      "close": 118.53,
+      "chg": 4.4,
+      "vol": 1335464.0,
+      "mcap": 7010473531.0,
+      "float": 57045731.0,
+      "volm": 4.85,
       "rvol": 0.75,
       "pm_chg": null,
       "pm_vol": null,
@@ -1572,327 +700,137 @@
     {
       "ticker": "CROX",
       "name": "Crocs, Inc.",
-      "close": 156.88,
-      "chg": -1.94,
-      "vol": 1138856.0,
-      "mcap": 7173344152.0,
+      "close": 163.12,
+      "chg": 3.98,
+      "vol": 605401.0,
+      "mcap": 7458668828.0,
       "float": 43713374.0,
-      "volm": 3.75,
-      "rvol": 0.66,
+      "volm": 3.85,
+      "rvol": 0.45,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_1m_small"
       ],
       "hits": 1,
-      "perf_1m": 32.62
+      "perf_1m": 39.48
     },
     {
-      "ticker": "HSHP",
-      "name": "Himalaya Shipping Ltd.",
-      "close": 16.13,
-      "chg": -1.95,
-      "vol": 549533.0,
-      "mcap": 760852106.0,
-      "float": 28243887.0,
-      "volm": 3.28,
-      "rvol": 1.26,
+      "ticker": "ETON",
+      "name": "Eton Pharmaceuticals, Inc.",
+      "close": 63.87,
+      "chg": 3.93,
+      "vol": 387030.0,
+      "mcap": 1842008057.0,
+      "float": 27421174.0,
+      "volm": 6.61,
+      "rvol": 0.48,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "MAGN",
-      "name": "Magnera Corporation",
-      "close": 12.97,
-      "chg": -1.97,
-      "vol": 325090.0,
-      "mcap": 464325975.0,
-      "float": 35396677.0,
-      "volm": 4.35,
-      "rvol": 0.86,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "AGX",
-      "name": "Argan, Inc.",
-      "close": 315.34,
-      "chg": -2.07,
-      "vol": 166999.0,
-      "mcap": 4424170194.0,
-      "float": 13550402.0,
-      "volm": 6.36,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "HELE",
-      "name": "Helen of Troy Limited",
-      "close": 37.19,
-      "chg": -2.09,
-      "vol": 393981.0,
-      "mcap": 869897712.0,
-      "float": 22810724.0,
-      "volm": 4.63,
-      "rvol": 0.51,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "MPWR",
-      "name": "Monolithic Power Systems, Inc.",
-      "close": 1447.4,
-      "chg": -2.12,
-      "vol": 809816.0,
-      "mcap": 70586802656.0,
-      "float": 47066436.0,
-      "volm": 6.12,
-      "rvol": 0.56,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_large"
+        "mom_6m_small"
       ],
       "hits": 1,
-      "perf_w": 20.33
+      "perf_6m": 119.92
     },
     {
-      "ticker": "LIF",
-      "name": "Life360, Inc.",
-      "close": 43.7,
-      "chg": -2.15,
-      "vol": 533300.0,
-      "mcap": 3572707370.0,
-      "float": 78869439.0,
-      "volm": 5.64,
-      "rvol": 0.46,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ECG",
-      "name": "Everus Construction Group, Inc.",
-      "close": 87.17,
-      "chg": -2.18,
-      "vol": 457799.0,
-      "mcap": 4451262805.0,
-      "float": 50846576.0,
-      "volm": 7.36,
-      "rvol": 0.35,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "CYRX",
-      "name": "CryoPort, Inc.",
-      "close": 20.1,
-      "chg": -2.24,
-      "vol": 659180.0,
-      "mcap": 1019078577.0,
-      "float": 48474855.0,
-      "volm": 5.81,
-      "rvol": 0.35,
+      "ticker": "SENS",
+      "name": "Senseonics Holdings, Inc.",
+      "close": 10.41,
+      "chg": 3.69,
+      "vol": 639083.0,
+      "mcap": 570265066.0,
+      "float": 48247487.0,
+      "volm": 9.95,
+      "rvol": 0.51,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_1w_small"
       ],
       "hits": 1,
-      "perf_w": 21.89
+      "perf_w": 28.84
     },
     {
       "ticker": "PAR",
       "name": "PAR Technology Corporation",
-      "close": 21.75,
-      "chg": -2.29,
-      "vol": 1087891.0,
-      "mcap": 899811342.0,
+      "close": 22.46,
+      "chg": 3.26,
+      "vol": 292801.0,
+      "mcap": 929184485.0,
       "float": 40614387.0,
-      "volm": 5.41,
-      "rvol": 0.73,
+      "volm": 5.43,
+      "rvol": 0.19,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_1m_small"
       ],
       "hits": 1,
-      "perf_1m": 37.66
+      "perf_1m": 40.55
     },
     {
-      "ticker": "CNXC",
-      "name": "Concentrix Corporation",
-      "close": 31.97,
-      "chg": -2.4,
-      "vol": 838774.0,
-      "mcap": 1953541046.0,
-      "float": 47347764.0,
-      "volm": 5.93,
-      "rvol": 0.93,
+      "ticker": "GCT",
+      "name": "GigaCloud Technology Inc",
+      "close": 66.71,
+      "chg": 2.96,
+      "vol": 375495.0,
+      "mcap": 2376478778.0,
+      "float": 27139494.0,
+      "volm": 5.27,
+      "rvol": 0.48,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "strongest_jk"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AMPH",
+      "name": "Amphastar Pharmaceuticals, Inc.",
+      "close": 29.64,
+      "chg": 2.67,
+      "vol": 172279.0,
+      "mcap": 1264209852.0,
+      "float": 30988828.0,
+      "volm": 3.77,
+      "rvol": 0.3,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ONTO",
-      "name": "Onto Innovation Inc.",
-      "close": 209.67,
-      "chg": -2.51,
-      "vol": 752006.0,
-      "mcap": 10291510872.0,
-      "float": 48779437.0,
-      "volm": 6.99,
-      "rvol": 0.54,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_large"
-      ],
-      "hits": 1,
-      "perf_w": 22.27
-    },
-    {
-      "ticker": "SCCO",
-      "name": "Southern Copper Corporation",
-      "close": 168.21,
-      "chg": -2.55,
-      "vol": 986159.0,
-      "mcap": 143532472381.0,
-      "float": 84755887.0,
-      "volm": 4.08,
-      "rvol": 0.76,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "CBIO",
-      "name": "Crescent Biopharma, Inc.",
-      "close": 14.37,
-      "chg": -2.61,
-      "vol": 209893.0,
-      "mcap": 533758422.0,
-      "float": 30912602.0,
-      "volm": 7.85,
-      "rvol": 1.04,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "FIX",
-      "name": "Comfort Systems USA, Inc.",
-      "close": 1128.09,
-      "chg": -2.89,
-      "vol": 549764.0,
-      "mcap": 39467245089.0,
-      "float": 34592833.0,
-      "volm": 5.99,
-      "rvol": 0.59,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
       ],
       "hits": 1
     },
     {
       "ticker": "SN",
       "name": "SharkNinja, Inc.",
-      "close": 220.14,
-      "chg": -2.99,
-      "vol": 1142147.0,
-      "mcap": 31020256394.0,
+      "close": 225.48,
+      "chg": 2.43,
+      "vol": 549297.0,
+      "mcap": 31772724712.0,
       "float": 86325062.0,
-      "volm": 3.88,
-      "rvol": 0.6,
+      "volm": 3.87,
+      "rvol": 0.31,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_6m_large"
       ],
       "hits": 1,
-      "perf_6m": 109.2
+      "perf_6m": 114.27
     },
     {
-      "ticker": "CMCO",
-      "name": "Columbus McKinnon Corporation",
-      "close": 21.15,
-      "chg": -3.03,
-      "vol": 516009.0,
-      "mcap": 611796919.0,
-      "float": 28021400.0,
-      "volm": 6.26,
-      "rvol": 0.73,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 33.44
-    },
-    {
-      "ticker": "IBTA",
-      "name": "Ibotta, Inc.",
-      "close": 58.12,
-      "chg": -3.04,
-      "vol": 470902.0,
-      "mcap": 1363625259.0,
-      "float": 8400607.0,
-      "volm": 6.32,
-      "rvol": 0.63,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 35.01
-    },
-    {
-      "ticker": "PICS",
-      "name": "PicS N.V.",
-      "close": 6.96,
-      "chg": -3.06,
-      "vol": 451645.0,
-      "mcap": 901929269.0,
-      "float": 22152580.0,
-      "volm": 8.25,
-      "rvol": 0.66,
+      "ticker": "AAON",
+      "name": "AAON, Inc.",
+      "close": 80.52,
+      "chg": 2.18,
+      "vol": 943410.0,
+      "mcap": 6639883338.0,
+      "float": 68913334.0,
+      "volm": 7.87,
+      "rvol": 0.44,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -1901,14 +839,203 @@
       "hits": 1
     },
     {
-      "ticker": "PWP",
-      "name": "Perella Weinberg Partners",
-      "close": 13.45,
-      "chg": -3.06,
-      "vol": 829427.0,
-      "mcap": 1331359732.0,
-      "float": 74090604.0,
-      "volm": 7.14,
+      "ticker": "BLKB",
+      "name": "Blackbaud, Inc.",
+      "close": 54.63,
+      "chg": 2.01,
+      "vol": 111871.0,
+      "mcap": 2457420855.0,
+      "float": 34195614.0,
+      "volm": 4.08,
+      "rvol": 0.3,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FCN",
+      "name": "FTI Consulting, Inc.",
+      "close": 202.27,
+      "chg": 1.84,
+      "vol": 142717.0,
+      "mcap": 5512704194.0,
+      "float": 26598518.0,
+      "volm": 3.72,
+      "rvol": 0.26,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 45.66
+    },
+    {
+      "ticker": "CHRD",
+      "name": "Chord Energy Corporation",
+      "close": 149.76,
+      "chg": 1.84,
+      "vol": 259417.0,
+      "mcap": 7964715180.0,
+      "float": 50914298.0,
+      "volm": 3.99,
+      "rvol": 0.27,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "NVRI",
+      "name": "Enviri Corporation",
+      "close": 24.64,
+      "chg": 1.61,
+      "vol": 212199.0,
+      "mcap": 694663226.0,
+      "float": 26746367.0,
+      "volm": 5.33,
+      "rvol": 0.33,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "EVER",
+      "name": "EverQuote, Inc.",
+      "close": 28.34,
+      "chg": 1.6,
+      "vol": 139902.0,
+      "mcap": 1005102783.0,
+      "float": 26690862.0,
+      "volm": 5.36,
+      "rvol": 0.14,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "YOU",
+      "name": "Clear Secure, Inc.",
+      "close": 57.58,
+      "chg": 1.39,
+      "vol": 570412.0,
+      "mcap": 7560132645.0,
+      "float": 92468609.0,
+      "volm": 5.07,
+      "rvol": 0.27,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "DIN",
+      "name": "Dine Brands Global, Inc. Common Stock",
+      "close": 36.82,
+      "chg": 1.35,
+      "vol": 208948.0,
+      "mcap": 452703752.0,
+      "float": 11633242.0,
+      "volm": 5.38,
+      "rvol": 0.37,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "TNK",
+      "name": "Teekay Tankers Ltd.",
+      "close": 89.69,
+      "chg": 1.34,
+      "vol": 202997.0,
+      "mcap": 3110459272.0,
+      "float": 23997598.0,
+      "volm": 4.34,
+      "rvol": 0.32,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "NXST",
+      "name": "Nexstar Media Group, Inc.",
+      "close": 208.49,
+      "chg": 1.22,
+      "vol": 154445.0,
+      "mcap": 6425876114.0,
+      "float": 28684642.0,
+      "volm": 3.61,
+      "rvol": 0.31,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PCOR",
+      "name": "Procore Technologies, Inc.",
+      "close": 78.17,
+      "chg": 1.21,
+      "vol": 992982.0,
+      "mcap": 11693389569.0,
+      "float": 123518509.0,
+      "volm": 4.28,
+      "rvol": 0.23,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_large"
+      ],
+      "hits": 1,
+      "perf_1m": 39.33
+    },
+    {
+      "ticker": "FDS",
+      "name": "FactSet Research Systems Inc.",
+      "close": 335.34,
+      "chg": 1.09,
+      "vol": 110980.0,
+      "mcap": 11822180215.0,
+      "float": 35143672.0,
+      "volm": 3.68,
+      "rvol": 0.13,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AXGN",
+      "name": "Axogen, Inc.",
+      "close": 55.96,
+      "chg": 1.01,
+      "vol": 696489.0,
+      "mcap": 3342530999.0,
+      "float": 58265386.0,
+      "volm": 5.56,
       "rvol": 0.36,
       "pm_chg": null,
       "pm_vol": null,
@@ -1918,102 +1045,693 @@
       "hits": 1
     },
     {
-      "ticker": "AMBQ",
-      "name": "Ambiq Micro, Inc.",
-      "close": 48.78,
-      "chg": -3.08,
-      "vol": 588065.0,
-      "mcap": 1213688923.0,
-      "float": 20681678.0,
-      "volm": 8.13,
-      "rvol": 1.1,
+      "ticker": "ROP",
+      "name": "Roper Technologies, Inc.",
+      "close": 482.44,
+      "chg": 0.96,
+      "vol": 207580.0,
+      "mcap": 47779134974.0,
+      "float": 98656397.0,
+      "volm": 2.83,
+      "rvol": 0.17,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_1w_small"
+        "mom_1m_large"
       ],
       "hits": 1,
-      "perf_w": 24.63
+      "perf_1m": 30.21
     },
     {
-      "ticker": "HGV",
-      "name": "Hilton Grand Vacations Inc.",
-      "close": 43.92,
-      "chg": -3.28,
-      "vol": 1408608.0,
-      "mcap": 3330134001.0,
-      "float": 61809831.0,
-      "volm": 4.13,
-      "rvol": 0.81,
+      "ticker": "GKOS",
+      "name": "Glaukos Corporation",
+      "close": 248.04,
+      "chg": 0.82,
+      "vol": 244844.0,
+      "mcap": 14683488219.0,
+      "float": 56846665.0,
+      "volm": 5.32,
+      "rvol": 0.11,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_large"
+      ],
+      "hits": 1,
+      "perf_1m": 50.38
+    },
+    {
+      "ticker": "ARDT",
+      "name": "Ardent Health, Inc.",
+      "close": 17.82,
+      "chg": 0.82,
+      "vol": 466031.0,
+      "mcap": 2512191125.0,
+      "float": 21968037.0,
+      "volm": 4.98,
+      "rvol": 0.4,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 52.09
+    },
+    {
+      "ticker": "LIF",
+      "name": "Life360, Inc.",
+      "close": 44.06,
+      "chg": 0.82,
+      "vol": 216171.0,
+      "mcap": 3602139360.0,
+      "float": 78869439.0,
+      "volm": 5.69,
+      "rvol": 0.19,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "ONT",
+      "name": "Onterris, Inc.",
+      "close": 23.27,
+      "chg": 0.8,
+      "vol": 159459.0,
+      "mcap": 817759724.0,
+      "float": 31943330.0,
+      "volm": 6.52,
+      "rvol": 0.23,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 77.4
+    },
+    {
+      "ticker": "TRUP",
+      "name": "Trupanion, Inc.",
+      "close": 34.56,
+      "chg": 0.76,
+      "vol": 111147.0,
+      "mcap": 1495270646.0,
+      "float": 30263632.0,
+      "volm": 4.97,
+      "rvol": 0.2,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 31.86
+    },
+    {
+      "ticker": "ALSN",
+      "name": "Allison Transmission Holdings, Inc.",
+      "close": 126.54,
+      "chg": 0.71,
+      "vol": 228324.0,
+      "mcap": 10393228137.0,
+      "float": 81459827.0,
+      "volm": 3.27,
+      "rvol": 0.22,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "KNTK",
+      "name": "Kinetik Holdings Inc.",
+      "close": 54.85,
+      "chg": 0.68,
+      "vol": 537483.0,
+      "mcap": 8907740819.0,
+      "float": 64449614.0,
+      "volm": 3.82,
+      "rvol": 0.41,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "LPG",
+      "name": "Dorian LPG Ltd.",
+      "close": 48.11,
+      "chg": 0.65,
+      "vol": 193962.0,
+      "mcap": 2066963171.0,
+      "float": 36960038.0,
+      "volm": 4.48,
+      "rvol": 0.28,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "MAN",
+      "name": "ManpowerGroup",
+      "close": 46.33,
+      "chg": 0.61,
+      "vol": 157184.0,
+      "mcap": 2154602997.0,
+      "float": 45686218.0,
+      "volm": 4.48,
+      "rvol": 0.27,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "INSW",
+      "name": "International Seaways, Inc.",
+      "close": 105.28,
+      "chg": 0.6,
+      "vol": 237609.0,
+      "mcap": 5385634896.0,
+      "float": 43425530.0,
+      "volm": 5.2,
+      "rvol": 0.28,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "ANIP",
+      "name": "ANI Pharmaceuticals, Inc.",
+      "close": 71.44,
+      "chg": 0.53,
+      "vol": 105934.0,
+      "mcap": 1623816513.0,
+      "float": 19972435.0,
+      "volm": 3.13,
+      "rvol": 0.17,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "TYL",
+      "name": "Tyler Technologies, Inc.",
+      "close": 425.6,
+      "chg": 0.47,
+      "vol": 210812.0,
+      "mcap": 16921653821.0,
+      "float": 39549172.0,
+      "volm": 3.51,
+      "rvol": 0.22,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
       ],
       "hits": 1
     },
     {
       "ticker": "FLGT",
       "name": "Fulgent Genetics, Inc.",
-      "close": 24.85,
-      "chg": -3.31,
-      "vol": 287390.0,
-      "mcap": 694284150.0,
+      "close": 24.91,
+      "chg": 0.24,
+      "vol": 143321.0,
+      "mcap": 695960480.0,
       "float": 17881323.0,
-      "volm": 5.82,
-      "rvol": 0.58,
+      "volm": 5.77,
+      "rvol": 0.28,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "mom_1w_small"
       ],
       "hits": 1,
-      "perf_w": 26.85
-    },
-    {
-      "ticker": "NESR",
-      "name": "National Energy Services Reunited Corp",
-      "close": 21.23,
-      "chg": -3.41,
-      "vol": 1731666.0,
-      "mcap": 2168074832.0,
-      "float": 93081234.0,
-      "volm": 7.53,
-      "rvol": 0.66,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
-    },
-    {
-      "ticker": "ALSN",
-      "name": "Allison Transmission Holdings, Inc.",
-      "close": 125.65,
-      "chg": -3.41,
-      "vol": 604471.0,
-      "mcap": 10320128519.0,
-      "float": 81459827.0,
-      "volm": 3.29,
-      "rvol": 0.58,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "fundamental_growth"
-      ],
-      "hits": 1
+      "perf_w": 21.69
     },
     {
       "ticker": "VCEL",
       "name": "Vericel Corporation",
-      "close": 57.42,
-      "chg": -3.41,
-      "vol": 826630.0,
-      "mcap": 2930129425.0,
+      "close": 57.56,
+      "chg": 0.24,
+      "vol": 237699.0,
+      "mcap": 2937273462.0,
       "float": 50421066.0,
-      "volm": 4.93,
-      "rvol": 0.66,
+      "volm": 4.95,
+      "rvol": 0.19,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SPB",
+      "name": "Spectrum Brands Holdings, Inc.",
+      "close": 88.5,
+      "chg": 0.17,
+      "vol": 173621.0,
+      "mcap": 2035110205.0,
+      "float": 21750089.0,
+      "volm": 3.5,
+      "rvol": 0.38,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PAYS",
+      "name": "Paysign, Inc.",
+      "close": 9.51,
+      "chg": 0.16,
+      "vol": 574006.0,
+      "mcap": 540400449.0,
+      "float": 41323695.0,
+      "volm": 8.5,
+      "rvol": 0.36,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PARR",
+      "name": "Par Pacific Holdings, Inc. Common Stock",
+      "close": 72.14,
+      "chg": 0.15,
+      "vol": 196170.0,
+      "mcap": 3612551943.0,
+      "float": 48659571.0,
+      "volm": 6.0,
+      "rvol": 0.19,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "INNV",
+      "name": "InnovAge Holding Corp.",
+      "close": 9.4,
+      "chg": 0.0,
+      "vol": 149587.0,
+      "mcap": 1282691022.0,
+      "float": 31913472.0,
+      "volm": 4.55,
+      "rvol": 0.26,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "BRZE",
+      "name": "Braze, Inc.",
+      "close": 46.6,
+      "chg": -0.02,
+      "vol": 1260186.0,
+      "mcap": 5293034362.0,
+      "float": 87730569.0,
+      "volm": 1.52,
+      "rvol": 0.22,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FICO",
+      "name": "Fair Isaac Corporation",
+      "close": 717.11,
+      "chg": -0.04,
+      "vol": 197037.0,
+      "mcap": 15332478779.0,
+      "float": 20667826.0,
+      "volm": 5.26,
+      "rvol": 0.26,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "HAE",
+      "name": "Haemonetics Corporation",
+      "close": 122.64,
+      "chg": -0.06,
+      "vol": 218281.0,
+      "mcap": 5584492487.0,
+      "float": 44681031.0,
+      "volm": 3.48,
+      "rvol": 0.28,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small"
+      ],
+      "hits": 1,
+      "perf_6m": 114.13
+    },
+    {
+      "ticker": "FNKO",
+      "name": "Funko, Inc.",
+      "close": 6.89,
+      "chg": -0.07,
+      "vol": 209274.0,
+      "mcap": 389164372.0,
+      "float": 40208448.0,
+      "volm": 6.38,
+      "rvol": 0.16,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1w_small"
+      ],
+      "hits": 1,
+      "perf_w": 30.96
+    },
+    {
+      "ticker": "WHD",
+      "name": "Cactus, Inc. Class A Common Stock",
+      "close": 61.7,
+      "chg": -0.08,
+      "vol": 140083.0,
+      "mcap": 4953326778.0,
+      "float": 69825387.0,
+      "volm": 4.74,
+      "rvol": 0.18,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "HGV",
+      "name": "Hilton Grand Vacations Inc.",
+      "close": 43.87,
+      "chg": -0.11,
+      "vol": 425106.0,
+      "mcap": 3326342736.0,
+      "float": 61809831.0,
+      "volm": 4.17,
+      "rvol": 0.25,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "BOBS",
+      "name": "Bob's Discount Furniture, Inc.",
+      "close": 20.6,
+      "chg": -0.19,
+      "vol": 347131.0,
+      "mcap": 2693911673.0,
+      "float": 30673066.0,
+      "volm": 6.09,
+      "rvol": 0.2,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 52.59
+    },
+    {
+      "ticker": "ALGT",
+      "name": "Allegiant Travel Company",
+      "close": 92.32,
+      "chg": -0.21,
+      "vol": 118314.0,
+      "mcap": 2521024309.0,
+      "float": 24483331.0,
+      "volm": 5.84,
+      "rvol": 0.17,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 30.86
+    },
+    {
+      "ticker": "REF",
+      "name": "Reformation Inc.",
+      "close": 18.09,
+      "chg": -0.22,
+      "vol": 162122.0,
+      "mcap": 1068744831.0,
+      "float": 16448037.0,
+      "volm": 7.56,
+      "rvol": 0.29,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 33.6
+    },
+    {
+      "ticker": "HELE",
+      "name": "Helen of Troy Limited",
+      "close": 37.1,
+      "chg": -0.23,
+      "vol": 170788.0,
+      "mcap": 867909462.0,
+      "float": 22810724.0,
+      "volm": 4.49,
+      "rvol": 0.22,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 33.95
+    },
+    {
+      "ticker": "SBCF",
+      "name": "Seacoast Banking Corporation of Florida",
+      "close": 33.49,
+      "chg": -0.27,
+      "vol": 203464.0,
+      "mcap": 3231184986.0,
+      "float": 94692454.0,
+      "volm": 2.42,
+      "rvol": 0.26,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "STAA",
+      "name": "STAAR Surgical Company",
+      "close": 26.7,
+      "chg": -0.3,
+      "vol": 181768.0,
+      "mcap": 1340388638.0,
+      "float": 30355472.0,
+      "volm": 5.3,
+      "rvol": 0.17,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "daily_tightness"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "CRL",
+      "name": "Charles River Laboratories International, Inc.",
+      "close": 339.77,
+      "chg": -0.31,
+      "vol": 271331.0,
+      "mcap": 16280918334.0,
+      "float": 47381495.0,
+      "volm": 5.2,
+      "rvol": 0.21,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_large"
+      ],
+      "hits": 1,
+      "perf_6m": 115.67
+    },
+    {
+      "ticker": "IMAX",
+      "name": "Imax Corporation",
+      "close": 47.71,
+      "chg": -0.38,
+      "vol": 304250.0,
+      "mcap": 2633730504.0,
+      "float": 44826853.0,
+      "volm": 3.6,
+      "rvol": 0.28,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "RMNI",
+      "name": "Rimini Street, Inc.",
+      "close": 5.56,
+      "chg": -0.54,
+      "vol": 387942.0,
+      "mcap": 515389769.0,
+      "float": 47514208.0,
+      "volm": 5.05,
+      "rvol": 0.58,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 37.62
+    },
+    {
+      "ticker": "EME",
+      "name": "EMCOR Group, Inc.",
+      "close": 657.17,
+      "chg": -0.84,
+      "vol": 159697.0,
+      "mcap": 28772221277.0,
+      "float": 43461997.0,
+      "volm": 4.1,
+      "rvol": 0.25,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "NESR",
+      "name": "National Energy Services Reunited Corp",
+      "close": 21.04,
+      "chg": -0.89,
+      "vol": 425108.0,
+      "mcap": 2148671428.0,
+      "float": 93081234.0,
+      "volm": 7.41,
+      "rvol": 0.16,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PTRN",
+      "name": "Pattern Group Inc. - Series A",
+      "close": 20.76,
+      "chg": -0.91,
+      "vol": 319046.0,
+      "mcap": 3668306904.0,
+      "float": 40845591.0,
+      "volm": 5.12,
+      "rvol": 0.23,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1w_small"
+      ],
+      "hits": 1,
+      "perf_w": 20.07
+    },
+    {
+      "ticker": "TRIN",
+      "name": "Trinity Capital Inc.",
+      "close": 17.68,
+      "chg": -1.04,
+      "vol": 434760.0,
+      "mcap": 1747563504.0,
+      "float": 94927785.0,
+      "volm": 2.15,
+      "rvol": 0.44,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "HSHP",
+      "name": "Himalaya Shipping Ltd.",
+      "close": 15.95,
+      "chg": -1.12,
+      "vol": 146420.0,
+      "mcap": 752361432.0,
+      "float": 28243887.0,
+      "volm": 3.03,
+      "rvol": 0.33,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SLDE",
+      "name": "Slide Insurance Holdings, Inc.",
+      "close": 25.65,
+      "chg": -1.19,
+      "vol": 332872.0,
+      "mcap": 3007427756.0,
+      "float": 73761360.0,
+      "volm": 3.65,
+      "rvol": 0.3,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2024,13 +1742,13 @@
     {
       "ticker": "MAMA",
       "name": "Mama's Creations, Inc.",
-      "close": 13.24,
-      "chg": -3.5,
-      "vol": 211377.0,
-      "mcap": 624232496.0,
+      "close": 13.08,
+      "chg": -1.21,
+      "vol": 129463.0,
+      "mcap": 616688878.0,
       "float": 45985550.0,
-      "volm": 4.31,
-      "rvol": 0.46,
+      "volm": 4.17,
+      "rvol": 0.33,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2039,51 +1757,15 @@
       "hits": 1
     },
     {
-      "ticker": "BKSY",
-      "name": "BlackSky Technology Inc.",
-      "close": 23.24,
-      "chg": -3.57,
-      "vol": 1288312.0,
-      "mcap": 962105997.0,
-      "float": 35886380.0,
-      "volm": 8.07,
-      "rvol": 0.98,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1w_small"
-      ],
-      "hits": 1,
-      "perf_w": 21.87
-    },
-    {
-      "ticker": "BOBS",
-      "name": "Bob's Discount Furniture, Inc.",
-      "close": 20.64,
-      "chg": -3.6,
-      "vol": 822622.0,
-      "mcap": 2699142630.0,
-      "float": 30673066.0,
-      "volm": 6.18,
-      "rvol": 0.48,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 45.25
-    },
-    {
-      "ticker": "FORM",
-      "name": "FormFactor, Inc.",
-      "close": 92.32,
-      "chg": -3.61,
-      "vol": 1027594.0,
-      "mcap": 7238175422.0,
-      "float": 77800180.0,
-      "volm": 7.43,
-      "rvol": 0.49,
+      "ticker": "CVI",
+      "name": "CVR Energy Inc.",
+      "close": 40.52,
+      "chg": -1.32,
+      "vol": 618552.0,
+      "mcap": 4073500109.0,
+      "float": 29328813.0,
+      "volm": 6.75,
+      "rvol": 0.17,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2092,66 +1774,64 @@
       "hits": 1
     },
     {
-      "ticker": "TKNO",
-      "name": "Alpha Teknova, Inc.",
-      "close": 8.29,
-      "chg": -3.77,
-      "vol": 380447.0,
-      "mcap": 521781453.0,
-      "float": 12800844.0,
-      "volm": 9.88,
-      "rvol": 0.73,
+      "ticker": "ECG",
+      "name": "Everus Construction Group, Inc.",
+      "close": 85.75,
+      "chg": -1.63,
+      "vol": 315327.0,
+      "mcap": 4378751576.0,
+      "float": 50846576.0,
+      "volm": 7.42,
+      "rvol": 0.24,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_6m_small"
-      ],
-      "hits": 1,
-      "perf_6m": 127.26
-    },
-    {
-      "ticker": "DUOL",
-      "name": "Duolingo, Inc.",
-      "close": 157.42,
-      "chg": -4.08,
-      "vol": 890632.0,
-      "mcap": 7426761034.0,
-      "float": 40127596.0,
-      "volm": 6.05,
-      "rvol": 0.39,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "daily_tightness"
+        "fundamental_growth"
       ],
       "hits": 1
     },
     {
-      "ticker": "TREE",
-      "name": "LendingTree, Inc.",
-      "close": 35.31,
-      "chg": -4.15,
-      "vol": 253030.0,
-      "mcap": 495900230.0,
-      "float": 12126844.0,
-      "volm": 6.27,
-      "rvol": 0.44,
+      "ticker": "PWP",
+      "name": "Perella Weinberg Partners",
+      "close": 13.22,
+      "chg": -1.64,
+      "vol": 435069.0,
+      "mcap": 1309574727.0,
+      "float": 74090604.0,
+      "volm": 6.1,
+      "rvol": 0.22,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_1m_small"
+        "fundamental_growth"
       ],
-      "hits": 1,
-      "perf_1m": 41.69
+      "hits": 1
     },
     {
-      "ticker": "ELF",
-      "name": "e.l.f. Beauty, Inc.",
-      "close": 113.53,
-      "chg": -4.16,
-      "vol": 1682941.0,
-      "mcap": 6715031110.0,
-      "float": 57045731.0,
+      "ticker": "RSKD",
+      "name": "Riskified Ltd.",
+      "close": 9.26,
+      "chg": -1.7,
+      "vol": 1575189.0,
+      "mcap": 1045494732.0,
+      "float": 67464138.0,
+      "volm": 5.83,
+      "rvol": 0.65,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PANL",
+      "name": "Pangaea Logistics Solutions Ltd.",
+      "close": 9.29,
+      "chg": -1.8,
+      "vol": 601209.0,
+      "mcap": 608251327.0,
+      "float": 31303417.0,
       "volm": 4.68,
       "rvol": 0.98,
       "pm_chg": null,
@@ -2162,15 +1842,33 @@
       "hits": 1
     },
     {
-      "ticker": "AUGO",
-      "name": "Aura Minerals Inc.",
-      "close": 77.94,
-      "chg": -4.25,
-      "vol": 871601.0,
-      "mcap": 6535646597.0,
-      "float": 35468753.0,
-      "volm": 6.52,
-      "rvol": 0.94,
+      "ticker": "TKNO",
+      "name": "Alpha Teknova, Inc.",
+      "close": 8.14,
+      "chg": -1.87,
+      "vol": 210446.0,
+      "mcap": 512031480.0,
+      "float": 12800844.0,
+      "volm": 9.88,
+      "rvol": 0.43,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_6m_small"
+      ],
+      "hits": 1,
+      "perf_6m": 123.01
+    },
+    {
+      "ticker": "FIX",
+      "name": "Comfort Systems USA, Inc.",
+      "close": 1106.96,
+      "chg": -1.87,
+      "vol": 259751.0,
+      "mcap": 38727991664.0,
+      "float": 34592833.0,
+      "volm": 5.93,
+      "rvol": 0.28,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2179,33 +1877,15 @@
       "hits": 1
     },
     {
-      "ticker": "HRI",
-      "name": "Herc Holdings Inc.",
-      "close": 166.5,
-      "chg": -4.26,
-      "vol": 373031.0,
-      "mcap": 5571654933.0,
-      "float": 32740022.0,
-      "volm": 6.63,
-      "rvol": 0.62,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 31.0
-    },
-    {
-      "ticker": "VMET",
-      "name": "Versamet Royalties Corporation",
-      "close": 8.15,
-      "chg": -4.34,
-      "vol": 525027.0,
-      "mcap": 886960501.0,
-      "float": 47008034.0,
-      "volm": 4.6,
-      "rvol": 1.95,
+      "ticker": "CDNA",
+      "name": "CareDx, Inc.",
+      "close": 78.19,
+      "chg": -2.03,
+      "vol": 461175.0,
+      "mcap": 4108188927.0,
+      "float": 47826033.0,
+      "volm": 6.69,
+      "rvol": 0.29,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2214,33 +1894,15 @@
       "hits": 1
     },
     {
-      "ticker": "IRON",
-      "name": "Disc Medicine, Inc.",
-      "close": 83.23,
-      "chg": -4.42,
-      "vol": 761216.0,
-      "mcap": 3790364523.0,
-      "float": 28153824.0,
-      "volm": 5.52,
-      "rvol": 0.76,
-      "pm_chg": null,
-      "pm_vol": null,
-      "scans": [
-        "mom_1m_small"
-      ],
-      "hits": 1,
-      "perf_1m": 38.35
-    },
-    {
-      "ticker": "EZPW",
-      "name": "EZCORP, Inc.",
-      "close": 27.05,
-      "chg": -4.42,
-      "vol": 2039441.0,
-      "mcap": 1662043291.0,
-      "float": 54224479.0,
-      "volm": 4.79,
-      "rvol": 3.08,
+      "ticker": "COCO",
+      "name": "The Vita Coco Company, Inc.",
+      "close": 63.24,
+      "chg": -2.26,
+      "vol": 307272.0,
+      "mcap": 3608718212.0,
+      "float": 48104035.0,
+      "volm": 5.31,
+      "rvol": 0.27,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2249,33 +1911,101 @@
       "hits": 1
     },
     {
-      "ticker": "CARS",
-      "name": "Cars.com Inc.",
-      "close": 12.85,
-      "chg": -4.67,
-      "vol": 721837.0,
-      "mcap": 669175894.0,
-      "float": 45391750.0,
-      "volm": 4.7,
-      "rvol": 0.56,
+      "ticker": "OOMA",
+      "name": "Ooma, Inc.",
+      "close": 17.95,
+      "chg": -2.42,
+      "vol": 93744.0,
+      "mcap": 495281990.0,
+      "float": 24250188.0,
+      "volm": 3.79,
+      "rvol": 0.41,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_1m_small"
+        "fundamental_growth"
       ],
-      "hits": 1,
-      "perf_1m": 33.58
+      "hits": 1
     },
     {
-      "ticker": "AXGN",
-      "name": "Axogen, Inc.",
-      "close": 55.4,
-      "chg": -5.51,
-      "vol": 3055457.0,
-      "mcap": 3309081766.0,
-      "float": 58265386.0,
-      "volm": 5.55,
-      "rvol": 1.63,
+      "ticker": "AGX",
+      "name": "Argan, Inc.",
+      "close": 307.4,
+      "chg": -2.52,
+      "vol": 61876.0,
+      "mcap": 4312773203.0,
+      "float": 13550402.0,
+      "volm": 6.26,
+      "rvol": 0.2,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "SCCO",
+      "name": "Southern Copper Corporation",
+      "close": 163.93,
+      "chg": -2.54,
+      "vol": 456859.0,
+      "mcap": 139880381984.0,
+      "float": 84755887.0,
+      "volm": 4.07,
+      "rvol": 0.36,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "IESC",
+      "name": "IES Holdings, Inc.",
+      "close": 169.68,
+      "chg": -2.58,
+      "vol": 118739.0,
+      "mcap": 6834657044.0,
+      "float": 39383557.0,
+      "volm": 7.54,
+      "rvol": 0.2,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AMBQ",
+      "name": "Ambiq Micro, Inc.",
+      "close": 47.52,
+      "chg": -2.59,
+      "vol": 193352.0,
+      "mcap": 1182214547.0,
+      "float": 20681678.0,
+      "volm": 8.14,
+      "rvol": 0.34,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1w_small"
+      ],
+      "hits": 1,
+      "perf_w": 23.93
+    },
+    {
+      "ticker": "ARW",
+      "name": "Arrow Electronics, Inc.",
+      "close": 192.67,
+      "chg": -2.79,
+      "vol": 198499.0,
+      "mcap": 9740915374.0,
+      "float": 50133019.0,
+      "volm": 4.58,
+      "rvol": 0.31,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2286,13 +2016,13 @@
     {
       "ticker": "RCEL",
       "name": "Avita Medical, Inc.",
-      "close": 16.2,
-      "chg": -6.36,
-      "vol": 495816.0,
-      "mcap": 509007532.0,
+      "close": 15.72,
+      "chg": -2.96,
+      "vol": 321702.0,
+      "mcap": 493925873.0,
       "float": 24364103.0,
-      "volm": 7.35,
-      "rvol": 0.73,
+      "volm": 7.42,
+      "rvol": 0.46,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
@@ -2301,39 +2031,177 @@
       "hits": 1
     },
     {
-      "ticker": "AZTA",
-      "name": "Azenta, Inc.",
-      "close": 43.86,
-      "chg": -10.31,
-      "vol": 910542.0,
-      "mcap": 1921436281.0,
-      "float": 43118374.0,
-      "volm": 6.39,
-      "rvol": 0.88,
+      "ticker": "ALMR",
+      "name": "Alamar Biosciences, Inc.",
+      "close": 30.79,
+      "chg": -3.07,
+      "vol": 321586.0,
+      "mcap": 2138992651.0,
+      "float": 35879351.0,
+      "volm": 9.23,
+      "rvol": 0.41,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
-        "mom_6m_small"
+        "mom_1m_small"
       ],
       "hits": 1,
-      "perf_6m": 164.7
+      "perf_1m": 32.75
     },
     {
-      "ticker": "DGII",
-      "name": "Digi International Inc.",
-      "close": 58.44,
-      "chg": -12.72,
-      "vol": 1656651.0,
-      "mcap": 2217688109.0,
-      "float": 36750951.0,
-      "volm": 5.07,
-      "rvol": 3.12,
+      "ticker": "STRL",
+      "name": "Sterling Infrastructure, Inc.",
+      "close": 291.48,
+      "chg": -3.36,
+      "vol": 570922.0,
+      "mcap": 8890727086.0,
+      "float": 29765194.0,
+      "volm": 8.97,
+      "rvol": 0.41,
       "pm_chg": null,
       "pm_vol": null,
       "scans": [
         "fundamental_growth"
       ],
       "hits": 1
+    },
+    {
+      "ticker": "MAZE",
+      "name": "Maze Therapeutics, Inc.",
+      "close": 34.78,
+      "chg": -3.63,
+      "vol": 897761.0,
+      "mcap": 1901886642.0,
+      "float": 33954858.0,
+      "volm": 5.72,
+      "rvol": 1.64,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1m_small"
+      ],
+      "hits": 1,
+      "perf_1m": 31.2
+    },
+    {
+      "ticker": "AUGO",
+      "name": "Aura Minerals Inc.",
+      "close": 75.1,
+      "chg": -3.64,
+      "vol": 302131.0,
+      "mcap": 6297498917.0,
+      "float": 35468753.0,
+      "volm": 6.47,
+      "rvol": 0.31,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "PHAT",
+      "name": "Phathom Pharmaceuticals, Inc.",
+      "close": 5.96,
+      "chg": -4.33,
+      "vol": 782291.0,
+      "mcap": 484497501.0,
+      "float": 51476298.0,
+      "volm": 9.87,
+      "rvol": 0.45,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "FORM",
+      "name": "FormFactor, Inc.",
+      "close": 87.57,
+      "chg": -5.15,
+      "vol": 839849.0,
+      "mcap": 6865760698.0,
+      "float": 77800180.0,
+      "volm": 7.51,
+      "rvol": 0.45,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "MTSI",
+      "name": "MACOM Technology Solutions Holdings, Inc.",
+      "close": 231.65,
+      "chg": -5.74,
+      "vol": 690527.0,
+      "mcap": 17691324590.0,
+      "float": 71120935.0,
+      "volm": 7.9,
+      "rvol": 0.26,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "OFRM",
+      "name": "Once Upon a Farm, PBC",
+      "close": 9.56,
+      "chg": -6.09,
+      "vol": 1102337.0,
+      "mcap": 401430664.0,
+      "float": 20185873.0,
+      "volm": 8.13,
+      "rvol": 0.68,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "BLZE",
+      "name": "Backblaze, Inc.",
+      "close": 8.02,
+      "chg": -8.82,
+      "vol": 1206604.0,
+      "mcap": 506548004.0,
+      "float": 59800914.0,
+      "volm": 9.42,
+      "rvol": 0.33,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "fundamental_growth"
+      ],
+      "hits": 1
+    },
+    {
+      "ticker": "AOSL",
+      "name": "Alpha and Omega Semiconductor Limited",
+      "close": 27.54,
+      "chg": -9.81,
+      "vol": 239026.0,
+      "mcap": 834707015.0,
+      "float": 25031964.0,
+      "volm": 8.45,
+      "rvol": 0.27,
+      "pm_chg": null,
+      "pm_vol": null,
+      "scans": [
+        "mom_1w_small"
+      ],
+      "hits": 1,
+      "perf_w": 25.73
     }
   ],
   "failed": []
