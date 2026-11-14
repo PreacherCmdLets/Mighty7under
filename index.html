@@ -136,6 +136,25 @@
   @media(max-width:1200px){.mc-top{grid-template-columns:1fr 1fr}.mc-panel.chart{grid-column:1/-1}.mc-cards{grid-template-columns:repeat(3,1fr)}.mc-bottom{grid-template-columns:1fr 1fr}.mc-right{grid-column:1/-1;flex-direction:row}.mc-right .mc-panel{flex:1}}
   @media(max-width:600px){.mc-top{grid-template-columns:1fr}.mc-chips{grid-template-columns:repeat(3,1fr)}.mc-cards{grid-template-columns:repeat(2,1fr)}.mc-bottom{grid-template-columns:1fr}.mc-right{flex-direction:column}}
 
+  /* STATUS */
+  .st-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  @media(max-width:1000px){.st-2col{grid-template-columns:1fr}}
+  .st-banner{border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:12px;line-height:1.6;border:1px solid}
+  .st-banner.ok{background:rgba(22,163,74,.07);border-color:rgba(22,163,74,.3);color:#15803d}
+  .st-banner.warn{background:#fffbeb;border-color:#fde68a;color:#92650c}
+  .st-banner.bad{background:rgba(229,72,77,.07);border-color:rgba(229,72,77,.35);color:#9b2c2f}
+  .st-banner b{font-weight:700}
+  .pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .pill.ok{background:rgba(22,163,74,.14);color:var(--green)}
+  .pill.warn{background:rgba(217,119,6,.15);color:var(--yellow)}
+  .pill.bad{background:rgba(229,72,77,.15);color:var(--red)}
+  .pill.idle{background:#e9edf2;color:var(--text2)}
+  /* a dot on the nav tab so a problem is visible without opening the page */
+  #nav-status-dot{display:none;width:7px;height:7px;border-radius:50%;margin-left:5px}
+  #nav-status-dot.show{display:inline-block}
+  #nav-status-dot.warn{background:var(--yellow)}
+  #nav-status-dot.bad{background:var(--red);animation:pulse 1.6s infinite}
+
   /* BACKTEST */
   .bt-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
   .bt-stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
@@ -498,6 +517,7 @@
     <div class="nav-tab" onclick="showPage('screener',this)">🔍 Screener</div>
     <div class="nav-tab" onclick="showPage('backtest',this)">🧪 Backtest</div>
     <div class="nav-tab" onclick="showPage('calc',this)">⚖️ Position Sizer</div>
+    <div class="nav-tab" onclick="showPage('status',this)">🩺 Status<span id="nav-status-dot"></span></div>
   </div>
   <div class="nav-meta">
     <div class="live-dot"></div>
@@ -665,6 +685,28 @@
   <div class="section">
     <div class="sec-hdr"><span class="sec-title">Scan Validation</span><span class="sec-sub" id="bt-sub">Do the scans actually work?</span></div>
     <div id="bt-body"><div class="loading">Backtest results appear after the next data refresh.</div></div>
+  </div>
+</div>
+
+<!-- PAGE: STATUS -->
+<div class="page" id="page-status">
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">Pipeline Status</span><span class="sec-sub" id="st-sub">Checking…</span></div>
+    <div id="st-banner"></div>
+    <div class="st-2col">
+      <div>
+        <div class="mc-ptitle">Workflows <span style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:400">live from GitHub Actions</span></div>
+        <div class="scan-wrap"><table><thead><tr><th style="text-align:left">Workflow</th><th style="text-align:left">Last run</th><th style="text-align:left">When</th><th>Status</th></tr></thead>
+          <tbody id="st-wf"><tr><td colspan="4" class="loading">Loading…</td></tr></tbody></table></div>
+        <div class="scan-note">Read straight from the Actions API, not from a file the pipeline writes — a step that dies can still report its own failure here.</div>
+      </div>
+      <div>
+        <div class="mc-ptitle">Data freshness</div>
+        <div class="scan-wrap"><table><thead><tr><th style="text-align:left">File</th><th style="text-align:left">Updated</th><th>Age</th><th>Status</th></tr></thead>
+          <tbody id="st-data"><tr><td colspan="4" class="loading">Loading…</td></tr></tbody></table></div>
+        <div class="scan-note" id="st-data-note"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -943,6 +985,123 @@ function drawFV(){
     if(FV_DATA?.rows?.length)drawFV();
   }catch(e){console.warn('Finviz screens not loaded:',e.message)}
 })();
+
+// PIPELINE STATUS
+// Workflow state comes from the Actions API rather than a file the pipeline
+// writes: three outages were invisible precisely because a broken step cannot
+// report its own failure. Public repos allow unauthenticated CORS reads
+// (60/hour; this costs two).
+const GH_REPO='PreacherCmdLets/Mighty7under';
+
+// warnH is generous enough that a Friday-close file is not "stale" on Monday
+// morning (~64h); badH is the point where something is genuinely wrong.
+const ST_FILES=[
+  {f:'meta.json',          label:'Market snapshot',  warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'scans.json',         label:'TradingView scans',warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'finviz_screens.json',label:'Finviz screens',   warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'news.json',          label:'Catalyst news',    warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'events.json',        label:'Economic calendar',warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'breadth_monitor.json',label:'Market monitor',  warnH:80,  badH:140, note:'weekdays ×3'},
+  {f:'watchlists.json',    label:'Watchlists',       warnH:40,  badH:80,  note:'daily'},
+  {f:'breadth.json',       label:'Breadth matrix',   warnH:40,  badH:80,  note:'daily'},
+  {f:'backtest.json',      label:'Scan validation',  warnH:110, badH:200, note:'weekdays, after close'},
+];
+
+const agoTxt=h=>h==null?'—':h<1?`${Math.round(h*60)}m`:h<48?`${h.toFixed(1)}h`:`${(h/24).toFixed(1)}d`;
+const pill=(s,t)=>`<span class="pill ${s}">${t}</span>`;
+
+// Pull a timestamp out of whatever shape the file happens to be.
+function stampOf(j){
+  if(!j)return null;
+  if(Array.isArray(j)){
+    const ts=j.map(x=>x&&x.lastUpdated).filter(Boolean).sort();
+    return ts.length?ts[ts.length-1]:null;       // watchlists.json
+  }
+  return j.updated_utc||j.lastUpdated||null;
+}
+
+async function fileStamp(spec){
+  try{
+    const r=await fetch(`data/${spec.f}?t=${Date.now()}`);
+    if(!r.ok)return{...spec,missing:true};
+    const lm=r.headers.get('last-modified');     // fallback for events.json
+    const j=await r.json();
+    const iso=stampOf(j)||lm;
+    if(!iso)return{...spec,unknown:true};
+    const d=new Date(iso);
+    return{...spec,when:d,ageH:(Date.now()-d.getTime())/36e5};
+  }catch(e){ return{...spec,missing:true}; }
+}
+
+function stateOf(r){
+  if(r.missing)return'bad';
+  if(r.ageH==null)return'idle';
+  if(r.ageH>r.badH)return'bad';
+  if(r.ageH>r.warnH)return'warn';
+  return'ok';
+}
+
+async function renderStatus(){
+  let worst='ok';
+  const bump=s=>{ if(s==='bad')worst='bad'; else if(s==='warn'&&worst!=='bad')worst='warn'; };
+
+  // ── Data freshness ───────────────────────────────────────────────────────
+  const rows=await Promise.all(ST_FILES.map(fileStamp));
+  document.getElementById('st-data').innerHTML=rows.map(r=>{
+    const s=stateOf(r); bump(s);
+    const txt=r.missing?'never built':s==='ok'?'current':s==='warn'?'ageing':'stale';
+    return`<tr>
+      <td style="text-align:left"><b>${esc(r.label)}</b><span class="sub">${esc(r.f)} · ${esc(r.note)}</span></td>
+      <td style="text-align:left">${r.when?esc(r.when.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})):'—'}</td>
+      <td>${agoTxt(r.ageH)}</td>
+      <td>${pill(s,txt)}</td></tr>`;
+  }).join('');
+  document.getElementById('st-data-note').textContent=
+    'Age is measured against each file\'s own timestamp. Thresholds allow for the weekend, so Friday\'s data is not flagged on Monday morning.';
+
+  // ── Workflows ────────────────────────────────────────────────────────────
+  const wfBody=document.getElementById('st-wf');
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/actions/runs?per_page=60`);
+    if(!r.ok)throw new Error(r.status===403?'GitHub rate limit (60/hour) — try again shortly':`HTTP ${r.status}`);
+    const runs=(await r.json()).workflow_runs||[];
+    const latest={};
+    runs.forEach(x=>{ if(!latest[x.name])latest[x.name]=x; });   // API returns newest first
+    const names=Object.keys(latest).sort();
+    if(!names.length)throw new Error('no runs returned');
+    wfBody.innerHTML=names.map(n=>{
+      const x=latest[n];
+      const ageH=(Date.now()-new Date(x.created_at).getTime())/36e5;
+      const s=x.status!=='completed'?'idle':x.conclusion==='success'?'ok':'bad';
+      bump(s==='idle'?'ok':s);
+      const label=x.status!=='completed'?'running':esc(x.conclusion||'—');
+      return`<tr>
+        <td style="text-align:left"><b>${esc(n)}</b><span class="sub">run #${x.run_number} · ${esc(x.event)}</span></td>
+        <td style="text-align:left"><a href="${safeUrl(x.html_url)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none">open ↗</a></td>
+        <td style="text-align:left">${agoTxt(ageH)} ago</td>
+        <td>${pill(s,label)}</td></tr>`;
+    }).join('');
+  }catch(e){
+    wfBody.innerHTML=`<tr><td colspan="4" class="loading">Workflow status unavailable: ${esc(e.message)}</td></tr>`;
+  }
+
+  // ── Headline + nav dot ───────────────────────────────────────────────────
+  const bad=rows.filter(r=>stateOf(r)==='bad'), warn=rows.filter(r=>stateOf(r)==='warn');
+  const b=document.getElementById('st-banner');
+  b.className='st-banner '+worst;
+  b.innerHTML=worst==='ok'
+    ? '<b>All systems normal.</b> Every workflow passed its last run and every data file is within its expected refresh window.'
+    : worst==='warn'
+      ? `<b>Ageing data.</b> ${warn.map(r=>esc(r.label)).join(', ')} ${warn.length===1?'is':'are'} past the expected refresh window but not yet stale. Usually a delayed run — check the workflow list.`
+      : `<b>Something is broken.</b> ${bad.length?esc(bad.map(r=>r.label).join(', '))+' '+(bad.length===1?'is':'are')+' stale or missing. ':''}A failing workflow means the site keeps serving the last good data, so the page looks fine while the numbers quietly age.`;
+
+  const dot=document.getElementById('nav-status-dot');
+  if(dot){ dot.className=worst==='ok'?'':`show ${worst}`; }
+  const sub=document.getElementById('st-sub');
+  if(sub)sub.textContent=`Checked ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`;
+}
+renderStatus();
+setInterval(renderStatus,5*60*1000);   // refresh while the tab stays open
 
 // BACKTEST (data/backtest.json — built by scripts/backtest.py)
 function btTable(rows,horizons,empty){
