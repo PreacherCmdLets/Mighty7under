@@ -14,7 +14,14 @@ permissions:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    # Pinned, NOT ubuntu-latest. GitHub began migrating ubuntu-latest to
+    # Ubuntu 26 on 2026-10-19 and this job started failing on 2026-11-11:
+    # "playwright install chromium --with-deps" died after one second, which is
+    # Playwright refusing the distro outright rather than apt failing partway.
+    # The Python workflows are unaffected because they install no browsers.
+    # Revisit once Playwright supports Ubuntu 26; until then this pin keeps the
+    # scraper on the image it was last green on.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
